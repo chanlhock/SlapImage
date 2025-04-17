@@ -24,7 +24,7 @@ Testing is also done on a Virtual Phone that I have setup in Android Studio:
 - 25th Mar 2025: Assistance from DeepSeek to modify code so that the running banner code display transition more smoother and proffessionally handled.
 - 1st Apr 2025: With DeepSeek help clone developed an Apple IOS Apple for SlapImage using Apple xcode platform. Tried to maintained as similar visual looks, banner, grid icon and bottom navigation buttons as Android. Successfully emulated for iPad and iPhone.
 - 2nd to 14th Apr 2025: Added features of Open Photo, Open & Play Video, Open Text File, simple Calculator, simple Calendar, Game of Life Simulator, Stock Price Checker, Gallery browser and Play MP3 song. 
-- 14th Apr 2025: Decision not to continue with Apple xcode apps development due to xcode not able to upload my apps to my new iPad Air M3. Some _missing strings_ error that i am not willing to spend further time. Most probably my old MacBook Air 2017 issue. Apple really sucks when comes to development using an old machine!#@#@*% :rage:
+- 14th Apr 2025: Decision not to continue with Apple xcode apps development due to xcode not able to upload my apps to new iPad Air M3. Some _missing strings_ error that i am not willing to spend further time. Most probably it's an old MacBook Air 2017 issue. Apple really sucks when comes to development using an old machine!#@#@*% :rage:
 - 17th Apr 2025:
   - Completed implementing in HomeFragment.kt both horizontal grid icon scroller and two circular indicators below horizontal grid icon scroller with active page's indicator highlighted in blue.
   - SlapImage had reached a point of stable code of functions and features. I proceeded to commit it to GitHub.
