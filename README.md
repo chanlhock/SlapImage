@@ -1,4 +1,4 @@
-# Welcome to SlapImage Apps
+# :mouse: Welcome to SlapImage Apps
 
 This is my attempt to create a utility Android Apps which rich features and useful functions using Android Studio Meerkat with the assistance of DeepSeek (https://www.deepseek.com/). Some of graphics are generated with Doubao 豆包 (https://www.doubao.com/chat/).
 
@@ -34,5 +34,5 @@ Testing is also done on a Virtual Phone that I have setup in Android Studio:
 
 ## :left_speech_bubble: Feedback and Suggestions
 For any feedback or suggestions, feel free to contact me via email:\
-:email: chanlhock@gmail.com
+:email: chanlhock@gmail.com :mouse:
 
