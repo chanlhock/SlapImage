@@ -1,6 +1,6 @@
 # Welcome to SlapImage Apps
 
-This is my attempt to create a utility Android Apps which rich features and useful functions using Android Studio Meerkat with the assistance of DeepSeek.
+This is my attempt to create a utility Android Apps which rich features and useful functions using Android Studio Meerkat with the assistance of DeepSeek. Some of graphics are generated with Doubao.
 
 ## Development Platform
 SlapImage is developed using:
