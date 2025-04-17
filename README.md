@@ -21,6 +21,9 @@ Testing is also done on a Virtual Phone that I have setup in Android Studio:
 ## Chronology of Development Events
 - 16th Mar 2025: Started Android project SlapImage from scratch _Vibe Coding_ using DeepSeek in Kotlin.
 - 20th Mar 2025: Completed the Apps initial view with a running banner on top, follow by rows of grid icons container in the middle and bottom navigation fragment icons.
+- 25th Mar 2025: Assistance from DeepSeek to modify code so that the running banner code display transition more smoother and proffessionally handled.
+- 1st Apr 2025: With DeepSeek help clone developed an Apple IOS Apple for SlapImage using Apple xcode platform. Tried to maintained as similar visual looks, banner, grid icon and bottom navigation buttons as Android. Successfully emulated for iPad and iPhone.
+- 17th Apr 2025: Completed implementing in HomeFragment.kt both horizontal grid icon scroller and two circular indicators below horizontal grid icon scroller with active page's indicator highlighted in blue.
 - 
 ## Unresolvable Bug in Todo List
 - When user press the back arrow button at the topbar of StockActivity.kt view, returning back to HomeFragment.kt view there is a large white rectangle covering lower two rows o the grid icon container. This only happens when user enters a Stock Ticker and check the stock price. However, if user uses the phone back button to return to HomeFragment.kt view, the bug doesn't happen.
