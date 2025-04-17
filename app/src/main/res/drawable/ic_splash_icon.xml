@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<animated-vector xmlns="http://schemas.android.com/apk/res/android"><vector android_width="120dp" android_height="120dp" android_viewportWidth="24" android_viewportHeight="24"><path android_name="path" android_fillColor="#FF0000" android_pathData="M12,0L12,24M0,12L24,12" /></vector><target android_name="path"><objectAnimator android_propertyName="fillColor" android_duration="100" android_valueFrom="#FF0000" android_valueTo="#00FF00" android_repeatCount="infinite" /></target></animated-vector>

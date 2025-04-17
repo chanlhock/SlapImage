@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:orientation="vertical">
+
+    <!-- Photo Bar Container with Black Background -->
+    <RelativeLayout
+        android:id="@+id/photoBarContainer"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@android:color/black">
+
+        <!-- ImageView that scales to fit height and aligns to the left -->
+        <ImageView
+            android:id="@+id/photoBar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="fitStart"
+            android:adjustViewBounds="true"
+            android:layout_alignParentStart="true"
+            android:contentDescription="@string/top_bar"
+            android:src="@drawable/slapimage_bw_logo" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/photosRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    </FrameLayout>
+</LinearLayout>

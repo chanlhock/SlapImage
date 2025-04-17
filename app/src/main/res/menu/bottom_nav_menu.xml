@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home_icon_24dp"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/nav_search"
+        android:icon="@drawable/ic_display_photo"
+        android:title="Open Photo" />
+
+    <item
+        android:id="@+id/nav_play"
+        android:icon="@drawable/ic_play_icon_24dp"
+        android:title="Play Video" />
+
+    <item
+        android:id="@+id/nav_chatbot"
+        android:icon="@drawable/ic_chatbot"
+        android:title="DeepSeek Bot" />
+
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_about"
+        android:title="About" />
+</menu>

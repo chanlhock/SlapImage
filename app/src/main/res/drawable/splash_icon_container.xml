@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/drawable/splash_icon_container.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:width="120dp" android:height="40dp" android:gravity="center">
+        <bitmap android:src="@drawable/slapimage_yellow" />
+    </item>
+</layer-list>

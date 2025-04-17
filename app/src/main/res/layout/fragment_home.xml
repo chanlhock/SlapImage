@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Add your UI elements here -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:background="@android:color/white"> <!-- Set white background at root -->>
+
+    <!-- Photo Bar Container with Black Background -->
+    <RelativeLayout
+        android:id="@+id/photoBarContainer"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@android:color/black">
+
+        <!-- ImageView that scales to fit height and aligns to the left -->
+        <ImageView
+            android:id="@+id/photoBar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="fitStart"
+            android:adjustViewBounds="true"
+            android:layout_alignParentStart="true"
+            android:contentDescription="@string/top_bar"
+            android:src="@drawable/slapimage_bw_logo" />
+
+    </RelativeLayout>
+
+    <!-- Add this around your banner ImageView 280 -->
+    <FrameLayout
+        android:id="@+id/banner_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:background="@null"> <!-- Critical: Remove background here -->
+
+        <ImageView
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/banner_height"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/banner"
+            android:src="@drawable/banner4" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.65"
+        android:background="@android:color/white">
+    <!-- Horizontal Icon Pager (Replaces GridView) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/icon_pager_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="4dp"
+        android:background="@null"
+        android:clipToPadding="false"
+        android:overScrollMode="never"/>
+    <!-- Top divider (14dp as before) -->
+    </FrameLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#CDCDCF"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.35"
+        android:orientation="vertical"
+        android:background="#CDCDCF">
+        <!-- Button container -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp">
+        <!-- Add your UI elements here -->
+        <!-- Music Button -->
+            <Button
+                android:id="@+id/musicButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/music"
+                android:background="@drawable/button_background"
+                android:textColor="@android:color/white"
+                android:padding="16dp"
+                android:textSize="16sp"
+                android:drawableEnd="@drawable/icon13"
+                android:drawablePadding="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_vertical|start" />
+
+            <!-- AppGallery Button -->
+            <Button
+                android:id="@+id/appGalleryButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/gallery"
+                android:background="@drawable/button_background"
+                android:textColor="@android:color/white"
+                android:padding="16dp"
+                android:textSize="16sp"
+                android:drawableEnd="@drawable/icon12"
+                android:drawablePadding="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_vertical|start" />
+
+
+        </LinearLayout>
+    <!-- Horizontal Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CDCDCF"/>
+
+    </LinearLayout>
+</LinearLayout>
+<!-- </FrameLayout>-->

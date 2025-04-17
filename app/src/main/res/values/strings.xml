@@ -1,0 +1,171 @@
+<resources>
+    <string name="app_name">SlapImage</string>
+    <string name="slapImage">SlapImage</string>
+    <string name="set_photo_button_text">Set Photo</string>
+    <string name="display_photo_button_text">Open &amp; Display Photo</string>
+    <string name="image_description">photo displayed in full screen</string>
+    <string name="play_video">Play Video</string>
+    <string name="quit_program">Quit Program</string>
+    <string name="top_bar">Top bar with SlapImage title</string>
+    <string name="banner">Banner</string>
+    <string name="calendar">Calendar</string>
+    <string name="calculator">Calculator</string>
+    <string name="comingsoon">Coming Soon</string>
+    <string name="gallery">Gallery</string>
+    <string name="stock">Find Stock Price</string>
+    <string name="toolbar_title">Open TextFile</string>
+    <string name="view_text_file">View TextFile</string>
+    <string name="splash_line1">Copyright Reserved &#169; 2025 A HackerWacker Production</string>
+    <string name="splash_line2">All Rights Reserved</string>
+    <!-- New strings for error messages -->
+    <string name="error_reading_file">Error reading file: %1$s</string>
+    <string name="no_file_selected">No file selected</string>
+    <string name="file_content_loaded">File content loaded</string>
+    <string name="logo_description">Demo Photo</string>
+    <string name="photo">Photo</string>
+    <string name="music">Music</string>
+        <!-- Music Player Strings -->
+        <string name="playing_from">PLAYING FROM</string>
+        <string name="device_storage">Device Storage</string>
+        <string name="default_time">0:00</string>
+        <string name="no_song_selected">No song selected</string>
+        <string name="unknown_artist">Unknown Artist</string>
+        <string name="select_song">Select Song</string>
+        <string name="permission_needed">Permission needed to access files</string>
+        <string name="error_media_player">Error initializing media player</string>
+
+        <!-- Button Content Descriptions -->
+        <string name="stop">Stop</string>
+        <string name="forward_10">Forward 10 seconds</string>
+        <string name="backward_10">Backward 10 seconds</string>
+    <string name="api_limit_reached">API limit reached. Please wait or use a premium API key.</string>
+    <string name="invalid_ticker">Invalid stock symbol. Please check and try again.</string>
+    <string name="network_error">Network error. Please check your connection.</string>
+    <string name="tips_message">
+        <![CDATA[
+        \n
+        Set Photo - select the photo file\n
+        Display Photo - display photo on screen\n
+        Play Video - select a video file to play\n
+        Quit Program - quit and exit the program
+        ]]>
+    </string>
+    <string name="display_photo_tips_message">
+        <![CDATA[
+        \n
+        Select the photo file you want to open\n
+        and display on screen\n
+        Demo photo can be changed by swiping\n
+        left or right on the image…
+        ]]>
+    </string>
+    <string name="display_video_tips_message">
+        <![CDATA[
+        \n
+        Select the video file you want to open\n
+        and display on screen\n
+        Demo video can be changed by swiping\n
+        left or right on the image…
+        ]]>
+    </string>
+    <string name="version">
+        <![CDATA[
+        Version: 1.0.0.10\n
+        Coded by: Bernard Chan\n
+        Assisted by: DeepSeek
+        ]]>
+    </string>
+    <string name="score_level_format">Score: %1$d | Level: %2$d</string>
+    <string name="final_score">Final Score: %1$d</string>
+    <string name="congratulations">Congratulations!</string>
+    <string name="game_completed_message">You completed all levels with score: %1$d</string>
+    <string name="ok">OK</string>
+    <!-- Stock display strings -->
+    <string name="stock_symbol_hint">Stock Symbol (e.g. AAPL)</string>
+    <string name="get_stock_data_button">Get Stock Data</string>
+    <string name="price_label">Price: %1$s</string>
+    <string name="open_label">Open: %1$s</string>
+    <string name="high_label">High: %1$s</string>
+    <string name="low_label">Low: %1$s</string>
+    <string name="volume_label">Volume: %1$s</string>
+    <string name="change_label">%1$s (%2$s)</string>
+    <string name="label_na">N/A</string>
+    <string name="error_empty_ticker">Please enter a stock symbol</string>
+    <string name="error_data_fetch">Failed to fetch stock data</string>
+    <string name="error_network">Network error: %1$s</string>
+    <string name="error_unknown">Unknown error occurred</string>
+    <!-- Video Player Strings -->
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="forward">⏩</string>
+    <string name="backward">⏪</string>
+    <string name="video_content_description">Video player</string>
+    <string name="play_pause_content_description">Play/Pause button</string>
+    <string name="forward_content_description">Fast forward</string>
+    <string name="backward_content_description">Rewind</string>
+    <!-- Calculator Strings -->
+    <string name="zero">0</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+    <string name="equal">=</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="AC">AC</string>
+    <string name="DEL">DEL</string>
+    <string name="dot">.</string>
+    <string name="divide">÷</string>
+    <string name="times">×</string>
+    <string name="calculation_template">%1$s %2$s</string>
+    <string name="full_calculation_template">%1$s %2$s %3$s =</string>
+
+        <!-- Activity Title -->
+        <string name="game_of_life_title">Game of Life</string>
+
+        <!-- Section Headers -->
+        <string name="board_settings">Board Settings</string>
+        <string name="game_rules">Game Rules</string>
+        <string name="simulation_settings">Simulation Settings</string>
+        <string name="color_settings">Color Settings</string>
+        <string name="initial_pattern">Initial Pattern</string>
+
+        <!-- Input Hints -->
+        <string name="width_hint">Width (cells)</string>
+        <string name="height_hint">Height (cells)</string>
+        <string name="birth_rule_hint">Birth rule (e.g., 3)</string>
+        <string name="survival_rule_hint">Survival rule (e.g., 2,3)</string>
+
+        <!-- Labels -->
+        <string name="simulation_speed">Simulation Speed</string>
+        <string name="wrap_around_edges">Wrap around edges</string>
+        <string name="live_cell_color">Live Cell Color:</string>
+        <string name="dead_cell_color">Dead Cell Color:</string>
+        <string name="change">Change</string>
+
+        <!-- Pattern Options -->
+        <string name="random">Random</string>
+        <string name="empty">Empty</string>
+        <string name="glider">Glider</string>
+
+        <!-- Action Button -->
+        <string name="start_simulation">Start Simulation</string>
+    <string name="invalid_dimensions">Width and height must be positive numbers</string>
+    <string name="invalid_numbers">Please enter valid numbers</string>
+    <string name="simulation_start_message">Starting simulation with:\nSize: %1$d×%2$d\nBirth Rule: %3$s\nSurvival Rule: %4$s\nSpeed: %5$d\nWrap Around: %6$s</string>
+    <string name="random_pattern_selected">Random pattern selected</string>
+    <string name="empty_pattern_selected">Empty pattern selected</string>
+    <string name="glider_pattern_selected">Glider pattern selected</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="simulation_title">Game of Life (Simulation)</string>
+    <string name="resume">Resume</string>
+    <string name="step">Step</string>
+    <string name="reset">Reset</string>
+    <string name="speed_slider_desc">Simulation speed control. Current value: 5</string>
+</resources>

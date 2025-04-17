@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Add your UI elements here -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/light_green"> <!-- Set background color to light green -->
+
+
+    <!-- Photo Bar Container with Black Background -->
+    <RelativeLayout
+        android:id="@+id/photoBarContainer"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/slapimage_top_bar_black">
+
+        <!-- ImageView that scales to fit height and aligns to the left -->
+        <ImageView
+            android:id="@+id/photoBar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="fitStart"
+            android:adjustViewBounds="true"
+            android:layout_alignParentStart="true"
+            android:contentDescription="@string/top_bar"
+            android:src="@drawable/slapimage_bw_logo" />
+    </RelativeLayout>
+
+    <!-- ImageView to display the selected photo -->
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+        android:contentDescription="@string/image_description" />
+
+    <!-- ImageView to display an image above the TextView 450 -->
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="@dimen/photo_image_width"
+        android:layout_height="@dimen/photo_image_height"
+        android:src="@drawable/panda_example"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/logo_description"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center" />
+
+    <!-- TextView to display a message -->
+    <TextView
+        android:id="@+id/tvMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/display_photo_tips_message"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:maxWidth="320dp"
+        android:gravity="start"
+        android:layout_gravity="center" />
+
+    <!-- Button to display the photo -->
+
+    <Button
+        android:id="@+id/btnDisplayPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/display_photo_button_text"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:backgroundTint="@color/red"
+        android:layout_marginTop="5dp"
+        android:maxWidth="320dp"
+        android:layout_gravity="center" />
+
+
+</LinearLayout>

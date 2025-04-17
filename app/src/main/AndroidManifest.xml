@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.slapimage">
+
+
+    <!-- For Android 12 and below -->
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.OPEN_DOCUMENT" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.PICK" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.GET_CONTENT" />
+        </intent>
+    </queries>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <uses-permission
+        android:name="android.permission.INTERNET" />
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:hardwareAccelerated="false">
+
+    <!-- MainActivity with android:exported explicitly set -->
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:launchMode="singleTop"/>
+        <activity android:name=".gridiconactivity.ComingSoonActivity" />
+        <activity android:name=".PlaceholderActivity" />
+        <activity android:name=".gridiconactivity.CalendarActivity" />
+        <activity android:name=".gridiconactivity.StockActivity" />
+        <activity android:name=".gridiconactivity.CalculatorActivity" />
+        <activity android:name=".GalleryActivity" />
+        <activity android:name=".FolderContentsActivity" />
+        <activity android:name=".PhotoViewerActivity" />
+        <activity android:name=".PlaylistActivity" />
+        <activity
+            android:name=".gridiconactivity.MusicPlayerActivity"
+            android:label="Music Player"
+            android:exported="false" />
+
+        <activity
+            android:name=".gridiconactivity.TextViewerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:mimeType="text/*" />
+                <data android:mimeType="application/xml" />
+                <data android:mimeType="application/json" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".gridiconactivity.GameOfLifeActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.GameofLife" />
+        <activity
+            android:name=".gridiconactivity.SimulationActivity"
+            android:theme="@style/AppTheme.GameofLife"
+            android:parentActivityName=".gridiconactivity.GameOfLifeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".gridiconactivity.GameOfLifeActivity" />
+        </activity>
+    </application>
+
+</manifest>
