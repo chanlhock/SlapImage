@@ -1,4 +1,4 @@
-# :mouse: Welcome to SlapImage Apps
+# :mouse: Welcome to SlapImage
 
 This is my attempt to create a utility Android Apps which rich features and useful functions using Android Studio Meerkat with the assistance of DeepSeek (https://www.deepseek.com/). Some of graphics are generated with Doubao 豆包 (https://www.doubao.com/chat/).
 
