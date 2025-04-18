@@ -6,6 +6,16 @@
  <img alt="SlapImage title yellow over black" src="app/src/main/res/drawable/animated_logo.gif" width="400">
 </picture>
 
+## Table of Contents
+- [Description](#scroll-description)
+- [APK Download](#gift-apk-download)
+- [Development Platform](#computer-development-platform)
+- [Platform Tested](#iphone-platform-tested)
+- [Chronology of Development Events](#hourglass_flowing_sand-chronology-of-development-events)
+- [Unresolvable Bug in Todo List](#beetle-unresolvable-bug-in-todo-list)
+- [Uncomplete Todo Tasks](#plate_with_cutlery-uncomplete-todo-tasks)
+- [Feedback and Suggestions](#speech_balloon-feedback-and-suggestions)
+
 ## :scroll: Description
 <picture>
  <source media="(prefers-color-scheme: dark)" srcset="app/src/main/res/drawable/slapimage_yellow.png" width="200">
