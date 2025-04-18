@@ -57,7 +57,7 @@ Testing is also done on a Virtual Phone that I have setup in Android Studio:
   - SlapImage had reached a point of stable code of functions and features. I proceeded to commit it to GitHub.
 - 
 ## :beetle: Unresolvable Bug in Todo List
-- [ ] When user pressed the back arrow button at the topbar of StockActivity.kt view, returning back to HomeFragment.kt view there is a large white rectangle covering lower two rows of the grid icon container. This only happens when user enters a Stock Ticker and check the stock price. However, if user uses the phone back button to return to HomeFragment.kt view, the bug doesn't happen. One other observation is that the bug doesn't happen on Android 15 phone.
+- [ ] When user pressed the back arrow button at the topbar of StockActivity.kt view, returning back to HomeFragment.kt view there is a large white rectangle covering lower two rows of the grid icon container. This only happens when user enters a Stock Ticker and check the stock price. However, if user uses the phone back button to return to HomeFragment.kt view, the bug doesn't happen. One other observation is that the bug doesn't happen on Android 15 phone. :eyes:
 - [X] (Issue fixed 18th Apr 2025) When user clicked Gallery button to launch, SlapImage crashes. :warning: (Issue only specifically occurred on Huawei Matepad 12 X).  ----- 
    - Resolution: The key improvements are: (refer to GalleryActivity.kt for more details)
      - Better null safety checks
