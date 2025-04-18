@@ -1,17 +1,17 @@
 # :mouse: Welcome to SlapImage
 
 <picture>
- <source media="(prefers-color-scheme: dark)" srcset="app/src/main/res/drawable/animated_logo.gif" width="200">
- <source media="(prefers-color-scheme: light)" srcset="app/src/main/res/drawable/animated_logo.gif" width="200">
- <img alt="SlapImage title yellow over black" src="app/src/main/res/drawable/animated_logo.gif" width="200">
+ <source media="(prefers-color-scheme: dark)" srcset="app/src/main/res/drawable/animated_logo.gif" width="400">
+ <source media="(prefers-color-scheme: light)" srcset="app/src/main/res/drawable/animated_logo.gif" width="400">
+ <img alt="SlapImage title yellow over black" src="app/src/main/res/drawable/animated_logo.gif" width="400">
 </picture>
+
+## :scroll: Description
 <picture>
  <source media="(prefers-color-scheme: dark)" srcset="app/src/main/res/drawable/slapimage_yellow.png" width="200">
  <source media="(prefers-color-scheme: light)" srcset="app/src/main/res/drawable/slapimage_yellow.png" width="200">
  <img alt="SlapImage title yellow over black" src="app/src/main/res/drawable/slapimage_yellow.png" width="200">
-</picture>
-
-## :scroll: Description
+</picture><br>
 This is my attempt to create a utility Android Apps which rich features and useful functions using Android Studio Meerkat with the assistance of DeepSeek (https://www.deepseek.com/). Some of graphics are generated with Doubao 豆包 (https://www.doubao.com/chat/).
 
 ## :gift: APK Download
