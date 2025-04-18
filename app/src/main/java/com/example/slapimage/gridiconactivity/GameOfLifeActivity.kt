@@ -10,12 +10,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.example.slapimage.R
-import com.example.slapimage.gridiconactivity.SimulationActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.slider.Slider
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textfield.TextInputEditText
+import androidx.core.graphics.toColorInt
 
 // Add this enum class at the top of your file
 enum class InitialPattern { RANDOM, EMPTY, GLIDER }
@@ -36,7 +36,7 @@ class GameOfLifeActivity : AppCompatActivity() {
     private lateinit var startButton: MaterialButton
     private var selectedPattern: InitialPattern = InitialPattern.RANDOM
 
-    private var liveCellColor = Color.parseColor("#FF03DAC5")
+    private var liveCellColor = "#FF03DAC5".toColorInt()
     private var deadCellColor = Color.WHITE
 
     override fun onCreate(savedInstanceState: Bundle?) {

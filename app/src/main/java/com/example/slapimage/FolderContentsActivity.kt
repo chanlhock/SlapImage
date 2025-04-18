@@ -81,7 +81,7 @@ class FolderContentsActivity : AppCompatActivity() {
                         file.lastModified()
                     }
                 }
-            } catch (e: SecurityException) {
+            } catch (_: SecurityException) {
                 0L
             }
         }
