@@ -58,8 +58,18 @@ Testing is also done on a Virtual Phone that I have setup in Android Studio:
 - 
 ## :beetle: Unresolvable Bug in Todo List
 - [ ] When user pressed the back arrow button at the topbar of StockActivity.kt view, returning back to HomeFragment.kt view there is a large white rectangle covering lower two rows of the grid icon container. This only happens when user enters a Stock Ticker and check the stock price. However, if user uses the phone back button to return to HomeFragment.kt view, the bug doesn't happen.
-- [ ] When user clicked Gallery button to launch, SlapImage crashes. :warning: (Issue only specifically occurred on Huawei Matepad 12 X)
-
+- [X] (Issue fixed 18th Apr 2025) When user clicked Gallery button to launch, SlapImage crashes. :warning: (Issue only specifically occurred on Huawei Matepad 12 X).  ----- 
+   - Resolution: The key improvements are: (refer to GalleryActivity.kt for more details)
+     - Better null safety checks
+     - Huawei-specific MediaStore handling
+```
+    val uri = if (Build.MANUFACTURER.equals("huawei", ignoreCase = true)) {
+        // Huawei specific URI
+        MediaStore.Images.Media.getContentUri("external")
+    } else {
+        MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+    }
+```
 ## :plate_with_cutlery: Incomplete Todo Tasks
 - [ ] Add an activity to support Google Gemini AI Chat Dialog.
 - [ ] Explore possibility of creating access of DeepSeek tensorflow lite model locally on device to run the DeepSeek Chat Dialog activity? :eye:
