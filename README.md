@@ -13,7 +13,7 @@
 - [Platform Tested](#iphone-platform-tested)
 - [Chronology of Development Events](#hourglass_flowing_sand-chronology-of-development-events)
 - [Unresolvable Bug in Todo List](#beetle-unresolvable-bug-in-todo-list)
-- [Uncomplete Todo Tasks](#plate_with_cutlery-uncomplete-todo-tasks)
+- [Incomplete Todo Tasks](#plate_with_cutlery-uncomplete-todo-tasks)
 - [Feedback and Suggestions](#speech_balloon-feedback-and-suggestions)
 
 ## :scroll: Description
