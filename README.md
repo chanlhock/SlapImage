@@ -5,6 +5,9 @@
 ## :scroll: Description
 This is my attempt to create a utility Android Apps which rich features and useful functions using Android Studio Meerkat with the assistance of DeepSeek (https://www.deepseek.com/). Some of graphics are generated with Doubao 豆包 (https://www.doubao.com/chat/).
 
+## :gift: APK Download
+Try it yourself and I would love to hear your feedback :smiley: :mouse:
+
 ## :computer: Development Platform
 SlapImage is developed using:
 - old MacBook Air 2017 with Intel Processor.
