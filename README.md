@@ -12,7 +12,7 @@
  <source media="(prefers-color-scheme: light)" srcset="app/src/main/res/drawable/slapimage_yellow.png" width="200">
  <img alt="SlapImage title yellow over black" src="app/src/main/res/drawable/slapimage_yellow.png" width="200">
 </picture><br>
-This is my attempt to create a utility Android Apps which rich features and useful functions using Android Studio Meerkat with the assistance of DeepSeek (https://www.deepseek.com/). Some of graphics are generated with Doubao 豆包 (https://www.doubao.com/chat/).
+This is my attempt to create a utility Android Apps which is features rich and useful functions using Android Studio Meerkat with the assistance of DeepSeek (https://www.deepseek.com/). Some of graphics are generated with Doubao 豆包 (https://www.doubao.com/chat/).
 
 ## :gift: APK Download
 Try it yourself and I would love to hear your feedback :smiley: :mouse:
