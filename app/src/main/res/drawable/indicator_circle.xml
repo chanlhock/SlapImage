@@ -1,0 +1,8 @@
+<!-- res/drawable/indicator_circle.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <size
+        android:width="@dimen/indicator_size"
+        android:height="@dimen/indicator_size"/>
+    <solid android:color="@color/indicator_inactive"/>
+</shape>
