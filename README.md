@@ -57,7 +57,7 @@ Testing is also done on a Virtual Phone that I have setup in Android Studio:
 - [ ] Improve the MP3 song player features by adapting good open source solution in GitHub.
 
       
-## :left_speech_bubble: Feedback and Suggestions
+## :speech_balloon: Feedback and Suggestions
 For any feedback or suggestions, feel free to contact me via email:\
 :email: chanlhock@gmail.com :mouse:
 
