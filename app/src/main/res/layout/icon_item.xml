@@ -9,6 +9,7 @@
         android:id="@+id/iconImage"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:contentDescription="@string/icon"
         android:scaleType="centerCrop" />
 
     <TextView

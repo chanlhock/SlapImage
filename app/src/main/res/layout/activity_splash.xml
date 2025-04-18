@@ -10,6 +10,7 @@
         android:layout_width="240dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
+        android:contentDescription="@string/banner"
         android:src="@drawable/slapimage_yellow"/>
 
     <!-- Text container at bottom -->

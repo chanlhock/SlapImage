@@ -34,6 +34,8 @@
         <string name="select_song">Select Song</string>
         <string name="permission_needed">Permission needed to access files</string>
         <string name="error_media_player">Error initializing media player</string>
+        <string name="album_art">Album Art</string>
+        <string name="zero_dot_zero_zero">0:00</string>
 
         <!-- Button Content Descriptions -->
         <string name="stop">Stop</string>

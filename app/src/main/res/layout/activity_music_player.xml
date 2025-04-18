@@ -12,7 +12,7 @@
         android:id="@+id/tvPlayingFrom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PLAYING FROM"
+        android:text="@string/playing_from"
         android:textColor="@android:color/white"
         android:textSize="12sp"
         android:layout_marginBottom="8dp"/>
@@ -21,7 +21,7 @@
         android:id="@+id/tvSource"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Device Storage"
+        android:text="@string/device_storage"
         android:textColor="@android:color/white"
         android:textSize="14sp"
         android:layout_marginBottom="24dp"/>
@@ -32,7 +32,7 @@
         android:layout_height="200dp"
         android:src="@drawable/ic_music_note"
         android:layout_marginBottom="24dp"
-        android:contentDescription="Album art"/>
+        android:contentDescription="@string/album_art"/>
 
     <TextView
         android:id="@+id/tvSongTitle"
@@ -94,6 +94,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:src="@android:drawable/ic_media_rew"
+            android:contentDescription="@string/backward_10"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_marginEnd="16dp"/>
 
@@ -102,6 +103,7 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:src="@android:drawable/ic_media_play"
+            android:contentDescription="@string/play"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_marginEnd="16dp"/>
 
@@ -110,6 +112,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:src="@drawable/ic_stop"
+            android:contentDescription="@string/stop"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_marginEnd="16dp"/>
 
@@ -118,6 +121,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:src="@android:drawable/ic_media_ff"
+            android:contentDescription="@string/forward_10"
             android:background="?attr/selectableItemBackgroundBorderless"/>
     </LinearLayout>
 
@@ -125,6 +129,6 @@
         android:id="@+id/btnSelectSong"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select Song"
+        android:text="@string/select_song"
         android:layout_gravity="center"/>
 </LinearLayout>
