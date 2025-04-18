@@ -234,7 +234,9 @@ class StockActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         clearStockDataResources()
-        supportFinishAfterTransition()
+       // supportFinishAfterTransition()
+        // Mimic back press (NavController handles fragment state)
+        onBackPressedDispatcher.onBackPressed() // This will trigger our callback
         return true
     }
 }

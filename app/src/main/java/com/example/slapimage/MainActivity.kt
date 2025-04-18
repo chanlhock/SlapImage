@@ -54,8 +54,6 @@ class MainActivity : AppCompatActivity() {
         // Add the callback to the OnBackPressedDispatcher
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
 
-        // Initialize constraintLayout
-        //constraintLayout = findViewById(R.id.constraintLayout) // Replace with your actual ID
         // Set a listener for item selection
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -87,11 +85,6 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             replaceFragment(HomeFragment())
         }
-        //splashScreen.setKeepOnScreenCondition { false } // Keep the splash screen visible until your app is ready
-        // Delay dismissal after 3 seconds
-     //   Handler(Looper.getMainLooper()).postDelayed({
-//splashScreen.setKeepOnScreenCondition { false }
-     //   }, 3000) // 3000ms = 3 seconds
 
     }
     private fun replaceFragment(fragment: Fragment) {

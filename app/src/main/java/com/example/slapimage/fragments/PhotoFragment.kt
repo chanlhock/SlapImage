@@ -85,6 +85,7 @@ class PhotoFragment : Fragment() {
         }else{
             btnDisplayPhoto.visibility = View.VISIBLE
         }
+
         return view
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
