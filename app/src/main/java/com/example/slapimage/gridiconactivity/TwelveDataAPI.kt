@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 object TwelveDataAPI {
     private const val TAG = "TwelveDataAPI"
     private const val BASE_URL = "https://api.twelvedata.com"
-    private const val API_KEY = "replace with your own API key" // Replace with your key
+    private const val API_KEY = "c480aa1660db419594c2d89af02dbd1f" // Replace with your key
 
     private val client = OkHttpClient.Builder()
         .connectTimeout(15, TimeUnit.SECONDS)

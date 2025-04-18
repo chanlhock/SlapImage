@@ -7,7 +7,7 @@
     <ImageView
         android:id="@+id/folderThumbnail"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="@dimen/folder_size"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_folder" />
 

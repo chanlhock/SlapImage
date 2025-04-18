@@ -181,8 +181,20 @@ class StockActivity : AppCompatActivity() {
         tvChange.setTextColor(ContextCompat.getColor(this, colorRes))
     }
 
+    // this will display in local currency and not USD
+    // private fun formatCurrency(value: Float): String {
+    //    return NumberFormat.getCurrencyInstance().format(value.toDouble())
+    // }
+
+    // Forced to display only in USD
     private fun formatCurrency(value: Float): String {
-        return NumberFormat.getCurrencyInstance().format(value.toDouble())
+        val usdFormat = NumberFormat.getCurrencyInstance().apply {
+            // Force USD currency format
+            maximumFractionDigits = 2
+            minimumFractionDigits = 2
+            currency = java.util.Currency.getInstance("USD")
+        }
+        return usdFormat.format(value.toDouble())
     }
 
     private fun formatNumber(value: Long): String {

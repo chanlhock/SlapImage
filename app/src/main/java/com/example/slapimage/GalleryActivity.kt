@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.io.File
+import android.os.Build
 
 class GalleryActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -91,6 +92,12 @@ class GalleryActivity : AppCompatActivity() {
     }
 
     private fun scanForPhotoFolders(): List<PhotoFolder> {
+        val uri = if (Build.MANUFACTURER.equals("HUAWEI", ignoreCase = true)) {
+            MediaStore.Images.Media.getContentUri("external")
+        } else {
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        }
+
         val projection = arrayOf(
             MediaStore.Images.Media.BUCKET_DISPLAY_NAME,
             MediaStore.Images.Media.DATA,
@@ -98,48 +105,64 @@ class GalleryActivity : AppCompatActivity() {
             MediaStore.Images.Media.DATE_TAKEN
         )
 
+        val selection = if (Build.MANUFACTURER.equals("HUAWEI", ignoreCase = true)) {
+            "${MediaStore.Images.Media.BUCKET_ID} IS NOT NULL"
+        } else {
+            null
+        }
+
         val cursor = contentResolver.query(
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            uri,
             projection,
-            null,
+            selection,
             null,
             "${MediaStore.Images.Media.DATE_TAKEN} ASC"
-        )
+        ) ?: return emptyList()
 
         val folderMap = mutableMapOf<String, PhotoFolder>()
 
-        cursor?.use {
-            val bucketNameColumn = it.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME)
-            val dataColumn = it.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-            val bucketIdColumn = it.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_ID)
-            val dateTakenColumn = it.getColumnIndexOrThrow(MediaStore.Images.Media.DATE_TAKEN)
+        try {
+            val bucketNameColumn = cursor.getColumnIndex(MediaStore.Images.Media.BUCKET_DISPLAY_NAME)
+            val dataColumn = cursor.getColumnIndex(MediaStore.Images.Media.DATA)
+            val bucketIdColumn = cursor.getColumnIndex(MediaStore.Images.Media.BUCKET_ID)
+            val dateTakenColumn = cursor.getColumnIndex(MediaStore.Images.Media.DATE_TAKEN)
 
-            while (it.moveToNext()) {
-                val bucketName = it.getString(bucketNameColumn)
-                val data = it.getString(dataColumn)
-                val bucketId = it.getString(bucketIdColumn)
-                val dateTaken = it.getLong(dateTakenColumn)
-                val folderPath = File(data).parent ?: continue
+            if (bucketNameColumn == -1 || dataColumn == -1 || bucketIdColumn == -1 || dateTakenColumn == -1) {
+                return emptyList()
+            }
 
-                val folder = folderMap[bucketId] ?: PhotoFolder(
-                    id = bucketId,
-                    name = bucketName,
-                    path = folderPath,
-                    thumbnailPath = data,
-                    photoCount = 0,
-                    newestPhotoDate = dateTaken,
-                    isSinglePhoto = false
-                ).also { folderMap[bucketId] = it }
+            while (cursor.moveToNext()) {
+                try {
+                    val bucketName = cursor.getString(bucketNameColumn) ?: continue
+                    val data = cursor.getString(dataColumn) ?: continue
+                    val bucketId = cursor.getString(bucketIdColumn) ?: continue
+                    val dateTaken = cursor.getLong(dateTakenColumn)
 
-                folder.photoCount++
-                if (dateTaken > folder.newestPhotoDate) {
-                    folder.newestPhotoDate = dateTaken
-                    folder.thumbnailPath = data
+                    val folderPath = File(data).parent ?: continue
+
+                    val folder = folderMap[bucketId] ?: PhotoFolder(
+                        id = bucketId,
+                        name = bucketName,
+                        path = folderPath,
+                        thumbnailPath = data,
+                        photoCount = 0,
+                        newestPhotoDate = dateTaken,
+                        isSinglePhoto = false
+                    ).also { folderMap[bucketId] = it }
+
+                    folder.photoCount++
+                    if (dateTaken > folder.newestPhotoDate) {
+                        folder.newestPhotoDate = dateTaken
+                        folder.thumbnailPath = data
+                    }
+                } catch (e: Exception) {
+                    continue // Skip problematic entries
                 }
             }
+        } finally {
+            cursor.close()
         }
 
-        // Mark single-photo folders
         folderMap.values.forEach { folder ->
             if (folder.photoCount == 1) {
                 folder.isSinglePhoto = true

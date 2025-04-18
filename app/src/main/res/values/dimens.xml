@@ -10,4 +10,9 @@
     <dimen name="small_margin">8dp</dimen>
     <dimen name="medium_margin">16dp</dimen>
     <dimen name="large_margin">24dp</dimen>
+    <dimen name="indicator_size">8dp</dimen>
+    <dimen name="indicator_margin">4dp</dimen>
+    <dimen name="grid_icon_size">48dp</dimen>
+    <dimen name="folder_size">150dp</dimen>
+    <dimen name="picture_size">120dp</dimen>
 </resources>

@@ -41,6 +41,8 @@ import com.example.slapimage.gridiconactivity.GameOfLifeActivity
 import com.example.slapimage.gridiconactivity.StockActivity
 import com.example.slapimage.gridiconactivity.TextViewerActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 
 class HomeFragment : Fragment() {
 
@@ -58,6 +60,7 @@ class HomeFragment : Fragment() {
     private lateinit var bannerContainer: ViewGroup
     private lateinit var currentBanner: ImageView
     private lateinit var nextBanner: ImageView
+    private lateinit var pageIndicator: LinearLayout
 
     private val openTextFileLauncher = registerForActivityResult(
         ActivityResultContracts.OpenDocument()
@@ -101,6 +104,7 @@ class HomeFragment : Fragment() {
         Glide.with(this).load(bannerImages[currentBannerIndex]).into(currentBanner)
         rotateBannerWithAnimation()
 
+        pageIndicator = view.findViewById(R.id.pageIndicator)
         // Initialize icon pager
         iconRecyclerView = view.findViewById(R.id.icon_pager_recycler_view)
         setupIconPager()
@@ -135,6 +139,41 @@ class HomeFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun setupPageIndicator(pageCount: Int) {
+        pageIndicator.removeAllViews() // This clears any existing indicators
+
+        for (i in 0 until pageCount) {
+            val circle = ImageView(requireContext()).apply {
+                setImageResource(R.drawable.indicator_circle)
+                layoutParams = LinearLayout.LayoutParams(
+                    resources.getDimensionPixelSize(R.dimen.indicator_size),
+                    resources.getDimensionPixelSize(R.dimen.indicator_size)
+                ).apply {
+                    setMargins(
+                        resources.getDimensionPixelSize(R.dimen.indicator_margin),
+                        0,
+                        resources.getDimensionPixelSize(R.dimen.indicator_margin),
+                        0
+                    )
+                }
+            }
+            pageIndicator.addView(circle)
+        }
+        updateIndicator(0)
+    }
+
+    private fun updateIndicator(position: Int) {
+        for (i in 0 until pageIndicator.childCount) {
+            val circle = pageIndicator.getChildAt(i) as ImageView
+            circle.setColorFilter(
+                ContextCompat.getColor(
+                    requireContext(),
+                    if (i == position) R.color.indicator_active else R.color.indicator_inactive
+                )
+            )
+        }
     }
 
     private fun setupIconPager() {
@@ -172,12 +211,23 @@ class HomeFragment : Fragment() {
             )
         )
 
+        setupPageIndicator(iconPages.size)
+
         iconRecyclerView.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = IconPagerAdapter(iconPages) { icon ->
                 handleIconClick(icon)
             }
             PagerSnapHelper().attachToRecyclerView(this)
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                    val firstVisibleItem = layoutManager.findFirstVisibleItemPosition()
+                    if (firstVisibleItem != RecyclerView.NO_POSITION) {
+                        updateIndicator(firstVisibleItem)
+                    }
+                }
+            })
         }
     }
 
@@ -327,11 +377,12 @@ class HomeFragment : Fragment() {
         inner class IconViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             private val iconImage: ImageView = itemView.findViewById(R.id.icon_image)
             private val iconText: TextView = itemView.findViewById(R.id.icon_text)
-
+            //private val container: View = itemView.findViewById(R.id.icon_container)
             fun bind(icon: Icon) {
                 iconImage.setImageResource(icon.image)
                 iconText.text = icon.text
                 itemView.setOnClickListener { onIconClick(icon) }
+                //container.setBackgroundResource(R.drawable.icon_item_background)
             }
         }
 

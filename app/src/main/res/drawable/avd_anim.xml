@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:drawable="@drawable/ic_splash_icon">
-    <target
-        android:name="logo"
-        android:animation="@animator/scale_and_fade" />
-</animated-vector>
