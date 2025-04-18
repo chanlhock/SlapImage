@@ -1,6 +1,11 @@
 # :mouse: Welcome to SlapImage
 
 <picture>
+ <source media="(prefers-color-scheme: dark)" srcset="app/src/main/res/drawable/animated_logo.gif" width="200">
+ <source media="(prefers-color-scheme: light)" srcset="app/src/main/res/drawable/animated_logo.gif" width="200">
+ <img alt="SlapImage title yellow over black" src="app/src/main/res/drawable/animated_logo.gif" width="200">
+</picture>
+<picture>
  <source media="(prefers-color-scheme: dark)" srcset="app/src/main/res/drawable/slapimage_yellow.png" width="200">
  <source media="(prefers-color-scheme: light)" srcset="app/src/main/res/drawable/slapimage_yellow.png" width="200">
  <img alt="SlapImage title yellow over black" src="app/src/main/res/drawable/slapimage_yellow.png" width="200">
