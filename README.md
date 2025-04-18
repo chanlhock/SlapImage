@@ -30,8 +30,16 @@ Testing is also done on a Virtual Phone that I have setup in Android Studio:
   - SlapImage had reached a point of stable code of functions and features. I proceeded to commit it to GitHub.
 - 
 ## :beetle: Unresolvable Bug in Todo List
-- [ ] When user press the back arrow button at the topbar of StockActivity.kt view, returning back to HomeFragment.kt view there is a large white rectangle covering lower two rows of the grid icon container. This only happens when user enters a Stock Ticker and check the stock price. However, if user uses the phone back button to return to HomeFragment.kt view, the bug doesn't happen.
+- [ ] When user pressed the back arrow button at the topbar of StockActivity.kt view, returning back to HomeFragment.kt view there is a large white rectangle covering lower two rows of the grid icon container. This only happens when user enters a Stock Ticker and check the stock price. However, if user uses the phone back button to return to HomeFragment.kt view, the bug doesn't happen.
+- [ ] When user clicked Gallery button to launch, SlapImage crashed. :warning: (Issue only specifically occurred on Huawei Matepad 12 X)
 
+## :plate_with_cutlery: Uncomplete Todo Tasks
+- [ ] Add an activity to support Google Gemini AI Chat Dialog.
+- [ ] Explore possibility of creating access of DeepSeek tensorflow lite model locally on device to run the DeepSeek Chat Dialog activity? :eye:
+- [ ] Add an activity to support Textris game activity.
+- [ ] Improve the MP3 song player features by adapting good open source solution in GitHub.
+
+      
 ## :left_speech_bubble: Feedback and Suggestions
 For any feedback or suggestions, feel free to contact me via email:\
 :email: chanlhock@gmail.com :mouse:
