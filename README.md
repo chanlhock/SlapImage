@@ -25,11 +25,11 @@ SlapImage is developed using:
 
 ## :iphone: Platform tested:
 I have tested mostly my code on:
-- Huawei P50 Pro mobile phone running EMUI 14.2.0 (Android 12) 6.6" display (2700 x 1228 pixels).
+- Huawei P50 Pro mobile phone running EMUI 14.2.0 (Android 12) 6.6" display (1228 x 2700 pixels).
 - Honor 200 mobile phone running Android 14 6.78" display (1224 x 2700 pixels).
   
 In addition I have also tested to some extend on:
-- Huawei Matepad 12 X Tablet running on Harmony OS 4.2.0 (Android 12) 12" display (2800 x 1840 pixels)\
+- Huawei Matepad 12 X Tablet running on Harmony OS 4.2.0 (Android 12) 12" display (1840 x 2800 pixels)\
   [Note: an attempt to develop the apps to cover larger screen size]
 
 Testing is also done on a Virtual Phone that I have setup in Android Studio:
