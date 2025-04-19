@@ -74,7 +74,7 @@ Testing is also done on a Virtual Phone that I have setup in Android Studio:
 ## :plate_with_cutlery: Incomplete Todo Tasks
 - [X] Add an activity to support Google Gemini AI Chat Dialog.
 - [ ] Explore possibility of creating access of DeepSeek tensorflow lite model locally on device to run the DeepSeek Chat Dialog activity? :eye:
-- [ ] Add an activity to support Textris game activity by adapting goid open source solution from GitHub.
+- [ ] Add an activity to support Textris game activity by adapting good open source solution from GitHub.
 - [ ] Improve the MP3 song player features by adapting good open source solution from GitHub.
 
       
