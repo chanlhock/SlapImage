@@ -86,4 +86,15 @@
         <item name="android:windowEnterAnimation">@anim/slide_up</item>
         <item name="android:windowExitAnimation">@anim/no_animation</item>
     </style>
+    <style name="CodeBlockStyle">
+        <item name="android:background">@color/code_block_background</item>
+        <item name="android:textColor">@color/code_block_text</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:layout_margin">4dp</item>
+    </style>
+
+    <!-- Add to colors.xml -->
+    <color name="code_block_background">#F5F5F5</color>
+    <color name="code_block_text">#333333</color>
 </resources>

@@ -37,6 +37,10 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textSize="16sp"
+                android:autoLink="web"
+                android:linksClickable="true"
+                android:textIsSelectable="true"
+                android:lineSpacingExtra="4dp"
                 tools:text="This is a sample response from Gemini AI" />
 
             <TextView

@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.slapimage.databinding.ItemChatBotMessageBinding
 import com.example.slapimage.databinding.ItemChatUserMessageBinding
+import android.text.method.LinkMovementMethod
+import androidx.core.content.ContextCompat
 
 class GeminiChatAdapter : ListAdapter<ChatMessage, RecyclerView.ViewHolder>(ChatDiffCallback()) {
 
@@ -55,6 +57,7 @@ class GeminiChatAdapter : ListAdapter<ChatMessage, RecyclerView.ViewHolder>(Chat
         }
     }
 
+    /*
     inner class BotMessageViewHolder(private val binding: ItemChatBotMessageBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(message: ChatMessage) {
@@ -62,7 +65,52 @@ class GeminiChatAdapter : ListAdapter<ChatMessage, RecyclerView.ViewHolder>(Chat
             binding.timestampText.text = formatTimestamp(message.timestamp)
         }
     }
+*/
+    /*
+    inner class BotMessageViewHolder(private val binding: ItemChatBotMessageBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(message: ChatMessage) {
+            binding.messageText.apply {
+                // Use formatted text if available, otherwise fall back to plain text
+                message.formattedText?.let {
+                    text = it
+                } ?: run {
+                    text = message.text
+                }
 
+                // Make links clickable
+                movementMethod = LinkMovementMethod.getInstance()
+                // Optional: Customize link appearance
+                highlightColor = ContextCompat.getColor(context, android.R.color.transparent)
+            }
+            binding.timestampText.text = formatTimestamp(message.timestamp)
+        }
+    }
+*/
+    inner class BotMessageViewHolder(private val binding: ItemChatBotMessageBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(message: ChatMessage) {
+            binding.messageText.apply {
+                // Safely apply formatted text
+                text = try {
+                    message.formattedText ?: message.text
+                } catch (e: Exception) {
+                    // Fallback to plain text if span application fails
+                    message.text
+                }
+
+                // Only enable links if we have formatted text
+                movementMethod = if (message.formattedText != null) {
+                    LinkMovementMethod.getInstance()
+                } else {
+                    null
+                }
+            }
+
+            binding.timestampText.text = formatTimestamp(message.timestamp)
+        }
+    }
     private fun formatTimestamp(timestamp: Long): String {
         // Implement your timestamp formatting logic here
         return "Just now"

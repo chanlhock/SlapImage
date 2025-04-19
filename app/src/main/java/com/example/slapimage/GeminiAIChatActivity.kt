@@ -2,6 +2,7 @@ package com.example.slapimage
 
 import android.os.Bundle
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -52,7 +53,7 @@ class GeminiAIChatActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupListeners() {
+  /*  private fun setupListeners() {
         binding.sendButton.setOnClickListener {
             val inputText = binding.inputEditText.text.toString().trim()
             if (inputText.isNotEmpty()) {
@@ -67,7 +68,7 @@ class GeminiAIChatActivity : AppCompatActivity() {
             true
         }
     }
-
+*/
     private fun setupObservers() {
         // For chat messages
         lifecycleScope.launch {
@@ -112,6 +113,40 @@ class GeminiAIChatActivity : AppCompatActivity() {
                         viewModel.errorMessageShown()
                     }
                 }
+            }
+        }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.processingComplete.collect { complete ->
+                    if (complete) {
+                        hideKeyboard()
+                        clearInputFocus()
+                        viewModel.resetProcessingState()
+                    }
+                }
+            }
+        }
+    }
+    private fun hideKeyboard() {
+        val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(
+            binding.inputEditText.windowToken,
+            InputMethodManager.HIDE_NOT_ALWAYS
+        )
+    }
+
+    private fun clearInputFocus() {
+        binding.inputEditText.clearFocus()
+        binding.root.requestFocus()
+    }
+    // Update your send button click listener
+    private fun setupListeners() {
+        binding.sendButton.setOnClickListener {
+            val inputText = binding.inputEditText.text.toString().trim()
+            if (inputText.isNotEmpty()) {
+                viewModel.sendMessage(inputText)
+                binding.inputEditText.text?.clear()
+                hideKeyboard() // Hide keyboard immediately when sending
             }
         }
     }
