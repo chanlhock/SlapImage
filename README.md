@@ -32,6 +32,8 @@ Try it yourself and I would love to hear your feedback :smiley: :mouse:
 SlapImage is developed using:
 - old MacBook Air 2017 with Intel Processor.
 - Android Studio Meerkat 2024 3.1 Patch 1
+- DeepSeek AI for code and activity generation, debug and review
+- GitHub Copilot for some minor code review and debug
 
 ## :iphone: Platform tested:
 I have tested mostly my code on:
