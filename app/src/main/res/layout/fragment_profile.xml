@@ -31,13 +31,13 @@
     <!-- ImageView to display an image above the TextView -->
     <ImageView
         android:id="@+id/ivLogo"
-        android:layout_width="250dp"
-        android:layout_height="220dp"
+        android:layout_width="@dimen/profile_logo_width"
+        android:layout_height="@dimen/profile_logo_height"
         android:src="@drawable/slap_imagelogo"
         android:background="@drawable/border"
         android:scaleType="fitCenter"
         android:contentDescription="@string/logo_description"
-        android:layout_marginTop="700dp"
+        android:layout_marginTop="@dimen/profile_logo_margintop"
         app:layout_constraintTop_toBottomOf="@id/photoBarContainer"
         app:layout_constraintBottom_toTopOf="@+id/tvbMessage"
         app:layout_constraintStart_toStartOf="parent"

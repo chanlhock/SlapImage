@@ -15,4 +15,7 @@
     <dimen name="grid_icon_size">72dp</dimen>
     <dimen name="folder_size">300dp</dimen>
     <dimen name="picture_size">240dp</dimen>
+    <dimen name="profile_logo_width">500dp</dimen>
+    <dimen name="profile_logo_height">440dp</dimen>
+    <dimen name="profile_logo_margintop">1000dp</dimen>
 </resources>
