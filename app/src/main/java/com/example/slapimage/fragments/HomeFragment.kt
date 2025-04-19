@@ -54,7 +54,14 @@ class HomeFragment : Fragment() {
         R.drawable.banner8, R.drawable.banner4, R.drawable.banner5, R.drawable.banner6,
         R.drawable.banner7, R.drawable.banner3, R.drawable.banner9, R.drawable.banner10,
         R.drawable.banner11, R.drawable.banner12, R.drawable.banner13, R.drawable.banner14,
-        R.drawable.banner15, R.drawable.banner16, R.drawable.banner17, R.drawable.banner18
+        R.drawable.banner15, R.drawable.banner16, R.drawable.banner17, R.drawable.banner18,
+        R.drawable.banner19, R.drawable.banner20, R.drawable.banner21, R.drawable.banner22,
+        R.drawable.banner23, R.drawable.banner24, R.drawable.banner25, R.drawable.banner26,
+        R.drawable.banner27, R.drawable.banner28, R.drawable.banner29, R.drawable.banner30,
+        R.drawable.banner31, R.drawable.banner32, R.drawable.banner33, R.drawable.banner34,
+        R.drawable.banner35, R.drawable.banner36, R.drawable.banner37, R.drawable.banner38,
+        R.drawable.banner39, R.drawable.banner40, R.drawable.banner41, R.drawable.banner42,
+        R.drawable.banner43, R.drawable.banner44
     )
     private var currentBannerIndex = 0
     private val handler = Handler(Looper.getMainLooper())
