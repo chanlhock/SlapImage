@@ -9,13 +9,13 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.slapimage.R
-import org.tensorflow.lite.Interpreter
+//import org.tensorflow.lite.Interpreter
 import java.io.FileInputStream
 import java.nio.MappedByteBuffer
 import java.nio.channels.FileChannel
 
 class ChatBotFragment : Fragment() {
-    private lateinit var interpreter: Interpreter
+    //private lateinit var interpreter: Interpreter
     private lateinit var inputEditText: EditText
     private lateinit var outputTextView: TextView
     private lateinit var sendButton: Button
@@ -66,7 +66,7 @@ class ChatBotFragment : Fragment() {
 
         // Run inference
         val outputBuffer = FloatArray(1) // Adjust based on your model's output shape
-        interpreter.run(inputBuffer, outputBuffer)
+        //interpreter.run(inputBuffer, outputBuffer)
 
         // Post-process the output (e.g., convert to a string)
         return postprocessOutput(outputBuffer)
