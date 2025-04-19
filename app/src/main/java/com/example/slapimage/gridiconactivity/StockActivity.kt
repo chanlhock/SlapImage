@@ -1,6 +1,7 @@
 package com.example.slapimage.gridiconactivity
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import com.example.slapimage.MainActivity
 import com.example.slapimage.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
@@ -73,7 +75,11 @@ class StockActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
             title = getString(R.string.stock)
         }
-        toolbar.setNavigationOnClickListener { finish() }
+        toolbar.setNavigationOnClickListener {
+            // Navigate back to MainActivity (which hosts HomeFragment)
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            super.finish() }
     }
 
     private fun initializeViews() {
@@ -232,13 +238,13 @@ class StockActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        clearStockDataResources()
+   // override fun onSupportNavigateUp(): Boolean {
+     //   clearStockDataResources()
        // supportFinishAfterTransition()
         // Mimic back press (NavController handles fragment state)
-        onBackPressedDispatcher.onBackPressed() // This will trigger our callback
-        return true
-    }
+       // onBackPressedDispatcher.onBackPressed() // This will trigger our callback
+      //  return true
+   // }
 }
 
 data class StockData(
