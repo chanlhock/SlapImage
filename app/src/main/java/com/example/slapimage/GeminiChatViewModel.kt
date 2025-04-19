@@ -13,7 +13,7 @@ class GeminiChatViewModel : ViewModel() {
     // Replace with your actual API key (store securely in production)
     private val generativeModel = GenerativeModel(
         modelName = "gemini-2.0-flash",
-        apiKey = "AIzaSyBghu7r7ZYlemjYn2APxGxiBQufhj8eBsM"
+        apiKey = "Place your own API key"
     )
 
     private val _chatMessages = MutableStateFlow<List<ChatMessage>>(listOf(
