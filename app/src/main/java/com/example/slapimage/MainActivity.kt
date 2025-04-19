@@ -17,8 +17,10 @@ import com.example.slapimage.fragments.PhotoFragment
 import com.example.slapimage.fragments.PlayFragment
 import com.example.slapimage.fragments.ProfileFragment
 
+//private const val ACTION_PICK_IMAGES = "android.intent.action.PICK_IMAGES"
 
 class MainActivity : AppCompatActivity() {
+    //private lateinit var pickImagesLauncher: ActivityResultLauncher<Intent>
 
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,20 +31,29 @@ class MainActivity : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         // Customize the splash screen behavior (optional)
-       // splashScreen.setKeepOnScreenCondition { true } // Keep the splash screen visible until your app is ready
+        // splashScreen.setKeepOnScreenCondition { true } // Keep the splash screen visible until your app is ready
 
         // Initialize the BottomNavigationView
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
         // Apply the ColorStateList to the icon tints
-        bottomNavigationView.itemIconTintList = ContextCompat.getColorStateList(this, R.color.bottom_nav_icon_color)
-        bottomNavigationView.itemTextColor = ContextCompat.getColorStateList(this,R.color.bottom_nav_icon_color)
+        bottomNavigationView.itemIconTintList =
+            ContextCompat.getColorStateList(this, R.color.bottom_nav_icon_color)
+        bottomNavigationView.itemTextColor =
+            ContextCompat.getColorStateList(this, R.color.bottom_nav_icon_color)
         // Ensure all icons are always displayed
         bottomNavigationView.labelVisibilityMode = BottomNavigationView.LABEL_VISIBILITY_LABELED
 
         // Check for permissions
         checkPermissions()
 
+        // Initialize the ActivityResultLauncher
+        //pickImagesLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        //    if (result.resultCode == Activity.RESULT_OK) {
+        //        val data = result.data
+        //        handleSelectedPhotos(data)
+        //    }
+        //}
         // Handle the back button press using OnBackPressedDispatcher
         val onBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -61,22 +72,27 @@ class MainActivity : AppCompatActivity() {
                     replaceFragment(HomeFragment())
                     true
                 }
+
                 R.id.nav_search -> {
                     replaceFragment(PhotoFragment())
                     true
                 }
+
                 R.id.nav_play -> {
                     replaceFragment(PlayFragment())
                     true
                 }
+
                 R.id.nav_chatbot -> {
                     replaceFragment(ChatBotFragment())
                     true
                 }
+
                 R.id.nav_profile -> {
                     replaceFragment(ProfileFragment())
                     true
                 }
+
                 else -> false
             }
         }
@@ -87,14 +103,43 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commit()
     }
+    /**
+    private fun checkPermissions() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+    if (checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+    requestPermissions(
+    arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
+    REQUEST_CODE_PERMISSIONS
+    )
+    }
+    }
+    }
+     **/
 
     private fun checkPermissions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // Android 13+ (API level 33+)
+            val permissions = mutableListOf<String>()
+
+            if (checkSelfPermission(android.Manifest.permission.READ_MEDIA_IMAGES) != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(android.Manifest.permission.READ_MEDIA_IMAGES)
+            }
+            if (checkSelfPermission(android.Manifest.permission.READ_MEDIA_VIDEO) != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(android.Manifest.permission.READ_MEDIA_VIDEO)
+            }
+            if (checkSelfPermission(android.Manifest.permission.READ_MEDIA_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(android.Manifest.permission.READ_MEDIA_AUDIO)
+            }
+
+            if (permissions.isNotEmpty()) {
+                requestPermissions(permissions.toTypedArray(), REQUEST_CODE_PERMISSIONS)
+            }
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { // Android 6 to 12 (API level 23-32)
             if (checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(
                     arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
@@ -104,6 +149,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+/*
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -116,6 +163,29 @@ class MainActivity : AppCompatActivity() {
             } else {
                 // Permission denied, show a message to the user
                 Toast.makeText(this, "Permission denied. Cannot access video and cannot load AI model.", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+*/
+
+
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_CODE_PERMISSIONS) {
+            val deniedPermissions = permissions.zip(grantResults.toTypedArray())
+                .filter { it.second != PackageManager.PERMISSION_GRANTED }
+                .map { it.first }
+
+            if (deniedPermissions.isEmpty()) {
+                // All permissions granted
+            } else {
+                // Some permissions denied
+                Toast.makeText(this, "Permissions denied: ${deniedPermissions.joinToString(", ")}", Toast.LENGTH_SHORT).show()
             }
         }
     }

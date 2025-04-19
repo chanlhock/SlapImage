@@ -68,17 +68,17 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation("com.google.android.material:material:1.9.0") // Use the latest version
     implementation("com.github.bumptech.glide:glide:4.16.0") // Use the latest version
-    //kapt ("com.github.bumptech.glide:compiler:4.16.0")
+    kapt ("com.github.bumptech.glide:compiler:4.16.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5") // Use the latest version
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
 
     // For Deepseek R1
-    implementation("org.tensorflow:tensorflow-lite:2.8.0") // Use the latest version
-    implementation("org.tensorflow:tensorflow-lite-support:0.3.1") // Optional for support libraries
+    //implementation("org.tensorflow:tensorflow-lite:2.8.0") // Use the latest version
+    //implementation("org.tensorflow:tensorflow-lite-support:0.3.1") // Optional for support libraries
 
     // Gallery
     // RecyclerView dependency
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")   // 1.3.2
     //implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation("com.github.chrisbanes:PhotoView:2.3.0")
 
@@ -98,4 +98,8 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("androidx.transition:transition-ktx:1.4.1")
+
+    // Activity Result API
+    implementation("androidx.activity:activity-ktx:1.7.2")
+    implementation("androidx.fragment:fragment-ktx:1.6.1")
 }
