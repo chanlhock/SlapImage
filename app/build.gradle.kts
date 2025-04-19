@@ -102,4 +102,24 @@ dependencies {
     // Activity Result API
     implementation("androidx.activity:activity-ktx:1.7.2")
     implementation("androidx.fragment:fragment-ktx:1.6.1")
+
+    // Gemini AI
+    implementation("com.google.ai.client.generativeai:generativeai:0.2.2")
+
+    // ViewModel and LiveData
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+
+    // Material Components
+    implementation("com.google.android.material:material:1.11.0")
+
+    // RecyclerView
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+
+    // Navigation
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
+
+    // Coil for image loading
+    implementation("io.coil-kt:coil:2.5.0")
 }

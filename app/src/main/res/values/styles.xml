@@ -82,4 +82,8 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
     </style>
+    <style name="GeminiTransition" parent="android:Animation.Activity">
+        <item name="android:windowEnterAnimation">@anim/slide_up</item>
+        <item name="android:windowExitAnimation">@anim/no_animation</item>
+    </style>
 </resources>

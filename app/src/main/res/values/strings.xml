@@ -171,4 +171,11 @@
     <string name="step">Step</string>
     <string name="reset">Reset</string>
     <string name="speed_slider_desc">Simulation speed control. Current value: 5</string>
+
+    // Gemini AI
+    <string name="gemini_logo">Gemini Logo</string>
+    <string name="gemini">Gemini AI</string>
+    <string name="send">Send message</string>
+    <string name="type_a_message">Type a message...</string>
+    <string name="just_now">Just now</string>
 </resources>

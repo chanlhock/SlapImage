@@ -40,9 +40,11 @@ import com.example.slapimage.R
 import com.example.slapimage.gridiconactivity.GameOfLifeActivity
 import com.example.slapimage.gridiconactivity.StockActivity
 import com.example.slapimage.gridiconactivity.TextViewerActivity
+import com.example.slapimage.GeminiAIChatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
+import android.app.ActivityOptions
 
 class HomeFragment : Fragment() {
 
@@ -183,14 +185,14 @@ class HomeFragment : Fragment() {
             listOf(
                 Icon(R.drawable.icon1, "Open Photo"),
                 Icon(R.drawable.icon2, "Play Video"),
-                Icon(R.drawable.icon3, "DeepSeek Bot"),
+                Icon(R.drawable.icon13, "Play Music"),
                 Icon(R.drawable.icon4, "Open TextFile"),
                 Icon(R.drawable.icon5, "Calendar"),
                 Icon(R.drawable.icon6, "Calculator"),
                 Icon(R.drawable.icon7, "Game of Life"),
                 Icon(R.drawable.icon8, "Stock"),
-                Icon(R.drawable.icon13, "Play Music"),
-                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon3, "DeepSeek Bot"),
+                Icon(R.drawable.icon9, "Gemini AI"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon10, "About")
             ),
@@ -275,6 +277,15 @@ class HomeFragment : Fragment() {
             "Coming Soon" -> {
                 val intent = Intent(activity, ComingSoonActivity::class.java)
                 startActivity(intent)
+            }
+            "Gemini AI" -> {
+                val intent = Intent(activity, GeminiAIChatActivity::class.java)
+                val options = ActivityOptions.makeCustomAnimation(
+                    requireContext(),
+                    R.anim.slide_up,
+                    R.anim.no_animation
+                )
+                startActivity(intent, options.toBundle())
             }
             "About" -> {
                 val transaction = parentFragmentManager.beginTransaction()

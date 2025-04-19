@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="slapimage_top_bar_black">#171717</color>
     <color name="yellow">#FFFF00</color>
+    <color name="light_yellow">#F6F1C5</color>
     <color name="white">#FFFFFFFF</color>
     <color name="light_green">#C8E6C9</color> <!-- Light green color -->
     <color name="splashScreenBackground">@color/black</color> <!-- Replace with your desired color -->
@@ -28,4 +29,9 @@
     <color name="indicator_active">#4285F4</color>
     <color name="indicator_inactive">#BDBDBD</color>
 
+    // Gemini AI theme color
+    <color name="bot_message_background">#F1F3F4</color>
+    <color name="user_message_background">#4285F4</color>
+    <color name="gray_300">#DADCE0</color>
+    <color name="gray_500">#9AA0A6</color>
 </resources>
