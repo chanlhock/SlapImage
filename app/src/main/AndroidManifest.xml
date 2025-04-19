@@ -61,6 +61,11 @@
         <activity android:name=".PhotoViewerActivity" />
         <activity android:name=".PlaylistActivity" />
         <activity
+            android:name=".GeminiAIChatActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
             android:name=".gridiconactivity.MusicPlayerActivity"
             android:label="Music Player"
             android:exported="false" />
