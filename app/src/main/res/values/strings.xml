@@ -176,6 +176,20 @@
     <string name="gemini_logo">Gemini Logo</string>
     <string name="gemini">Gemini AI</string>
     <string name="send">Send message</string>
-    <string name="type_a_message">Type a message...</string>
+    <string name="type_a_message">Type a message…</string>
     <string name="just_now">Just now</string>
+
+    // DeepSeek AI
+    <string name="select_model">Select Model</string>
+    <string name="model_not_loaded">Model not loaded. Please select an ONNX model file.</string>
+    <string name="model_loaded">Model loaded: %s</string>
+    <string name="type_your_message">Type your message…</string>
+    <string name="you">You</string>
+    <string name="ai">AI Assistant</string>
+    <string name="exit_chat_title">Exit Chat?</string>
+    <string name="exit_chat_message">Your current conversation will be lost. Are you sure you want to exit?</string>
+    <string name="exit">Exit</string>
+    <string name="cancel">Cancel</string>
+    <string name="error_loading_model">Error loading model: %s</string>
+    <string name="processing">Processing…</string>
 </resources>

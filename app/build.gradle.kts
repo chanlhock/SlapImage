@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.slapimage"
-        minSdk = 21
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -67,8 +67,8 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.1.2") // Use the latest version
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation("com.google.android.material:material:1.9.0") // Use the latest version
-    implementation("com.github.bumptech.glide:glide:4.16.0") // Use the latest version
-    kapt ("com.github.bumptech.glide:compiler:4.16.0")
+    //implementation("com.github.bumptech.glide:glide:4.16.0") // Use the latest version
+    //kapt("com.github.bumptech.glide:compiler:4.16.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5") // Use the latest version
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
 
@@ -78,8 +78,8 @@ dependencies {
 
     // Gallery
     // RecyclerView dependency
-    implementation("androidx.recyclerview:recyclerview:1.3.2")   // 1.3.2
-    //implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation("com.github.chrisbanes:PhotoView:2.3.0")
 
     // Kotlin extensions for RecyclerView (optional but recommended)
@@ -122,4 +122,16 @@ dependencies {
 
     // Coil for image loading
     implementation("io.coil-kt:coil:2.5.0")
+
+    // DeepSeek R1 Chatbot
+    // DJL with ONNX Runtime
+    implementation("ai.djl:api:0.25.0")
+    implementation("ai.djl.onnxruntime:onnxruntime-engine:0.25.0")
+    //implementation("ai.djl.android:core:0.25.0")
+    // Use the regular core implementation instead of Android-specific one
+    implementation("ai.djl:basicdataset:0.25.0")
+
+    implementation("com.google.code.gson:gson:2.10.1")
+    // For Markdown rendering
+    implementation("io.noties.markwon:core:4.6.2")
 }

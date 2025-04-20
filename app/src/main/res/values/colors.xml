@@ -34,4 +34,12 @@
     <color name="user_message_background">#4285F4</color>
     <color name="gray_300">#DADCE0</color>
     <color name="gray_500">#9AA0A6</color>
+
+    // DeepSeek AI Theme color
+    <color name="background_color">#FFF5F5F5</color>
+    <color name="model_status_text">#FF6200EE</color>
+    <color name="sender_text">#FF757575</color>
+    <color name="message_text">#FF212121</color>
+    <color name="user_message_bg">#FFE3F2FD</color>
+    <color name="ai_message_bg">#FFFFFFFF</color>
 </resources>
