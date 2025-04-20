@@ -69,26 +69,6 @@ class GeminiChatAdapter : ListAdapter<ChatMessage, RecyclerView.ViewHolder>(Chat
     /*
     inner class BotMessageViewHolder(private val binding: ItemChatBotMessageBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(message: ChatMessage) {
-            binding.messageText.apply {
-                // Use formatted text if available, otherwise fall back to plain text
-                message.formattedText?.let {
-                    text = it
-                } ?: run {
-                    text = message.text
-                }
-
-                // Make links clickable
-                movementMethod = LinkMovementMethod.getInstance()
-                // Optional: Customize link appearance
-                highlightColor = ContextCompat.getColor(context, android.R.color.transparent)
-            }
-            binding.timestampText.text = formatTimestamp(message.timestamp)
-        }
-    }
-*/
-    inner class BotMessageViewHolder(private val binding: ItemChatBotMessageBinding) :
-        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(message: ChatMessage) {
             binding.messageText.apply {
@@ -111,6 +91,28 @@ class GeminiChatAdapter : ListAdapter<ChatMessage, RecyclerView.ViewHolder>(Chat
             binding.timestampText.text = formatTimestamp(message.timestamp)
         }
     }
+    */
+
+    inner class BotMessageViewHolder(private val binding: ItemChatBotMessageBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(message: ChatMessage) {
+            binding.messageText.apply {
+                // Enable paragraph spacing
+                setLineSpacing(1.1f, 1.2f) // Adjust line spacing
+                text = message.formattedText ?: message.text
+
+                // Make links clickable if formatted
+                movementMethod = if (message.formattedText != null) {
+                    LinkMovementMethod.getInstance()
+                } else {
+                    null
+                }
+            }
+            binding.timestampText.text = formatTimestamp(message.timestamp)
+        }
+    }
+
     private fun formatTimestamp(timestamp: Long): String {
         // Implement your timestamp formatting logic here
         return "Just now"
