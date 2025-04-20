@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.slapimage">
-
 
     <!-- For Android 12 and below -->
     <uses-permission
@@ -49,13 +49,21 @@
         </activity>
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="DiscouragedApi,LockedOrientationActivity"
             android:exported="false"
             android:launchMode="singleTop"/>
         <activity android:name=".gridiconactivity.ComingSoonActivity" />
         <activity android:name=".PlaceholderActivity" />
-        <activity android:name=".gridiconactivity.CalendarActivity" />
+        <activity android:name=".gridiconactivity.CalendarActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="DiscouragedApi,LockedOrientationActivity"
+            android:exported="false"/>
         <activity android:name=".gridiconactivity.StockActivity" />
-        <activity android:name=".gridiconactivity.CalculatorActivity" />
+        <activity android:name=".gridiconactivity.CalculatorActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="DiscouragedApi,LockedOrientationActivity"
+            android:exported="false"/>
         <activity android:name=".GalleryActivity" />
         <activity android:name=".FolderContentsActivity" />
         <activity android:name=".PhotoViewerActivity" />
@@ -67,6 +75,8 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".gridiconactivity.MusicPlayerActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="DiscouragedApi,LockedOrientationActivity"
             android:label="Music Player"
             android:exported="false" />
 

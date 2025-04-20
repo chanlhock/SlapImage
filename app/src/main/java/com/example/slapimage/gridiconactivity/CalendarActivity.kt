@@ -16,9 +16,9 @@ class CalendarActivity : AppCompatActivity() {
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_calendar) // Set the layout for this activity
         // Lock screen orientation to portrait
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        setContentView(R.layout.activity_calendar) // Set the layout for this activity
 
         // Set up the Toolbar as the ActionBar
         val toolbar = findViewById<Toolbar>(R.id.toolbar)

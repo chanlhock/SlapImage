@@ -23,9 +23,9 @@ class CalculatorActivity : AppCompatActivity() {
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_calculator)
         // Lock screen orientation to portrait
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        setContentView(R.layout.activity_calculator)
 
         currentDisplay = findViewById(R.id.current_display)
         previousCalculation = findViewById(R.id.previous_calculation)
