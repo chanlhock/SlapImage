@@ -49,6 +49,14 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+   // }
+   // packagingOptions {
+        // For .so (JNI) files
+        jniLibs.pickFirsts.add("**/libonnxruntime4j_jni.so")
+        jniLibs.pickFirsts.add("**/libonnxruntime.so")
+
+        // For other files (e.g., assets, resources)
+        // resources.pickFirsts.add("**/some_resource_file")
     }
 }
 
@@ -130,6 +138,8 @@ dependencies {
     //implementation("ai.djl.android:core:0.25.0")
     // Use the regular core implementation instead of Android-specific one
     implementation("ai.djl:basicdataset:0.25.0")
+    // Include native ONNX Runtime libraries for Android
+   // implementation("com.microsoft.onnxruntime:onnxruntime-android:1.16.0") // or latest
 
     implementation("com.google.code.gson:gson:2.10.1")
     // For Markdown rendering

@@ -26,6 +26,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
+import java.io.FileOutputStream
+import android.content.Context
 
 class ChatBotFragment : Fragment() {
     private var _binding: FragmentChatbotBinding? = null
@@ -37,7 +39,20 @@ class ChatBotFragment : Fragment() {
     private val filePickerLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
-        result.data?.data?.let { uri -> loadModelFromUri(uri) }
+        if (result.resultCode == android.app.Activity.RESULT_OK) {
+            result.data?.data?.let { uri ->
+                lifecycleScope.launch {
+                    try {
+                        // First ensure vocab file exists
+                        prepareVocabFile(requireContext())
+                        // Then load the model
+                        loadModelFromUri(uri)
+                    } catch (e: Exception) {
+                        Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
     }
 
     override fun onCreateView(
@@ -87,7 +102,9 @@ class ChatBotFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.chatMessages.collect { messages ->
                     chatAdapter.submitList(messages)
-                    binding.rvChatMessages.smoothScrollToPosition(messages.size - 1)
+                    if(messages.isNotEmpty()) {
+                        binding.rvChatMessages.smoothScrollToPosition(messages.size - 1)
+                    }
                 }
             }
         }
@@ -109,29 +126,6 @@ class ChatBotFragment : Fragment() {
             putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("application/octet-stream", "model/onnx"))
         }
         filePickerLauncher.launch(intent)
-    }
-
-    private fun loadModelFromUri(uri: Uri) {
-        lifecycleScope.launch {
-            try {
-                binding.tvModelStatus.text = getString(R.string.processing)
-                binding.btnSend.isEnabled = false
-
-                val inputStream = requireContext().contentResolver.openInputStream(uri)
-                val file = File(requireContext().cacheDir, "temp_model.onnx").apply {
-                    inputStream?.use { it.copyTo(outputStream()) }
-                }
-
-                viewModel.loadModel(file.absolutePath)
-                binding.tvModelStatus.text = getString(R.string.model_loaded, file.name)
-                binding.btnSend.isEnabled = true
-                Toast.makeText(requireContext(), "Model loaded", Toast.LENGTH_SHORT).show()
-            } catch (e: Exception) {
-                binding.tvModelStatus.text = getString(R.string.model_not_loaded)
-                binding.btnSend.isEnabled = false
-                Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_LONG).show()
-            }
-        }
     }
 
     private fun sendMessage() {
@@ -188,6 +182,49 @@ class ChatBotFragment : Fragment() {
             .setPositiveButton(R.string.exit) { _, _ -> parentFragmentManager.popBackStack() }
             .setNegativeButton(R.string.cancel, null)
             .show()
+    }
+
+    private suspend fun prepareVocabFile(context: Context): File = withContext(Dispatchers.IO) {
+        val vocabFile = File(context.cacheDir, "vocab.txt")
+        if (!vocabFile.exists()) {
+            try {
+                context.assets.open("vocab.txt").use { input ->
+                    FileOutputStream(vocabFile).use { output ->
+                        input.copyTo(output)
+                    }
+                }
+            } catch (e: Exception) {
+                throw IllegalStateException("Failed to prepare vocabulary file", e)
+            }
+        }
+        return@withContext vocabFile
+    }
+
+
+    private fun loadModelFromUri(uri: Uri) {
+        lifecycleScope.launch {
+            try {
+                binding.tvModelStatus.text = getString(R.string.processing)
+                binding.btnSend.isEnabled = false
+
+                // Copy the model file to cache
+                val inputStream = requireContext().contentResolver.openInputStream(uri)
+                val modelFile = File(requireContext().cacheDir, "temp_model.onnx").apply {
+                    inputStream?.use { it.copyTo(outputStream()) }
+                }
+
+                // Load model with context
+                viewModel.loadModel(requireContext(), modelFile.absolutePath)
+
+                binding.tvModelStatus.text = getString(R.string.model_loaded, modelFile.name)
+                binding.btnSend.isEnabled = true
+                Toast.makeText(requireContext(), "Model loaded", Toast.LENGTH_SHORT).show()
+            } catch (e: Exception) {
+                binding.tvModelStatus.text = getString(R.string.model_not_loaded)
+                binding.btnSend.isEnabled = false
+                Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     override fun onDestroyView() {

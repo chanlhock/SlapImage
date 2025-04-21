@@ -7,6 +7,7 @@ import ai.djl.ndarray.NDList
 import ai.djl.ndarray.NDManager
 import ai.djl.ndarray.types.Shape
 import ai.djl.translate.NoopTranslator
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.slapimage.models.AIChatMessage
@@ -14,7 +15,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.io.File
+import java.io.FileOutputStream
 import java.nio.file.Paths
+import kotlinx.coroutines.Dispatchers
 
 class AIChatViewModel : ViewModel() {
     private val _chatMessages = MutableStateFlow<List<AIChatMessage>>(emptyList())
@@ -30,30 +35,54 @@ class AIChatViewModel : ViewModel() {
     val isModelLoaded: Boolean
         get() = model != null && predictor != null
 
-    fun loadModel(modelPath: String) {
+    fun loadModel(context: Context, modelPath: String) {
+        //fun loadModel(modelPath: String) {
         viewModelScope.launch {
             try {
                 _isProcessing.value = true
                 closeModel()
 
+                // First ensure vocab file exists in cache
+                val vocabFile = prepareVocabFile(context)
+                // Load the model
                 model = Model.newInstance("deepseek-r1").apply {
                     load(Paths.get(modelPath))
                 }
-
+                // Load vocabulary from the prepared file
                 vocabulary = DefaultVocabulary.builder()
                     .optMinFrequency(1)
-                    .addFromTextFile(model?.getArtifact("vocab.txt"))
+                    .addFromTextFile(vocabFile.toPath())
                     .optUnknownToken("[UNK]")
                     .build()
 
                 predictor = model?.newPredictor(NoopTranslator())
+                // Add system message confirming model loaded
+                addChatMessage(AIChatMessage("System", "Model loaded successfully", true))
             } catch (e: Exception) {
                 closeModel()
-                throw e
+                // You might want to update UI with this error
+                addChatMessage(AIChatMessage("System", "Error loading model: ${e.localizedMessage}", true))
+                //throw e
             } finally {
                 _isProcessing.value = false
             }
         }
+    }
+
+    private suspend fun prepareVocabFile(context: Context): File = withContext(Dispatchers.IO) {
+        val vocabFile = File(context.cacheDir, "vocab.txt")
+        if (!vocabFile.exists()) {
+            try {
+                context.assets.open("vocab.txt").use { input ->
+                    FileOutputStream(vocabFile).use { output ->
+                        input.copyTo(output)
+                    }
+                }
+            } catch (e: Exception) {
+                throw IllegalStateException("Failed to prepare vocabulary file", e)
+            }
+        }
+        return@withContext vocabFile
     }
 
     fun getAIResponse(input: String): String {
