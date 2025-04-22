@@ -1,9 +1,21 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose") // Add this line
     id("kotlin-kapt") // Add this if using Glide annotations
 }
+
+// Load local.properties
+val localProperties = Properties().apply {
+    rootProject.file("local.properties").takeIf { it.exists() }?.inputStream()?.use { load(it) }
+}
+
+
+// Access the API_KEY from local.properties
+val apiKey: String = localProperties.getProperty("TWELVEDATA_API_KEY", "")
+val apiKey_gemini: String = localProperties.getProperty("GEMINI_API_KEY", "")
 
 android {
     namespace = "com.example.slapimage"
@@ -16,6 +28,10 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        android.buildFeatures.buildConfig = true
+        // Add the API_KEY to BuildConfig
+        buildConfigField("String", "TWELVEDATA_API_KEY", "$apiKey")
+        buildConfigField("String", "GEMINI_API_KEY", "$apiKey_gemini")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true

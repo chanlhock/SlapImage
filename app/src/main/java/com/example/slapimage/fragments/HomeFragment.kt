@@ -66,11 +66,15 @@ class HomeFragment : Fragment() {
         R.drawable.banner55, R.drawable.banner56, R.drawable.banner57, R.drawable.banner58,
         R.drawable.banner59, R.drawable.banner60, R.drawable.banner61, R.drawable.banner62,
         R.drawable.banner63, R.drawable.banner64, R.drawable.banner65, R.drawable.banner66,
-        R.drawable.banner67, R.drawable.banner68, R.drawable.banner69, R.drawable.banner70
+        R.drawable.banner67, R.drawable.banner68, R.drawable.banner69, R.drawable.banner70,
+        R.drawable.banner71, R.drawable.banner72, R.drawable.banner73, R.drawable.banner74,
+        R.drawable.banner75, R.drawable.banner76, R.drawable.banner77, R.drawable.banner78,
+        R.drawable.banner79, R.drawable.banner80, R.drawable.banner81, R.drawable.banner82,
+        R.drawable.banner83, R.drawable.banner84, R.drawable.banner85
     )
     private var currentBannerIndex = 3
     private val handler = Handler(Looper.getMainLooper())
-    private val bannerChangeInterval = 2000L
+    private val bannerChangeInterval = 1500L
     private lateinit var bannerContainer: ViewGroup
     private lateinit var currentBanner: ImageView
     private lateinit var nextBanner: ImageView
@@ -126,6 +130,12 @@ class HomeFragment : Fragment() {
         // Initialize buttons
         val myButton: Button = view.findViewById(R.id.appGalleryButton)
         val myMusicButton: Button = view.findViewById(R.id.musicButton)
+        // Set white background and black text
+        //myButton.setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.white))
+        //myButton.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.black))
+
+        //myMusicButton.setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.white))
+        //myMusicButton.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.black))
         val newWidth = 100
         val newHeight = 100
         updateButtonIcon(myButton, R.drawable.icon12, newWidth, newHeight)
