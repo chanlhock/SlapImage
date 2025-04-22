@@ -1,4 +1,4 @@
-package com.example.slapimage
+package com.example.slapimage.gridiconactivity
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,8 @@ import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.slapimage.adapters.PhotoAdapter
+import com.example.slapimage.R
 import java.io.File
 
 class FolderContentsActivity : AppCompatActivity() {

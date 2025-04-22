@@ -1,8 +1,9 @@
-package com.example.slapimage
+package com.example.slapimage.gridiconactivity
 
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
@@ -13,8 +14,11 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.slapimage.gridiconactivity.FolderContentsActivity
+import com.example.slapimage.PhotoFolder
+import com.example.slapimage.adapters.PhotoFolderAdapter
+import com.example.slapimage.R
 import java.io.File
-import android.os.Build
 
 class GalleryActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView

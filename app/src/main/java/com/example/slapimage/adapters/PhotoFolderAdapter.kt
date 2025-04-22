@@ -1,4 +1,4 @@
-package com.example.slapimage
+package com.example.slapimage.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.slapimage.PhotoFolder
+import com.example.slapimage.R
 
 class PhotoFolderAdapter(
     private val context: Context,

@@ -1,15 +1,17 @@
-package com.example.slapimage
+package com.example.slapimage.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.slapimage.R
 import java.io.File
 
 class PhotoAdapter(
-    private val context: android.content.Context,
+    private val context: Context,
     private var photos: List<String>,
     private val onPhotoClick: (String) -> Unit
 ) : RecyclerView.Adapter<PhotoAdapter.ViewHolder>() {
