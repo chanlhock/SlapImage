@@ -16,6 +16,8 @@
         <item>@drawable/photo15</item>
         <item>@drawable/photo16</item>
         <item>@drawable/photo17</item>
+        <item>@drawable/photo18</item>
+        <item>@drawable/photo19</item>
         <!-- Add more photos as needed -->
     </array>
 </resources>
