@@ -322,8 +322,10 @@ class HomeFragment : Fragment() {
     private fun rotateBannerWithAnimation() {
         handler.postDelayed({
             val nextIndex = (currentBannerIndex + 1) % bannerImages.size
+            // Load the next banner image
             Glide.with(this).load(bannerImages[nextIndex]).into(nextBanner)
 
+            // Define animations
             val slideOut = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_out_left).apply {
                 duration = 300
             }
@@ -331,9 +333,11 @@ class HomeFragment : Fragment() {
                 duration = 300
             }
 
+            // Set next banner visibility and animation
             nextBanner.visibility = View.VISIBLE
             nextBanner.bringToFront()
 
+            // Start animations
             currentBanner.startAnimation(slideOut)
             nextBanner.startAnimation(slideIn)
 
@@ -341,10 +345,13 @@ class HomeFragment : Fragment() {
                 override fun onAnimationStart(animation: Animation?) {}
                 override fun onAnimationRepeat(animation: Animation?) {}
                 override fun onAnimationEnd(animation: Animation?) {
+                    currentBannerIndex = nextIndex
+                    // Swap banners
                     val temp = currentBanner
                     currentBanner = nextBanner
                     nextBanner = temp
-                    currentBannerIndex = nextIndex
+
+                    // Continue rotating banners
                     rotateBannerWithAnimation()
                 }
             })
@@ -361,6 +368,22 @@ class HomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        handler.removeCallbacksAndMessages(null)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // Clear Glide memory cache when the fragment resumes
+        Glide.get(requireContext()).clearMemory()
+        Thread {
+            Glide.get(requireContext()).clearDiskCache()
+        }.start()
+        rotateBannerWithAnimation()
+    }
+
+    override fun onPause() {
+        super.onPause()
         handler.removeCallbacksAndMessages(null)
     }
 
