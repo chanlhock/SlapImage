@@ -152,7 +152,7 @@ class ChatBotFragment : Fragment() {
                 viewModel.addChatMessage(
                     AIChatMessage(
                         getString(R.string.ai),
-                        "Error: ${e.message}",
+                        "Error (AI Response): ${e.message}",
                         true
                     )
                 )
@@ -218,7 +218,7 @@ class ChatBotFragment : Fragment() {
 
                 binding.tvModelStatus.text = getString(R.string.model_loaded, modelFile.name)
                 binding.btnSend.isEnabled = true
-                Toast.makeText(requireContext(), "Model loaded", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Model loading. Wait for system completion message.", Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
                 binding.tvModelStatus.text = getString(R.string.model_not_loaded)
                 binding.btnSend.isEnabled = false

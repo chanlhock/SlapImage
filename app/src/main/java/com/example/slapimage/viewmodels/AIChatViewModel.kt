@@ -8,6 +8,8 @@ import ai.djl.ndarray.NDManager
 import ai.djl.ndarray.types.Shape
 import ai.djl.translate.NoopTranslator
 import android.content.Context
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.slapimage.models.AIChatMessage
@@ -85,6 +87,7 @@ class AIChatViewModel : ViewModel() {
         return@withContext vocabFile
     }
 
+    /*
     fun getAIResponse(input: String): String {
         if (!isModelLoaded) throw IllegalStateException("Model not loaded")
 
@@ -109,7 +112,50 @@ class AIChatViewModel : ViewModel() {
             }
         }
     }
+*/
+// In AIChatViewModel.kt
+fun getAIResponse(input: String): String {
+    if (!isModelLoaded) throw IllegalStateException("Model not loaded")
 
+    return NDManager.newBaseManager().use { manager ->
+        try {
+            // 1. Tokenization with proper unknown token handling
+            val tokens = input.split(" ").map {
+                vocabulary?.getIndex(it)?.toLong()
+                    ?: vocabulary?.getIndex("[UNK]")?.toLong()
+                    ?: 0L
+            }
+
+            // 2. Create input tensor with explicit type and shape toLong
+            val inputArray = manager.create(tokens.toLongArray())
+                .reshape(Shape(1, tokens.size.toLong()))
+
+
+            // 3. Perform inference
+            val output = predictor?.predict(NDList(inputArray))
+                ?: throw IllegalStateException("Predictor not initialized")
+
+
+            // 4. Proper output processing
+            return@use when {
+                // For classification models
+                output.singletonOrThrow().shape.dimension() == 1 -> {
+                    val probs = output.singletonOrThrow().softmax(0)
+                    "Prediction: ${probs.argMax().getLong()}"
+                }
+                // For text generation
+                else -> {
+                    val outputIds = output.singletonOrThrow().toLongArray()
+                    outputIds.joinToString(" ") { id ->
+                        vocabulary?.getToken(id) ?: "[UNK]"
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            "Error generating response: ${e.message}\n${e.stackTraceToString()}"
+        }
+    }
+}
 
     fun addChatMessage(message: AIChatMessage) {
         _chatMessages.value = _chatMessages.value + message

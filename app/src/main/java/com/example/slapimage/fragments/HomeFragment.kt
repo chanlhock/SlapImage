@@ -65,7 +65,7 @@ class HomeFragment : Fragment() {
     )
     private var currentBannerIndex = 3
     private val handler = Handler(Looper.getMainLooper())
-    private val bannerChangeInterval = 3000L
+    private val bannerChangeInterval = 2000L
     private lateinit var bannerContainer: ViewGroup
     private lateinit var currentBanner: ImageView
     private lateinit var nextBanner: ImageView
@@ -257,8 +257,11 @@ class HomeFragment : Fragment() {
                 requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation).selectedItemId = R.id.nav_play
             }
             "DeepSeek Bot" -> {
-                val intent = Intent(activity, ComingSoonActivity::class.java)
-                startActivity(intent)
+                val transaction = parentFragmentManager.beginTransaction()
+                transaction.replace(R.id.fragment_container, ChatBotFragment())
+                transaction.addToBackStack(null)
+                transaction.commit()
+                requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation).selectedItemId = R.id.nav_chatbot
             }
             "Open TextFile" -> openTextFile()
             "Calendar" -> {
@@ -322,10 +325,10 @@ class HomeFragment : Fragment() {
             Glide.with(this).load(bannerImages[nextIndex]).into(nextBanner)
 
             val slideOut = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_out_left).apply {
-                duration = 500
+                duration = 300
             }
             val slideIn = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_right).apply {
-                duration = 500
+                duration = 300
             }
 
             nextBanner.visibility = View.VISIBLE
