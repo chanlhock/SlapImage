@@ -1,6 +1,7 @@
 package com.example.slapimage.gridiconactivity
 
 import android.util.Log
+import com.example.slapimage.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
@@ -9,7 +10,7 @@ import java.util.concurrent.TimeUnit
 object TwelveDataAPI {
     private const val TAG = "TwelveDataAPI"
     private const val BASE_URL = "https://api.twelvedata.com"
-    private const val API_KEY = "Put your own API Key" // Replace with your key
+    private const val API_KEY = BuildConfig.TWELVEDATA_API_KEY // Replace with your key
 
     private val client = OkHttpClient.Builder()
         .connectTimeout(15, TimeUnit.SECONDS)

@@ -8,12 +8,14 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import android.text.Spanned
+import com.example.slapimage.utils.MessageFormatter
 
 class GeminiChatViewModel : ViewModel() {
     // Replace with your actual API key (store securely in production)
     private val generativeModel = GenerativeModel(
         modelName = "gemini-2.0-flash",
-        apiKey = "Place your own API key"
+        apiKey = BuildConfig.GEMINI_API_KEY
     )
 
     private val _chatMessages = MutableStateFlow<List<ChatMessage>>(listOf(
@@ -42,7 +44,7 @@ class GeminiChatViewModel : ViewModel() {
                 timestamp = System.currentTimeMillis()
             )
         }
-
+/*
         viewModelScope.launch {
             try {
                 val response = generativeModel.generateContent(message)
@@ -59,7 +61,36 @@ class GeminiChatViewModel : ViewModel() {
             } finally {
                 _isLoading.value = false
             }
+        }*/
+        viewModelScope.launch {
+            try {
+                val response = generativeModel.generateContent(message)
+                val formattedText = MessageFormatter.formatMessage(response.text ?: "")
+
+                _chatMessages.update { messages ->
+                    messages + ChatMessage(
+                        text = response.text ?: "I couldn't understand that. Please try again.",
+                        formattedText = formattedText,
+                        isUser = false,
+                        timestamp = System.currentTimeMillis()
+                    )
+                }
+            } catch (e: Exception) {
+                _errorMessage.value = "Error: ${e.localizedMessage}"
+            } finally {
+                _isLoading.value = false
+                // Notify that processing is complete
+                _processingComplete.value = true
+            }
         }
+    }
+
+    // Add this new state flow
+    private val _processingComplete = MutableStateFlow(false)
+    val processingComplete: StateFlow<Boolean> = _processingComplete.asStateFlow()
+
+    fun resetProcessingState() {
+        _processingComplete.value = false
     }
 
     fun errorMessageShown() {
@@ -70,5 +101,6 @@ class GeminiChatViewModel : ViewModel() {
 data class ChatMessage(
     val text: String,
     val isUser: Boolean,
-    val timestamp: Long
+    val timestamp: Long,
+    val formattedText: Spanned? = null  // For rich text formatting
 )
