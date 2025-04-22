@@ -35,7 +35,6 @@ import com.example.slapimage.gridiconactivity.ComingSoonActivity
 import com.example.slapimage.GalleryActivity
 import com.example.slapimage.Icon
 import com.example.slapimage.gridiconactivity.MusicPlayerActivity
-import com.example.slapimage.PlaylistActivity
 import com.example.slapimage.R
 import com.example.slapimage.gridiconactivity.GameOfLifeActivity
 import com.example.slapimage.gridiconactivity.StockActivity
@@ -128,7 +127,7 @@ class HomeFragment : Fragment() {
 
         // Set button click listeners
         myMusicButton.setOnClickListener {
-            val intent = Intent(requireActivity(), PlaylistActivity::class.java)
+            val intent = Intent(requireActivity(), ComingSoonActivity::class.java)
             ActivityOptionsCompat.makeCustomAnimation(
                 requireContext(),
                 android.R.anim.fade_in,
