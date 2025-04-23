@@ -57,7 +57,8 @@ Testing is also done on a Virtual Phone that I have setup in Android Studio:
 - 17th Apr 2025:
   - Completed implementing in HomeFragment.kt both horizontal grid icon scroller and two circular indicators below horizontal grid icon scroller with active page's indicator highlighted in blue.
   - SlapImage had reached a point of stable code of functions and features. I proceeded to commit it to GitHub.
-- 19th Apr 2025:  Added an activity to support Google Gemini AI with DeepSeek generated production ready chat dialog.
+- 19th Apr 2025: Added an activity to support Google Gemini AI with DeepSeek generated production ready chat dialog.
+- 22nd Apr 2025: Removed API Keys from source code and secured them in local.properties for apps build.
   
 ## :beetle: Unresolvable Bug in Todo List
 - [X] (Issue fixed 19th Apr 2025) When user pressed the back arrow button at the topbar of StockActivity.kt view, returning back to HomeFragment.kt view there is a large white rectangle covering lower two rows of the grid icon container. This only happens when user enters a Stock Ticker and check the stock price. However, if user uses the phone back button to return to HomeFragment.kt view, the bug doesn't happen. One other observation is that the bug doesn't happen on Android 15 phone. :eyes:
