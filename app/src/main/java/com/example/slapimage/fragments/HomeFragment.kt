@@ -130,14 +130,9 @@ class HomeFragment : Fragment() {
         // Initialize buttons
         val myButton: Button = view.findViewById(R.id.appGalleryButton)
         val myMusicButton: Button = view.findViewById(R.id.musicButton)
-        // Set white background and black text
-        //myButton.setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.white))
-        //myButton.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.black))
 
-        //myMusicButton.setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.white))
-        //myMusicButton.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.black))
-        val newWidth = 100
-        val newHeight = 100
+        val newWidth = 150
+        val newHeight = 150
         updateButtonIcon(myButton, R.drawable.icon12, newWidth, newHeight)
         updateButtonIcon(myMusicButton, R.drawable.icon13, newWidth, newHeight)
 
@@ -390,10 +385,10 @@ class HomeFragment : Fragment() {
         super.onResume()
 
         // Clear Glide memory cache when the fragment resumes
-        Glide.get(requireContext()).clearMemory()
-        Thread {
-            Glide.get(requireContext()).clearDiskCache()
-        }.start()
+        //Glide.get(requireContext()).clearMemory()
+        //Thread {
+        //    Glide.get(requireContext()).clearDiskCache()
+        //}.start()
         rotateBannerWithAnimation()
     }
 

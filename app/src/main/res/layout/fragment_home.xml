@@ -98,12 +98,12 @@
                 android:layout_weight="1"
                 android:text="@string/music"
                 android:background="@drawable/button_background"
-                android:textColor="@android:color/white"
-                android:padding="16dp"
+                android:textColor="@android:color/black"
+                android:padding="8dp"
                 android:textSize="16sp"
                 android:drawableEnd="@drawable/icon13"
-                android:drawablePadding="16dp"
-                android:layout_marginStart="8dp"
+                android:drawablePadding="8dp"
+                android:layout_marginStart="4dp"
                 android:layout_marginEnd="8dp"
                 android:gravity="center_vertical|start" />
 
@@ -115,12 +115,12 @@
                 android:layout_weight="1"
                 android:text="@string/gallery"
                 android:background="@drawable/button_background"
-                android:textColor="@android:color/white"
-                android:padding="16dp"
+                android:textColor="@android:color/black"
+                android:padding="8dp"
                 android:textSize="16sp"
                 android:drawableEnd="@drawable/icon12"
-                android:drawablePadding="16dp"
-                android:layout_marginStart="8dp"
+                android:drawablePadding="8dp"
+                android:layout_marginStart="4dp"
                 android:layout_marginEnd="8dp"
                 android:gravity="center_vertical|start" />
 

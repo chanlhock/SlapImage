@@ -58,18 +58,23 @@
             tools:ignore="DiscouragedApi,LockedOrientationActivity"
             android:exported="false"
             android:launchMode="singleTop"/>
-        <activity android:name=".gridiconactivity.ComingSoonActivity" />
+        <activity android:name=".gridiconactivity.ComingSoonActivity"
+            android:theme="@style/AppThemeActivity"/>
         <activity android:name=".PlaceholderActivity" />
         <activity android:name=".gridiconactivity.CalendarActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/AppThemeActivity"
             tools:ignore="DiscouragedApi,LockedOrientationActivity"
             android:exported="false"/>
-        <activity android:name=".gridiconactivity.StockActivity" />
+        <activity android:name=".gridiconactivity.StockActivity"
+            android:theme="@style/AppThemeActivity"/>
         <activity android:name=".gridiconactivity.CalculatorActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/AppThemeActivity"
             tools:ignore="DiscouragedApi,LockedOrientationActivity"
             android:exported="false"/>
-        <activity android:name=".gridiconactivity.GalleryActivity" />
+        <activity android:name=".gridiconactivity.GalleryActivity"
+            android:theme="@style/AppThemeActivity"/>
         <activity android:name=".gridiconactivity.FolderContentsActivity" />
         <activity android:name=".gridiconactivity.PhotoViewerActivity" />
         <activity
@@ -80,6 +85,7 @@
         <activity
             android:name=".gridiconactivity.MusicPlayerActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/AppThemeActivity"
             tools:ignore="DiscouragedApi,LockedOrientationActivity"
             android:label="Music Player"
             android:exported="false" />

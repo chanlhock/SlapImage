@@ -28,6 +28,7 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
 import android.content.Context
+import androidx.core.content.ContextCompat
 
 class ChatBotFragment : Fragment() {
     private var _binding: FragmentChatbotBinding? = null
@@ -95,6 +96,7 @@ class ChatBotFragment : Fragment() {
     private fun setupUIListeners() {
         binding.btnSelectModel.setOnClickListener { openFilePicker() }
         binding.btnSend.setOnClickListener { sendMessage() }
+        binding.btnSend.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.dark_blue))
     }
 
     private fun setupObservers() {
@@ -176,12 +178,19 @@ class ChatBotFragment : Fragment() {
     }
 
     private fun showExitConfirmationDialog() {
-        AlertDialog.Builder(requireContext())
+        val dialog = AlertDialog.Builder(requireContext())
             .setTitle(R.string.exit_chat_title)
             .setMessage(R.string.exit_chat_message)
             .setPositiveButton(R.string.exit) { _, _ -> parentFragmentManager.popBackStack() }
             .setNegativeButton(R.string.cancel, null)
             .show()
+        // Access and set text color for the buttons
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(
+            ContextCompat.getColor(requireContext(), R.color.dark_blue)
+        )
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(
+            ContextCompat.getColor(requireContext(), R.color.dark_blue)
+        )
     }
 
     private suspend fun prepareVocabFile(context: Context): File = withContext(Dispatchers.IO) {
