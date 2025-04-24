@@ -15,7 +15,7 @@ val localProperties = Properties().apply {
 
 // Access the API_KEY from local.properties
 val apiKey: String = localProperties.getProperty("TWELVEDATA_API_KEY", "")
-val apiKey_gemini: String = localProperties.getProperty("GEMINI_API_KEY", "")
+val apiKeygemini: String = localProperties.getProperty("GEMINI_API_KEY", "")
 
 android {
     namespace = "com.example.slapimage"
@@ -31,7 +31,7 @@ android {
         android.buildFeatures.buildConfig = true
         // Add the API_KEY to BuildConfig
         buildConfigField("String", "TWELVEDATA_API_KEY", "$apiKey")
-        buildConfigField("String", "GEMINI_API_KEY", "$apiKey_gemini")
+        buildConfigField("String", "GEMINI_API_KEY", "$apiKeygemini")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
@@ -78,31 +78,24 @@ android {
 
 dependencies {
     // Compose dependencies
-    implementation("androidx.compose.ui:ui:1.7.8")  // 1.5.4
-    implementation("androidx.compose.material:material:1.7.8")  // 1.5.4
-    implementation("androidx.compose.ui:ui-tooling-preview:1.7.8")  // 1.5.4
-    implementation("androidx.activity:activity-compose:1.10.1") // 1.8.0
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7") //2.6.2
-    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation("androidx.compose.ui:ui:1.7.8")
+    implementation("androidx.compose.material:material:1.7.8")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.7.8")
+    implementation("androidx.activity:activity-compose:1.10.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("org.json:json:20210307") // For lightweight JSON parsing
-    //implementation("com.google.android.material:material:1.6.0")
 
     // Material 3 dependency
-    implementation("androidx.compose.material3:material3:1.1.2") // Use the latest version
+    implementation("androidx.compose.material3:material3:1.3.2")
     implementation("androidx.core:core-splashscreen:1.0.1")
-    implementation("com.google.android.material:material:1.9.0") // Use the latest version
-    //implementation("com.github.bumptech.glide:glide:4.16.0") // Use the latest version
-    //kapt("com.github.bumptech.glide:compiler:4.16.0")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.5") // Use the latest version
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
-
-    // For Deepseek R1
-    //implementation("org.tensorflow:tensorflow-lite:2.8.0") // Use the latest version
-    //implementation("org.tensorflow:tensorflow-lite-support:0.3.1") // Optional for support libraries
+    implementation("com.google.android.material:material:1.12.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.8.9")
+    implementation("androidx.navigation:navigation-ui-ktx:2.8.9")
 
     // Gallery
     // RecyclerView dependency
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("androidx.recyclerview:recyclerview:1.4.0")
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation("com.github.chrisbanes:PhotoView:2.3.0")
 
@@ -114,35 +107,34 @@ dependencies {
 
 
     // Other dependencies
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    //implementation("com.google.android.material:material:1.11.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.core:core-ktx:1.16.0")
+    implementation("androidx.appcompat:appcompat:1.7.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.2.1")
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    implementation("androidx.transition:transition-ktx:1.4.1")
+    androidTestImplementation("androidx.test.ext:junit:1.2.1")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+    implementation("androidx.transition:transition-ktx:1.5.1")
 
     // Activity Result API
-    implementation("androidx.activity:activity-ktx:1.7.2")
-    implementation("androidx.fragment:fragment-ktx:1.6.1")
+    implementation("androidx.activity:activity-ktx:1.10.1")
+    implementation("androidx.fragment:fragment-ktx:1.8.6")  //1.6.1
 
     // Gemini AI
-    implementation("com.google.ai.client.generativeai:generativeai:0.2.2")
+    implementation("com.google.ai.client.generativeai:generativeai:0.9.0")
 
     // ViewModel and LiveData
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
 
     // Material Components
-    implementation("com.google.android.material:material:1.11.0")
+    implementation("com.google.android.material:material:1.12.0")
 
     // RecyclerView
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("androidx.recyclerview:recyclerview:1.4.0")
 
     // Navigation
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.8.9")
+    implementation("androidx.navigation:navigation-ui-ktx:2.8.9")
 
     // Coil for image loading
     implementation("io.coil-kt:coil:2.5.0")
@@ -151,11 +143,7 @@ dependencies {
     // DJL with ONNX Runtime
     implementation("ai.djl:api:0.25.0")
     implementation("ai.djl.onnxruntime:onnxruntime-engine:0.25.0")
-    //implementation("ai.djl.android:core:0.25.0")
-    // Use the regular core implementation instead of Android-specific one
     implementation("ai.djl:basicdataset:0.25.0")
-    // Include native ONNX Runtime libraries for Android
-   // implementation("com.microsoft.onnxruntime:onnxruntime-android:1.16.0") // or latest
 
     implementation("com.google.code.gson:gson:2.10.1")
     // For Markdown rendering

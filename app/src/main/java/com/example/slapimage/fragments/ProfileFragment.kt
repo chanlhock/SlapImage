@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.slapimage.R
@@ -68,6 +69,13 @@ class ProfileFragment : Fragment() {
 
         val dialog: AlertDialog = builder.create()
         dialog.show()
+        // Access and set text color for the buttons
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(
+            ContextCompat.getColor(requireContext(), R.color.dark_blue)
+        )
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(
+            ContextCompat.getColor(requireContext(), R.color.dark_blue)
+        )
     }
 
     override fun onDestroy() {

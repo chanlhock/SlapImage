@@ -92,6 +92,7 @@
 
         <activity
             android:name=".gridiconactivity.TextViewerActivity"
+            android:theme="@style/AppThemeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
