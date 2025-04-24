@@ -46,6 +46,7 @@ In addition I have also tested to some extent on:
 
 Testing is also done on a Virtual Phone that I have setup in Android Studio:
 - Virtual phone using Pixel 4 skin Android 10 (API 29) 5.7" display (1080 x 2280 pixels)
+- Virtual Medium Tablet Android 10 (API 29) 10.05" display (1600 x 2560 pixels)
 
 ## :hourglass_flowing_sand: Chronology of Development Events
 - 16th Mar 2025: Started Android project SlapImage from scratch _Vibe Coding_ using DeepSeek in Kotlin.
