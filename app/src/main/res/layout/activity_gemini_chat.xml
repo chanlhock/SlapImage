@@ -85,6 +85,6 @@
             android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_send"
-            android:contentDescription="@string/send" />
+            android:contentDescription="@string/send_message" />
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -42,4 +42,10 @@
     <color name="message_text">#FF212121</color>
     <color name="user_message_bg">#FFE3F2FD</color>
     <color name="ai_message_bg">#FFFFFFFF</color>
+
+    // Music Player Theme color
+    <color name="cool_blue">#0091EA</color>
+    <color name="cool_green">#64DD17</color>
+    <color name="cool_pink">#F50057</color>
+    <color name="cool_yellow">#FFD600</color>
 </resources>

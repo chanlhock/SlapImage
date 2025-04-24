@@ -148,4 +148,19 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
     // For Markdown rendering
     implementation("io.noties.markwon:core:4.6.2")
+
+    // Music Player
+    // Pull to Refresh
+    //implementation("libs.legacy.support")
+    // Glide for image loading
+    //implementation("libs.glide")
+    // For storing objects in shared preferences
+    //implementation("libs.gson")
+    // Notification
+    //implementation("libs.androidx.media")
+    // Vertical Seekbar
+    //implementation("libs.verticalseekbar")
+    implementation("com.github.lukelorusso:VerticalSeekBar:1.2.7")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    implementation("androidx.media:media:1.6.0")
 }

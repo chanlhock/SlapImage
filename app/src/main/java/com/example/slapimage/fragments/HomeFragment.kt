@@ -44,6 +44,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import android.app.ActivityOptions
+import com.example.slapimage.musicplayer.MainMusicActivity
 
 class HomeFragment : Fragment() {
 
@@ -138,7 +139,7 @@ class HomeFragment : Fragment() {
 
         // Set button click listeners
         myMusicButton.setOnClickListener {
-            val intent = Intent(requireActivity(), ComingSoonActivity::class.java)
+            val intent = Intent(requireActivity(), MainMusicActivity::class.java)
             ActivityOptionsCompat.makeCustomAnimation(
                 requireContext(),
                 android.R.anim.fade_in,
