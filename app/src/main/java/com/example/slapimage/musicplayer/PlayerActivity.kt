@@ -217,10 +217,10 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
                 R.drawable.music_player_icon_slash_screen
             )
         }
-        val bgColor = getMainColor(image)
-        val gradient = GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP, intArrayOf(0xFFFFFF, bgColor))
-        binding.root.background = gradient
-        window?.statusBarColor = bgColor
+        //val bgColor = getMainColor(image)
+        //val gradient = GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP, intArrayOf(0xFFFFFF, bgColor))
+        //binding.root.background = gradient
+        //window?.statusBarColor = bgColor
     }
 
     private fun createMediaPlayer(){
@@ -360,8 +360,13 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
 
     override fun onDestroy() {
         super.onDestroy()
-        if(musicListPA[songPosition].id == "Unknown" && !isPlaying) exitApplication()
+        if(musicListPA[songPosition].id == "Unknown" && !isPlaying) {
+            exitApplication()
+        }
+        finishAndRemoveTask()
+        super.finish()  // added this chanlhock
     }
+
     private fun initServiceAndPlaylist(playlist: ArrayList<Music>, shuffle: Boolean, playNext: Boolean = false){
         val intent = Intent(this, MusicService::class.java)
         bindService(intent, this, BIND_AUTO_CREATE)

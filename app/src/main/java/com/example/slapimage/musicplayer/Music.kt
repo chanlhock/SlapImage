@@ -8,7 +8,6 @@ import androidx.appcompat.app.AlertDialog
 import com.google.android.material.color.MaterialColors
 import java.io.File
 import java.util.concurrent.TimeUnit
-import kotlin.system.exitProcess
 import com.example.slapimage.R
 
 data class Music(
@@ -66,7 +65,6 @@ fun exitApplication() {
         PlayerActivity.musicService!!.mediaPlayer!!.release()
         PlayerActivity.musicService = null
     }
-    exitProcess(1)
 }
 
 fun favouriteChecker(id: String): Int {

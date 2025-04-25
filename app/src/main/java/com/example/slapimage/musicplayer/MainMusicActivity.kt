@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -17,7 +18,9 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.slapimage.MainActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
@@ -62,7 +65,16 @@ class MainMusicActivity : AppCompatActivity() {
             setDisplayShowTitleEnabled(true)
             setDisplayHomeAsUpEnabled(true)
             title = getString(R.string.text_nav)
+            // Set background color
+            setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this@MainMusicActivity, R.color.cool_blue)))
+
+            // Set text color
+           // val textColor = ContextCompat.getColor(this@MainMusicActivity, R.color.white)
+            //val titleId = resources.getIdentifier("action_bar_title", "id", "android")
+            //val titleTextView = findViewById<TextView>(titleId)
+           // titleTextView?.setTextColor(ContextCompat.getColor(this@MainMusicActivity, R.color.white))
         }
+
         //supportActionBar?.setDisplayHomeAsUpEnabled(true)
         //checking for dark theme
         if(themeIndex == 4 &&  resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_NO)
@@ -113,6 +125,12 @@ class MainMusicActivity : AppCompatActivity() {
                         .setMessage("Do you want to go back to Home screen?")
                         .setPositiveButton("Yes"){ _, _ ->
                             exitApplication()
+                            // Navigate back to MainActivity (which hosts HomeFragment)
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
+                            //finishAndRemoveTask()
+                            finishAffinity()
+                            super.finish()
                         }
                         .setNegativeButton("No"){dialog, _ ->
                             dialog.dismiss()
@@ -243,8 +261,12 @@ class MainMusicActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         if(!PlayerActivity.isPlaying && PlayerActivity.musicService != null){
-           exitApplication()
+            exitApplication()
         }
+        // Navigate back to MainActivity (which hosts HomeFragment)
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        super.finish()
     }
 
     override fun onResume() {

@@ -15,13 +15,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="?attr/themeColor"
-        android:layout_marginTop="2dp">
+        android:layout_marginTop="0dp">
 
         <ImageButton
                 android:id="@+id/backBtnPN"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:src="@drawable/back_icon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_arrow_back"
                 android:contentDescription="@string/back_btn"
                 android:backgroundTint="@android:color/transparent"
                 app:tint="@color/white"
@@ -31,11 +31,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/play_next"
-                android:gravity="center"
+                android:gravity="start|center"
                 android:text="@string/play_next"
                 android:textColor="@color/white"
-                android:textSize="25sp"
-                android:textStyle="bold" />
+                android:textSize="20sp"
+                android:textStyle="normal" />
     </LinearLayout>
 
     <TextView

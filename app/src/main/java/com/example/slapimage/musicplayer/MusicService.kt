@@ -160,19 +160,55 @@ class MusicService : Service(), AudioManager.OnAudioFocusChangeListener {
             PlayerActivity.nowPlayingId = PlayerActivity.musicListPA[PlayerActivity.songPosition].id
             PlayerActivity.loudnessEnhancer = LoudnessEnhancer(mediaPlayer!!.audioSessionId)
             PlayerActivity.loudnessEnhancer.enabled = true
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             return
         }
     }
 
+   //   fun seekBarSetup() {
+   //      runnable = Runnable {
+  //          PlayerActivity.binding.tvSeekBarStart.text =
+  //              formatDuration(mediaPlayer!!.currentPosition.toLong())
+  //          PlayerActivity.binding.seekBarPA.progress = mediaPlayer!!.currentPosition
+  //          Handler(Looper.getMainLooper()).postDelayed(runnable, 200)
+  //      }
+  //     Handler(Looper.getMainLooper()).postDelayed(runnable, 0)
+  //  }
     fun seekBarSetup() {
         runnable = Runnable {
-            PlayerActivity.binding.tvSeekBarStart.text =
-                formatDuration(mediaPlayer!!.currentPosition.toLong())
-            PlayerActivity.binding.seekBarPA.progress = mediaPlayer!!.currentPosition
-            Handler(Looper.getMainLooper()).postDelayed(runnable, 200)
+            try {
+                // Check if mediaPlayer exists and is in a valid state
+                if (mediaPlayer != null) {
+                    val currentPosition = try {
+                        mediaPlayer!!.currentPosition
+                    } catch (_: IllegalStateException) {
+                        // If MediaPlayer is in an invalid state, stop updates
+                        Handler(Looper.getMainLooper()).removeCallbacks(runnable)
+                        return@Runnable
+                    }
+
+                    // Update UI only if we're still bound to the activity
+                    if (PlayerActivity.binding != null) {
+                        PlayerActivity.binding.tvSeekBarStart.text =
+                            formatDuration(currentPosition.toLong())
+                        PlayerActivity.binding.seekBarPA.progress = currentPosition
+                    }
+
+                    // Continue updates only if mediaPlayer is playing
+                    if (mediaPlayer?.isPlaying == true) {
+                        Handler(Looper.getMainLooper()).postDelayed(runnable, 200)
+                    }
+                }
+            } catch (_: Exception) {
+                // Catch any other unexpected errors and stop updates
+                Handler(Looper.getMainLooper()).removeCallbacks(runnable)
+            }
         }
-        Handler(Looper.getMainLooper()).postDelayed(runnable, 0)
+
+        // Only start updates if mediaPlayer is ready
+        if (mediaPlayer != null) {
+            Handler(Looper.getMainLooper()).postDelayed(runnable, 0)
+        }
     }
 
     fun getPlayBackState(): PlaybackStateCompat {

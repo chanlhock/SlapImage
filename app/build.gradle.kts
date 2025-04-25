@@ -163,4 +163,10 @@ dependencies {
     implementation("com.github.lukelorusso:VerticalSeekBar:1.2.7")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("androidx.media:media:1.6.0")
+
+    // Tetris
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
+    implementation("androidx.compose.ui:ui-tooling:1.7.8")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.7.8")
+    implementation ("androidx.compose.material3:material3:1.3.2")
 }

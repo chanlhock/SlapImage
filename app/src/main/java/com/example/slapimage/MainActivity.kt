@@ -55,15 +55,15 @@ class MainActivity : AppCompatActivity() {
         //    }
         //}
         // Handle the back button press using OnBackPressedDispatcher
-        val onBackPressedCallback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
+       // val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        //    override fun handleOnBackPressed() {
                 // Show the dialog when the back button is pressed
-                showExitDialog()
-            }
-        }
+         //       showExitDialog()
+         //   }
+       // }
 
         // Add the callback to the OnBackPressedDispatcher
-        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+       // onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
 
         // Set a listener for item selection
         bottomNavigationView.setOnItemSelectedListener { item ->
