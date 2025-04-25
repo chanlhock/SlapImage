@@ -186,6 +186,12 @@
             android:launchMode="singleTask"
             tools:ignore="DiscouragedApi,LockedOrientationActivity">
         </activity>
+        <activity
+            android:name=".tetris.TetrisActivity"
+            android:exported="true"
+            android:label="@string/tetris"
+            android:theme="@style/Theme.Composetetris.NoActionBar">
+        </activity>
         <!-- Updated Permission for Android 14   -->
         <service
             android:name=".musicplayer.MusicService"

@@ -45,6 +45,7 @@ import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import android.app.ActivityOptions
 import com.example.slapimage.musicplayer.MainMusicActivity
+import com.example.slapimage.tetris.TetrisActivity
 
 class HomeFragment : Fragment() {
 
@@ -216,7 +217,7 @@ class HomeFragment : Fragment() {
             ),
             // Second page (example additional icons)
             listOf(
-                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon11, "Tetris"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
@@ -314,6 +315,15 @@ class HomeFragment : Fragment() {
                 transaction.addToBackStack(null)
                 transaction.commit()
                 requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation).selectedItemId = R.id.nav_profile
+            }
+            "Tetris" -> {
+                val intent = Intent(activity, TetrisActivity::class.java)
+                val options = ActivityOptions.makeCustomAnimation(
+                    requireContext(),
+                    R.anim.slide_up,
+                    R.anim.no_animation
+                )
+                startActivity(intent, options.toBundle())
             }
         }
     }
