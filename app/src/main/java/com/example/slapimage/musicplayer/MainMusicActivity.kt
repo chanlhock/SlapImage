@@ -129,8 +129,8 @@ class MainMusicActivity : AppCompatActivity() {
                             val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
                             //finishAndRemoveTask()
-                            finishAffinity()
-                            super.finish()
+                            //finishAffinity()
+                            //super.finish()
                         }
                         .setNegativeButton("No"){dialog, _ ->
                             dialog.dismiss()
@@ -266,7 +266,7 @@ class MainMusicActivity : AppCompatActivity() {
         // Navigate back to MainActivity (which hosts HomeFragment)
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-        super.finish()
+        //super.finish()
     }
 
     override fun onResume() {

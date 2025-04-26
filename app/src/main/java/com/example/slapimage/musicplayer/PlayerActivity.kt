@@ -7,7 +7,6 @@ import android.content.ServiceConnection
 import android.database.Cursor
 import android.graphics.BitmapFactory
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.GradientDrawable
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.media.audiofx.AudioEffect
@@ -363,8 +362,8 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
         if(musicListPA[songPosition].id == "Unknown" && !isPlaying) {
             exitApplication()
         }
-        finishAndRemoveTask()
-        super.finish()  // added this chanlhock
+        //finishAndRemoveTask()
+        //super.finish()  // added this chanlhock
     }
 
     private fun initServiceAndPlaylist(playlist: ArrayList<Music>, shuffle: Boolean, playNext: Boolean = false){
