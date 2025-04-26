@@ -44,6 +44,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import android.app.ActivityOptions
+import androidx.activity.OnBackPressedCallback
 import com.example.slapimage.musicplayer.MainMusicActivity
 import com.example.slapimage.tetris.TetrisActivity
 
@@ -158,6 +159,20 @@ class HomeFragment : Fragment() {
             )
             startActivity(intent)
         }
+
+        // Create the callback
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // Navigate back to HomeFragment
+                //parentFragmentManager.popBackStack()
+            }
+        }
+
+        // Register the callback with the correct dispatcher
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            onBackPressedCallback
+        )
 
         return view
     }

@@ -32,6 +32,7 @@ import com.example.slapimage.R
 import com.example.slapimage.gridiconactivity.SwipeDirection
 import com.example.slapimage.gridiconactivity.addSwipeListener
 import android.graphics.Color
+import androidx.activity.OnBackPressedCallback
 
 class PlayFragment : Fragment() {
     private lateinit var btnPlayVideo: Button
@@ -177,6 +178,21 @@ class PlayFragment : Fragment() {
         btnPlayVideo.setOnClickListener {
             openVideoPicker()
         }
+
+        // Create the callback
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // Navigate back to HomeFragment
+                parentFragmentManager.popBackStack()
+            }
+        }
+
+        // Register the callback with the correct dispatcher
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            onBackPressedCallback
+        )
+
         // Initialize new views
         seekBar = view.findViewById(R.id.seekBar)
         controlsContainer = view.findViewById(R.id.controlsContainer)

@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
@@ -75,6 +76,20 @@ class PhotoFragment : Fragment() {
         btnDisplayPhoto.setOnClickListener {
             openGallery()
         }
+
+        // Create the callback
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // Navigate back to HomeFragment
+                parentFragmentManager.popBackStack()
+            }
+        }
+
+        // Register the callback with the correct dispatcher
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            onBackPressedCallback
+        )
 
         // Restore the button visibility based on whether an image is already selected
         if (selectedImageUri != null) {

@@ -73,13 +73,28 @@ class ChatBotFragment : Fragment() {
         setupUIListeners()
         setupObservers()
 
+        //requireActivity().onBackPressedDispatcher.addCallback(
+        //    viewLifecycleOwner,
+        //    object : OnBackPressedCallback(true) {
+        //        override fun handleOnBackPressed() {
+        //            showExitConfirmationDialog()
+        //        }
+        //    }
+        //)
+
+        // Create the callback
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                showExitConfirmationDialog()
+                // Navigate back to HomeFragment
+                //parentFragmentManager.popBackStack()
+            }
+        }
+
+        // Register the callback with the correct dispatcher
         requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    showExitConfirmationDialog()
-                }
-            }
+            onBackPressedCallback
         )
     }
 
