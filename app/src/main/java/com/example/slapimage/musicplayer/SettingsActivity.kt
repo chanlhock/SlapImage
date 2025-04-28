@@ -60,6 +60,7 @@ class SettingsActivity : AppCompatActivity() {
                 .setMessage("Do you want to apply theme?")
                 .setPositiveButton("Yes"){ _, _ ->
                     exitApplication()
+                    finish()
                 }
                 .setNegativeButton("No"){dialog, _ ->
                     dialog.dismiss()

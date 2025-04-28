@@ -1,6 +1,7 @@
 package com.example.slapimage.musicplayer
 
 import android.content.Context
+import android.content.ServiceConnection
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.media.MediaMetadataRetriever
@@ -9,6 +10,7 @@ import com.google.android.material.color.MaterialColors
 import java.io.File
 import java.util.concurrent.TimeUnit
 import com.example.slapimage.R
+import kotlin.system.exitProcess
 
 data class Music(
     val id: String,
@@ -63,8 +65,11 @@ fun exitApplication() {
         PlayerActivity.musicService!!.audioManager.abandonAudioFocus(PlayerActivity.musicService)
         PlayerActivity.musicService!!.stopForeground(true)
         PlayerActivity.musicService!!.mediaPlayer!!.release()
-        PlayerActivity.musicService = null
+       // PlayerActivity.musicService = null
+        PlayerActivity.musicService!!.mediaPlayer = null
+        //unbindService(context)
     }
+    exitProcess(1)
 }
 
 fun favouriteChecker(id: String): Int {

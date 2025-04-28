@@ -27,6 +27,9 @@ class PlaylistActivity : AppCompatActivity() {
         setTheme(MainMusicActivity.currentTheme[MainMusicActivity.themeIndex])
         binding = ActivityPlaylistBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Keep the screen on for this activity
+        window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         binding.playlistRV.setHasFixedSize(true)
         binding.playlistRV.setItemViewCacheSize(13)
         binding.playlistRV.layoutManager = GridLayoutManager(this@PlaylistActivity, 2)

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
-import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -14,6 +13,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -27,6 +27,9 @@ import com.google.gson.reflect.TypeToken
 import com.example.slapimage.databinding.ActivityMainmusicBinding
 import java.io.File
 import com.example.slapimage.R
+import com.example.slapimage.musicplayer.PlayerActivity.Companion.musicService
+import androidx.core.graphics.drawable.toDrawable
+import android.widget.TextView
 
 class MainMusicActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainmusicBinding
@@ -65,20 +68,27 @@ class MainMusicActivity : AppCompatActivity() {
             setDisplayShowTitleEnabled(true)
             setDisplayHomeAsUpEnabled(true)
             title = getString(R.string.text_nav)
+
             // Set background color
-            setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this@MainMusicActivity, R.color.cool_blue)))
+            val colorInt = ContextCompat.getColor(this@MainMusicActivity, R.color.cool_blue) // Resolve color resource to a color int
+            setBackgroundDrawable(colorInt.toDrawable()) // Convert color int to ColorDrawable
+            val actionBarTitleId = resources.getIdentifier("action_bar_title", "id", "android")
+            val actionBarTitle = findViewById<TextView>(actionBarTitleId)
+            actionBarTitle?.setTextColor(ContextCompat.getColor(this@MainMusicActivity, R.color.white))
 
             // Set text color
-           // val textColor = ContextCompat.getColor(this@MainMusicActivity, R.color.white)
+            //val textColor = ContextCompat.getColor(this@MainMusicActivity, R.color.white)
             //val titleId = resources.getIdentifier("action_bar_title", "id", "android")
             //val titleTextView = findViewById<TextView>(titleId)
-           // titleTextView?.setTextColor(ContextCompat.getColor(this@MainMusicActivity, R.color.white))
+            //titleTextView?.setTextColor(ContextCompat.getColor(this@MainMusicActivity, R.color.white))
         }
 
-        //supportActionBar?.setDisplayHomeAsUpEnabled(true)
         //checking for dark theme
         if(themeIndex == 4 &&  resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_NO)
             Toast.makeText(this, "Black Theme Works Best in Dark Mode!!", Toast.LENGTH_LONG).show()
+
+        // Keep the screen on for this activity
+        window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         if(requestRuntimePermission()){
             initializeLayout()
@@ -114,6 +124,14 @@ class MainMusicActivity : AppCompatActivity() {
         binding.playNextBtn.setOnClickListener {
             startActivity(Intent(this@MainMusicActivity, PlayNext::class.java))
         }
+
+        // Disable the back button entirely
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // Leave this empty to block the back button
+            }
+        })
+
         binding.navView.setNavigationItemSelectedListener{
             when(it.itemId)
             {
@@ -125,12 +143,10 @@ class MainMusicActivity : AppCompatActivity() {
                         .setMessage("Do you want to go back to Home screen?")
                         .setPositiveButton("Yes"){ _, _ ->
                             exitApplication()
+                            super.finish()
                             // Navigate back to MainActivity (which hosts HomeFragment)
                             val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
-                            //finishAndRemoveTask()
-                            //finishAffinity()
-                            //super.finish()
                         }
                         .setNegativeButton("No"){dialog, _ ->
                             dialog.dismiss()
@@ -176,10 +192,11 @@ class MainMusicActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(toggle.onOptionsItemSelected(item))
+        if (toggle.onOptionsItemSelected(item))
             return true
         return super.onOptionsItemSelected(item)
     }
+
 
     @SuppressLint("SetTextI18n")
     private fun initializeLayout(){
@@ -263,10 +280,6 @@ class MainMusicActivity : AppCompatActivity() {
         if(!PlayerActivity.isPlaying && PlayerActivity.musicService != null){
             exitApplication()
         }
-        // Navigate back to MainActivity (which hosts HomeFragment)
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        //super.finish()
     }
 
     override fun onResume() {
@@ -288,7 +301,7 @@ class MainMusicActivity : AppCompatActivity() {
             MusicListMA = getAllAudio()
             musicAdapter.updateMusicList(MusicListMA)
         }
-        if(PlayerActivity.musicService != null) binding.nowPlaying.visibility = View.VISIBLE
+        if(musicService != null) binding.nowPlaying.visibility = View.VISIBLE
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

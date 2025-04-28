@@ -14,8 +14,27 @@ import com.example.slapimage.fragments.HomeFragment
 import com.example.slapimage.fragments.PhotoFragment
 import com.example.slapimage.fragments.PlayFragment
 import com.example.slapimage.fragments.ProfileFragment
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 
 class MainActivity : AppCompatActivity() {
+
+    private val powerConnectionReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            when (intent?.action) {
+                Intent.ACTION_POWER_CONNECTED -> {
+                    // Phone is plugged in, keep the screen on
+                    window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+                }
+                Intent.ACTION_POWER_DISCONNECTED -> {
+                    // Phone is unplugged, allow the screen to turn off
+                    window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+                }
+            }
+        }
+    }
 
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +57,13 @@ class MainActivity : AppCompatActivity() {
 
         // Check for permissions
         checkPermissions()
+
+        // Register the receiver
+        val filter = IntentFilter().apply {
+            addAction(Intent.ACTION_POWER_CONNECTED)
+            addAction(Intent.ACTION_POWER_DISCONNECTED)
+        }
+        registerReceiver(powerConnectionReceiver, filter)
 
         // Set a listener for item selection
         bottomNavigationView.setOnItemSelectedListener { item ->
@@ -131,6 +157,12 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Permissions denied: ${deniedPermissions.joinToString(", ")}", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // Unregister the receiver to avoid memory leaks
+        unregisterReceiver(powerConnectionReceiver)
     }
 
     companion object {

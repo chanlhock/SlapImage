@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:background="@null"> <!-- Critical: Remove background here -->
+        android:background="@color/black"> <!-- Critical: Remove background here @null"-->
 
         <ImageView
             android:id="@+id/banner"

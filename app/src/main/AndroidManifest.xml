@@ -75,6 +75,8 @@
             tools:ignore="DiscouragedApi,LockedOrientationActivity"
             android:exported="false"/>
         <activity android:name=".gridiconactivity.StockActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="DiscouragedApi,LockedOrientationActivity"
             android:theme="@style/AppThemeActivity"/>
         <activity android:name=".gridiconactivity.CalculatorActivity"
             android:screenOrientation="portrait"
@@ -88,6 +90,8 @@
         <activity
             android:name=".GeminiAIChatActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="DiscouragedApi,LockedOrientationActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
         <activity
@@ -114,10 +118,14 @@
         <activity
             android:name=".gridiconactivity.GameOfLifeActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="DiscouragedApi,LockedOrientationActivity"
             android:theme="@style/AppTheme.GameofLife" />
         <activity
             android:name=".gridiconactivity.SimulationActivity"
             android:theme="@style/AppTheme.GameofLife"
+            android:screenOrientation="portrait"
+            tools:ignore="DiscouragedApi,LockedOrientationActivity"
             android:parentActivityName=".gridiconactivity.GameOfLifeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -162,7 +170,7 @@
             android:name=".musicplayer.PlayerActivity"
             android:configChanges="uiMode|orientation"
             android:exported="true"
-            android:launchMode="singleTask"
+            android:launchMode="standard"
             android:noHistory="true"
             android:screenOrientation="sensorPortrait"
             tools:ignore="DiscouragedApi,LockedOrientationActivity">
@@ -183,13 +191,15 @@
             android:configChanges="uiMode|orientation"
             android:exported="true"
             android:screenOrientation="sensorPortrait"
-            android:launchMode="singleTask"
+            android:launchMode="standard"
             tools:ignore="DiscouragedApi,LockedOrientationActivity">
         </activity>
         <activity
             android:name=".tetris.TetrisActivity"
             android:exported="true"
             android:label="@string/tetris"
+            android:screenOrientation="portrait"
+            tools:ignore="DiscouragedApi,LockedOrientationActivity"
             android:theme="@style/Theme.Composetetris.NoActionBar">
         </activity>
         <!-- Updated Permission for Android 14   -->

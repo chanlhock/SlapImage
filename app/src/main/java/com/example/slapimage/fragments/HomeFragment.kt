@@ -122,6 +122,12 @@ class HomeFragment : Fragment() {
             visibility = View.INVISIBLE
         }
         bannerContainer.addView(nextBanner)
+
+        // Clear Glide memory cache when the fragment resumes
+        Glide.get(requireContext()).clearMemory()
+        Thread {
+            Glide.get(requireContext()).clearDiskCache()
+        }.start()
         Glide.with(this).load(bannerImages[currentBannerIndex]).into(currentBanner)
         rotateBannerWithAnimation()
 

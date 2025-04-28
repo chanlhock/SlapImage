@@ -4,11 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:fitsSystemWindows="true"
+    android:fitsSystemWindows="false"
+    android:textColor="@color/white"
     tools:openDrawer="start"
     tools:context=".musicplayer.MainMusicActivity">
 
-
+    <!-- android:fitsSystemWindows="true" -->
 <!--    for refreshing layout on swipe from top-->
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refreshLayout"
@@ -117,7 +118,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"
+        android:fitsSystemWindows="false"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_menu"/>
 

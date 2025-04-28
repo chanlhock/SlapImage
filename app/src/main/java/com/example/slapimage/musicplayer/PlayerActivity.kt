@@ -70,6 +70,9 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
         }
         else initializeLayout()
 
+        // Keep the screen on for this activity
+        window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+
         //audio booster feature
         binding.boosterBtnPA.setOnClickListener {
             val customDialogB = LayoutInflater.from(this).inflate(R.layout.audio_booster, binding.root, false)
@@ -225,6 +228,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
     private fun createMediaPlayer(){
         try {
             if (musicService!!.mediaPlayer == null) musicService!!.mediaPlayer = MediaPlayer()
+            //if (musicService!!.mediaPlayer!!.isPlaying) musicService!!.mediaPlayer!!.stop()  // added chanhock
             musicService!!.mediaPlayer!!.reset()
             musicService!!.mediaPlayer!!.setDataSource(musicListPA[songPosition].path)
             musicService!!.mediaPlayer!!.prepare()
@@ -237,23 +241,32 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
             playMusic()
             loudnessEnhancer = LoudnessEnhancer(musicService!!.mediaPlayer!!.audioSessionId)
             loudnessEnhancer.enabled = true
-        }catch (e: Exception){Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show()}
+        //}catch (e: Exception){Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show()}
+        } catch (e: IllegalStateException) {
+            Toast.makeText(this, "MediaPlayer Error: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun playMusic(){
-        isPlaying = true
-        musicService!!.mediaPlayer!!.start()
-        binding.playPauseBtnPA.setIconResource(R.drawable.pause_icon)
-        musicService!!.showNotification(R.drawable.pause_icon)
+        try {
+            isPlaying = true
+            musicService!!.mediaPlayer!!.start()
+            binding.playPauseBtnPA.setIconResource(R.drawable.pause_icon)
+            musicService!!.showNotification(R.drawable.pause_icon)
+        } catch (e: IllegalStateException) {
+            Toast.makeText(this, "MediaPlayer Error: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun pauseMusic(){
-        isPlaying = false
-        musicService!!.mediaPlayer!!.pause()
-        binding.playPauseBtnPA.setIconResource(R.drawable.play_icon)
-        musicService!!.showNotification(R.drawable.play_icon)
-
-
+        try {
+            isPlaying = false
+            musicService!!.mediaPlayer!!.pause()
+            binding.playPauseBtnPA.setIconResource(R.drawable.play_icon)
+            musicService!!.showNotification(R.drawable.play_icon)
+        } catch (e: IllegalStateException) {
+            Toast.makeText(this, "MediaPlayer Error: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
     }
     private fun prevNextSong(increment: Boolean){
         if(increment)
@@ -285,6 +298,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
     }
 
     override fun onServiceDisconnected(name: ComponentName?) {
+        musicService?.mediaPlayer?.release()  // added chanhock
         musicService = null
     }
 
@@ -362,9 +376,14 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
         if(musicListPA[songPosition].id == "Unknown" && !isPlaying) {
             exitApplication()
         }
-        //finishAndRemoveTask()
-        //super.finish()  // added this chanlhock
     }
+
+    //override fun onPause() {
+    //    super.onPause()
+   ////     if (musicService != null) {
+    //        unbindService(this)
+   //     }
+    ////}
 
     private fun initServiceAndPlaylist(playlist: ArrayList<Music>, shuffle: Boolean, playNext: Boolean = false){
         val intent = Intent(this, MusicService::class.java)
@@ -376,4 +395,17 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
         setLayout()
         if(!playNext) PlayNext.playNextList = ArrayList()
     }
+
+    //fun exitApplicationPlay() {
+    //    if (musicService != null) {
+   //         musicService!!.audioManager.abandonAudioFocus(PlayerActivity.musicService)
+   //         musicService!!.stopForeground(true)
+  //          musicService!!.mediaPlayer!!.release()
+            // PlayerActivity.musicService = null
+   //         musicService!!.mediaPlayer = null
+    //        unbindService(this)
+  //      }
+
+  //  }
+
 }
