@@ -3,7 +3,7 @@
 <picture>
  <source media="(prefers-color-scheme: dark)" srcset="app/src/main/res/drawable/animated_logo.gif" width="400">
  <source media="(prefers-color-scheme: light)" srcset="app/src/main/res/drawable/animated_logo.gif" width="400">
- <img alt="SlapImage title yellow over black" src="app/src/main/res/drawable/animated_logo.gif" width="400">
+ <img alt="SlapImage title yellow over black" src="https://github.com/chanlhock/SlapImage/blob/17ab5055a6b81205f3194fa02f8e676fe465c4ca/app/src/main/res/drawable/animated_logo.gif" width="400">
 </picture>
 
 ## Table of Contents
