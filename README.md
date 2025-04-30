@@ -52,9 +52,9 @@ Testing is also done on a Virtual Phone that I have setup in Android Studio:
 
 ## :film_strip: Screenshots
 <p float="left">
-  <img src="app/src/main/res/drawable/slapimage_yellow.png" width="100" />
-  <img src="app/src/main/res/drawable/slapimage_yellow.png" width="100" /> 
-  <img src="app/src/main/res/drawable/slapimage_yellow.png" width="100" />
+  <img src="screenshots/Screenshot_20250429_134303_com.example.slapimage.jpg" width="100" />
+  <img src="screenshots/Screenshot_20250429_134303_com.example.slapimage.jpg" width="100" /> 
+  <img src="screenshots/Screenshot_20250429_134303_com.example.slapimage.jpg" width="100" />
 </p>
 
 ## :hourglass_flowing_sand: Chronology of Development Events
