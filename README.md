@@ -51,6 +51,11 @@ Testing is also done on a Virtual Phone that I have setup in Android Studio:
 - Virtual Medium Tablet Android 10 (API 29) 10.05" display (1600 x 2560 pixels)
 
 ## :film_strip: Screenshots
+<p float="left">
+  <img src="app/src/main/res/drawable/slapimage_yellow.png" width="100" />
+  <img src="app/src/main/res/drawable/slapimage_yellow.png" width="100" /> 
+  <img src="app/src/main/res/drawable/slapimage_yellow.png" width="100" />
+</p>
 
 ## :hourglass_flowing_sand: Chronology of Development Events
 - 16th Mar 2025: Started Android project SlapImage from scratch _Vibe Coding_ using DeepSeek in Kotlin.
