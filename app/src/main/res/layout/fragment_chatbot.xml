@@ -8,13 +8,35 @@
     android:background="@color/background_color"
     tools:context=".fragments.ChatBotFragment">
 
+    <!-- Photo Bar Container with Black Background -->
+    <RelativeLayout
+        android:id="@+id/photoBarContainer"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/slapimage_top_bar_black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- ImageView that scales to fit height and aligns to the left -->
+        <ImageView
+            android:id="@+id/photoBar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="fitStart"
+            android:adjustViewBounds="true"
+            android:layout_alignParentStart="true"
+            android:contentDescription="@string/top_bar"
+            android:src="@drawable/slapimage_bw_logo" />
+    </RelativeLayout>
+
     <!-- Model Status Indicator -->
     <TextView
         android:id="@+id/tvModelStatus"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="46dp"
         android:layout_marginEnd="16dp"
         android:text="@string/model_not_loaded"
         android:textColor="@color/model_status_text"
