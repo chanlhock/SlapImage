@@ -54,7 +54,7 @@ Testing is also done on a Virtual Phone that I have setup in Android Studio:
 <p float="left">
   <img src="screenshots/Screenshot_20250429_134303_com.example.slapimage.jpg" width="200" />
   <img src="screenshots/Screenshot_20250429_134939_com.example.slapimage.jpg" width="200" /> 
-  <img src="screenshots/Screenshot_20250429_134303_com.example.slapimage.jpg" width="200" />
+  <img src="screenshots/Screenshot_20250429_134944_com.example.slapimage.jpg" width="200" />
 </p>
 
 ## :hourglass_flowing_sand: Chronology of Development Events
