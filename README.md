@@ -11,6 +11,7 @@
 - [APK Download](#gift-apk-download)
 - [Development Platform](#computer-development-platform)
 - [Platform Tested](#iphone-platform-tested)
+- [Screenshots](#film_strip-screenshots)
 - [Chronology of Development Events](#hourglass_flowing_sand-chronology-of-development-events)
 - [Unresolvable Bug in Todo List](#beetle-unresolvable-bug-in-todo-list)
 - [Incomplete Todo Tasks](#plate_with_cutlery-uncomplete-todo-tasks)
@@ -48,6 +49,8 @@ In addition I have also tested to some extent on:
 Testing is also done on a Virtual Phone that I have setup in Android Studio:
 - Virtual phone using Pixel 4 skin Android 10 (API 29) 5.7" display (1080 x 2280 pixels)
 - Virtual Medium Tablet Android 10 (API 29) 10.05" display (1600 x 2560 pixels)
+
+## :film_strip: Screenshots
 
 ## :hourglass_flowing_sand: Chronology of Development Events
 - 16th Mar 2025: Started Android project SlapImage from scratch _Vibe Coding_ using DeepSeek in Kotlin.
