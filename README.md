@@ -52,14 +52,14 @@ Testing is also done on a Virtual Phone that I have setup in Android Studio:
 
 ## :film_strip: Screenshots
 <p float="left">
-  <img src="screenshots/Screenshot_20250429_134303_com.example.slapimage.jpg" width="150" />
-  <img src="screenshots/Screenshot_20250430_184358_com.example.slapimage.jpg" width="150" /> 
-  <img src="screenshots/Screenshot_20250429_134939_com.example.slapimage.jpg" width="150" />
+  <img src="screenshots/Screenshot_20250429_134303_com.example.slapimage.jpg" width="140" />
+  <img src="screenshots/Screenshot_20250430_184358_com.example.slapimage.jpg" width="140" /> 
+  <img src="screenshots/Screenshot_20250429_134939_com.example.slapimage.jpg" width="140" />
 </p>
 <p float="left">
-  <img src="screenshots/Screenshot_20250429_134944_com.example.slapimage.jpg" width="200" /> 
-  <img src="screenshots/Screenshot_20250430_192357_com.example.slapimage.jpg" width="200" />
-  <img src="screenshots/Screenshot_20250429_134948_com.example.slapimage.jpg" width="200" />
+  <img src="screenshots/Screenshot_20250429_134944_com.example.slapimage.jpg" width="140" /> 
+  <img src="screenshots/Screenshot_20250430_192357_com.example.slapimage.jpg" width="140" />
+  <img src="screenshots/Screenshot_20250429_134948_com.example.slapimage.jpg" width="140" />
 </p>
 
 
