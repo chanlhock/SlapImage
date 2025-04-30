@@ -3,7 +3,7 @@
 <picture>
  <source media="(prefers-color-scheme: dark)" srcset="app/src/main/res/drawable/animated_logo.gif" width="400">
  <source media="(prefers-color-scheme: light)" srcset="app/src/main/res/drawable/animated_logo.gif" width="400">
- <img alt="SlapImage title yellow over black" src="app/src/main/res/drawable/animated_logo.gif" width="400">
+ <img alt="SlapImage title yellow over black" src="https://github.com/chanlhock/SlapImage/blob/17ab5055a6b81205f3194fa02f8e676fe465c4ca/app/src/main/res/drawable/animated_logo.gif" width="400">
 </picture>
 
 ## Table of Contents
@@ -39,6 +39,7 @@ SlapImage is developed using:
 I have tested mostly my code on:
 - Huawei P50 Pro mobile phone running EMUI 14.2.0 (Android 12) 6.6" display (1228 x 2700 pixels).
 - Honor 200 mobile phone running Android 15 6.78" display (1224 x 2700 pixels).
+- Huawei Mate 30 mobile phone running EMUI 12.0.0 (Android 10) 6.62" display (1080 x 2340 pixels)
   
 In addition I have also tested to some extent on:
 - Huawei Matepad 12 X Tablet running on Harmony OS 4.2.0 (Android 12) 12" display (1840 x 2800 pixels)\
