@@ -52,10 +52,15 @@ Testing is also done on a Virtual Phone that I have setup in Android Studio:
 
 ## :film_strip: Screenshots
 <p float="left">
-  <img src="app/src/main/res/drawable/slapimage_yellow.png" width="100" />
-  <img src="app/src/main/res/drawable/slapimage_yellow.png" width="100" /> 
-  <img src="app/src/main/res/drawable/slapimage_yellow.png" width="100" />
+  <img src="screenshots/Screenshot_20250429_134303_com.example.slapimage.jpg" width="200" />
+  <img src="screenshots/Screenshot_20250429_134303_com.example.slapimage.jpg" width="200" /> 
 </p>
+<p float="left">
+  <img src="screenshots/Screenshot_20250429_134939_com.example.slapimage.jpg" width="200" /> 
+  <img src="screenshots/Screenshot_20250429_134944_com.example.slapimage.jpg" width="200" />
+  <img src="screenshots/Screenshot_20250429_134948_com.example.slapimage.jpg" width="200" />
+</p>
+
 
 ## :hourglass_flowing_sand: Chronology of Development Events
 - 16th Mar 2025: Started Android project SlapImage from scratch _Vibe Coding_ using DeepSeek in Kotlin.
