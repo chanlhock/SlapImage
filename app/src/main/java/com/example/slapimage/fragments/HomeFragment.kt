@@ -1,3 +1,20 @@
+/**
+##################################################################################################################
+# Simple and Feature Rich Android Apps with useful functions and utilities. Coded with the assistance of DeepSeek
+# on Android Studio platform.
+#
+# Copyright (c) 2025 Bernard Chan
+# chanlhock@gmail.com
+#
+# Date			Author          Notes
+# 16/03/2025	Bernard Chan   Initial release
+#
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of the GNU Lesser General Public License as published by the
+# Free Software Foundation; either version 2.1 of the License, or (at your
+# option) any later version.
+##################################################################################################################
+**/
 package com.example.slapimage.fragments
 
 import android.annotation.SuppressLint

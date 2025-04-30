@@ -12,7 +12,7 @@
         android:id="@+id/photoBarContainer"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@android:color/black">
+        android:background="@color/slapimage_top_bar_black">
 
         <!-- ImageView that scales to fit height and aligns to the left -->
         <ImageView
