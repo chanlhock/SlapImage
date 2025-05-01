@@ -1,10 +1,8 @@
 # :mouse: Welcome to SlapImage
 
-<picture>
- <source media="(prefers-color-scheme: dark)" srcset="app/src/main/res/drawable/animated_logo.gif" width="400">
- <source media="(prefers-color-scheme: light)" srcset="app/src/main/res/drawable/animated_logo.gif" width="400">
+<p float="left">
  <img src="app/src/main/res/drawable/animated_logo.gif" width="400">
-</picture>
+</p>
 
 ## Table of Contents
 - [Description](#scroll-description)
@@ -20,7 +18,7 @@
 ## :scroll: Description
 <p float="left">
  <img src="app/src/main/res/drawable/slapimage_yellow.png" width="200">
-</p><br>
+</p>
 This is my attempt to create a utility Android Apps which is feature-rich and contains useful functions using Android Studio Meerkat with the assistance of DeepSeek (https://www.deepseek.com/). Some of graphics are generated with Doubao 豆包 (https://www.doubao.com/chat/). <br>
 Basically it allows me to personally experience the recent hype of Vibe Coding and whether AI can actually realistically replace software engineers? :grin: 
 
