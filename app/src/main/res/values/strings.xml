@@ -250,4 +250,36 @@
     <string name="button_pause">PAUSE/RESUME</string>
     <string name="button_reset">START/RESET</string>
 
+    // New Calculator
+    <string name="appInnappName">Calculator</string>
+    <string name="appVersion">v1.2.0</string>
+    <string name="calculatorDisplayMock">8888888888</string>
+    <string name="calculatorDisplayMockCommas">,,,,,,,,,,</string>
+    <string name="calculatorAc">AC</string>
+    <string name="calculatorPlusAndMinus">+ / -</string>
+    <string name="calculatorPermutation">nCr</string>
+    <string name="calculatorLog">ln</string>
+    <string name="calculatorFactorial">!</string>
+    <string name="calculatorPower">^</string>
+    <string name="calculatorPercent">%</string>
+    <string name="calculatorDivide">÷</string>
+    <string name="calculatorMultiply">x</string>
+    <string name="calculatorMinus">-</string>
+    <string name="calculatorPlus">+</string>
+    <string name="calculatorEquals">=</string>
+    <string name="calculatorComma">,</string>
+    <string name="calculatorDot">.</string>
+    <string name="calculatorNine">9</string>
+    <string name="calculatorEight">8</string>
+    <string name="calculatorSeven">7</string>
+    <string name="calculatorSix">6</string>
+    <string name="calculatorFive">5</string>
+    <string name="calculatorFour">4</string>
+    <string name="calculatorThree">3</string>
+    <string name="calculatorTwo">2</string>
+    <string name="calculatorOne">1</string>
+    <string name="calculatorZero">0</string>
+
+    <string name="Night_Mode_on">Successfully switch to Night Mode.</string>
+    <string name="Night_Mode_off">Successfully switch to Day Mode.</string>
 </resources>

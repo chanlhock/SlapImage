@@ -64,6 +64,7 @@ import android.app.ActivityOptions
 import androidx.activity.OnBackPressedCallback
 import com.example.slapimage.musicplayer.MainMusicActivity
 import com.example.slapimage.tetris.TetrisActivity
+import com.example.slapimage.newcalculator.CalcMainActivity
 
 class HomeFragment : Fragment() {
 
@@ -256,7 +257,7 @@ class HomeFragment : Fragment() {
             // Second page (example additional icons)
             listOf(
                 Icon(R.drawable.icon11, "Tetris"),
-                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon15, "AI Calc"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
@@ -318,7 +319,7 @@ class HomeFragment : Fragment() {
                 val intent = Intent(activity, CalendarActivity::class.java)
                 startActivity(intent)
             }
-            "Calculator" -> {
+            "AI Calc" -> {
                 val intent = Intent(activity, CalculatorActivity::class.java)
                 startActivity(intent)
             }
@@ -356,6 +357,15 @@ class HomeFragment : Fragment() {
             }
             "Tetris" -> {
                 val intent = Intent(activity, TetrisActivity::class.java)
+                val options = ActivityOptions.makeCustomAnimation(
+                    requireContext(),
+                    R.anim.slide_up,
+                    R.anim.no_animation
+                )
+                startActivity(intent, options.toBundle())
+            }
+            "Calculator" -> {
+                val intent = Intent(activity, CalcMainActivity::class.java)
                 val options = ActivityOptions.makeCustomAnimation(
                     requireContext(),
                     R.anim.slide_up,
