@@ -169,4 +169,24 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling:1.7.8")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.7.8")
     implementation ("androidx.compose.material3:material3:1.3.2")
+
+    // New Calculator
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+    implementation("org.jetbrains.kotlin:kotlin-stdlib")
+    implementation("com.github.fornewid:neumorphism:0.2.1")
+    //implementation("com.github.medyo:android-about-page:1.3.1")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+
+    implementation("pl.droidsonroids.gif:android-gif-drawable:1.2.28")
+    // Play Core library for in-app updates
+    implementation("com.google.android.play:app-update:2.1.0")
+
+    // Play Core KTX for coroutines support (optional)
+    implementation("com.google.android.play:app-update-ktx:2.1.0")
+    // Play Core Review Library (for in-app reviews)
+    implementation("com.google.android.play:review:2.0.1")
+
+    // Optional: Kotlin extensions for coroutines support
+    implementation("com.google.android.play:review-ktx:2.0.1")
+    implementation("com.google.android.gms:play-services-tasks:18.1.0")
 }
