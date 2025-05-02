@@ -29,6 +29,7 @@ import java.io.File
 import java.io.FileOutputStream
 import android.content.Context
 import androidx.core.content.ContextCompat
+import android.provider.OpenableColumns
 
 class ChatBotFragment : Fragment() {
     private var _binding: FragmentChatbotBinding? = null
@@ -222,12 +223,19 @@ class ChatBotFragment : Fragment() {
                 binding.tvModelStatus.text = getString(R.string.processing)
                 binding.btnSend.isEnabled = false
 
-                // Copy the model file to cache
-                val inputStream = requireContext().contentResolver.openInputStream(uri)
-                val modelFile = File(requireContext().cacheDir, "temp_model.onnx").apply {
-                    inputStream?.use { it.copyTo(outputStream()) }
+                // Get the original filename from the URI
+                val originalFileName = getFileNameFromUri(uri)
+                val cacheFileName = if (originalFileName != null) {
+                    "cache_$originalFileName.onnx"  // Append original filename
+                } else {
+                    "temp_model.onnx"  // Fallback if filename can't be retrieved
                 }
 
+                // Copy the model file to cache
+                val inputStream = requireContext().contentResolver.openInputStream(uri)
+                val modelFile = File(requireContext().cacheDir, cacheFileName).apply {
+                    inputStream?.use { it.copyTo(outputStream()) }
+                }
                 // Load model with context
                 viewModel.loadModel(requireContext(), modelFile.absolutePath)
 
@@ -240,6 +248,24 @@ class ChatBotFragment : Fragment() {
                 Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    // Helper function to get filename from URI
+    private fun getFileNameFromUri(uri: Uri): String? {
+        return when (uri.scheme) {
+            "content" -> {
+                requireContext().contentResolver.query(uri, null, null, null, null)?.use { cursor ->
+                    val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                    if (nameIndex >= 0 && cursor.moveToFirst()) {
+                        cursor.getString(nameIndex)
+                    } else {
+                        null
+                    }
+                }
+            }
+            "file" -> uri.lastPathSegment
+            else -> null
+        }?.substringBeforeLast(".onnx")?.substringBeforeLast(".") // Remove extension if present
     }
 
     override fun onDestroyView() {
