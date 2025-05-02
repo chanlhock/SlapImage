@@ -1,0 +1,832 @@
+package com.example.slapimage.newcalculator
+
+import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.ContentValues
+import android.content.Context
+import android.content.Intent
+import android.media.MediaPlayer
+import android.os.Build
+import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
+import android.util.Log
+import android.view.View
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.SwitchCompat
+import androidx.appcompat.widget.Toolbar
+import androidx.core.text.isDigitsOnly
+import com.example.slapimage.R
+import com.example.slapimage.newcalculator.screens.DataScreen
+import kotlin.math.*
+import com.example.slapimage.databinding.ActivityCalcmainBinding
+import androidx.core.content.edit
+
+class CalcMainActivity : AppCompatActivity() {
+    private var operation: Operation = Operation.EMPTY
+    private var firstProcessingNumber = 0.0
+    private var secondProcessingNumber = 0.0
+    private var is_errored_text = false
+    private var is_ans_showed = false
+    lateinit var toolbar : Toolbar
+    private var player : MediaPlayer?=null
+    private var darkmode = false
+    private val operators = charArrayOf('/', '*', '%', '-', '+', 'l', 'o', 'g', 'n', '!', '^', 'C', '√', 's', 'i', 'n', 'c', 'o', 't', 'a', 'e','m','d')
+    private lateinit var binding: ActivityCalcmainBinding
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean("darkmode", darkmode)
+    }
+
+  // if (savedInstanceState != null) {
+    //        darkmode = savedInstanceState.getBoolean("darkmode")
+   //     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityCalcmainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        loadDayNight()
+
+        initListeners()
+        daynight()
+    }
+
+
+    // load Dark night after open the app
+    private fun loadDayNight(){
+        val sharedPreferences=getSharedPreferences("DayNight", MODE_PRIVATE)
+        val DayNight= sharedPreferences.getString("My_DayNight","")
+        if (DayNight != null) {
+            setDayNight(DayNight)
+
+        }
+    }
+
+
+    // load DayNight actually
+    private fun daynight(){
+        val swtch: SwitchCompat = findViewById(R.id.daynight)
+
+        // Load state using SharedPreferences (no KTX needed for reading)
+        val sharedPreferences = getSharedPreferences("DayNight", MODE_PRIVATE)
+        swtch.isChecked = sharedPreferences.getBoolean("My_Switch", false)
+
+        swtch.setOnCheckedChangeListener { _, isChecked ->
+            setDayNight(if (isChecked) "yes" else "no")
+            vibration()
+
+            // KTX edit extension - cleaner way to edit preferences
+            sharedPreferences.edit {
+                putBoolean("My_Switch", isChecked)
+            }
+        }
+    }
+
+    private fun setDayNight(daynightMode: String) {
+        // Using KTX edit extension
+        getSharedPreferences("DayNight", MODE_PRIVATE).edit {
+            putString("My_DayNight", daynightMode)
+        }
+
+        // Apply theme
+        if (daynightMode == "yes") {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+    }
+
+  /*  private fun darkmode() {
+        vibration()
+        val share: Button
+        val swtch: Switch
+        val close: ImageButton
+        val dialog = Dialog(this@CalcMainActivity)
+        dialog.setContentView(R.layout.darkmodeprompt)
+        dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+        val window = dialog.window
+        window!!.setGravity(Gravity.CENTER)
+        window.attributes.windowAnimations = R.style.DialogAnimation
+        swtch = dialog.findViewById(R.id.modebtn)
+        close = dialog.findViewById(R.id.closePopup)
+        swtch.isChecked = darkmode
+        swtch.setOnCheckedChangeListener { compoundButton, b ->
+            darkmode = !darkmode
+            if(darkmode) {
+                getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                Toast.makeText(this@CalcMainActivity, "Its on", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                Toast.makeText(this@CalcMainActivity, "Its off", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        close.setOnClickListener {
+            vibration()
+            dialog.dismiss()
+        }
+        dialog.setCancelable(true)
+        window.setLayout(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT)
+        dialog.show()
+
+    }
+
+*/
+
+    private fun extractOperands(expression: String, operators: CharArray): List<String> {
+        val operands = mutableListOf<String>()
+        var currentOperand = ""
+        for (char in expression) {
+            if (char in operators) {
+                // Add the current operand to the list
+                if (currentOperand.isNotEmpty()) {
+                    operands.add(currentOperand)
+                    currentOperand = ""
+                }
+            } else {
+                // Add the current character to the current operand
+                currentOperand += char
+            }
+        }
+        // Add the final operand to the list
+        if (currentOperand.isNotEmpty()) {
+            operands.add(currentOperand)
+        }
+        return operands
+    }
+
+    private fun equalsButtonOnclick() {
+        try {
+
+            val dbHelper = CalculatorDatabaseHelper(this)
+            val db = dbHelper.writableDatabase
+
+
+
+            if(operation == Operation.log || operation == Operation.sqrt || operation == Operation.sin || operation == Operation.cos
+                || operation == Operation.tan || operation == Operation.ln || operation == Operation.e||operation==Operation.inv)
+            {
+                val ans =
+                    if ((floor(calculateExpression()) == ceil(calculateExpression())))
+                        calculateExpression()
+                            .toString().replace(".0", "")
+                    else
+                        calculateExpression().toString()
+                binding.calculatorDisplayNonMock.text = ans
+
+                val contentValues = ContentValues().apply {
+                    put("first_number", firstProcessingNumber)
+                    put("operation", getOperatorSymbol(operation.name))
+                    put("second_number", secondProcessingNumber)
+                    put("equals","=")
+                    put("result",ans.toDouble())
+                }
+                db.insert("calculations", null, contentValues)
+
+                firstProcessingNumber = calculateExpression()
+                secondProcessingNumber = 0.0
+
+                operation = Operation.EMPTY
+            }
+
+            if(operation == Operation.FACT) {
+                val ans =
+                    if ((floor(calculateExpression()) == ceil(calculateExpression())))
+                        calculateExpression()
+                            .toString().replace(".0", "")
+                    else
+                        calculateExpression().toString()
+                binding.calculatorDisplayNonMock.text = ans
+                val contentValues = ContentValues().apply {
+                    put("first_number", firstProcessingNumber)
+                    put("operation", getOperatorSymbol(operation.name))
+                    put("second_number", secondProcessingNumber)
+                    put("equals","=")
+                    put("result",ans.toDouble())
+                }
+                db.insert("calculations", null, contentValues)
+                firstProcessingNumber = calculateExpression()
+                secondProcessingNumber = 0.0
+                operation = Operation.EMPTY
+            }
+
+            if (operation == Operation.DVD || operation == Operation.MUL || operation == Operation.POW || operation == Operation.PLUS
+                || operation == Operation.MINUS || operation == Operation.nCr || operation == Operation.PERCENT||operation == Operation.mod)
+            {
+                if (secondProcessingNumber == 0.0 && operation == Operation.DVD) {
+                    val alertBuilder = AlertDialog.Builder(this)
+                    alertBuilder.setTitle("Math Error")
+                        .setMessage("Can't divide by zero")
+                        .setCancelable(true)
+                        .setPositiveButton("Ok"){dialogInterface, it ->
+                            dialogInterface.cancel()
+                        }
+                        .show()
+                    clearDisplay()
+
+                } else {
+                    val ans =
+                        if ((floor(calculateExpression()) == ceil(calculateExpression())))
+                            calculateExpression()
+                                .toString().replace(".0", "")
+                        else
+                            calculateExpression().toString()
+                    // val rnd = ans.toInt()
+                    // val ans2 = (round(rnd.toDouble() * 1000.0)/1000.0).toString()
+                    binding.calculatorDisplayNonMock.text = ans
+                    val contentValues = ContentValues().apply {
+                        put("first_number", firstProcessingNumber)
+                        put("operation", getOperatorSymbol(operation.name))
+                        put("second_number", secondProcessingNumber)
+                        put("equals","=")
+                        put("result",ans.toDouble())
+                    }
+                    db.insert("calculations", null, contentValues)
+                    firstProcessingNumber = calculateExpression()
+                    secondProcessingNumber = 0.0
+                    operation = Operation.EMPTY
+                }
+            } else {
+                val ans =
+                    if ((floor(calculateExpression()) == ceil(calculateExpression())))
+                        calculateExpression()
+                            .toString().replace(".0", "")
+                    else
+                        calculateExpression().toString()
+
+                binding.calculatorDisplayNonMock.setText(calculateExpression().toString())
+                Log.d("overflow",calculateExpression().toString())
+
+                if (ans.length > 9){
+
+                    val number : Double = ans.toDouble()
+
+                    val alertBuilder = AlertDialog.Builder(this)
+                    alertBuilder.setTitle("Answer Overflowed")
+                        .setMessage("Full answer = "+ans)
+                        .setCancelable(true)
+                        .setPositiveButton("Ok"){dialogInterface, it ->
+                            dialogInterface.cancel()
+                        }
+                        .show()
+                    val contentValues = ContentValues().apply {
+                        put("first_number", firstProcessingNumber)
+                        put("operation", getOperatorSymbol(operation.name))
+                        put("second_number", secondProcessingNumber)
+                        put("equals","=")
+                        put("result",ans.toDouble())
+                    }
+                    db.insert("calculations", null, contentValues)
+                    val scientificNotation = String.format("%.2e", number)
+                    binding.calculatorDisplayNonMock.text = scientificNotation
+
+                } else {
+                    val contentValues = ContentValues().apply {
+                        put("first_number", firstProcessingNumber)
+                        put("operation", getOperatorSymbol(operation.name))
+                        put("second_number", secondProcessingNumber)
+                        put("equals","=")
+                        put("result",ans.toDouble())
+                    }
+                    db.insert("calculations", null, contentValues)
+                    firstProcessingNumber = calculateExpression()
+                    secondProcessingNumber = 0.0
+                    operation = Operation.EMPTY
+                }
+
+            }
+
+        } catch (e: NumberFormatException) {
+            Log.d("ERROR", "Error is"+e)
+            binding.calculatorDisplayNonMock.text = "ERROR"
+            is_errored_text = true
+            clearDisplay(true)
+        }
+        is_ans_showed = true
+    }
+
+    fun extractDouble(input: String): Double? {
+        val regex = Regex("-?\\d+\\.?\\d*") // regular expression for matching numerical values
+        val matchResult = regex.find(input)
+        return matchResult?.value?.toDoubleOrNull()
+    }
+
+    fun extractFirstNumberAfterOperator(str: String, searchStr: String): Double? {
+        val escapedSearchStr = Regex.escape(searchStr) // escape search string to avoid regex syntax errors
+        val regex = Regex("$escapedSearchStr.*?(\\d+\\.?\\d*)") // regular expression for matching a numerical value after a search string
+        val matchResult = regex.find(str)
+        return matchResult?.groupValues?.getOrNull(1)?.toDoubleOrNull()
+    }
+
+    private fun clearDisplay(
+        screen: Boolean = false,
+        first_val: Boolean = true,
+        second_val: Boolean = true,
+        operator: Boolean = true
+    )
+    {
+        if (!screen) {
+            binding.calculatorDisplayNonMock.text = ""
+        }
+        if (operator)
+            operation = Operation.EMPTY
+        if (first_val)
+            firstProcessingNumber = 0.0
+        if (second_val)
+            secondProcessingNumber = 0.0
+    }
+
+
+    private fun calculateExpression(): Double {
+        return when (operation) {
+            Operation.DVD -> (firstProcessingNumber / secondProcessingNumber * 100000000).roundToLong()
+                .toDouble() / 100000000
+            Operation.MUL -> (firstProcessingNumber * secondProcessingNumber * 100000000).roundToLong()
+                .toDouble() / 100000000
+            Operation.MINUS -> ((firstProcessingNumber - secondProcessingNumber) * 100000000).roundToLong()
+                .toDouble() / 100000000
+            Operation.PLUS -> ((firstProcessingNumber + secondProcessingNumber) * 100000000).roundToLong()
+                .toDouble() / 100000000
+            Operation.PERCENT -> (firstProcessingNumber / 100 * secondProcessingNumber * 100000000).roundToLong()
+                .toDouble() / 100000000
+            Operation.POW -> (firstProcessingNumber.pow(secondProcessingNumber) * 100000000).roundToLong()
+                .toDouble() / 100000000
+            Operation.nCr -> (factorial(firstProcessingNumber)/(factorial(secondProcessingNumber)*factorial(firstProcessingNumber-secondProcessingNumber)) * 100000000).roundToLong() .toDouble() / 100000000
+            Operation.FACT -> (factorial(firstProcessingNumber) * 100000000).roundToLong()
+                .toDouble() / 100000000
+            Operation.log -> (log10(secondProcessingNumber) * 100000000).roundToLong()
+                .toDouble() / 100000000
+            Operation.sqrt -> (sqrt(secondProcessingNumber) *100000000).roundToLong()
+                .toDouble() / 100000000
+            Operation.ln -> (log(secondProcessingNumber,2.7182818284) * 100000000).roundToLong()
+                .toDouble() / 100000000
+            Operation.sin -> (Math.round((sin(Math.toRadians(secondProcessingNumber)))*100000000).toDouble()/100000000)
+            Operation.cos -> (Math.round((cos(Math.toRadians(secondProcessingNumber)))*100000000).toDouble()/100000000)
+            Operation.tan -> (Math.round((tan(Math.toRadians(secondProcessingNumber)))*100000000).toDouble()/100000000)
+            Operation.e-> (2.7182818284.pow(secondProcessingNumber)* 100000000).roundToLong()
+                .toDouble() / 100000000
+            Operation.mod->(firstProcessingNumber%secondProcessingNumber)
+            Operation.inv->{1.0/firstProcessingNumber }
+
+
+            else -> firstProcessingNumber
+        }
+    }
+
+    private fun isAvailableToOperate(operation: Operation) {
+        if (binding.calculatorDisplayNonMock.text.toString()
+                .isNotEmpty() && binding.calculatorDisplayNonMock.text.toString() != "-"
+        ) {
+            onClickOperation(operation)
+        }
+        else
+        {
+            onClickOperation(operation)
+        }
+
+    }
+
+    private fun checkOutputScreen(
+        screen: Boolean = false,
+        first_val: Boolean = true,
+        second_val: Boolean = true,
+        operator: Boolean = true,
+        check_ans: Boolean = true
+
+    ) {
+        if (check_ans) {
+            if (is_errored_text || is_ans_showed) {
+                clearDisplay(
+                    screen = screen,
+                    first_val = first_val,
+                    second_val = second_val,
+                    operator = operator
+                )
+                is_errored_text = false
+                is_ans_showed = false
+            }
+        } else {
+            if (is_errored_text) {
+                clearDisplay(
+                    screen = screen,
+                    first_val = first_val,
+                    second_val = second_val,
+                    operator = operator
+                )
+                is_errored_text = false
+                is_ans_showed = false
+            }
+        }
+    }
+
+    private fun getOperatorSymbol(operation: String): String {
+        return when (operation) {
+            "DVD" -> "/"
+            "MUL" -> "*"
+            "PERCENT" -> "%"
+            "MINUS" -> "-"
+            "PLUS" -> "+"
+            "log" -> "log"
+            "ln" -> "ln"
+            "FACT" -> "!"
+            "POW" -> "^"
+            "nCr" -> "C"
+            "EMPTY" -> ""
+            "sqrt" -> "√"
+            "sin" -> "sin"
+            "cos" -> "cos"
+            "tan" -> "tan"
+            "e" -> "e^"
+            "mod"->"mod"
+            "inv"->"^-1"
+            else -> throw IllegalArgumentException("Invalid operation: $operation")
+        }
+    }
+
+    private fun convertValue(value: Double): Any {
+        return if (value % 1 == 0.0) {
+            value.toInt()
+        } else {
+            value
+        }
+    };
+
+    private fun onClickOperation(processingOperation: Operation) {
+        try {
+            if (operation == Operation.EMPTY) {
+                if (binding.calculatorDisplayNonMock.text.toString().isNotEmpty()) {
+                    firstProcessingNumber =
+                        binding.calculatorDisplayNonMock.text.toString().replace(',', '.').toDouble()
+                    operation = processingOperation
+                    binding.calculatorDisplayNonMock.setText(convertValue(firstProcessingNumber).toString() + getOperatorSymbol(operation.toString()))
+                } else{
+                    operation = processingOperation
+                    binding.calculatorDisplayNonMock.setText(getOperatorSymbol(operation.toString()))
+                }
+            }
+        } catch (e: Exception){
+            Log.d("ERROR", "Error is"+e)
+            binding.calculatorDisplayNonMock.text = "ERROR"
+            is_errored_text = true
+            clearDisplay(true)
+        }
+    }
+
+
+     fun factorial(n: Double): Double {
+         if (n < 0) {
+             val errorMessage = "ERROR"
+             Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+             return 0.0
+         } else {
+             return if (n == 1.00 || n == 0.00) 1.00 else n * factorial(n - 1)
+         }
+
+     }
+
+    private fun vibration(){
+        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        if (vibrator.hasVibrator()) { // Vibrator availability checking
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE)) // New vibrate method for API Level 26 or higher
+            } else {
+                vibrator.vibrate(140) // Vibrate method for below API Level 26
+            }
+        }
+    }
+
+
+    private fun onClickSound() {
+        try {
+            // Release any previous player instance
+            player?.release()
+
+            // Create new MediaPlayer
+            player = MediaPlayer.create(this, R.raw.on_click_sound).apply {
+                setOnCompletionListener { mp ->
+                    mp.release()
+                    player = null
+                }
+                setOnErrorListener { mp, what, extra ->
+                    mp.release()
+                    player = null
+                    Log.e("MediaPlayer", "Error occurred: what=$what extra=$extra")
+                    true
+                }
+                isLooping = false
+                start()
+            }
+        } catch (e: Exception) {
+            Log.e("SoundError", "Failed to play sound", e)
+            player?.release()
+            player = null
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun initListeners() {
+        val group = binding.groupOfNumbers
+        val refIds = group.referencedIds
+        for (id in refIds) {
+            findViewById<View>(id).setOnClickListener {
+                vibration()
+                checkOutputScreen(first_val=false, operator = false)
+                if (operation == Operation.EMPTY) {
+                    binding.calculatorDisplayNonMock.text =
+                        "${binding.calculatorDisplayNonMock.text.toString()}${(it as? Button)?.text.toString()}"
+                } else {
+                    binding.calculatorDisplayNonMock.text =
+                        "${binding.calculatorDisplayNonMock.text.toString()}${(it as? Button)?.text.toString()}"
+                    val extractedText = extractOperands(binding.calculatorDisplayNonMock.text.toString(), operators)
+                    if (extractedText.size == 2)
+                        secondProcessingNumber = extractedText[1].toDouble()
+                    else
+                        secondProcessingNumber = extractedText[0].toDouble()
+                }
+            }
+        }
+
+        clearDisplay()
+        val history=findViewById<Button>(R.id.HistoryButton)
+        history.setOnClickListener {
+            Log.d("CalcMainActivity","moving to Data section")
+             val intent = Intent(this@CalcMainActivity,  DataScreen::class.java)
+          //    dataScreen()
+              startActivity(intent)
+
+        }
+        binding.logButton.setOnClickListener{
+            vibration()
+            onClickSound()
+            Log.d("log",binding.calculatorDisplayNonMock.text.toString())
+            checkOutputScreen(second_val = false, check_ans=false)
+            isAvailableToOperate(Operation.log)
+        }
+
+        binding.expButton.setOnClickListener{
+            vibration()
+            onClickSound()
+            checkOutputScreen(second_val = false, check_ans=false)
+            isAvailableToOperate(Operation.e)
+        }
+
+        binding.lnButton.setOnClickListener{
+            vibration()
+            onClickSound()
+            Log.d("ln",binding.calculatorDisplayNonMock.text.toString())
+            checkOutputScreen(second_val = false, check_ans=false)
+            isAvailableToOperate(Operation.ln)
+        }
+
+        binding.factorialButton.setOnClickListener {
+            onClickSound()
+            vibration()
+            checkOutputScreen(first_val = false,second_val = false, check_ans=false)
+            isAvailableToOperate(Operation.FACT)
+        }
+
+        binding.sqrt.setOnClickListener {
+            onClickSound()
+            vibration()
+            checkOutputScreen(first_val = false,second_val = false, check_ans=false)
+            isAvailableToOperate(Operation.sqrt)
+
+        }
+
+        binding.sinButton.setOnClickListener {
+            onClickSound()
+            vibration()
+            checkOutputScreen(first_val = false,second_val = false, check_ans=false)
+            isAvailableToOperate(Operation.sin)
+        }
+
+        binding.cosButton.setOnClickListener {
+            onClickSound()
+            vibration()
+            checkOutputScreen(first_val = false,second_val = false, check_ans=false)
+            isAvailableToOperate(Operation.cos)
+        }
+
+        binding.tanButton.setOnClickListener {
+            onClickSound()
+            vibration()
+            checkOutputScreen(first_val = false,second_val = false, check_ans=false)
+            isAvailableToOperate(Operation.tan)
+        }
+
+        binding.acButton.setOnClickListener {
+            onClickSound()
+            vibration()
+            clearDisplay()
+        }
+
+        binding.permutationButton.setOnClickListener {
+            onClickSound()
+            vibration()
+            checkOutputScreen(first_val=false, check_ans=false)
+            isAvailableToOperate(Operation.nCr)
+        }
+
+        binding.powerButton.setOnClickListener {
+            vibration()
+            onClickSound()
+            checkOutputScreen(first_val=false, check_ans=false)
+            isAvailableToOperate(Operation.POW)
+        }
+
+        binding.commaButton.setOnClickListener {
+            vibration()
+            checkOutputScreen()
+            if (binding.calculatorDisplayNonMock.text.toString()
+                    .lastIndexOf(".") != binding.calculatorDisplayNonMock.text.toString().length - 1
+            ) {
+                if (operation == Operation.EMPTY) {
+                    binding.calculatorDisplayNonMock.text =
+                        "${binding.calculatorDisplayNonMock.text.toString()}."
+                } else {
+                    binding.calculatorDisplayNonMock.text =
+                        "${binding.calculatorDisplayNonMock.text.toString()}."
+                    val extractedText = extractOperands(binding.calculatorDisplayNonMock.text.toString(), operators)
+                    if (extractedText.size == 2)
+                        secondProcessingNumber = extractedText[1].toDouble()
+                    else
+                        secondProcessingNumber = extractedText[0].toDouble()
+                }
+            }
+        }
+
+        binding.divideButton.setOnClickListener {
+            vibration()
+            onClickSound()
+            checkOutputScreen(first_val=false, check_ans=false)
+            isAvailableToOperate(Operation.DVD)
+        }
+
+        binding.multiplyButton.setOnClickListener {
+            vibration()
+            onClickSound()
+            checkOutputScreen(first_val=false, check_ans=false)
+            isAvailableToOperate(Operation.MUL)
+        }
+
+        binding.minusButton.setOnClickListener {
+            vibration()
+            onClickSound()
+            checkOutputScreen(first_val = false,second_val = false, check_ans=false)
+            val displayAsString = binding.calculatorDisplayNonMock.text.toString()
+            try {
+                if (displayAsString.isNotEmpty()) {
+                    onClickOperation(Operation.MINUS)
+                } else if (displayAsString.isEmpty() && displayAsString != "-"
+                ) {
+                    binding.calculatorDisplayNonMock.text =
+                        "${binding.calculatorDisplayNonMock.text.toString()}-"
+                }
+            } catch (e: java.lang.NumberFormatException) {
+                clearDisplay()
+            }
+        }
+
+        binding.plusButton.setOnClickListener {
+            vibration()
+            onClickSound()
+            checkOutputScreen(first_val=false, check_ans=false)
+            isAvailableToOperate(Operation.PLUS)
+        }
+        binding.moduloButton.setOnClickListener{
+            vibration()
+            onClickSound()
+            checkOutputScreen(first_val=false, check_ans=false)
+            isAvailableToOperate(Operation.mod)
+        }
+        binding.inverseButton.setOnClickListener{
+            onClickSound()
+            vibration()
+            checkOutputScreen(first_val = false,second_val = false, check_ans=false)
+            isAvailableToOperate(Operation.inv)
+        }
+
+        binding.percentButton.setOnClickListener {
+            vibration()
+            onClickSound()
+            checkOutputScreen(first_val=false, check_ans=false)
+            isAvailableToOperate(Operation.PERCENT)
+        }
+
+        binding.plusAndMinusButton.setOnClickListener {
+            vibration()
+            onClickSound()
+            checkOutputScreen(screen = false, first_val = false, check_ans = false)
+
+
+
+            if (binding.calculatorDisplayNonMock.text.toString().isNotEmpty()) {
+                var value: String = binding.calculatorDisplayNonMock.text.toString()
+                var lastElement: String = value.substring(value.length - 1, value.length)
+                if (lastElement.equals("+")
+                    || lastElement.equals("^")
+                    || lastElement.equals("/")
+                    || lastElement.equals("*")
+                    || lastElement.equals("-")
+                    || lastElement.equals("%")
+                    || lastElement.equals("!")
+                    || lastElement.equals("C")
+                    || lastElement.equals("e")
+                    || lastElement.equals("√")
+                ) {
+                    clearDisplay()
+                }
+                else if (value.length >= 3 && !binding.calculatorDisplayNonMock.text.isDigitsOnly()) {
+                    Log.d("Check", value.length.toString())
+                    var value2: String = value.substring(value.length - 3, value.length)
+                    Log.d("Check", value2)
+                    if (value2.equals("sin") || value2.equals("cos") || value2.equals("tan") || value2.equals(
+                            "3.14"
+                        )
+                    ) {
+
+
+                    }
+                }
+                else if(binding.calculatorDisplayNonMock.text.isDigitsOnly()){
+                    if (binding.calculatorDisplayNonMock.text.toString()
+                            .isNotEmpty() && binding.calculatorDisplayNonMock.text.toString() != "-"
+                    ) {
+                        firstProcessingNumber =
+                            +binding.calculatorDisplayNonMock.text.toString().replace(',', '.')
+                                .toDouble() * -1
+                        binding.calculatorDisplayNonMock.text =
+                            if ((floor(firstProcessingNumber) == ceil(firstProcessingNumber)))
+                                firstProcessingNumber
+                                    .toString().replace(".0", "")
+                            else
+                                firstProcessingNumber.toString()
+                    }
+                }
+                else if(value.substring(value.length - 2, value.length).equals("ln"))
+                    clearDisplay()
+            }
+        }
+
+        binding.equalsButton.setOnClickListener {
+            onClickSound()
+            vibration()
+            equalsButtonOnclick()
+        }
+
+        binding.backspace.setOnClickListener {
+            onClickSound()
+            vibration()
+            var value : String = binding.calculatorDisplayNonMock.text.toString()
+            if (value.length==1)
+                clearDisplay()
+            if (value.length == 3 && ( value.substring(value.length - 3, value.length).equals("sin")||
+                        value.substring(value.length - 3, value.length).equals("cos")||
+                        value.substring(value.length - 3, value.length).equals("tan"))) {
+
+                    value = value.substring(0, value.length - 3)
+                    binding.calculatorDisplayNonMock.setText(value)
+                    if (value.isEmpty())
+                        clearDisplay()
+
+            }
+            else if (value.length == 4 && value.substring(value.length-4,value.length).equals("3.14")){
+                    value = value.substring(0,value.length-4)
+                binding.calculatorDisplayNonMock.setText(value)
+                if(value.isEmpty())
+                    clearDisplay()
+            }
+            else {
+                if (value.isNotEmpty()) {
+                    value = value.substring(0, value.length - 1)
+                    binding.calculatorDisplayNonMock.setText(value)
+                }
+            }
+        }
+
+        binding.piButton.setOnClickListener {
+            vibration()
+            onClickSound()
+            if(operation != Operation.EMPTY) {
+                if (firstProcessingNumber == 0.0) {
+                    binding.calculatorDisplayNonMock.setText(getOperatorSymbol(operation.toString()) + "3.14")
+                    secondProcessingNumber = 3.14
+                } else {
+                    binding.calculatorDisplayNonMock.setText(
+                        convertValue(firstProcessingNumber).toString() + getOperatorSymbol(
+                            operation.toString()
+                        ) + "3.14"
+                    )
+                    secondProcessingNumber = 3.14
+                }
+            } else {
+                binding.calculatorDisplayNonMock.setText("3.14")
+            }
+        }
+    }
+}
