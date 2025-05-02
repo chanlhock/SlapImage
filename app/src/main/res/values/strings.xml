@@ -279,7 +279,9 @@
     <string name="calculatorTwo">2</string>
     <string name="calculatorOne">1</string>
     <string name="calculatorZero">0</string>
-
+    <string name="history">History</string>
+    <string name="back">BACK</string>
+    <string name="clear">CLEAR</string>
     <string name="Night_Mode_on">Successfully switch to Night Mode.</string>
     <string name="Night_Mode_off">Successfully switch to Day Mode.</string>
 </resources>
