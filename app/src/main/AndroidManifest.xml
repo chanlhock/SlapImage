@@ -241,15 +241,6 @@
             tools:ignore="DiscouragedApi,LockedOrientationActivity"/>
         <activity android:name=".newcalculator.screens.DataScreen" />
 
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="com.mrayush.calculator"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/paths" />
-        </provider>
     </application>
 
 </manifest>
