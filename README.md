@@ -73,7 +73,8 @@ Testing is also done on a Virtual Phone that I have setup in Android Studio:
 - 22nd Apr 2025: Removed API Keys from source code and secured them in local.properties for apps build.
 - 24th Apr 2025: Modified and added a simple and feature-rich Music Player from Github. (https://github.com/HarshAndroid/MusicPlayer-Android-Kotlin)
 - 25th Apr 2025: Modified and added a tetris game fully built using Jetpack Compose source code from Github. Need to migrate from Material to Material3 to resolve build error. (https://github.com/vitaviva/compose-tetris)
-  
+- 2nd May 2025: Modified and added a new calculator from Github. (https://github.com/AyushAgnihotri2025/Calculator)
+
 ## :beetle: Unresolvable Bug in Todo List
 - [X] (Issue fixed 19th Apr 2025) When user pressed the back arrow button at the topbar of StockActivity.kt view, returning back to HomeFragment.kt view there is a large white rectangle covering lower two rows of the grid icon container. This only happens when user enters a Stock Ticker and check the stock price. However, if user uses the phone back button to return to HomeFragment.kt view, the bug doesn't happen. One other observation is that the bug doesn't happen on Android 15 phone. :eyes:
    - Resolution: Added these lines of code to navigate back to MainActivity (which hosts HomeFragment) solved the issue.
