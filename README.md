@@ -12,7 +12,8 @@
 - [Screenshots](#film_strip-screenshots)
 - [Chronology of Development Events](#hourglass_flowing_sand-chronology-of-development-events)
 - [Unresolvable Bug in Todo List](#beetle-unresolvable-bug-in-todo-list)
-- [Incomplete Todo Tasks](#plate_with_cutlery-uncomplete-todo-tasks)
+- [Incomplete Todo Tasks](#plate_with_cutlery-incomplete-todo-tasks)
+- [Buy Me a Coffee](#coffee-buy-me-a-coffee)
 - [Feedback and Suggestions](#speech_balloon-feedback-and-suggestions)
 
 ## :scroll: Description
@@ -105,7 +106,7 @@ Testing is also done on a Virtual Phone that I have setup in Android Studio:
   - :pencil:Managed to generate ONNX file from Deepseek R1 model, unsuccessful in proceeding to generate tensorflow lite model. Create a Chat Dialog activity using ONNX model instead. Model able to load but when send message gotten error response. Pending further study and debugging...
 
 ## :coffee: Buy Me a Coffee
-If you appreciate my work, do support me by...
+If you appreciate my work, do support me by...<br>
 <a href="https://www.buymeacoffee.com/chanlhock" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-yellow.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 ## :speech_balloon: Feedback and Suggestions
