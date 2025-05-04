@@ -106,9 +106,7 @@ Testing is also done on a Virtual Phone that I have setup in Android Studio:
 
 ## :coffee: Buy Me a Coffee
 If you appreciate my work, do support me by...
-<html>
-<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="chanlhock" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
-</html>
+<a href="https://www.buymeacoffee.com/chanlhock" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-yellow.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 ## :speech_balloon: Feedback and Suggestions
 For any feedback or suggestions, feel free to contact me via email:\
