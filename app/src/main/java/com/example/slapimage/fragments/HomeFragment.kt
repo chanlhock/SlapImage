@@ -65,6 +65,7 @@ import androidx.activity.OnBackPressedCallback
 import com.example.slapimage.musicplayer.MainMusicActivity
 import com.example.slapimage.tetris.TetrisActivity
 import com.example.slapimage.newcalculator.CalcMainActivity
+import com.example.slapimage.tictactoe.content.TicTacToeMainActivity
 
 class HomeFragment : Fragment() {
 
@@ -251,7 +252,7 @@ class HomeFragment : Fragment() {
                 Icon(R.drawable.icon8, "Stock"),
                 Icon(R.drawable.icon3, "DeepSeek Bot"),
                 Icon(R.drawable.icon9, "Gemini AI"),
-                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon16, "TicTacToe"),
                 Icon(R.drawable.icon10, "About")
             ),
             // Second page (example additional icons)
@@ -366,6 +367,15 @@ class HomeFragment : Fragment() {
             }
             "Calculator" -> {
                 val intent = Intent(activity, CalcMainActivity::class.java)
+                val options = ActivityOptions.makeCustomAnimation(
+                    requireContext(),
+                    R.anim.slide_up,
+                    R.anim.no_animation
+                )
+                startActivity(intent, options.toBundle())
+            }
+            "TicTacToe" -> {
+                val intent = Intent(activity, TicTacToeMainActivity::class.java)
                 val options = ActivityOptions.makeCustomAnimation(
                     requireContext(),
                     R.anim.slide_up,

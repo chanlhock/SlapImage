@@ -241,6 +241,12 @@
             tools:ignore="DiscouragedApi,LockedOrientationActivity"/>
         <activity android:name=".newcalculator.screens.DataScreen" />
 
+        <activity
+            android:name=".tictactoe.content.TicTacToeMainActivity"
+            android:configChanges="locale|fontScale|orientation|screenSize|keyboardHidden|keyboard|locale|screenLayout|screenSize|layoutDirection"
+            android:exported="true"
+            android:theme="@style/AppThemeActivity">
+        </activity>
     </application>
 
 </manifest>

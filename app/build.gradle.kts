@@ -4,7 +4,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose") // Add this line
-    id("kotlin-kapt") // Add this if using Glide annotations
+    id("kotlin-kapt") // Add this if using Glide
+    id("kotlin-parcelize")
 }
 
 // Load local.properties
@@ -189,4 +190,19 @@ dependencies {
     // Optional: Kotlin extensions for coroutines support
     implementation("com.google.android.play:review-ktx:2.0.1")
     implementation("com.google.android.gms:play-services-tasks:18.1.0")
+
+    //Tic Tac Toe
+
+    //compose material3
+    implementation("androidx.compose.material:material-icons-extended")
+    //material3
+    implementation("androidx.compose.material3:material3-window-size-class:1.3.2")
+    //compose navigation
+    implementation("androidx.navigation:navigation-compose:2.8.9")
+    //datastore
+    implementation("androidx.datastore:datastore-preferences:1.0.0") // must be version 1.0.0 else wouldn't work
+    implementation("androidx.datastore:datastore-core:1.0.0")
+
+    // Also include coroutines if not already present
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 }
