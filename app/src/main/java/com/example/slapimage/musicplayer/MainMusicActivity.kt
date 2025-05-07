@@ -1,7 +1,6 @@
 package com.example.slapimage.musicplayer
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
@@ -22,7 +21,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.slapimage.MainActivity
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.example.slapimage.databinding.ActivityMainmusicBinding
@@ -31,11 +29,6 @@ import com.example.slapimage.R
 import com.example.slapimage.musicplayer.PlayerActivity.Companion.musicService
 import androidx.core.graphics.drawable.toDrawable
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.toArgb
-import com.example.slapimage.fragments.HomeFragment
 
 class MainMusicActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainmusicBinding
