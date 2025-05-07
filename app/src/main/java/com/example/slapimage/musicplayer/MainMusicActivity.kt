@@ -1,6 +1,7 @@
 package com.example.slapimage.musicplayer
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
@@ -30,6 +31,11 @@ import com.example.slapimage.R
 import com.example.slapimage.musicplayer.PlayerActivity.Companion.musicService
 import androidx.core.graphics.drawable.toDrawable
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.toArgb
+import com.example.slapimage.fragments.HomeFragment
 
 class MainMusicActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainmusicBinding
@@ -129,8 +135,10 @@ class MainMusicActivity : AppCompatActivity() {
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 // Leave this empty to block the back button
+                showExitDialog()
             }
         })
+
 
         binding.navView.setNavigationItemSelectedListener{
             when(it.itemId)
@@ -138,23 +146,7 @@ class MainMusicActivity : AppCompatActivity() {
 //                R.id.navFeedback -> startActivity(Intent(this@MainActivity, FeedbackActivity::class.java))
                 R.id.navSettings -> startActivity(Intent(this@MainMusicActivity, SettingsActivity::class.java))
                 R.id.navExit -> {
-                    val builder = MaterialAlertDialogBuilder(this)
-                    builder.setTitle("Exit")
-                        .setMessage("Do you want to go back to Home screen?")
-                        .setPositiveButton("Yes"){ _, _ ->
-                            exitApplication()
-                            super.finish()
-                            // Navigate back to MainActivity (which hosts HomeFragment)
-                            val intent = Intent(this, MainActivity::class.java)
-                            startActivity(intent)
-                        }
-                        .setNegativeButton("No"){dialog, _ ->
-                            dialog.dismiss()
-                        }
-                    val customDialog = builder.create()
-                    customDialog.show()
-
-                    setDialogBtnBackground(this, customDialog)
+                    showExitDialog()
                 }
             }
             true
@@ -326,5 +318,34 @@ class MainMusicActivity : AppCompatActivity() {
             }
         })
         return super.onCreateOptionsMenu(menu)
+    }
+
+    private fun showExitDialog() {
+        val builder = android.app.AlertDialog.Builder(this)
+        builder.setTitle("Exit MusicPlayer")
+        builder.setMessage("Do you want to go back to Home screen?")
+
+        builder.setPositiveButton("Yes") { dialog, which ->
+            exitApplication()
+            super.finish()
+            // Navigate back to MainActivity (which hosts HomeFragment)
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        builder.setNegativeButton("No") { dialog, which ->
+            // User cancelled the dialog
+            dialog.dismiss() // Dismiss the dialog
+        }
+
+        val dialog: android.app.AlertDialog = builder.create()
+        dialog.show()
+        // Access and set text color for the buttons
+        dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)?.setTextColor(
+            ContextCompat.getColor(this, R.color.dark_blue)
+        )
+        dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE)?.setTextColor(
+            ContextCompat.getColor(this, R.color.dark_blue)
+        )
     }
 }

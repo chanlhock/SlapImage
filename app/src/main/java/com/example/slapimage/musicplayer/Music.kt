@@ -1,16 +1,14 @@
 package com.example.slapimage.musicplayer
 
 import android.content.Context
-import android.content.ServiceConnection
 import android.graphics.Bitmap
-import android.graphics.Color
 import android.media.MediaMetadataRetriever
 import androidx.appcompat.app.AlertDialog
-import com.google.android.material.color.MaterialColors
 import java.io.File
 import java.util.concurrent.TimeUnit
 import com.example.slapimage.R
 import kotlin.system.exitProcess
+import androidx.core.content.ContextCompat
 
 data class Music(
     val id: String,
@@ -96,23 +94,22 @@ fun checkPlaylist(playlist: ArrayList<Music>): ArrayList<Music> {
 }
 
 fun setDialogBtnBackground(context: Context, dialog: AlertDialog) {
-    //setting button text
+    // Access and set text color for the buttons
     dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)?.setTextColor(
-        MaterialColors.getColor(context, R.attr.dialogTextColor, Color.WHITE)
+        ContextCompat.getColor(context, R.color.white)
     )
     dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE)?.setTextColor(
-        MaterialColors.getColor(context, R.attr.dialogTextColor, Color.WHITE)
+        ContextCompat.getColor(context, R.color.white)
     )
 
     //setting button background
     dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)?.setBackgroundColor(
-        MaterialColors.getColor(context, R.attr.dialogBtnBackground, Color.RED)
+        ContextCompat.getColor(context, R.color.red)
     )
     dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE)?.setBackgroundColor(
-        MaterialColors.getColor(context, R.attr.dialogBtnBackground, Color.RED)
+        ContextCompat.getColor(context, R.color.red)
     )
 }
-
 fun getMainColor(img: Bitmap): Int {
     val newImg = Bitmap.createScaledBitmap(img, 1, 1, true)
     val color = newImg.getPixel(0, 0)
