@@ -246,7 +246,7 @@
             android:configChanges="locale|fontScale|orientation|screenSize|keyboardHidden|keyboard|locale|screenLayout|screenSize|layoutDirection"
             android:exported="true"
             android:windowSoftInputMode="adjustResize"
-            android:theme="@style/AppThemeActivity">
+            android:theme="@style/AppTheme">
         </activity>
     </application>
 

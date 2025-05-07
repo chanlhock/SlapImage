@@ -8,7 +8,9 @@ import androidx.core.view.WindowCompat
 internal class TicTacToeMainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { MainNavigation() }
+        setContent {
+            MainNavigation()
+        }
         WindowCompat.setDecorFitsSystemWindows(window, false)
     }
 }

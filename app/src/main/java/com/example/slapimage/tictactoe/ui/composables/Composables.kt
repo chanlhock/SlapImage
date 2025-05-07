@@ -288,8 +288,8 @@ fun AnimatedAppIcon(
         while (isAnimating) {
             animate(
                 typeConverter = Dp.VectorConverter,
-                initialValue = 64.dp,
-                targetValue = 56.dp,
+                initialValue = 64.dp,       // 64
+                targetValue = 56.dp,  //56
                 animationSpec = infiniteRepeatable(
                     animation = tween(1000),
                     repeatMode = RepeatMode.Reverse
@@ -301,8 +301,8 @@ fun AnimatedAppIcon(
 
     Icon(
         painter = painterResource(R.drawable.ic_launcher_foreground),
-        contentDescription = stringResource(R.string.app_name),
-        tint = MaterialTheme.colorScheme.onSurface,
+        contentDescription = stringResource(R.string.tictactoe),
+        tint = Color.White, //MaterialTheme.colorScheme.onSurface,
         modifier = Modifier.size(size)
     )
 }

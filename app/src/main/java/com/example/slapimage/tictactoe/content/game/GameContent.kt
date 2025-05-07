@@ -70,8 +70,7 @@ import com.example.slapimage.tictactoe.ui.composables.isFontScaleNormal
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GameContent(
-    onNavigateToSettings: () -> Unit,
-    onNavigateToAbout: () -> Unit
+    onNavigateToSettings: () -> Unit
 ) {
     LockScreenOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
@@ -82,7 +81,7 @@ fun GameContent(
     }
 
     Scaffold(
-        topBar = { MainTopAppBar(scrollBehavior, onNavigateToSettings, onNavigateToAbout) },
+        topBar = { MainTopAppBar(scrollBehavior, onNavigateToSettings) },
         bottomBar = {
             BottomAppBar(
                 actions = {
@@ -117,13 +116,14 @@ fun GameContent(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(contentPadding)
-                    .verticalScroll(rememberScrollState()) // Move scroll here
                     .padding(horizontal = 16.dp),
                 content = {
                     Column(
                         verticalArrangement = Arrangement.spacedBy(16.dp),
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier
+                            .fillMaxSize()
+                            .verticalScroll(rememberScrollState()) // Move scroll here
                             .pointerInput(Unit) {
                                 detectVerticalDragGestures { change, dragAmount ->
                                     change.consume() // Prevent conflict with game board
