@@ -62,7 +62,7 @@
         <item name="android:fontFamily">sans-serif-medium</item> <!-- Optional: Change font family -->
         <!-- Define colors for bottom navigation  -->
     </style>
-    <style name="Theme.MyApp.Mp3Player" parent="Theme.Material3.DayNight">
+    <style name="Theme.MyApp.Mp3Player" parent="Theme.MaterialComponents.DayNight">
         <!-- Your theme attributes -->
         <item name="colorPrimary">@color/dark_blue</item>
         <item name="colorPrimaryVariant">@color/white</item>

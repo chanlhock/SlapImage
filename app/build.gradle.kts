@@ -80,7 +80,7 @@ android {
 dependencies {
     // Compose dependencies
     implementation("androidx.compose.ui:ui:1.7.8")
-    implementation("androidx.compose.material:material:1.7.8")
+   // implementation("androidx.compose.material:material:1.7.8")
     implementation("androidx.compose.ui:ui-tooling-preview:1.7.8")
     implementation("androidx.activity:activity-compose:1.10.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
@@ -90,7 +90,7 @@ dependencies {
     // Material 3 dependency
     implementation("androidx.compose.material3:material3:1.3.2")
     implementation("androidx.core:core-splashscreen:1.0.1")
-    implementation("com.google.android.material:material:1.12.0")
+   // implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.8.9")
     implementation("androidx.navigation:navigation-ui-ktx:2.8.9")
 
@@ -128,7 +128,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
 
     // Material Components
-    implementation("com.google.android.material:material:1.12.0")
+    //implementation("com.google.android.material:material:1.12.0")
 
     // RecyclerView
     implementation("androidx.recyclerview:recyclerview:1.4.0")
@@ -151,16 +151,6 @@ dependencies {
     implementation("io.noties.markwon:core:4.6.2")
 
     // Music Player
-    // Pull to Refresh
-    //implementation("libs.legacy.support")
-    // Glide for image loading
-    //implementation("libs.glide")
-    // For storing objects in shared preferences
-    //implementation("libs.gson")
-    // Notification
-    //implementation("libs.androidx.media")
-    // Vertical Seekbar
-    //implementation("libs.verticalseekbar")
     implementation("com.github.lukelorusso:VerticalSeekBar:1.2.7")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("androidx.media:media:1.6.0")
@@ -169,7 +159,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
     implementation("androidx.compose.ui:ui-tooling:1.7.8")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.7.8")
-    implementation ("androidx.compose.material3:material3:1.3.2")
+   // implementation ("androidx.compose.material3:material3:1.3.2")
 
     // New Calculator
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
@@ -183,22 +173,24 @@ dependencies {
     implementation("com.google.android.play:app-update:2.1.0")
 
     // Play Core KTX for coroutines support (optional)
-    implementation("com.google.android.play:app-update-ktx:2.1.0")
+   // implementation("com.google.android.play:app-update-ktx:2.1.0")
     // Play Core Review Library (for in-app reviews)
-    implementation("com.google.android.play:review:2.0.1")
+    //implementation("com.google.android.play:review:2.0.1")
 
     // Optional: Kotlin extensions for coroutines support
-    implementation("com.google.android.play:review-ktx:2.0.1")
-    implementation("com.google.android.gms:play-services-tasks:18.1.0")
+   // implementation("com.google.android.play:review-ktx:2.0.1")
+ //   implementation("com.google.android.gms:play-services-tasks:18.1.0")
 
     //Tic Tac Toe
 
     //compose material3
-    implementation("androidx.compose.material:material-icons-extended")
+    implementation("androidx.compose.material:material-icons-extended:1.7.8") // must be version 1.6.4 else wouldn't work
     //material3
-    implementation("androidx.compose.material3:material3-window-size-class:1.3.2")
+    implementation("androidx.compose.material3:material3-window-size-class:1.3.2") // must be version 1.2.1 else wouldn't work
     //compose navigation
     implementation("androidx.navigation:navigation-compose:2.8.9")
+ //   implementation("androidx.compose.material3:material3:1.2.1")
+    implementation("androidx.compose.foundation:foundation:1.6.4")
     //datastore
     implementation("androidx.datastore:datastore-preferences:1.0.0") // must be version 1.0.0 else wouldn't work
     implementation("androidx.datastore:datastore-core:1.0.0")
