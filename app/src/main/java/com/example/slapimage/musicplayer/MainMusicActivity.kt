@@ -3,7 +3,6 @@ package com.example.slapimage.musicplayer
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.res.Configuration
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -28,7 +27,7 @@ import java.io.File
 import com.example.slapimage.R
 import com.example.slapimage.musicplayer.PlayerActivity.Companion.musicService
 import androidx.core.graphics.drawable.toDrawable
-import android.widget.TextView
+import androidx.core.net.toUri
 
 class MainMusicActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainmusicBinding
@@ -40,10 +39,10 @@ class MainMusicActivity : AppCompatActivity() {
         lateinit var musicListSearch : ArrayList<Music>
         var search: Boolean = false
         var themeIndex: Int = 0
-        val currentTheme = arrayOf(R.style.coolPink, R.style.coolBlue, R.style.coolPurple, R.style.coolGreen, R.style.coolBlack)
-        val currentThemeNav = arrayOf(R.style.coolPinkNav, R.style.coolBlueNav, R.style.coolPurpleNav, R.style.coolGreenNav,
+        val currentTheme = arrayOf(R.style.coolPink, R.style.coolBlue, R.style.coolBlack)
+        val currentThemeNav = arrayOf(R.style.coolPinkNav, R.style.coolBlueNav,
             R.style.coolBlackNav)
-        val currentGradient = arrayOf(R.drawable.gradient_pink, R.drawable.gradient_blue, R.drawable.gradient_purple, R.drawable.gradient_green,
+        val currentGradient = arrayOf(R.drawable.gradient_pink, R.drawable.gradient_blue,
         R.drawable.gradient_black)
         var sortOrder: Int = 0
         val sortingList = arrayOf(MediaStore.Audio.Media.DATE_ADDED + " DESC", MediaStore.Audio.Media.TITLE,
@@ -71,20 +70,12 @@ class MainMusicActivity : AppCompatActivity() {
             // Set background color
             val colorInt = ContextCompat.getColor(this@MainMusicActivity, R.color.cool_blue) // Resolve color resource to a color int
             setBackgroundDrawable(colorInt.toDrawable()) // Convert color int to ColorDrawable
-            val actionBarTitleId = resources.getIdentifier("action_bar_title", "id", "android")
-            val actionBarTitle = findViewById<TextView>(actionBarTitleId)
-            actionBarTitle?.setTextColor(ContextCompat.getColor(this@MainMusicActivity, R.color.white))
 
-            // Set text color
-            //val textColor = ContextCompat.getColor(this@MainMusicActivity, R.color.white)
-            //val titleId = resources.getIdentifier("action_bar_title", "id", "android")
-            //val titleTextView = findViewById<TextView>(titleId)
-            //titleTextView?.setTextColor(ContextCompat.getColor(this@MainMusicActivity, R.color.white))
         }
 
         //checking for dark theme
-        if(themeIndex == 4 &&  resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_NO)
-            Toast.makeText(this, "Black Theme Works Best in Dark Mode!!", Toast.LENGTH_LONG).show()
+      //  if(themeIndex == 4 &&  resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_NO)
+       //     Toast.makeText(this, "Black Theme Works Best in Dark Mode!!", Toast.LENGTH_LONG).show()
 
         // Keep the screen on for this activity
         window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
@@ -136,7 +127,6 @@ class MainMusicActivity : AppCompatActivity() {
         binding.navView.setNavigationItemSelectedListener{
             when(it.itemId)
             {
-//                R.id.navFeedback -> startActivity(Intent(this@MainActivity, FeedbackActivity::class.java))
                 R.id.navSettings -> startActivity(Intent(this@MainMusicActivity, SettingsActivity::class.java))
                 R.id.navExit -> {
                     showExitDialog()
@@ -235,7 +225,8 @@ class MainMusicActivity : AppCompatActivity() {
                     val pathC = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA))
                     val durationC = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION))
                     val albumIdC = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)).toString()
-                    val uri = Uri.parse("content://media/external/audio/albumart")
+                    //val uri = Uri.parse("content://media/external/audio/albumart")
+                    val uri = "content://media/external/audio/albumart".toUri()
                     val artUriC = Uri.withAppendedPath(uri, albumIdC).toString()
 
                     // Only add the music file if the duration is greater than 0
@@ -262,14 +253,15 @@ class MainMusicActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        if(!PlayerActivity.isPlaying && PlayerActivity.musicService != null){
+        if(!PlayerActivity.isPlaying && musicService != null){
             exitApplication()
         }
     }
 
     override fun onResume() {
         super.onResume()
-
+        // Keep the screen on for this activity
+        window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         //for storing favourites data using shared preferences
         val editor = getSharedPreferences("FAVOURITES", MODE_PRIVATE).edit()
         val jsonString = GsonBuilder().create().toJson(FavouriteActivity.favouriteSongs)

@@ -3,7 +3,7 @@
     <dimen name="banner_height">280dp</dimen>
     <dimen name="photo_image_height">450dp</dimen>
     <dimen name="photo_image_width">300dp</dimen>
-    <dimen name="play_image_height">480dp</dimen>
+    <dimen name="play_image_height">460dp</dimen>
     <dimen name="play_image_width">350dp</dimen>
     <dimen name="play_image_margin">680dp</dimen>
     <dimen name="default_padding">16dp</dimen>

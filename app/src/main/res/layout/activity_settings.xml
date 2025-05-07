@@ -35,21 +35,7 @@
             android:layout_weight="1"
             android:src="@drawable/circle_icon"
             android:tint="@color/cool_blue"/>
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/coolPurpleTheme"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/circle_icon"
-            android:tint="@color/purple_500"/>
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/coolGreenTheme"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/circle_icon"
-            android:tint="@color/cool_green"/>
-        <com.google.android.material.imageview.ShapeableImageView
+         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/coolBlackTheme"
             android:layout_width="0dp"
             android:layout_height="match_parent"
