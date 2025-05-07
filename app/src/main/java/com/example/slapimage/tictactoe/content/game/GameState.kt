@@ -36,7 +36,6 @@ import kotlinx.coroutines.launch
 import kotlin.random.Random
 import kotlin.random.nextInt
 import kotlin.random.nextLong
-import kotlinx.coroutines.flow.first
 
 class GameState(
     private val hapticFeedback: HapticFeedback,
@@ -308,41 +307,42 @@ class GameState(
     }
 
     fun undo() {
-        if (lastPlayedCells.value.isNotEmpty()) {
-            val last = lastPlayedCells.value.last()
-            val mutatedRow = gameCells.value[last.x].toMutableList()
-            mutatedRow[last.y] = last.copy(owner = null)
-            val mutatedGameCells = gameCells.value.toMutableList()
-            mutatedGameCells[last.x] = mutatedRow
-            gameCells.value = mutatedGameCells
+            if (lastPlayedCells.value.isNotEmpty()) {
+                val last = lastPlayedCells.value.last()
+                val mutatedRow = gameCells.value[last.x].toMutableList()
+                mutatedRow[last.y] = last.copy(owner = null)
+                val mutatedGameCells = gameCells.value.toMutableList()
+                mutatedGameCells[last.x] = mutatedRow
+                gameCells.value = mutatedGameCells
 
-            lastPlayedCells.value = buildList {
-                val new = lastPlayedCells.value.toMutableList()
-                new.removeLast()
-                addAll(new)
-            }
-            prepareGameLogic()
-            winner.value = null
-            isGameFinished.value = false
-            isGameDrew.value = false
-            winnerCells.value = emptyList()
+                lastPlayedCells.value = buildList {
+                    val new = lastPlayedCells.value.toMutableList()
+                    //new.removeLast()
+                    new.removeAt(new.size - 1)
+                    addAll(new)
+                }
+                prepareGameLogic()
+                winner.value = null
+                isGameFinished.value = false
+                isGameDrew.value = false
+                winnerCells.value = emptyList()
 
-            if (isAiTurnToPlay())
-                playCellByAi()
-
-            if (gamePlayersType.value == GamePlayersType.PvP)
-                changePlayer()
-
-            if (lastPlayedCells.value.isEmpty()) {
-                val first = players.value.first()
-                val second = players.value.last()
-
-                currentPlayer.value = if (first.diceIndex > second.diceIndex) first else second
                 if (isAiTurnToPlay())
                     playCellByAi()
+
+                if (gamePlayersType.value == GamePlayersType.PvP)
+                    changePlayer()
+
+                if (lastPlayedCells.value.isEmpty()) {
+                    val first = players.value.first()
+                    val second = players.value.last()
+
+                    currentPlayer.value = if (first.diceIndex > second.diceIndex) first else second
+                    if (isAiTurnToPlay())
+                        playCellByAi()
+                }
             }
         }
-    }
 }
 
 @Composable

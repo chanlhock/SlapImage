@@ -8,6 +8,8 @@ import androidx.compose.animation.scaleOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectVerticalDragGestures
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,6 +29,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.twotone.Undo
 import androidx.compose.material.icons.twotone.Games
+//import androidx.compose.material3.ripple.rememberRippleIndication
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -45,6 +48,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -113,14 +117,19 @@ fun GameContent(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(contentPadding)
+                    .verticalScroll(rememberScrollState()) // Move scroll here
                     .padding(horizontal = 16.dp),
                 content = {
                     Column(
                         verticalArrangement = Arrangement.spacedBy(16.dp),
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier
-                            .padding(vertical = 16.dp)
-                            .verticalScroll(rememberScrollState()),
+                            .pointerInput(Unit) {
+                                detectVerticalDragGestures { change, dragAmount ->
+                                    change.consume() // Prevent conflict with game board
+                                }
+                            }
+                            .padding(vertical = 16.dp),
                         content = {
                             AnimatedVisibility(
                                 visible = gameState.isGameStarted.value,
@@ -282,7 +291,8 @@ private fun GameBoard(
                         hasOwner = cell.owner != null,
                         onClick = { onItemClick(cell) },
                         backgroundColor = colors.first,
-                        contentColor = colors.second
+                        contentColor = colors.second,
+                        isGameFinished = isGameFinished
                     )
                 }
             }
@@ -290,6 +300,7 @@ private fun GameBoard(
     )
 }
 
+@Suppress("DEPRECATION")
 @Composable
 private fun DoozItem(
     shape: Shape,
@@ -298,6 +309,7 @@ private fun DoozItem(
     hasOwner: Boolean,
     backgroundColor: Color,
     contentColor: Color,
+    isGameFinished: Boolean, // Add this parameter
     onClick: () -> Unit
 ) {
     Box(
@@ -306,8 +318,14 @@ private fun DoozItem(
             .clip(RoundedCornerShape(5.dp))
             .background(backgroundColor)
             .clickable(
-                enabled = clickable,
-                onClick = onClick
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null,
+                enabled = clickable && !isGameFinished,
+                onClick = {
+                    if (clickable && !isGameFinished) {
+                        onClick()
+                    }
+                }
             ),
         contentAlignment = Alignment.Center,
         content = {

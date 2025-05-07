@@ -35,7 +35,7 @@ import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.twotone.ArrowBack
-import androidx.compose.material.ripple.rememberRipple
+//import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
@@ -79,6 +79,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.slapimage.R
 
+@Suppress("DEPRECATION")
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Ripple(
@@ -90,8 +91,8 @@ fun Ripple(
     Box(
         content = content,
         modifier = modifier.combinedClickable(
-            //interactionSource = remember { MutableInteractionSource() },
-           // indication = rememberRipple(),
+            interactionSource = remember { MutableInteractionSource() },
+            indication = null,      //rememberRipple(),
             onClick = onClick,
             onLongClick = onLongClick
         )

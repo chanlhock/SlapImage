@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.ContentAlpha
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.runtime.Composable
@@ -60,8 +59,8 @@ internal fun PlayerCard(
     firstPlayerPolicy: FirstPlayerPolicy,
     isCurrentPlayer: Boolean = true
 ) {
-    val alpha = if (isCurrentPlayer) ContentAlpha.high else ContentAlpha.disabled
-
+    //val alpha = if (isCurrentPlayer) ContentAlpha.high else ContentAlpha.disabled
+    val alpha = if (isCurrentPlayer) 1f else 0.38f
     OutlinedCard(
         modifier = modifier.alpha(alpha)
     ) {
