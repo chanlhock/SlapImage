@@ -31,7 +31,7 @@ internal fun MainNavigation() {
         val savedTheme = dataStore.getString(Constants.theme)
         theme = try {
             ThemeSetting.valueOf(savedTheme ?: ThemeSetting.System.name)
-        } catch (e: IllegalArgumentException) {
+        } catch (_: IllegalArgumentException) {
             ThemeSetting.System // Fallback to default if invalid value is stored
         }
     }
@@ -53,8 +53,7 @@ internal fun MainNavigation() {
                     builder = {
                         composable(Nav.Routes.game) {
                             GameContent(
-                                onNavigateToSettings = { navController.navigate(Nav.Routes.settings) },
-                                onNavigateToAbout = { navController.navigate(Nav.Routes.about) }
+                                onNavigateToSettings = { navController.navigate(Nav.Routes.settings) }
                             )
                         }
 
@@ -64,8 +63,6 @@ internal fun MainNavigation() {
                                 onBackClick = { navController.popBackStack() }
                             )
                         }
-
-                        composable(Nav.Routes.about) { AboutContent(onBackClick = { navController.popBackStack() }) }
                     }
                 )
             }
