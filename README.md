@@ -25,6 +25,7 @@ Basically it allows me to personally experience the recent hype of Vibe Coding a
 
 ## :gift: APK Download
 Try it yourself and I would love to hear your feedback :smiley: :mouse:
+(https://github.com/chanlhock/SlapImage/releases/tag/v1.0.0-beta.1)
 
 ## :computer: Development Platform
 SlapImage is developed using:
