@@ -25,8 +25,8 @@ This is my attempt to create a utility Android Apps which is feature-rich and co
 Basically it allows me to personally experience the recent hype of Vibe Coding and whether AI can actually realistically replace software engineers? :grin: 
 
 ## :gift: APK Download
-Try it yourself and I would love to hear your feedback :smiley: :mouse:
-[SlapImage-v1.0.0-beta.1.apk](https://github.com/chanlhock/SlapImage/releases/tag/v1.0.0-beta.1)
+Try it yourself and I would love to hear your feedback :smiley: :mouse: <br>
+Download [SlapImage-v1.0.0-beta.1.apk](https://github.com/chanlhock/SlapImage/releases/tag/v1.0.0-beta.1)
 
 ## :computer: Development Platform
 SlapImage is developed using:
