@@ -197,4 +197,5 @@ dependencies {
 
     // Also include coroutines if not already present
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
 }
