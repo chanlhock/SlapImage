@@ -114,7 +114,7 @@ If you appreciate my work, do support me by...<br>
 <a href="https://www.buymeacoffee.com/chanlhock" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-yellow.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 ## :page_with_curl: License
-See the GNU General Public License for more details.
+See the [GNU General Public License](LICENSE) for more details.
 * [Third-Party License](THIRDPARTY.md)
 
 
