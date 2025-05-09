@@ -22,8 +22,9 @@
 <p float="left">
  <img src="app/src/main/res/drawable/slapimage_yellow.png" width="200">
 </p>
-This is my attempt to create a utility Android Apps which is feature-rich and contains useful functions using Android Studio Meerkat with the assistance of [DeepSeek](https://www.deepseek.com/) . Some of graphics are generated with [Doubao 豆包](https://www.doubao.com/chat/). <br>
-Basically it allows me to personally experience the recent hype of Vibe Coding and whether AI can actually realistically replace software engineers? :grin: 
+<p>This is my attempt to create a utility Android Apps which is feature-rich and contains useful functions using Android Studio Meerkat with the assistance of DeepSeek (https://www.deepseek.com/). </p>
+<p>Some of graphics are generated with Doubao 豆包 (https://www.doubao.com/chat/). </p>
+<p>Basically it allows me to personally experience the recent hype of Vibe Coding and whether AI can actually realistically replace software engineers? :grin: </p>
 
 ## :gift: APK Download
 Try it yourself and I would love to hear your feedback :smiley: :mouse: <br>
