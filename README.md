@@ -115,6 +115,8 @@ If you appreciate my work, do support me by...<br>
 
 ## :page_with_curl: License
 See the GNU General Public License for more details.
+* [Third-Party License][THIRDPARTY.md]
+
 
 ## :speech_balloon: Feedback and Suggestions
 For any feedback or suggestions, feel free to contact me via email:\
