@@ -113,6 +113,10 @@ Testing is also done on a Virtual Phone that I have setup in Android Studio:
 If you appreciate my work, do support me by...<br>
 <a href="https://www.buymeacoffee.com/chanlhock" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-yellow.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
+## Changelog
+
+- [Releases](https://github.com/chanlhock/SlapImage/releases)
+  
 ## :page_with_curl: License
 ```
 SlapImage is licensed under the GNU General Public License v3.0 
