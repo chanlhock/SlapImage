@@ -114,15 +114,14 @@ If you appreciate my work, do support me by...<br>
 <a href="https://www.buymeacoffee.com/chanlhock" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-yellow.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 ## :page_with_curl: License
-'''
+```
 SlapImage is licensed under the GNU General Public License v3.0 
 Permissions of this strong copyleft license are conditioned on making  
 available complete source code of licensed works and modifications,  
 which include larger works using a licensed work, under the same  
 license. Copyright and license notices must be preserved. Contributors  
 provide an express grant of patent rights.
-'''
-
+```
 See the [GNU General Public License](LICENSE.txt) for more details.
 * [Third-Party License](THIRDPARTY.md)
 
