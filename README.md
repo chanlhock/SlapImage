@@ -96,7 +96,7 @@ Testing is also done on a Virtual Phone that I have setup in Android Studio:
    - Resolution: The key improvements are: (refer to GalleryActivity.kt for more details)
      - Better null safety checks
      - Huawei-specific MediaStore handling
-```
+```kotlin
     val uri = if (Build.MANUFACTURER.equals("huawei", ignoreCase = true)) {
         // Huawei specific URI
         MediaStore.Images.Media.getContentUri("external")
