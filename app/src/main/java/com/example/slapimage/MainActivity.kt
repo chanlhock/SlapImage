@@ -9,10 +9,12 @@
 # Date			Author          Notes
 # 16/03/2025	Bernard Chan   Initial release
 #
-# This program is free software; you can redistribute it and/or modify it
-# under the terms of the GNU Lesser General Public License as published by the
-# Free Software Foundation; either version 2.1 of the License, or (at your
-# option) any later version.
+# SlapImage is licensed under the GNU General Public License v3.0
+# Permissions of this strong copyleft license are conditioned on making
+# available complete source code of licensed works and modifications,
+# which include larger works using a licensed work, under the same
+# license. Copyright and license notices must be preserved. Contributors
+# provide an express grant of patent rights.
 ##################################################################################################################
 **/
 package com.example.slapimage
