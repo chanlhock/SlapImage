@@ -33,6 +33,8 @@ android {
         // Add the API_KEY to BuildConfig
         buildConfigField("String", "TWELVEDATA_API_KEY", "$apiKey")
         buildConfigField("String", "GEMINI_API_KEY", "$apiKeygemini")
+        // Flag to set the build to not include all banners photo to reduce size
+        buildConfigField("boolean","MINIMAL_BUILDSIZE","true")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
@@ -40,6 +42,8 @@ android {
     }
 
     buildTypes {
+        debug  {
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(

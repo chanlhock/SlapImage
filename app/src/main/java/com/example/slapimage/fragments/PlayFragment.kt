@@ -33,6 +33,7 @@ import com.example.slapimage.gridiconactivity.SwipeDirection
 import com.example.slapimage.gridiconactivity.addSwipeListener
 import android.graphics.Color
 import androidx.activity.OnBackPressedCallback
+import com.example.slapimage.BuildConfig
 
 class PlayFragment : Fragment() {
     private lateinit var btnPlayVideo: Button
@@ -79,16 +80,23 @@ class PlayFragment : Fragment() {
         R.drawable.gif7
     )
 
-    private val gifList5 = listOf(
-        R.drawable.gif3,
-        R.drawable.gif6,
-        R.drawable.gif7,
-        R.drawable.gif4,
-        R.drawable.gif5,
-        R.drawable.gif10,
-        R.drawable.gif15
-    )
-
+    private val gifList5 = when {
+        BuildConfig.MINIMAL_BUILDSIZE == true -> listOf(
+            R.drawable.gif3,
+            R.drawable.gif6,
+            R.drawable.gif7,
+            R.drawable.gif4
+        )
+        else -> listOf(
+            R.drawable.gif3,
+            R.drawable.gif6,
+            R.drawable.gif7,
+            R.drawable.gif4,
+            R.drawable.gif5,
+            R.drawable.gif10,
+            R.drawable.gif15
+        )
+    }
     private var currentGifIndex = 0
     private var currentGifList = gifList3 // Start with 3 items
 

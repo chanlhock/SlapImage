@@ -19,6 +19,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.example.slapimage.BuildConfig
 import com.example.slapimage.R
 import kotlin.math.abs
 
@@ -27,8 +28,23 @@ class PhotoFragment : Fragment() {
     private lateinit var btnDisplayPhoto: Button
     private lateinit var ivLogo: ImageView
     private var selectedImageUri: Uri? = null
-    private val photoResources: List<Int> by lazy {
+    /*private val photoResources: List<Int> by lazy {
         resources.obtainTypedArray(R.array.photo_resources).run {
+            val list = (0 until length()).map { getResourceId(it, 0) }
+            recycle()
+            list
+        }
+    }*/
+    private val photoResources: List<Int> by lazy {
+        // Determine which array to use based on BuildConfig
+        val arrayResId = if (BuildConfig.MINIMAL_BUILDSIZE) {
+            R.array.photo_resources_minimal
+        } else {
+            R.array.photo_resources
+        }
+
+        // Load the appropriate array
+        resources.obtainTypedArray(arrayResId).run {
             val list = (0 until length()).map { getResourceId(it, 0) }
             recycle()
             list

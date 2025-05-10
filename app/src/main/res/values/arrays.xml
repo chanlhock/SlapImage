@@ -20,4 +20,16 @@
         <item>@drawable/photo19</item>
         <!-- Add more photos as needed -->
     </array>
+    <array name="photo_resources_minimal">
+        <item>@drawable/photo1</item>
+        <item>@drawable/photo2</item>
+        <item>@drawable/photo3</item>
+        <item>@drawable/photo4</item>
+        <item>@drawable/photo5</item>
+        <item>@drawable/photo6</item>
+        <item>@drawable/photo7</item>
+        <item>@drawable/photo12</item>
+        <item>@drawable/photo19</item>
+        <!-- Add more photos as needed -->
+    </array>
 </resources>
