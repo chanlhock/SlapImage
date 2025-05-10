@@ -14,17 +14,21 @@
 - [Unresolvable Bug in Todo List](#beetle-unresolvable-bug-in-todo-list)
 - [Incomplete Todo Tasks](#plate_with_cutlery-incomplete-todo-tasks)
 - [Buy Me a Coffee](#coffee-buy-me-a-coffee)
+- [Changelog](#new-changelog)
+- [License](#page_with_curl-license)
 - [Feedback and Suggestions](#speech_balloon-feedback-and-suggestions)
 
 ## :scroll: Description
 <p float="left">
  <img src="app/src/main/res/drawable/slapimage_yellow.png" width="200">
 </p>
-This is my attempt to create a utility Android Apps which is feature-rich and contains useful functions using Android Studio Meerkat with the assistance of DeepSeek (https://www.deepseek.com/). Some of graphics are generated with Doubao 豆包 (https://www.doubao.com/chat/). <br>
-Basically it allows me to personally experience the recent hype of Vibe Coding and whether AI can actually realistically replace software engineers? :grin: 
+<p>This is my attempt to create a utility Android Apps which is feature-rich and contains useful functions using Android Studio Meerkat with the assistance of DeepSeek (https://www.deepseek.com/). </p>
+<p>Some of graphics are generated with Doubao 豆包 (https://www.doubao.com/chat/). </p>
+<p>Basically it allows me to personally experience the recent hype of Vibe Coding and whether AI can actually realistically replace software engineers? :grin: </p>
 
 ## :gift: APK Download
-Try it yourself and I would love to hear your feedback :smiley: :mouse:
+Try it yourself and I would love to hear your feedback :smiley: :mouse: <br>
+- Download [SlapImage-v1.0.0-beta.1.apk](https://github.com/chanlhock/SlapImage/releases/tag/v1.0.0-beta.1)
 
 ## :computer: Development Platform
 SlapImage is developed using:
@@ -75,12 +79,13 @@ Testing is also done on a Virtual Phone that I have setup in Android Studio:
 - 24th Apr 2025: Modified and added a simple and feature-rich Music Player from Github. (https://github.com/HarshAndroid/MusicPlayer-Android-Kotlin)
 - 25th Apr 2025: Modified and added a tetris game fully built using Jetpack Compose source code from Github. Need to migrate from Material to Material3 to resolve build error. (https://github.com/vitaviva/compose-tetris)
 - 2nd May 2025: Modified and added a new calculator from Github. (https://github.com/AyushAgnihotri2025/Calculator)
-- 7th May 2025: Successfully modified, fixed bugs and added a TicTacToe from Github. (https://github.com/yamin8000/Dooz ) 
+- 7th May 2025: Successfully modified, fixed bugs and added a TicTacToe from Github. (https://github.com/yamin8000/Dooz )
+- 8th May 2025: Release the initial stable version of SlapImage v1.0.0-beta.1 apk. :tada:
 
 ## :beetle: Unresolvable Bug in Todo List
 - [X] (Issue fixed 19th Apr 2025) When user pressed the back arrow button at the topbar of StockActivity.kt view, returning back to HomeFragment.kt view there is a large white rectangle covering lower two rows of the grid icon container. This only happens when user enters a Stock Ticker and check the stock price. However, if user uses the phone back button to return to HomeFragment.kt view, the bug doesn't happen. One other observation is that the bug doesn't happen on Android 15 phone. :eyes:
    - Resolution: Added these lines of code to navigate back to MainActivity (which hosts HomeFragment) solved the issue.
-```
+```kotlin
      toolbar.setNavigationOnClickListener {
             // Navigate back to MainActivity (which hosts HomeFragment)
             val intent = Intent(this, MainActivity::class.java)
@@ -91,7 +96,7 @@ Testing is also done on a Virtual Phone that I have setup in Android Studio:
    - Resolution: The key improvements are: (refer to GalleryActivity.kt for more details)
      - Better null safety checks
      - Huawei-specific MediaStore handling
-```
+```kotlin
     val uri = if (Build.MANUFACTURER.equals("huawei", ignoreCase = true)) {
         // Huawei specific URI
         MediaStore.Images.Media.getContentUri("external")
@@ -109,6 +114,22 @@ Testing is also done on a Virtual Phone that I have setup in Android Studio:
 ## :coffee: Buy Me a Coffee
 If you appreciate my work, do support me by...<br>
 <a href="https://www.buymeacoffee.com/chanlhock" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-yellow.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+
+## :new: Changelog
+- [Releases](https://github.com/chanlhock/SlapImage/releases)
+  
+## :page_with_curl: License
+```
+SlapImage is licensed under the GNU General Public License v3.0 
+Permissions of this strong copyleft license are conditioned on making  
+available complete source code of licensed works and modifications,  
+which include larger works using a licensed work, under the same  
+license. Copyright and license notices must be preserved. Contributors  
+provide an express grant of patent rights.
+```
+See the [GNU General Public License](LICENSE.txt) for more details.
+* [Third-Party License](THIRDPARTY.md)
+
 
 ## :speech_balloon: Feedback and Suggestions
 For any feedback or suggestions, feel free to contact me via email:\
