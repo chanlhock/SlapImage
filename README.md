@@ -43,13 +43,13 @@ I have tested mostly my code on:
 - Honor 200 mobile phone running Android 15 6.78" display (1224 x 2700 pixels).
 - Huawei Mate 30 mobile phone running EMUI 12.0.0 (Android 10) 6.62" display (1080 x 2340 pixels)
   
-In addition I have also tested to some extent on:
-- Huawei Matepad 12 X Tablet running on Harmony OS 4.2.0 (Android 12) 12" display (1840 x 2800 pixels)\
-  [Note: an attempt to develop the apps to cover larger screen size]
-
 Testing is also done on a Virtual Phone that I have setup in Android Studio:
 - Virtual phone using Pixel 4 skin Android 10 (API 29) 5.7" display (1080 x 2280 pixels)
 - Virtual Medium Tablet Android 10 (API 29) 10.05" display (1600 x 2560 pixels)
+
+In addition I have also tested to some extent on:
+- Huawei Matepad 12 X Tablet running on Harmony OS 4.2.0 (Android 12) 12" display (1840 x 2800 pixels)\
+  [Note: an attempt to develop the apps to cover larger screen size]
 
 ## :film_strip: Screenshots
 <p float="left">
