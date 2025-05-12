@@ -19,57 +19,72 @@
 ##################################################################################################################
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.slapimage">
+    xmlns:tools="http://schemas.android.com/tools">
+   <!-- package="com.example.slapimage"> -->
 
-    <!-- For Android 12 and below -->
+    <!-- For Android 12 and below
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
-
+-->
     <!-- For Android 13 and above -->
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
 
+    <!-- Add the new photo picker permission -->
+    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" />
+
     <!-- Notification-->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-
-    <!-- Notification Permission for Android 14 -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- New Calculator -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <queries>
         <intent>
             <action android:name="android.intent.action.OPEN_DOCUMENT" />
         </intent>
+      <!--  //<intent>
+        //    <action android:name="android.intent.action.PICK" />
+        //</intent>
+        //<intent>
+        //    <action android:name="android.intent.action.GET_CONTENT" />
+        //</intent>  -->
         <intent>
-            <action android:name="android.intent.action.PICK" />
+            <action android:name="android.media.action.DISPLAY_AUDIO_EFFECT_CONTROL_PANEL" />
         </intent>
         <intent>
             <action android:name="android.intent.action.GET_CONTENT" />
+            <data android:mimeType="image/*" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.PICK" />
+            <data android:mimeType="image/*" />
         </intent>
     </queries>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
-    <uses-permission
-        android:name="android.permission.INTERNET" />
-
-    <!-- New Calculator -->
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <application
         android:name=".musicplayer.ApplicationClass"
         android:requestLegacyExternalStorage="true"
         android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
+        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:hardwareAccelerated="false">
+        tools:targetApi="35"
+        android:hardwareAccelerated="true">
 
     <!-- MainActivity with android:exported explicitly set -->
         <activity
@@ -89,9 +104,23 @@
             tools:ignore="DiscouragedApi,LockedOrientationActivity"
             android:exported="false"
             android:launchMode="singleTop"/>
+
+        <!-- Updated Permission for Android 14   -->
+        <service
+            android:name=".musicplayer.MusicService"
+            android:foregroundServiceType="mediaPlayback"
+            android:exported="false"
+            />
+
+        <receiver
+            android:name=".musicplayer.NotificationReceiver"
+            android:enabled="true" />
+
         <activity android:name=".gridiconactivity.ComingSoonActivity"
+            android:exported="false"
             android:theme="@style/AppThemeActivity"/>
-        <activity android:name=".PlaceholderActivity" />
+        <activity android:name=".PlaceholderActivity"
+            android:exported="false"/>
         <activity android:name=".gridiconactivity.CalendarActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeActivity"
@@ -99,6 +128,7 @@
             android:exported="false"/>
         <activity android:name=".gridiconactivity.StockActivity"
             android:screenOrientation="portrait"
+            android:exported="false"
             tools:ignore="DiscouragedApi,LockedOrientationActivity"
             android:theme="@style/AppThemeActivity"/>
         <activity android:name=".gridiconactivity.CalculatorActivity"
@@ -107,6 +137,7 @@
             tools:ignore="DiscouragedApi,LockedOrientationActivity"
             android:exported="false"/>
         <activity android:name=".gridiconactivity.GalleryActivity"
+            android:exported="false"
             android:theme="@style/AppThemeActivity"/>
         <activity android:name=".gridiconactivity.FolderContentsActivity" />
         <activity android:name=".gridiconactivity.PhotoViewerActivity" />
@@ -225,16 +256,7 @@
             tools:ignore="DiscouragedApi,LockedOrientationActivity"
             android:theme="@style/Theme.Composetetris.NoActionBar">
         </activity>
-        <!-- Updated Permission for Android 14   -->
-        <service
-            android:name=".musicplayer.MusicService"
-            android:foregroundServiceType="mediaPlayback"
-            android:exported="false"
-            />
 
-        <receiver
-            android:name=".musicplayer.NotificationReceiver"
-            android:enabled="true" />
 
         <activity
             android:name=".newcalculator.CalcMainActivity"
@@ -249,6 +271,15 @@
             android:exported="true"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".mp3tagger.MP3TaggerMainActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            tools:ignore="DiscouragedApi,LockedOrientationActivity"
+            android:theme="@style/Theme.Metadator">
         </activity>
     </application>
 

@@ -254,4 +254,6 @@
     <style name="numericButton" parent="textStyle">
         <item name="android:textColor">@color/colorCardDT</item>
     </style>
+
+    <style name="Theme.Metadator" parent="Theme.AppCompat.DayNight.NoActionBar" />
 </resources>

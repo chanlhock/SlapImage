@@ -6,6 +6,7 @@ plugins {
     id("org.jetbrains.kotlin.plugin.compose") // Add this line
     id("kotlin-kapt") // Add this if using Glide
     id("kotlin-parcelize")
+    id("kotlinx-serialization") // Add this line
 }
 
 // Load local.properties
@@ -17,6 +18,8 @@ val localProperties = Properties().apply {
 // Access the API_KEY from local.properties
 val apiKey: String = localProperties.getProperty("TWELVEDATA_API_KEY", "")
 val apiKeygemini: String = localProperties.getProperty("GEMINI_API_KEY", "")
+val clientid: String = localProperties.getProperty("CLIENT_ID", "")
+val clientsecret: String = localProperties.getProperty("CLIENT_SECRET", "")
 
 android {
     namespace = "com.example.slapimage"
@@ -25,20 +28,24 @@ android {
     defaultConfig {
         applicationId = "com.example.slapimage"
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
 
         android.buildFeatures.buildConfig = true
         // Add the API_KEY to BuildConfig
         buildConfigField("String", "TWELVEDATA_API_KEY", "$apiKey")
         buildConfigField("String", "GEMINI_API_KEY", "$apiKeygemini")
+        buildConfigField("String", "CLIENT_ID", "$clientid")
+        buildConfigField("String", "CLIENT_SECRET", "$clientsecret")
         // Flag to set the build to not include all banners photo to reduce size
-        buildConfigField("boolean","MINIMAL_BUILDSIZE","true")
+        buildConfigField("boolean","MINIMAL_BUILDSIZE","false")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
+        manifestPlaceholders["redirectHostName"] = "SlapImage"
+        manifestPlaceholders["redirectSchemeName"] = "SlapImage"
     }
 
     buildTypes {
@@ -202,4 +209,31 @@ dependencies {
     // Also include coroutines if not already present
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
+    // MP3 Tagger
+    // Koin for Android
+    implementation("io.insert-koin:koin-android:3.5.0")
+    implementation("io.insert-koin:koin-core:3.5.0")
+    // Koin for Jetpack Compose
+    implementation("io.insert-koin:koin-androidx-compose:3.5.0")
+    //implementation("io.insert-koin:koin-androidx-viewmodel:3.5.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
+    implementation("com.materialkolor:material-kolor:3.0.0-alpha04")
+    implementation("io.github.dokar3:sonner:0.3.8")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-io-core:0.3.0")
+    implementation("com.github.skydoves:landscapist-coil:2.2.12")
+    implementation("com.adamratzman:spotify-api-kotlin-core:4.1.0")
+    implementation("com.github.nanihadesuka:LazyColumnScrollbar:2.2.0")
+    implementation("com.google.accompanist:accompanist-permissions:0.34.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7")
+    implementation("com.github.Kyant0:taglib:1.0.0-alpha25")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.1")
+    implementation("com.soywiz.korlibs.korim:korim:4.0.10") // New version
+
+    implementation("androidx.paging:paging-runtime:3.2.1")
+    implementation("androidx.paging:paging-compose:3.3.0-alpha03")
+    implementation("androidx.media3:media3-exoplayer:1.2.1")
+    implementation("androidx.media3:media3-ui:1.2.1")
+    implementation("androidx.compose.material3:material3:1.3.2-alpha12") // or newer
+    implementation("androidx.compose.material3:material3-window-size-class:1.3.2-alpha12") // if needed
 }

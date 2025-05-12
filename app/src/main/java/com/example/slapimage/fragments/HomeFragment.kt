@@ -65,6 +65,7 @@ import androidx.core.content.ContextCompat
 import android.app.ActivityOptions
 import androidx.activity.OnBackPressedCallback
 import com.example.slapimage.BuildConfig
+import com.example.slapimage.mp3tagger.MP3TaggerMainActivity
 import com.example.slapimage.musicplayer.MainMusicActivity
 import com.example.slapimage.tetris.TetrisActivity
 import com.example.slapimage.newcalculator.CalcMainActivity
@@ -80,18 +81,18 @@ class HomeFragment : Fragment() {
          R.drawable.banner1, R.drawable.banner2,
          R.drawable.banner3, R.drawable.banner4, R.drawable.banner5, R.drawable.banner6,
          R.drawable.banner7, R.drawable.banner8, R.drawable.banner9, R.drawable.banner10,
-         R.drawable.banner11, R.drawable.banner12, R.drawable.banner13, R.drawable.banner14
+         R.drawable.banner12, R.drawable.banner13, R.drawable.banner14
      )
      else -> listOf(
          R.drawable.banner1, R.drawable.banner2,
          R.drawable.banner3, R.drawable.banner4, R.drawable.banner5, R.drawable.banner6,
          R.drawable.banner7, R.drawable.banner8, R.drawable.banner9, R.drawable.banner10,
-         R.drawable.banner11, R.drawable.banner12, R.drawable.banner13, R.drawable.banner14,
+         R.drawable.banner12, R.drawable.banner13, R.drawable.banner14,
          R.drawable.banner15, R.drawable.banner16, R.drawable.banner17, R.drawable.banner18,
          R.drawable.banner19, R.drawable.banner20, R.drawable.banner21, R.drawable.banner22,
          R.drawable.banner23, R.drawable.banner24, R.drawable.banner25, R.drawable.banner26,
          R.drawable.banner27, R.drawable.banner28, R.drawable.banner29, R.drawable.banner30,
-         R.drawable.banner31, R.drawable.banner32, R.drawable.banner33, R.drawable.banner34,
+         R.drawable.banner32, R.drawable.banner33, R.drawable.banner34,
          R.drawable.banner35, R.drawable.banner36, R.drawable.banner37, R.drawable.banner38,
          R.drawable.banner39, R.drawable.banner40, R.drawable.banner41, R.drawable.banner42,
          R.drawable.banner43, R.drawable.banner44, R.drawable.banner45, R.drawable.banner46,
@@ -103,8 +104,7 @@ class HomeFragment : Fragment() {
          R.drawable.banner67, R.drawable.banner68, R.drawable.banner69, R.drawable.banner70,
          R.drawable.banner71, R.drawable.banner72, R.drawable.banner73, R.drawable.banner74,
          R.drawable.banner75, R.drawable.banner76, R.drawable.banner77, R.drawable.banner78,
-         R.drawable.banner79, R.drawable.banner80, R.drawable.banner81, R.drawable.banner82,
-         R.drawable.banner83, R.drawable.banner84, R.drawable.banner85
+         R.drawable.banner79, R.drawable.banner80, R.drawable.banner84, R.drawable.banner85
      )
  }
     private var currentBannerIndex = 3
@@ -265,15 +265,15 @@ class HomeFragment : Fragment() {
                 Icon(R.drawable.icon8, "Stock"),
                 Icon(R.drawable.icon3, "DeepSeek Bot"),
                 Icon(R.drawable.icon9, "Gemini AI"),
-                Icon(R.drawable.icon16, "TicTacToe"),
+                Icon(R.drawable.icon17,"MP3 TagEdit"),
                 Icon(R.drawable.icon10, "About")
             ),
             // Second page (example additional icons)
             listOf(
                 Icon(R.drawable.icon11, "Tetris"),
+                Icon(R.drawable.icon16, "TicTacToe"),
+                Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon15, "AI Calc"),
-                Icon(R.drawable.icon14, "Coming Soon"),
-                Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
@@ -389,6 +389,15 @@ class HomeFragment : Fragment() {
             }
             "TicTacToe" -> {
                 val intent = Intent(activity, TicTacToeMainActivity::class.java)
+                val options = ActivityOptions.makeCustomAnimation(
+                    requireContext(),
+                    R.anim.slide_up,
+                    R.anim.no_animation
+                )
+                startActivity(intent, options.toBundle())
+            }
+            "MP3 TagEdit" -> {
+                val intent = Intent(activity, MP3TaggerMainActivity::class.java)
                 val options = ActivityOptions.makeCustomAnimation(
                     requireContext(),
                     R.anim.slide_up,
