@@ -17,6 +17,7 @@ fun NavGraphBuilder.settingsRouting(
             SettingsPage(
                 onBackPressed = onNavigateBack
             )
+            GeneralSettingsPage()
         }
 
         animatedComposable<Route.SettingsNavigator.Settings.General> {
