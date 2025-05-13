@@ -41,7 +41,7 @@ fun GeneralSettingsPage() {
             MediumTopAppBar(
                 title = {
                     Text(
-                        text = stringResource(id = R.string.general),
+                        text = stringResource(id = R.string.settings),
                         style = MaterialTheme.typography.titleLarge
                     )
                 },
