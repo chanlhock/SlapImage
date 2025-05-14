@@ -465,4 +465,8 @@
     <string name="write_external_storage_description">Allows the app to write to your storage</string>
     <string name="read_media_audio_description">Allows the app to read audio files</string>
     <string name="unknown_permission_description">This permission does not contain a description</string>
+
+    // Solitaire
+    <string name="game_won_title">Yayyy! You Won the game!</string>
+    <string name="game_won_message">Want to reset the game?</string>
 </resources>

@@ -236,4 +236,7 @@ dependencies {
     implementation("androidx.media3:media3-ui:1.2.1")
     implementation("androidx.compose.material3:material3:1.3.2-alpha12") // or newer
     implementation("androidx.compose.material3:material3-window-size-class:1.3.2-alpha12") // if needed
+
+    // Solitaire
+
 }

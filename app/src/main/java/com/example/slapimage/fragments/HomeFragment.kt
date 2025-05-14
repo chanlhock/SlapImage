@@ -69,6 +69,7 @@ import com.example.slapimage.mp3tagger.MP3TaggerMainActivity
 import com.example.slapimage.musicplayer.MainMusicActivity
 import com.example.slapimage.tetris.TetrisActivity
 import com.example.slapimage.newcalculator.CalcMainActivity
+import com.example.slapimage.solitaire.SolitaireMainActivity
 import com.example.slapimage.tictactoe.content.TicTacToeMainActivity
 //import com.github.chrisbanes.photoview.BuildConfig
 
@@ -80,21 +81,19 @@ class HomeFragment : Fragment() {
      BuildConfig.MINIMAL_BUILDSIZE == true -> listOf(
          R.drawable.banner1, R.drawable.banner2,
          R.drawable.banner3, R.drawable.banner4, R.drawable.banner5, R.drawable.banner6,
-         R.drawable.banner7, R.drawable.banner8, R.drawable.banner9, R.drawable.banner10,
+         R.drawable.banner7, R.drawable.banner8, R.drawable.banner37, R.drawable.banner10,
          R.drawable.banner12, R.drawable.banner13, R.drawable.banner14
      )
      else -> listOf(
          R.drawable.banner1, R.drawable.banner2,
          R.drawable.banner3, R.drawable.banner4, R.drawable.banner5, R.drawable.banner6,
-         R.drawable.banner7, R.drawable.banner8, R.drawable.banner9, R.drawable.banner10,
+         R.drawable.banner7, R.drawable.banner8, R.drawable.banner37, R.drawable.banner10,
          R.drawable.banner12, R.drawable.banner13, R.drawable.banner14,
          R.drawable.banner15, R.drawable.banner16, R.drawable.banner17, R.drawable.banner18,
-         R.drawable.banner19, R.drawable.banner20, R.drawable.banner21, R.drawable.banner22,
-         R.drawable.banner23, R.drawable.banner24, R.drawable.banner25, R.drawable.banner26,
-         R.drawable.banner27, R.drawable.banner28, R.drawable.banner29, R.drawable.banner30,
-         R.drawable.banner32, R.drawable.banner33, R.drawable.banner34,
-         R.drawable.banner35, R.drawable.banner36, R.drawable.banner37, R.drawable.banner38,
-         R.drawable.banner39, R.drawable.banner40, R.drawable.banner41, R.drawable.banner42,
+         R.drawable.banner19, R.drawable.banner23, R.drawable.banner24, R.drawable.banner25,
+         R.drawable.banner26, R.drawable.banner29, R.drawable.banner30, R.drawable.banner32,
+         R.drawable.banner35, R.drawable.banner36, R.drawable.banner9, R.drawable.banner38,
+         R.drawable.banner39, R.drawable.banner40,
          R.drawable.banner43, R.drawable.banner44, R.drawable.banner45, R.drawable.banner46,
          R.drawable.banner47, R.drawable.banner48, R.drawable.banner49, R.drawable.banner50,
          R.drawable.banner51, R.drawable.banner52, R.drawable.banner53, R.drawable.banner54,
@@ -272,7 +271,7 @@ class HomeFragment : Fragment() {
             listOf(
                 Icon(R.drawable.icon11, "Tetris"),
                 Icon(R.drawable.icon16, "TicTacToe"),
-                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon18, "Solitaire"),
                 Icon(R.drawable.icon15, "AI Calc"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
@@ -398,6 +397,15 @@ class HomeFragment : Fragment() {
             }
             "MP3 TagEdit" -> {
                 val intent = Intent(activity, MP3TaggerMainActivity::class.java)
+                val options = ActivityOptions.makeCustomAnimation(
+                    requireContext(),
+                    R.anim.slide_up,
+                    R.anim.no_animation
+                )
+                startActivity(intent, options.toBundle())
+            }
+            "Solitaire" -> {
+                val intent = Intent(activity, SolitaireMainActivity::class.java)
                 val options = ActivityOptions.makeCustomAnimation(
                     requireContext(),
                     R.anim.slide_up,
