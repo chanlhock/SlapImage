@@ -228,7 +228,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7")
     implementation("com.github.Kyant0:taglib:1.0.0-alpha25")
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.1")
-    implementation("com.soywiz.korlibs.korim:korim:4.0.10") // New version
+    implementation("com.soywiz.korlibs.korim:korim:3.4.0") // Must be this version
 
     implementation("androidx.paging:paging-runtime:3.2.1")
     implementation("androidx.paging:paging-compose:3.3.0-alpha03")
