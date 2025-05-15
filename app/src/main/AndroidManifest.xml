@@ -279,15 +279,9 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             tools:ignore="DiscouragedApi,LockedOrientationActivity"
-            android:theme="@style/Theme.Metadator">
+            android:theme="@style/AppThemeActivity">
         </activity>
-        <activity
-            android:name=".solitaire.SolitaireMainActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            tools:ignore="DiscouragedApi,LockedOrientationActivity"
-            android:theme="@style/SolitaireAppTheme">
-        </activity>
+
     </application>
 
 </manifest>
