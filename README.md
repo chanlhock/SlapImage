@@ -82,7 +82,7 @@ In addition I have also tested to some extent on:
 - 7th May 2025: Successfully modified, fixed bugs and added a TicTacToe from Github. (https://github.com/yamin8000/Dooz )
 - 8th May 2025: Release the initial stable version of SlapImage v1.0.0-beta.1 apk. :tada:
 - 12th May 2025: Modified and added an MP3 Tag Editor - Metadator from Github. (https://github.com/BobbyESP/Metadator)
-- 15th May 2025: Added SolitaireCG from Fdroid.org. Quite easily ported over eventhough it is in Java instead of Kotlin. (https://f-droid.org/en/packages/net.sourceforge.solitaire_cg/)
+- 15th May 2025: Added SolitaireCG from Fdroid.org based on Version 4.1 (4010) 2nd May 2025 source tarball. Quite easily ported over eventhough it is in Java instead of Kotlin. (https://f-droid.org/en/packages/net.sourceforge.solitaire_cg/)
 
 ## :beetle: Unresolvable Bug in Todo List
 - [X] (Issue fixed 19th Apr 2025) When user pressed the back arrow button at the topbar of StockActivity.kt view, returning back to HomeFragment.kt view there is a large white rectangle covering lower two rows of the grid icon container. This only happens when user enters a Stock Ticker and check the stock price. However, if user uses the phone back button to return to HomeFragment.kt view, the bug doesn't happen. One other observation is that the bug doesn't happen on Android 15 phone. :eyes:
