@@ -70,6 +70,8 @@ import com.example.slapimage.musicplayer.MainMusicActivity
 import com.example.slapimage.tetris.TetrisActivity
 import com.example.slapimage.newcalculator.CalcMainActivity
 import com.example.slapimage.tictactoe.content.TicTacToeMainActivity
+import com.example.slapimage.solitaire_cg.SolitaireCG
+
 //import com.github.chrisbanes.photoview.BuildConfig
 
 class HomeFragment : Fragment() {
@@ -259,7 +261,7 @@ class HomeFragment : Fragment() {
                 Icon(R.drawable.icon4, "Open TextFile"),
                 Icon(R.drawable.icon5, "Calendar"),
                 Icon(R.drawable.icon6, "Calculator"),
-                Icon(R.drawable.icon7, "Game of Life"),
+                Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon8, "Stock"),
                 Icon(R.drawable.icon3, "DeepSeek Bot"),
                 Icon(R.drawable.icon9, "Gemini AI"),
@@ -270,9 +272,9 @@ class HomeFragment : Fragment() {
             listOf(
                 Icon(R.drawable.icon11, "Tetris"),
                 Icon(R.drawable.icon16, "TicTacToe"),
-                Icon(R.drawable.icon18, "Solitaire"),
+                Icon(R.drawable.icon18, "SolitaireCG"),
+                Icon(R.drawable.icon7, "Game of Life"),
                 Icon(R.drawable.icon15, "AI Calc"),
-                Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
@@ -403,8 +405,8 @@ class HomeFragment : Fragment() {
                 )
                 startActivity(intent, options.toBundle())
             }
-            "Solitaire" -> {
-                val intent = Intent(activity, MP3TaggerMainActivity::class.java)
+            "SolitaireCG" -> {
+                val intent = Intent(activity, SolitaireCG::class.java)
                 val options = ActivityOptions.makeCustomAnimation(
                     requireContext(),
                     R.anim.slide_up,
