@@ -69,7 +69,6 @@ import com.example.slapimage.mp3tagger.MP3TaggerMainActivity
 import com.example.slapimage.musicplayer.MainMusicActivity
 import com.example.slapimage.tetris.TetrisActivity
 import com.example.slapimage.newcalculator.CalcMainActivity
-import com.example.slapimage.solitaire.SolitaireMainActivity
 import com.example.slapimage.tictactoe.content.TicTacToeMainActivity
 //import com.github.chrisbanes.photoview.BuildConfig
 
@@ -405,7 +404,7 @@ class HomeFragment : Fragment() {
                 startActivity(intent, options.toBundle())
             }
             "Solitaire" -> {
-                val intent = Intent(activity, SolitaireMainActivity::class.java)
+                val intent = Intent(activity, MP3TaggerMainActivity::class.java)
                 val options = ActivityOptions.makeCustomAnimation(
                     requireContext(),
                     R.anim.slide_up,

@@ -92,8 +92,5 @@
     <color name="neumorph_shadowColorDark">#D89A9A9A</color>
 
     // Solitaire Theme Color
-    <color name="colorPrimarySol">#3F51B5</color>
-    <color name="colorPrimaryDarkSol">#303F9F</color>
-    <color name="colorAccentSol">#FF4081</color>
-    <color name="game_background">#32CD32</color>
+
 </resources>
