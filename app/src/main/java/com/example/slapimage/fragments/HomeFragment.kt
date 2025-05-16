@@ -71,6 +71,7 @@ import com.example.slapimage.tetris.TetrisActivity
 import com.example.slapimage.newcalculator.CalcMainActivity
 import com.example.slapimage.tictactoe.content.TicTacToeMainActivity
 import com.example.slapimage.solitaire_cg.SolitaireCG
+import com.example.slapimage.textpad.activities.EditorActivity
 
 //import com.github.chrisbanes.photoview.BuildConfig
 
@@ -258,7 +259,7 @@ class HomeFragment : Fragment() {
                 Icon(R.drawable.icon1, "Open Photo"),
                 Icon(R.drawable.icon2, "Play Video"),
                 Icon(R.drawable.icon13, "Play Music"),
-                Icon(R.drawable.icon4, "Open TextFile"),
+                Icon(R.drawable.icon4, "TextPad"),
                 Icon(R.drawable.icon5, "Calendar"),
                 Icon(R.drawable.icon6, "Calculator"),
                 Icon(R.drawable.icon14, "Coming Soon"),
@@ -328,7 +329,16 @@ class HomeFragment : Fragment() {
                 transaction.commit()
                 requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation).selectedItemId = R.id.nav_chatbot
             }
-            "Open TextFile" -> openTextFile()
+           // "Open TextFile" -> openTextFile()
+            "TextPad" -> {
+                val intent = Intent(activity, EditorActivity::class.java)
+                val options = ActivityOptions.makeCustomAnimation(
+                    requireContext(),
+                    R.anim.slide_up,
+                    R.anim.no_animation
+                )
+                startActivity(intent, options.toBundle())
+            }
             "Calendar" -> {
                 val intent = Intent(activity, CalendarActivity::class.java)
                 startActivity(intent)

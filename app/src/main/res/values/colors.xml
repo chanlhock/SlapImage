@@ -91,6 +91,11 @@
     <color name="neumorph_shadowColorLight">#B5FFFFFF</color>
     <color name="neumorph_shadowColorDark">#D89A9A9A</color>
 
-    // Solitaire Theme Color
-
+    // TextPad Theme Color
+    <color name="TextPadColorPrimary">#3F51B5</color>
+    <color name="TextPadTextColorPrimary">#DDDDDD</color>
+    <color name="TextPadTextMenuColor">#7F7F7F</color>
+    <color name="TextPadColorPrimaryDark">#303F00</color>
+    <color name="TextPadColorAccent">#404081</color>
+    <color name="TextPadColorIcon">#7F7F7F</color>
 </resources>

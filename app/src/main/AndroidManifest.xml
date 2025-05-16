@@ -290,6 +290,50 @@
             android:screenOrientation="portrait"
             tools:ignore="DiscouragedApi,LockedOrientationActivity"/>
         <activity android:name=".solitaire_cg.Help" />
-    </application>
 
+    <activity
+        android:name=".textpad.activities.EditorActivity"
+        android:launchMode="singleTop"
+        android:configChanges="locale"
+        android:theme="@style/TextPadAppTheme"
+        android:exported="true" >
+        <intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+            <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
+        </intent-filter>
+
+        <intent-filter>
+            <action android:name="android.intent.action.SEARCH" />
+        </intent-filter>
+
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <action android:name="android.intent.action.EDIT" />
+            <action android:name="android.intent.action.SEND" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="content" />
+            <data android:mimeType="text/*" />
+        </intent-filter>
+
+        <meta-data android:name="android.app.searchable"
+            android:resource="@xml/searchable"
+            android:exported="false" />
+
+    </activity>
+    <activity
+        android:name=".textpad.FileDialog"
+        android:configChanges="locale" >
+    </activity>
+    <activity
+        android:name=".textpad.activities.SettingsActivity"
+        android:label="@string/app_name_settings"
+        android:theme="@style/TextPadAppTheme"
+        android:configChanges="locale" >
+    </activity>
+    <provider
+        android:name=".textpad.SearchSuggestions"
+        android:authorities="com.example.slapimage.authority"
+        android:exported="false" />
+    </application>
 </manifest>
