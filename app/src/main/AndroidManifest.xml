@@ -159,19 +159,7 @@
             android:label="Music Player"
             android:exported="false" />
 
-        <activity
-            android:name=".gridiconactivity.TextViewerActivity"
-            android:theme="@style/AppThemeActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:mimeType="text/*" />
-                <data android:mimeType="application/xml" />
-                <data android:mimeType="application/json" />
-            </intent-filter>
-        </activity>
+
         <activity
             android:name=".gridiconactivity.GameOfLifeActivity"
             android:exported="false"

@@ -57,7 +57,6 @@ import com.example.slapimage.gridiconactivity.MusicPlayerActivity
 import com.example.slapimage.R
 import com.example.slapimage.gridiconactivity.GameOfLifeActivity
 import com.example.slapimage.gridiconactivity.StockActivity
-import com.example.slapimage.gridiconactivity.TextViewerActivity
 import com.example.slapimage.GeminiAIChatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.widget.LinearLayout
@@ -116,27 +115,6 @@ class HomeFragment : Fragment() {
     private lateinit var nextBanner: ImageView
     private lateinit var pageIndicator: LinearLayout
 
-    private val openTextFileLauncher = registerForActivityResult(
-        ActivityResultContracts.OpenDocument()
-    ) { uri: Uri? ->
-        uri?.let { fileUri ->
-            try {
-                requireContext().contentResolver.takePersistableUriPermission(
-                    fileUri,
-                    Intent.FLAG_GRANT_READ_URI_PERMISSION
-                )
-
-                val intent = Intent(requireActivity(), TextViewerActivity::class.java).apply {
-                    data = fileUri
-                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                }
-                startActivity(intent)
-            } catch (e: SecurityException) {
-                Log.e("HomeFragment", "Error taking permission", e)
-                Toast.makeText(requireContext(), "Couldn't access file", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
 
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreateView(
@@ -329,7 +307,7 @@ class HomeFragment : Fragment() {
                 transaction.commit()
                 requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation).selectedItemId = R.id.nav_chatbot
             }
-           // "Open TextFile" -> openTextFile()
+
             "TextPad" -> {
                 val intent = Intent(activity, EditorActivity::class.java)
                 val options = ActivityOptions.makeCustomAnimation(
@@ -427,17 +405,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun openTextFile() {
-        try {
-            openTextFileLauncher.launch(arrayOf("text/plain"))
-        } catch (e: ActivityNotFoundException) {
-            Toast.makeText(
-                requireContext(),
-                "No app can handle this request: ${e.message}",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-    }
 
     private fun rotateBannerWithAnimation() {
         handler.postDelayed({
