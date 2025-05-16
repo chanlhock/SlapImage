@@ -3,9 +3,11 @@ package com.example.slapimage.gridiconactivity
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.provider.Settings
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -19,6 +21,7 @@ import com.example.slapimage.PhotoFolder
 import com.example.slapimage.adapters.PhotoFolderAdapter
 import com.example.slapimage.R
 import java.io.File
+import androidx.appcompat.app.AlertDialog
 
 class GalleryActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -44,7 +47,7 @@ class GalleryActivity : AppCompatActivity() {
         checkStoragePermission()
     }
 
-    private fun checkStoragePermission() {
+ /*   private fun checkStoragePermission() {
         if (ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.READ_EXTERNAL_STORAGE
@@ -59,7 +62,49 @@ class GalleryActivity : AppCompatActivity() {
             )
         }
     }
-
+*/
+ private fun checkStoragePermission() {
+     when {
+         // Android 13+ (API 33+) - Use the new photo picker or media permissions
+         Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> {
+             if (checkSelfPermission(Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED ||
+                 checkSelfPermission(Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED) == PackageManager.PERMISSION_GRANTED) {
+                 loadPhotoFolders()
+             } else {
+                 requestPermissions(
+                     arrayOf(
+                         Manifest.permission.READ_MEDIA_IMAGES,
+                         Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED
+                     ),
+                     STORAGE_PERMISSION_CODE
+                 )
+             }
+         }
+         // Android 10-12 (API 29-32)
+         Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> {
+             if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                 loadPhotoFolders()
+             } else {
+                 requestPermissions(
+                     arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                     STORAGE_PERMISSION_CODE
+                 )
+             }
+         }
+         // Legacy versions (pre-Android 10)
+         else -> {
+             if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                 loadPhotoFolders()
+             } else {
+                 requestPermissions(
+                     arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                     STORAGE_PERMISSION_CODE
+                 )
+             }
+         }
+     }
+ }
+/*
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -79,7 +124,55 @@ class GalleryActivity : AppCompatActivity() {
             }
         }
     }
+*/
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            STORAGE_PERMISSION_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults.any { it == PackageManager.PERMISSION_GRANTED }) {
+                    loadPhotoFolders()
+                } else {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        // Show rationale for Android 13+
+                        showPermissionRationale()
+                    } else {
+                        Toast.makeText(
+                            this,
+                            "Permission denied. Can't access photos.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        finish()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun showPermissionRationale() {
+        AlertDialog.Builder(this)
+            .setTitle("Permission Needed")
+            .setMessage("This app needs access to your photos to display them. Please grant the permission in settings.")
+            .setPositiveButton("Go to Settings") { _, _ ->
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                intent.data = Uri.parse("package:$packageName")
+                startActivity(intent)
+            }
+            .setNegativeButton("Cancel") { _, _ ->
+                Toast.makeText(
+                    this,
+                    "Permission denied. Can't access photos.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                finish()
+            }
+            .create()
+            .show()
+    }
     private fun loadPhotoFolders() {
         progressBar.visibility = View.VISIBLE
         recyclerView.visibility = View.GONE
@@ -96,6 +189,30 @@ class GalleryActivity : AppCompatActivity() {
     }
 
     private fun scanForPhotoFolders(): List<PhotoFolder> {
+
+        val uri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL)
+        } else {
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        }
+
+        val projection = arrayOf(
+            MediaStore.Images.Media.BUCKET_DISPLAY_NAME,
+            MediaStore.Images.Media.DATA,
+            MediaStore.Images.Media.BUCKET_ID,
+            MediaStore.Images.Media.DATE_TAKEN
+        )
+
+        // For Android 10+, we don't need special Huawei handling
+        val selection = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            null
+        } else if (Build.MANUFACTURER.equals("HUAWEI", ignoreCase = true)) {
+            "${MediaStore.Images.Media.BUCKET_ID} IS NOT NULL"
+        } else {
+            null
+        }
+
+  /*
         val uri = if (Build.MANUFACTURER.equals("HUAWEI", ignoreCase = true)) {
             MediaStore.Images.Media.getContentUri("external")
         } else {
@@ -114,7 +231,7 @@ class GalleryActivity : AppCompatActivity() {
         } else {
             null
         }
-
+*/
         val cursor = contentResolver.query(
             uri,
             projection,
