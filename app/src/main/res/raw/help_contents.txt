@@ -20,8 +20,6 @@ several single player card games for your enjoyment.
  &nbsp; <a href="#tripeaks-wrapcards">TriPeaks (wrap cards)</a><br>
  &nbsp; <a href="#vegas-deal1">Vegas (deal 1)</a><br>
  &nbsp; <a href="#vegas-deal3">Vegas (deal 3)</a><br>
-<a href="#readme">README</a><br>
-<a href="#copying">COPYING</a><br>
 </p>
 
 <h2 id="general">General</h2>
