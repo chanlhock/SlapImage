@@ -1,0 +1,22 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+
+package com.example.slapimage.mbcompass
+
+import android.os.Bundle
+import androidx.activity.compose.setContent
+import androidx.fragment.app.FragmentActivity
+import com.example.slapimage.mbcompass.ui.CompassNavGraph
+import com.example.slapimage.mbcompass.ui.theme.MBCompassTheme
+import org.maplibre.android.MapLibre
+
+class MBCompassMainActivity : FragmentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        MapLibre.getInstance(this)
+        setContent {
+            MBCompassTheme {
+                CompassNavGraph()
+            }
+        }
+    }
+}

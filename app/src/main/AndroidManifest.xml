@@ -323,5 +323,11 @@
         android:name=".textpad.SearchSuggestions"
         android:authorities="com.example.slapimage.authority"
         android:exported="false" />
+
+        <activity
+            android:name=".mbcompass.MBCompassMainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.MBCompass">
+        </activity>
     </application>
 </manifest>
