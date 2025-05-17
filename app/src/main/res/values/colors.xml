@@ -98,4 +98,8 @@
     <color name="TextPadColorPrimaryDark">#303F00</color>
     <color name="TextPadColorAccent">#404081</color>
     <color name="TextPadColorIcon">#7F7F7F</color>
+
+    // MB Compass
+    <color name="brand_color">#45CCDE</color>
+    <color name="attr_color">#9AB71C1C</color>
 </resources>

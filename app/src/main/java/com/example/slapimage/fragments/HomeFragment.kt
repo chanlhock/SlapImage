@@ -71,6 +71,7 @@ import com.example.slapimage.newcalculator.CalcMainActivity
 import com.example.slapimage.tictactoe.content.TicTacToeMainActivity
 import com.example.slapimage.solitaire_cg.SolitaireCG
 import com.example.slapimage.textpad.activities.EditorActivity
+import com.example.slapimage.mbcompass.MBCompassMainActivity
 
 //import com.github.chrisbanes.photoview.BuildConfig
 
@@ -240,7 +241,7 @@ class HomeFragment : Fragment() {
                 Icon(R.drawable.icon4, "TextPad"),
                 Icon(R.drawable.icon5, "Calendar"),
                 Icon(R.drawable.icon6, "Calculator"),
-                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon19, "Compass"),
                 Icon(R.drawable.icon8, "Stock"),
                 Icon(R.drawable.icon3, "DeepSeek Bot"),
                 Icon(R.drawable.icon9, "Gemini AI"),
@@ -368,6 +369,15 @@ class HomeFragment : Fragment() {
             }
             "Calculator" -> {
                 val intent = Intent(activity, CalcMainActivity::class.java)
+                val options = ActivityOptions.makeCustomAnimation(
+                    requireContext(),
+                    R.anim.slide_up,
+                    R.anim.no_animation
+                )
+                startActivity(intent, options.toBundle())
+            }
+            "Compass" -> {
+                val intent = Intent(activity, MBCompassMainActivity::class.java)
                 val options = ActivityOptions.makeCustomAnimation(
                     requireContext(),
                     R.anim.slide_up,

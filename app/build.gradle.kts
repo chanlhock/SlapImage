@@ -237,6 +237,9 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.3.2-alpha12") // or newer
     implementation("androidx.compose.material3:material3-window-size-class:1.3.2-alpha12") // if needed
 
-    // Solitaire
-
+    // MB Compass
+    // MapLibre Native SDK
+    //implementation("org.maplibre.navigation:navigation-ui-android:5.0.0-pre4")
+    implementation("org.maplibre.gl:android-sdk:11.8.8")
+    implementation("androidx.compose.ui:ui-viewbinding:1.6.0") // or latest version
 }
