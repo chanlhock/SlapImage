@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">SlapImage</string>
+    <string name="open_drawer">open</string>
+    <string name="close_drawer">close</string>
+    <string name="ni">This feature is not implemented</string>
+    <string name="unsupported_contnt">Unsupported content</string>
+    <string name="null_contnt">Error: Content is null</string>
+    <string name="restart_required">Restart Required</string>
+    <string name="save">File saved</string>
+    <string name="saveAll">saved all files</string>
+    <string name="save_label">Save</string>
+    <string name="ww_wait">Please wait for word wrap to complete</string>
+    <string name="open_file_or_folder">Open File or Folder</string>
+    <string name="open_file">Open a File</string>
+    <string name="open_directory">Open a Directory</string>
+    <string name="new_file">New File</string>
+    <string name="newFile_hint">Name eg. Test.txt</string>
+    <string name="mime">MimeType eg. text/plain</string>
+    <string name="rep">Replacement</string>
+    <string name="searck_keyword">Search Keyword</string>
+    <string name="cs">Case Sensitive</string>
+    <string name="wait">Please wait…</string>
+    <string name="report_issue">Report Issue</string>
+    <string name="copy">Copy</string>
+    <string name="save_all">Save All</string>
+    <string name="save_1">Save</string>
+    <string name="undo">Undo</string>
+    <string name="settings">Settings</string>
+    <string name="print">Print</string>
+    <string name="search">Search</string>
+    <string name="go_next">Go Next</string>
+    <string name="go_prev">Go Prev.</string>
+    <string name="close_search">Close Search</string>
+    <string name="replace">Replace</string>
+    <string name="share">Share</string>
+    <string name="reselect">Reselect</string>
+    <string name="openfile">Open File</string>
+    <string name="new_folder">New Folder</string>
+    <string name="new_file_1">New File</string>
+    <string name="rename">Rename</string>
+    <string name="open_with">Open With…</string>
+    <string name="save_as">Save As</string>
+    <string name="paste">Paste</string>
+    <string name="delete">Delete</string>
+    <string name="close_this">Close this</string>
+    <string name="close_others">Close others</string>
+    <string name="close_all">Close all</string>
+    <string name="insertdate">Insert Date</string>
+    <string name="close">Close</string>
+    <string name="unsaved">Unsaved Files</string>
+    <string name="unsavedfiles">You have unsaved files!</string>
+    <string name="cancel">Cancel</string>
+    <string name="saveexit">Save and Exit</string>
+    <string name="exit">Exit</string>
+    <string name="rr">Restart Required</string>
+    <string name="rapply">Please restart to apply settings</string>
+    <string name="oled">Black Theme</string>
+    <string name="ww">Word Wrap</string>
+    <string name="keepdl">Keep Drawer Locked</string>
+    <string name="restart">Restart</string>
+    <string name="refresh">Reload</string>
+    <string name="dir_example">Name eg. Test</string>
+    <string name="create">Create</string>
+    <string name="ask_enter_name">Please enter a name</string>
+    <string name="already_exists">A document already exist with this name</string>
+    <string name="attention">Attention</string>
+    <string name="ask_del">Are you sure you want to delete</string>
+    <string name="redir">Please reselect the directory</string>
+    <string name="canthandle">No app found to handle the file</string>
+    <string name="clipboardempty">Clipboard is empty</string>
+    <string name="terminal">Terminal</string>
+    <string name="add_file">Add External File</string>
+    <string name="keyword_regex">keyword (Regex)</string>
+    <string name="replaceall">ReplaceAll</string>
+    <string name="add_new_replacement_batch">Add new replacement batch</string>
+    <string name="remove_a_search_batch">remove a search batch</string>
+    <string name="replacement">replacement</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="download">Download</string>
+    
+
+    <string name="git">Git</string>
+    <string name="cred">Credentials</string>
+    <string name="inavalid_git_cred">Credentials are not valid. Change them in settings</string>
+    <string name="gitcred">Credentials for git</string>
+    <string name="repo_dir">Repository folder</string>
+    <string name="clone_dir">Folder for cloning repositories</string>
+    <string name="dir_exist_not">Folder does not exists</string>
+    <string name="file_exist_not">File no longer exists</string>
+    <string name="gitKeyExample">eg. SuperKek:ghp_…</string>
+    <string name="file_saved">File Saved</string>
+    <string name="gituserexample">eg. UserDev:example@email.com</string>
+    <string name="apply">Apply</string>
+    <string name="userdata">User data</string>
+    <string name="inavalid_userdata">User data is not valid. Change it in settings</string>
+    <string name="userdatagit">User data for git</string>
+    <string name="open_in_terminal">Open In Terminal</string>
+    <string name="open_dir_in_terminal">Open Directory in Terminal</string>
+    <string name="file_open_denied">Opening this file with other apps is not permitted</string>
+    <string name="reload_file_tree">Reload Files</string>
+    <string name="close_current_project">Close current project</string>
+    <string name="rename_descript">Rename the document</string>
+    <string name="open_with_other">Open selected file in other apps</string>
+    <string name="delete_descript">Delete document</string>
+    <string name="add_file_desc">Select a new file to be added here</string>
+    <string name="create_new_file_desc">Create a new file under selected folder</string>
+    <string name="paste_desc">Paste document</string>
+    <string name="clipboard_empty">File Clipboard is empty</string>
+    <string name="save_desc">Save the selected file somewhere else</string>
+    <string name="copy_desc">Copy document</string>
+    <string name="failed_move">Failed to move file</string>
+    <string name="file_name">File name</string>
+    <string name="ff_path">File or folder path</string>
+    <string name="path">Path</string>
+    <string name="open">Open</string>
+    <string name="enter_path">Please enter a path</string>
+    <string name="invalid_path">Path does not exist</string>
+    <string name="permission_denied">Permission Denied</string>
+    <string name="wait_download">Please wait while the files are being downloaded.</string>
+    <string name="done">Success</string>
+    <string name="git_branch">Branch. Example: main</string>
+    <string name="git_commit_msg">Commit message</string>
+    <string name="push">Push</string>
+    <string name="pull">Pull</string>
+    <string name="pull_desc">Sync local repository with remote repository</string>
+    <string name="commit_push">Commit and push</string>
+    <string name="push_desc">Create a commit and push changes to the remote repository"</string>
+    <string name="fill_both">Please fill in both fields</string>
+    <string name="pushing">Pushing to remote repository…</string>
+    <string name="nogit">Error: .git folder not found</string>
+    <string name="manage_storage">Manage Storage</string>
+    <string name="manage_storage_reason">Xed-Editor needs access to edit files in your storage. Please allow the access in the upcoming system setting.</string>
+    <string name="ok">OK</string>
+    <string name="data_clear">App data is cleared</string>
+    <string name="action_done">Action Completed</string>
+    <string name="clone_repo">Clone repository</string>
+    <string name="exists">already exists!</string>
+    <string name="private_files">Private Files</string>
+    <string name="private_files_desc">Private Files of Xed-Editor</string>
+    <string name="cloning">Cloning repository…</string>
+    <string name="clone_err">Repository is private. or Check your credentials</string>
+    <string name="err">Error</string>
+    <string name="open_dir_desc">Open a directory using SAF</string>
+    <string name="open_file_desc">Choose a file to directly edit it</string>
+    <string name="open_path">Internal Storage</string>
+    <string name="open_path_desc">Open internal storage</string>
+    <string name="clone_repo_desc">Clone repository using Git</string>
+    <string name="add">Add</string>
+    <string name="already_opened">File already opened</string>
+    <string name="open_cant">Cannot open more than</string>
+    <string name="files">Files</string>
+    <string name="installed">Installed</string>
+    <string name="available">Available</string>
+    <string name="already_installed">Already Installed</string>
+    <string name="download_sure">Are you sure you want to download</string>
+    <string name="yes">Yes</string>
+    <string name="fetch_failed">fetch request returned null</string>
+    <string name="app">Application</string>
+    <string name="oled_desc">Use a pure black theme for AMOLED devices</string>
+    <string name="themes">Themes</string>
+    <string name="change_theme">Change Theme</string>
+    <string name="editor">Editor</string>
+    <string name="smooth_tabs">Smooth Tabs</string>
+    <string name="smooth_tab_desc">Smoothly switch between tabs</string>
+    <string name="ww_desc">Enable Word Wrap in all editors</string>
+    <string name="drawer_lock_desc">Keep drawer locked when opening file</string>
+    <string name="diagonal_scroll">Diagonal Scrolling</string>
+    <string name="diagonal_scroll_desc">Enable Diagonal Scrolling in File Tree</string>
+    <string name="cursor_anim">Cursor Animation</string>
+    <string name="cursor_anim_desc">Enable Smooth Cursor Animations</string>
+    <string name="show_line_number">Show Line Numbers</string>
+    <string name="pin_line_number">Pin Line Numbers</string>
+    <string name="extra_keys">Extra Keys</string>
+    <string name="extra_keys_desc">Show extra keys in the editor</string>
+    <string name="auto_save">Auto Save</string>
+    <string name="auto_save_desc">automatically save file</string>
+    <string name="auto_save_time">Auto Save Time</string>
+    <string name="auto_save_time_desc">Automatically save file after specified time</string>
+    <string name="intervalinMs">Interval in milliseconds</string>
+    <string name="inavalid_v">Invalid value</string>
+    <string name="v_small">Value too small</string>
+    <string name="v_large">Value too large</string>
+    <string name="text_size">Text Size</string>
+    <string name="text_size_desc">Set text size</string>
+    <string name="tab_size">Tab Size</string>
+    <string name="tab_size_desc">Set tab size</string>
+    <string name="monet">Dynamic Colors</string>
+    <string name="monet_desc">Use device theme in app</string>
+    <string name="restart_app">Please restart the application.</string>
+
+    <string name="old_android">Unsupported Android version</string>
+    <string name="app_desc">General application settings</string>
+    <string name="editor_desc">General editor settings</string>
+    <string name="terminal_desc">General terminal settings</string>
+    <string name="git_desc">General git settings</string>
+    <string name="Lshell">Launch Shell</string>
+    <string name="Lshell_desc">Executed when the terminal is launched.</string>
+    <string name="terminal_text_size">Terminal text size</string>
+    <string name="terminal_text_size_desc">Set terminal text size</string>
+    <string name="sim_hard_links">Simulate hard links</string>
+    <string name="sim_hard_links_desc">Create a symlink where a hardlink should be created</string>
+    <string name="sim_ashmem">Simulate Ashmemfd on Android</string>
+    <string name="sysvipc">Handle System V IPC syscall</string>
+    <string name="kill_on_exit">Kill on exit</string>
+    <string name="kill_on_exit_desc">Terminate all processes when exiting terminal</string>
+    <string name="u_err">Unknown Error</string>
+    <string name="is_null">InputStream is null</string>
+    <string name="press_again_exit">Press back again to exit</string>
+    <string name="wait_pkg">Please wait while the packages are being downloaded.</string>
+    <string name="unsupported_aarch">Unsupported Platform, Use Fail Safe</string>
+    <string name="pkg_download_failed">Package download failed</string>
+    <string name="copy_failed">Failed to copy file</string>
+
+    <string name="install_done">Installed Successfully</string>
+    <string name="invalid_file_type">Invalid file type, zip file expected</string>
+    <string name="install_failed">Failed to install</string>
+    <string name="choose_file">Choose file</string>
+
+    <string name="force_char">Force Char</string>
+    <string name="force_char_desc">Force Char based input in Terminal</string>
+    <string name="useCtrlWorkaround">Use Ctrl Workaround</string>
+    <string name="useCtrlWorkaround_desc">Use Ctrl Space Workaround</string>
+    <string name="editor_font">Editor Font</string>
+    <string name="editor_font_desc">Select editor font</string>
+    <string name="force_desktop">Force Desktop Mode</string>
+    <string name="force_desktop_desc">Force Desktop layout on smaller screen devices</string>
+    <string name="force_normal">Force Normal Mode</string>
+    <string name="force_normal_desc">Force Normal layout on large screen devices</string>
+    
+    <string name="light_mode">Light</string>
+    <string name="dark_mode">Dark</string>
+    <string name="auto_mode">Auto</string>
+    <string name="select_theme_mode" >@string/theme_mode</string>
+    
+    <string name="cannot_be_empty">It cannot be empty.</string>
+    
+    <string name="theme_mode">Theme</string>
+    <string name="theme_mode_desc">Change app color theme</string>
+
+    <string name="show_suggestions">Show Suggestions</string>
+    
+    <string name="about">About</string>
+    <string name="about_desc">About Xed-Editor</string>
+    <string name="version">Version</string>
+    <string name="version_code">Version Code</string>
+    <string name="github">GitHub</string>
+    <string name="github_desc">Star it On Github 🤩</string>
+    <string name="telegram">Telegram Group</string>
+    <string name="telegram_desc">Report issues, feature requests etc.</string>
+    <string name="join">Join</string>
+    
+    <string name="show_virtual_keyboard">Show Virtual Keyboard</string>
+    <string name="show_virtual_keyboard_desc">Show virtual keyboard when Physical keyboard is connected</string>
+
+    <string name="git_commit">Git Commit Hash</string>
+    
+    <string name="check_for_updates">Check for Updates</string>
+    <string name="check_for_updates_desc">Periodically check for updates</string>
+
+    <string name="click_open">Click here to open file</string>
+    <string name="no">No</string>
+    <string name="file_too_large">File is too big to open</string>
+    <string name="toggle_suggestion">Toggle Suggestion</string>
+    <string name="run">Run</string>
+
+    <string name="txt_ww">Wrap txt files</string>
+    <string name="txt_ww_desc">Automatically wrap text files</string>
+
+    <string name="sora_s">Sora text search</string>
+    <string name="sora_s_desc">Use Sora text search</string>
+
+    <string name="manage_editor_font">Manage Editor Fonts</string>
+    <string name="default_encoding">Default Encoding</string>
+    <string name="default_encoding_desc">Editor Default Encoding</string>
+    <string name="other">Other</string>
+    <string name="content">Content</string>
+    <string name="fonts">Fonts</string>
+    <string name="font_added">Font Successfully added</string>
+    <string name="delete_font">Delete Font</string>
+    <string name="add_font">Add new Font</string>
+    <string name="add_font_desc">Choose a ttf font from storage</string>
+    <string name="install_termux">Install Termux from F-Droid</string>
+    <string name="termux_exec">Termux Exec</string>
+    <string name="termux_exec_guide">Termux Exec Docs</string>
+    <string name="termux_exec_guide_desc">Documentation for Enabling Termux Exec</string>
+    <string name="gestures">Gestures</string>
+    <string name="config_gestures">Configure Gestures</string>
+    <string name="Save_as">Save As</string>
+
+    <string name="file_not_saved">Some files are not saved</string>
+    <string name="file_unsaved">File Unsaved</string>
+    <string name="ask_unsaved">Are you sure you want to discard this unsaved document?</string>
+    <string name="keep_editing">Keep Editing</string>
+    <string name="discard">Discard</string>
+
+    <string name="tools">Tools</string>
+    <string name="warning">Warning</string>
+    <string name="encoding_warning">Changing the default encoding is highly discouraged, as it can lead to file corruption. It is strongly recommended to use UTF-8 unless you fully understand the implications and have created proper backups.</string>
+
+    <string name="line_spacing">Line Spacing</string>
+    <string name="line_spacing_multiplier">Line Spacing Multiplier</string>
+
+    <string name="mutators">Mutators</string>
+
+    <string name="update_av">New Updates Available</string>
+    <string name="update">Update</string>
+    <string name="ignore">Ignore</string>
+    <string name="update_disable">Update check disabled</string>
+
+    <string name="launch_termux">Launch Termux?</string>
+    <string name="launch_termux_explanation">Termux is stopped so xed-editor is unable to run command in it. do you like to start it?</string>
+    <string name="launch">Launch</string>
+
+    <string name="mutator_desc">Create micro tools</string>
+    <string name="restore_sessions">Restore Sessions</string>
+    <string name="restore_sessions_desc">"Restore previous tabs</string>
+    <string name="terminal_home">Terminal Home</string>
+    <string name="terminal_home_desc">Default home directory of terminal</string>
+    <string name="sessions">Sessions</string>
+    <string name="add_session">Add Session</string>
+    <string name="terminal_runtime">Terminal Runtime</string>
+    <string name="terminal_runtime_desc">Select Terminal Runtime</string>
+    <string name="enable_ext">Extensions</string>
+    <string name="enable_ext_desc">Load third party Extensions</string>
+    <string name="ext">Extensions</string>
+    <string name="ext_desc">Manage Extensions</string>
+
+    <string name="info_mutators">Mutators are small scripts that are used to modify the editor text. Create a mutator and click on it to open it in the editor.</string>
+    <string name="no_mutators">No mutators</string>
+    <string name="tab_opened">Tab Opened</string>
+    <string name="mutator_name">Mutator Name</string>
+    <string name="name_empty_err">Name cannot be empty</string>
+    <string name="name_used">Name already used</string>
+
+    <string name="script_get_text">get text</string>
+    <string name="script_show_toast">show toast</string>
+    <string name="script_network">network</string>
+    <string name="script_showing_dialog">Showing a dialog</string>
+    <string name="script_set_text">set text</string>
+    <string name="script_text">this text will be written in the editor</string>
+    <string name="script_api_info">check the ImplApi class in xed-editors source code at PROJECT/core/main/ui/screens/mutators/ImplApi for more information</string>
+
+    <string name="installing">Installing…</string>
+    <string name="not_plugin_err">Selected file is not a .apk file</string>
+    <string name="install_from_storage">Install from storage</string>
+    <string name="no_ext">No Extension Installed.</string>
+    <string name="loading">Loading…</string>
+    <string name="info_ext">Extensions can be used to modify the behavior and features of xed-editor. To learn how to build a plugin, click here</string>
+
+    <string name="initializing">Initializing…</string>
+    <string name="downloading">Downloading…</string>
+    <string name="network_err">Network Error</string>
+
+    <string name="user">User</string>
+    <string name="email">Email</string>
+    <string name="git_auth">Github Token</string>
+    <string name="invalid_email">Invalid Email</string>
+    <string name="invalid_user">Invalid Username</string>
+
+    <string name="use_github_url">Use default git domain</string>
+    <string name="custom_git_url">Custom Git Url</string>
+    <string name="http_git_url">Http git domain</string>
+
+    <string name="scroll_to_bottom">Scroll to Bottom</string>
+    <string name="scroll_to_bottom_desc">Scroll to Bottom when opening a file</string>
+
+    <string name="file_err">File cannot be saved, try closing and reopening the file</string>
+    <string name="file_not_loaded">File isn\'t loaded yet.</string>
+    <string name="file_not_exist">File No longer exists</string>
+
+    <string name="soft_keyboard_always">Always show keyboard</string>
+    <string name="soft_keyboard_always_desc">Always show soft keyboard even if hardware keyboard is connected</string>
+
+    <string name="experimental_feature">Experimental Feature</string>
+    <string name="experimental_session_restore_warning">This Feature is experimental and known to sometimes cause loss of data</string>
+
+    <string name="highlighting">Syntax Highlighting</string>
+
+    <string name="err_no_termux">Termux is not installed</string>
+    <string name="err_termux_incompatible">Termux is not compatible</string>
+
+    <string name="unrestricted_file">Open files of any size</string>
+    <string name="unrestricted_file_desc">Allow Opening files of any size. may lead to crashes</string>
+
+    <string name="suggest_clear_app_data">Clearing app data is recommended</string>
+    <string name="update_files_cleared">App updated : Data Cleared</string>
+
+    <string name="toggle_ww">Toggle Word Wrap</string>
+
+    <string name="warning_private_dir">Content of this directory will get deleted if you clear data or delete Xed-Editor</string>
+    <string name="read_only_file">File is read only</string>
+
+    <string name="new_document">New Document</string>
+    <string name="new_document_desc">New file or folder</string>
+    <string name="file">File</string>
+    <string name="folder">Folder</string>
+
+    <string name="sponsor">Sponsor</string>
+    <string name="sponsor_desc">Support Development</string>
+    <string name="feature_toggles">Feature Toggles</string>
+    <string name="feature_toggles_desc">Enable or disable specific features</string>
+
+    <string name="backup">Backup</string>
+    <string name="restore">Restore</string>
+    <string name="success">Success</string>
+    <string name="failed">Failed</string>
+    <string name="invalidpath">Invalid path</string>
+
+    <string name="unknown_err">Something went wrong</string>
+    <string name="misc">Miscellaneous</string>
+    <string name="misc_desc">Miscellaneous Settings</string>
+
+
+</resources>
