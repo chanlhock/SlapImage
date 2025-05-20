@@ -88,6 +88,7 @@ In addition I have also tested to some extent on:
 - 20th May 2025: Added Xed-Editor from f-droid.org based on Version 3.0.6 (52) 14th May 2025 source tarball. (https://f-droid.org/en/packages/com.rk.xededitor/). Xed-Editor also has open source at GitHub. (https://github.com/Xed-Editor/Xed-Editor)
 
 ## :beetle: Unresolvable Bug in Todo List
+- [] When Xed-Editor activity is launched and user using Alphine for running C++ and Python there is an error of permission denied for proot in the Alphine terminal windows. 
 - [X] (Issue fixed 19th Apr 2025) When user pressed the back arrow button at the topbar of StockActivity.kt view, returning back to HomeFragment.kt view there is a large white rectangle covering lower two rows of the grid icon container. This only happens when user enters a Stock Ticker and check the stock price. However, if user uses the phone back button to return to HomeFragment.kt view, the bug doesn't happen. One other observation is that the bug doesn't happen on Android 15 phone. :eyes:
    - Resolution: Added these lines of code to navigate back to MainActivity (which hosts HomeFragment) solved the issue.
 ```kotlin
