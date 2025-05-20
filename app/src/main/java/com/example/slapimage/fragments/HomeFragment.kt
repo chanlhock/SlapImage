@@ -72,6 +72,7 @@ import com.example.slapimage.tictactoe.content.TicTacToeMainActivity
 import com.example.slapimage.solitaire_cg.SolitaireCG
 import com.example.slapimage.textpad.activities.EditorActivity
 import com.example.slapimage.mbcompass.MBCompassMainActivity
+import com.example.slapimage.xededitor.xededitor.MainActivity.XEDMainActivity
 
 //import com.github.chrisbanes.photoview.BuildConfig
 
@@ -245,8 +246,8 @@ class HomeFragment : Fragment() {
                 Icon(R.drawable.icon8, "Stock"),
                 Icon(R.drawable.icon3, "DeepSeek Bot"),
                 Icon(R.drawable.icon9, "Gemini AI"),
-                Icon(R.drawable.icon17,"MP3 TagEdit"),
-                Icon(R.drawable.icon10, "About")
+                Icon(R.drawable.icon17, "MP3 TagEdit"),
+                Icon(R.drawable.icon20, "XED-Editor")
             ),
             // Second page (example additional icons)
             listOf(
@@ -405,6 +406,15 @@ class HomeFragment : Fragment() {
             }
             "SolitaireCG" -> {
                 val intent = Intent(activity, SolitaireCG::class.java)
+                val options = ActivityOptions.makeCustomAnimation(
+                    requireContext(),
+                    R.anim.slide_up,
+                    R.anim.no_animation
+                )
+                startActivity(intent, options.toBundle())
+            }
+            "XED-Editor" -> {
+                val intent = Intent(activity, XEDMainActivity::class.java)
                 val options = ActivityOptions.makeCustomAnimation(
                     requireContext(),
                     R.anim.slide_up,

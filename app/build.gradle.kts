@@ -50,6 +50,9 @@ android {
 
     buildTypes {
         debug  {
+            //applicationIdSuffix = ".debug"
+            //versionNameSuffix = "-DEBUG"
+            //resValue("string","app_name","SlapImage-Debug")
         }
         release {
             isMinifyEnabled = false
@@ -62,6 +65,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+        isCoreLibraryDesugaringEnabled = true
     }
     kotlinOptions {
         jvmTarget = "17"
@@ -71,20 +75,18 @@ android {
         viewBinding = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.4" // Use the latest version
+        kotlinCompilerExtensionVersion = "1.5.15"  //"1.5.4" // Use the latest version
     }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
-   // }
-   // packagingOptions {
         // For .so (JNI) files
         jniLibs.pickFirsts.add("**/libonnxruntime4j_jni.so")
         jniLibs.pickFirsts.add("**/libonnxruntime.so")
-
-        // For other files (e.g., assets, resources)
-        // resources.pickFirsts.add("**/some_resource_file")
+        jniLibs {
+            useLegacyPackaging = true
+        }
     }
 }
 
@@ -242,4 +244,23 @@ dependencies {
     //implementation("org.maplibre.navigation:navigation-ui-android:5.0.0-pre4")
     implementation("org.maplibre.gl:android-sdk:11.8.8")
     implementation("androidx.compose.ui:ui-viewbinding:1.6.0") // or latest version
+
+    // XED
+    api(libs.terminal.view)
+    api(libs.terminal.emulator)
+    api(libs.quickjs.android)
+    api(libs.anrwatchdog)
+    api(libs.word.wrap)
+    api(libs.asynclayoutinflater)
+    api(libs.gson)
+    api(libs.commons.net)
+    api(libs.nanohttpd)
+    api(libs.browser)
+    api(libs.utilcode)
+    api(platform(libs.androidx.compose.bom))
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
+    api(project(":core:editor"))
+    api(project(":core:language-textmate"))
+    api(project(":core:resources"))
+    api(project(":core:components"))
 }

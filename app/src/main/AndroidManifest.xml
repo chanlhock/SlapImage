@@ -31,6 +31,7 @@
         tools:ignore="ScopedStorage" />
 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
     <!-- For Android 13 and above -->
@@ -51,7 +52,12 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
+    <uses-permission android:name="com.termux.permission.RUN_COMMAND"/>
     <queries>
+        <package android:name="com.github.android" />
+        <intent>
+            <action android:name="android.support.customtabs.action.CustomTabsService" />
+        </intent>
         <intent>
             <action android:name="android.intent.action.OPEN_DOCUMENT" />
         </intent>
@@ -84,7 +90,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:supportsRtl="false"
         android:theme="@style/AppTheme"
         tools:targetApi="35"
         android:hardwareAccelerated="true">
@@ -329,5 +336,58 @@
             android:exported="true"
             android:theme="@style/Theme.MBCompass">
         </activity>
+
+        <activity
+            android:name="com.example.slapimage.xededitor.xededitor.MainActivity.XEDMainActivity"
+            android:alwaysRetainTaskState="true"
+            android:exported="true"
+            android:inputType="textFilter"
+            android:launchMode="singleTask"
+            android:persistableMode="persistAcrossReboots"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.Karbon">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+        </activity>
+
+        <service android:name="com.example.slapimage.xededitor.xededitor.service.SessionService" />
+
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity
+            android:name="com.example.slapimage.xededitor.crashhandler.CrashActivity"
+            android:exported="false" />
+
+        <activity
+            android:name="com.example.slapimage.xededitor.xededitor.ui.activities.settings.SettingsActivity"
+            android:exported="false" />
+
+        <activity android:name="com.example.slapimage.xededitor.runner.runners.web.markdown.MDViewer"
+            android:exported="false"/>
+        <activity android:name="com.example.slapimage.xededitor.runner.runners.web.WebActivity"
+            android:exported="false" />
+
+        <activity
+            android:name="com.example.slapimage.xededitor.xededitor.ui.activities.terminal.Terminal"
+            android:exported="true"
+            android:label="Terminal"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 </manifest>

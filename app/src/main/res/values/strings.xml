@@ -1,13 +1,13 @@
 <resources>
-    <string name="app_name">SlapImage</string>
-    <string name="slapImage">SlapImage</string>
+    <string name="app_name" translatable="false">SlapImage</string>
+    <string name="slapImage" translatable="false">SlapImage</string>
     <string name="set_photo_button_text">Set Photo</string>
     <string name="display_photo_button_text">Open &amp; Display Photo</string>
     <string name="image_description">photo displayed in full screen</string>
     <string name="play_video">Play Video</string>
     <string name="quit_program">Quit Program</string>
-    <string name="top_bar">Top bar with SlapImage title</string>
-    <string name="banner">Banner</string>
+    <string name="top_bar" translatable="false">Top bar with SlapImage title</string>
+    <string name="banner" translatable="false">Banner</string>
     <string name="calendar">Calendar</string>
     <string name="calculator">Calculator</string>
     <string name="comingsoon">Coming Soon</string>
@@ -16,8 +16,8 @@
     <string name="icon">Icon</string>
     <string name="toolbar_title">Open TextFile</string>
     <string name="view_text_file">View TextFile</string>
-    <string name="splash_line1">Copyright Reserved &#169; 2025 A HackerWacker Production</string>
-    <string name="splash_line2">All Rights Reserved</string>
+    <string name="splash_line1" translatable="false">Copyright Reserved &#169; 2025 A HackerWacker Production</string>
+    <string name="splash_line2" translatable="false">All Rights Reserved</string>
     <!-- New strings for error messages -->
     <string name="error_reading_file">Error reading file: %1$s</string>
     <string name="no_file_selected">No file selected</string>
@@ -71,7 +71,7 @@
         left or right on the image…
         ]]>
     </string>
-    <string name="version">
+    <string name="version" translatable="false">
         <![CDATA[
         Version: 1.0.0-beta.1\n
         Coded by: Bernard Chan\n
@@ -663,4 +663,7 @@ TIP:  Long press ^ at bottom center of screen for alternate menu.
     <string name="permission_rationale">Please grant location permission.</string>
     <string name="rotation_sensor_not_available">Rotational Vector Sensor not available</string>
     <string name="magnetometer_not_available">Magnetometer not available</string>
+
+    // XED Editor
+    <string name="choose_runtime">Choose Runtime</string>
 </resources>
