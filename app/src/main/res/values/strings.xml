@@ -666,4 +666,15 @@ TIP:  Long press ^ at bottom center of screen for alternate menu.
 
     // XED Editor
     <string name="choose_runtime">Choose Runtime</string>
+    // Change Wallpaper
+    <string name="wallpaper_chooser_title" translatable="false">Choose Your Wallpaper. Note: Make sure that you have your wallpaper1.jpg and wallpaper2.jpg file in phone internal storage location: /wallpaper</string>
+    <string name="set_wallpaper_1" translatable="false">Set Wallpaper 1</string>
+    <string name="set_wallpaper_2" translatable="false">Set Wallpaper 2</string>
+    <string name="wallpaper_preview_desc" translatable="false">Wallpaper preview image</string>
+    <string name="wallpaper_set_success" translatable="false">Wallpaper set successfully!</string>
+    <string name="wallpaper_set_failed" translatable="false">Failed to set wallpaper</string>
+    <string name="wallpaper_file_not_found" translatable="false">Wallpaper image not found</string>
+    <string name="wallpaper_permission_granted" translatable="false">Permission granted</string>
+    <string name="wallpaper_permission_required" translatable="false">Storage permission required to set wallpaper</string>
+    <string name="wallpaper_setter" translatable="false">Set Wallpaper</string>
 </resources>

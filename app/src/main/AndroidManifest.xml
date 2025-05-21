@@ -30,6 +30,7 @@
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
 -->
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
@@ -335,6 +336,14 @@
             android:name=".mbcompass.MBCompassMainActivity"
             android:exported="true"
             android:theme="@style/Theme.MBCompass">
+        </activity>
+
+        <activity
+            android:name=".WallpaperSetterActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            tools:ignore="DiscouragedApi,LockedOrientationActivity"
+            android:theme="@style/AppThemeActivity">
         </activity>
 
         <activity

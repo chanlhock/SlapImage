@@ -20,16 +20,14 @@
 package com.example.slapimage.fragments
 
 import android.annotation.SuppressLint
-import android.content.ActivityNotFoundException
+import android.app.ActivityOptions
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
-import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,10 +35,11 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityOptionsCompat
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.scale
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -48,33 +47,30 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.slapimage.BuildConfig
+import com.example.slapimage.GeminiAIChatActivity
+import com.example.slapimage.Icon
+import com.example.slapimage.R
+import com.example.slapimage.WallpaperSetterActivity
 import com.example.slapimage.gridiconactivity.CalculatorActivity
 import com.example.slapimage.gridiconactivity.CalendarActivity
 import com.example.slapimage.gridiconactivity.ComingSoonActivity
 import com.example.slapimage.gridiconactivity.GalleryActivity
-import com.example.slapimage.Icon
-import com.example.slapimage.gridiconactivity.MusicPlayerActivity
-import com.example.slapimage.R
 import com.example.slapimage.gridiconactivity.GameOfLifeActivity
+import com.example.slapimage.gridiconactivity.MusicPlayerActivity
 import com.example.slapimage.gridiconactivity.StockActivity
-import com.example.slapimage.GeminiAIChatActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import android.widget.LinearLayout
-import androidx.core.content.ContextCompat
-import android.app.ActivityOptions
-import androidx.activity.OnBackPressedCallback
-import com.example.slapimage.BuildConfig
+import com.example.slapimage.mbcompass.MBCompassMainActivity
 import com.example.slapimage.mp3tagger.MP3TaggerMainActivity
 import com.example.slapimage.musicplayer.MainMusicActivity
-import com.example.slapimage.tetris.TetrisActivity
 import com.example.slapimage.newcalculator.CalcMainActivity
-import com.example.slapimage.tictactoe.content.TicTacToeMainActivity
 import com.example.slapimage.solitaire_cg.SolitaireCG
+import com.example.slapimage.tetris.TetrisActivity
 import com.example.slapimage.textpad.activities.EditorActivity
-import com.example.slapimage.mbcompass.MBCompassMainActivity
+import com.example.slapimage.tictactoe.content.TicTacToeMainActivity
 import com.example.slapimage.xededitor.xededitor.MainActivity.XEDMainActivity
-
-//import com.github.chrisbanes.photoview.BuildConfig
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.view.GestureDetector
+import android.view.MotionEvent
 
 class HomeFragment : Fragment() {
 
@@ -116,7 +112,10 @@ class HomeFragment : Fragment() {
     private lateinit var currentBanner: ImageView
     private lateinit var nextBanner: ImageView
     private lateinit var pageIndicator: LinearLayout
-
+    private lateinit var gestureDetector: GestureDetector
+    private var initialY1: Float = 0f
+    private var initialY2: Float = 0f
+    private var isTwoFingersDown = false
 
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreateView(
@@ -125,6 +124,52 @@ class HomeFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
+        gestureDetector = GestureDetector(requireContext(), object : GestureDetector.SimpleOnGestureListener() {
+            override fun onDown(e: MotionEvent): Boolean = true
+        })
+
+        view.setOnTouchListener { v, event ->
+            gestureDetector.onTouchEvent(event)
+
+            when (event.actionMasked) {
+                MotionEvent.ACTION_POINTER_DOWN -> {
+                    if (event.pointerCount == 2) {
+                        initialY1 = event.getY(0)
+                        initialY2 = event.getY(1)
+                        isTwoFingersDown = true
+                    }
+                }
+
+                MotionEvent.ACTION_MOVE -> {
+                    if (isTwoFingersDown && event.pointerCount == 2) {
+                        val currentY1 = event.getY(0)
+                        val currentY2 = event.getY(1)
+
+                        // Calculate average movement of both fingers
+                        val avgDiffY = ((currentY1 - initialY1) + (currentY2 - initialY2)) / 2
+
+                        if (avgDiffY > 100) { // Minimum swipe distance threshold
+                            launchTargetActivity()
+                            isTwoFingersDown = false
+                            return@setOnTouchListener true
+                        }
+                    }
+                }
+
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_POINTER_UP -> {
+                    isTwoFingersDown = false
+                    v.performClick() // For accessibility
+                }
+            }
+
+            true
+        }
+
+        // Important for accessibility
+        view.isClickable = true
+        view.isFocusable = true
+        view.isLongClickable = true
 
         // Initialize banner views
         bannerContainer = view.findViewById(R.id.banner_container)
@@ -196,6 +241,20 @@ class HomeFragment : Fragment() {
         return view
     }
 
+    private fun launchTargetActivity() {
+        val intent = Intent(requireContext(), WallpaperSetterActivity::class.java)
+        try {
+            ActivityOptionsCompat.makeCustomAnimation(
+                requireContext(),
+                android.R.anim.fade_in,
+                android.R.anim.fade_out
+            )
+            startActivity(intent)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     private fun setupPageIndicator(pageCount: Int) {
         pageIndicator.removeAllViews() // This clears any existing indicators
 
@@ -256,7 +315,7 @@ class HomeFragment : Fragment() {
                 Icon(R.drawable.icon18, "SolitaireCG"),
                 Icon(R.drawable.icon7, "Game of Life"),
                 Icon(R.drawable.icon15, "AI Calc"),
-                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon21, "Wallpaper"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
@@ -415,6 +474,15 @@ class HomeFragment : Fragment() {
             }
             "XED-Editor" -> {
                 val intent = Intent(activity, XEDMainActivity::class.java)
+                val options = ActivityOptions.makeCustomAnimation(
+                    requireContext(),
+                    R.anim.slide_up,
+                    R.anim.no_animation
+                )
+                startActivity(intent, options.toBundle())
+            }
+            "Wallpaper" -> {
+                val intent = Intent(activity, WallpaperSetterActivity::class.java)
                 val options = ActivityOptions.makeCustomAnimation(
                     requireContext(),
                     R.anim.slide_up,
