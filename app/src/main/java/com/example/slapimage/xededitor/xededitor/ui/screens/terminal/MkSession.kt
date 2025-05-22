@@ -11,7 +11,7 @@ import com.example.slapimage.xededitor.libcommons.localBinDir
 import com.example.slapimage.xededitor.libcommons.localDir
 import com.example.slapimage.xededitor.libcommons.localLibDir
 import com.example.slapimage.xededitor.libcommons.pendingCommand
-import com.example.slapimage.xededitor.libcommons.toast
+import com.example.slapimage.xededitor.libcommons.XEDtoast
 import com.example.slapimage.xededitor.settings.Settings
 import com.example.slapimage.xededitor.xededitor.App.Companion.getTempDir
 import com.example.slapimage.BuildConfig
@@ -47,7 +47,7 @@ object MkSession {
                 if (currentProject is FileWrapper){
                     currentProject!!.getAbsolutePath()
                 }else{
-                    //toast("Current project ${currentProject?.getName()} is not a native directory")
+                    //XEDtoast("Current project ${currentProject?.getName()} is not a native directory")
                     Environment.getExternalStorageDirectory().path
                 }
             }else{

@@ -45,7 +45,7 @@ import com.example.slapimage.xededitor.libcommons.application
 import com.example.slapimage.xededitor.libcommons.editor.SetupEditor
 import com.example.slapimage.xededitor.libcommons.editor.textmateSources
 import com.example.slapimage.xededitor.libcommons.errorDialog
-import com.example.slapimage.xededitor.libcommons.toast
+import com.example.slapimage.xededitor.libcommons.XEDtoast
 import com.example.slapimage.xededitor.libcommons.toastCatching
 import com.example.slapimage.xededitor.resources.drawables
 import com.example.slapimage.xededitor.resources.strings
@@ -143,7 +143,7 @@ class XEDMainActivity : BaseActivity() {
                         }
                     }
                 }.onFailure {
-                    toast("State lost")
+                    XEDtoast("State lost")
                 }.onSuccess {
                     activityRef.get()?.let {
                         while(it.binding == null || it.tabLayout == null){

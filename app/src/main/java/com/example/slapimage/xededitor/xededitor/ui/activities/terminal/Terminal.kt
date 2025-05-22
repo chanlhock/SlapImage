@@ -33,7 +33,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.slapimage.xededitor.libcommons.alpineDir
 import com.example.slapimage.xededitor.libcommons.localDir
-import com.example.slapimage.xededitor.libcommons.toast
+import com.example.slapimage.xededitor.libcommons.XEDtoast
 import com.example.slapimage.xededitor.resources.getString
 import com.example.slapimage.xededitor.resources.strings
 import com.example.slapimage.xededitor.xededitor.service.SessionService
@@ -174,10 +174,10 @@ class Terminal : ComponentActivity() {
                     },
                     onError = { error ->
                         if (error is UnknownHostException){
-                            toast(strings.network_err.getString())
+                            XEDtoast(strings.network_err.getString())
                         }else{
                             error.printStackTrace()
-                            toast("Setup Failed: ${error.message}")
+                            XEDtoast("Setup Failed: ${error.message}")
                         }
                         finish()
 
@@ -185,10 +185,10 @@ class Terminal : ComponentActivity() {
                     })
             } catch (e: Exception) {
                 if (e is UnknownHostException){
-                    toast(strings.network_err.getString())
+                    XEDtoast(strings.network_err.getString())
                 }else{
                     e.printStackTrace()
-                    toast("Setup Failed: ${e.message}")
+                    XEDtoast("Setup Failed: ${e.message}")
                 }
                 finish()
             }

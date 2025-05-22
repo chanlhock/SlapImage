@@ -22,7 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import com.example.slapimage.xededitor.libcommons.toast
+import com.example.slapimage.xededitor.libcommons.XEDtoast
 import com.example.slapimage.xededitor.resources.getString
 import com.example.slapimage.xededitor.resources.strings
 import com.example.slapimage.xededitor.settings.Settings
@@ -80,7 +80,7 @@ fun EditorFontScreen(modifier: Modifier = Modifier) {
                         )
                     )
                     EditorFont.saveFonts()
-                    toast(strings.font_added.getString())
+                    XEDtoast(strings.font_added.getString())
                 }.onFailure { if (it.message?.isNotBlank() == true){
                     errorDialog(it)
                 } }

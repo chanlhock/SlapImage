@@ -27,7 +27,7 @@ import com.example.slapimage.xededitor.components.compose.preferences.base.Prefe
 import com.example.slapimage.xededitor.components.compose.preferences.base.PreferenceLayout
 import com.example.slapimage.xededitor.components.compose.preferences.switch.PreferenceSwitch
 import com.example.slapimage.xededitor.file_wrapper.FileWrapper
-import com.example.slapimage.xededitor.libcommons.toast
+import com.example.slapimage.xededitor.libcommons.XEDtoast
 import com.example.slapimage.xededitor.resources.getString
 import com.example.slapimage.xededitor.resources.strings
 import com.example.slapimage.xededitor.settings.Settings
@@ -155,7 +155,7 @@ fun DeveloperOptions(modifier: Modifier = Modifier,navController: NavController)
                     if (BuildConfig.DEBUG){
                         navController.navigate(SettingsRoutes.BeanshellREPL.route)
                     }else{
-                        toast("Debugger is not allowed on release builds for safety reasons")
+                        XEDtoast("Debugger is not allowed on release builds for safety reasons")
                     }
                 }
             )

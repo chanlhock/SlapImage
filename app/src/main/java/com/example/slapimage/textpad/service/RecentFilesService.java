@@ -95,7 +95,7 @@ public class RecentFilesService {
     private ArrayList<String> loadRecentFiles(Context context) {
         ArrayList<String> history = new ArrayList<>();
         try {
-            FileInputStream fis = context.getApplicationContext().openFileInput(RECENT_FILES_FILENAME);
+            FileInputStream fis = context.openFileInput(RECENT_FILES_FILENAME); // getApplicationContext().
             ObjectInputStream objectIn = new ObjectInputStream(fis);
             history = (ArrayList<String>) objectIn.readObject();
         } catch (FileNotFoundException e) {
@@ -103,8 +103,10 @@ public class RecentFilesService {
         } catch (StreamCorruptedException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            history = new ArrayList<>();
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
+            history = new ArrayList<>();
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,6 +121,7 @@ public class RecentFilesService {
             fos = context.openFileOutput(RECENT_FILES_FILENAME, Context.MODE_PRIVATE);
             ObjectOutputStream objectOut = new ObjectOutputStream(fos);
             objectOut.writeObject(recentFiles);
+            objectOut.flush();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

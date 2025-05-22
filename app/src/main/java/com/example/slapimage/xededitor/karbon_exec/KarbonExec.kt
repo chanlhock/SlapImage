@@ -11,7 +11,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.example.slapimage.xededitor.libcommons.TerminalCommand
 import com.example.slapimage.xededitor.libcommons.application
 import com.example.slapimage.xededitor.libcommons.pendingCommand
-import com.example.slapimage.xededitor.libcommons.toast
+import com.example.slapimage.xededitor.libcommons.XEDtoast
 import com.example.slapimage.xededitor.resources.getString
 import com.example.slapimage.xededitor.resources.strings
 import kotlinx.coroutines.DelicateCoroutinesApi

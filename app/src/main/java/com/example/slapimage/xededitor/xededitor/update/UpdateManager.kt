@@ -4,7 +4,7 @@ import androidx.core.content.pm.PackageInfoCompat
 import com.example.slapimage.xededitor.libcommons.application
 import com.example.slapimage.xededitor.libcommons.child
 import com.example.slapimage.xededitor.libcommons.localBinDir
-import com.example.slapimage.xededitor.libcommons.toast
+import com.example.slapimage.xededitor.libcommons.XEDtoast
 import com.example.slapimage.xededitor.resources.strings
 import com.example.slapimage.xededitor.settings.Preference
 import com.example.slapimage.xededitor.settings.Settings
@@ -39,7 +39,7 @@ object UpdateManager {
                 40L -> {
                     Preference.clearData()
                     deleteCommonFiles()
-                    toast(strings.update_files_cleared)
+                    XEDtoast(strings.update_files_cleared)
                 }
                 48L -> {
                     deleteCommonFiles()

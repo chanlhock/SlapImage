@@ -60,7 +60,7 @@ import com.example.slapimage.xededitor.libcommons.PathUtils.toPath
 import com.example.slapimage.xededitor.libcommons.alpineDir
 import com.example.slapimage.xededitor.libcommons.child
 import com.example.slapimage.xededitor.libcommons.dpToPx
-import com.example.slapimage.xededitor.libcommons.toast
+import com.example.slapimage.xededitor.libcommons.XEDtoast
 import com.example.slapimage.xededitor.xededitor.MainActivity.XEDMainActivity
 import com.example.slapimage.R
 import com.example.slapimage.xededitor.xededitor.ui.components.ValueSlider
@@ -206,7 +206,7 @@ fun SettingsTerminalScreen() {
                 ActivityResultContracts.GetContent()
             ) { uri ->
                 if (uri == null){
-                    toast(strings.invalid_path)
+                    XEDtoast(strings.invalid_path)
                     return@rememberLauncherForActivityResult
                 }
 
@@ -216,7 +216,7 @@ fun SettingsTerminalScreen() {
                     filePath.canRead().not() ||
                     filePath.isFile.not() ||
                     filePath.canWrite().not()){
-                    toast(strings.invalid_path)
+                    XEDtoast(strings.invalid_path)
                     return@rememberLauncherForActivityResult
                 }
 
@@ -231,9 +231,9 @@ fun SettingsTerminalScreen() {
                     withContext(Dispatchers.Main){
                         loading.hide()
                         if (result == 0){
-                            toast(strings.success)
+                            XEDtoast(strings.success)
                         }else{
-                            toast(strings.failed)
+                            XEDtoast(strings.failed)
                         }
                     }
                 }
@@ -247,7 +247,7 @@ fun SettingsTerminalScreen() {
                 ActivityResultContracts.OpenDocumentTree()
             ) { uri ->
                 if (uri == null){
-                    toast(strings.invalid_path)
+                    XEDtoast(strings.invalid_path)
                     return@rememberLauncherForActivityResult
                 }
 
@@ -257,7 +257,7 @@ fun SettingsTerminalScreen() {
                     path.canRead().not() ||
                     path.isDirectory.not() ||
                     path.canWrite().not()){
-                    toast(strings.invalid_path)
+                    XEDtoast(strings.invalid_path)
                     return@rememberLauncherForActivityResult
                 }
 
@@ -272,13 +272,13 @@ fun SettingsTerminalScreen() {
                     setPositiveButton(strings.backup){ _, _ ->
                         val text = editText.text.toString()
                         if (text.isBlank()){
-                            toast(strings.inavalid_v)
+                            XEDtoast(strings.inavalid_v)
                             return@setPositiveButton
                         }
 
                         val targetFile = path.child(text)
                         if (targetFile.exists()){
-                            toast(strings.already_exists)
+                            XEDtoast(strings.already_exists)
                             return@setPositiveButton
                         }
 
@@ -308,7 +308,7 @@ fun SettingsTerminalScreen() {
                             } catch (e: Exception) {
                                 withContext(Dispatchers.Main) {
                                     loading.hide()
-                                    toast("Error: ${e.message}")
+                                    XEDtoast("Error: ${e.message}")
                                 }
                             }
 

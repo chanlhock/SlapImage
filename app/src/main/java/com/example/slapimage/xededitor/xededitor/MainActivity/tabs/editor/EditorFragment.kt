@@ -19,7 +19,7 @@ import com.example.slapimage.xededitor.libcommons.editor.SetupEditor
 import com.example.slapimage.xededitor.libcommons.editor.getInputView
 import com.example.slapimage.xededitor.libcommons.errorDialog
 import com.example.slapimage.xededitor.libcommons.safeLaunch
-import com.example.slapimage.xededitor.libcommons.toast
+import com.example.slapimage.xededitor.libcommons.XEDtoast
 import com.example.slapimage.xededitor.libcommons.toastCatching
 import com.example.slapimage.xededitor.resources.getString
 import com.example.slapimage.xededitor.resources.strings
@@ -246,7 +246,7 @@ class EditorFragment(val context: Context,val scope:CoroutineScope) : CoreFragme
             if (isAutoSaver) {
                 return
             }
-            toast(strings.file_err)
+            XEDtoast(strings.file_err)
             return
         }
 
@@ -254,7 +254,7 @@ class EditorFragment(val context: Context,val scope:CoroutineScope) : CoreFragme
             if (isAutoSaver) {
                 return
             }
-            toast(strings.file_not_loaded)
+            XEDtoast(strings.file_not_loaded)
             return
         }
 
@@ -262,7 +262,7 @@ class EditorFragment(val context: Context,val scope:CoroutineScope) : CoreFragme
             if (isAutoSaver) {
                 return
             }
-            toast(strings.file_exist_not)
+            XEDtoast(strings.file_exist_not)
             return
         }
 
@@ -279,7 +279,7 @@ class EditorFragment(val context: Context,val scope:CoroutineScope) : CoreFragme
                 }.onFailure {
                     if (it is SecurityException){
                         if (isAutoSaver.not()){
-                            toast(strings.read_only_file)
+                            XEDtoast(strings.read_only_file)
                         }
                         return@safeLaunch
                     }else{
@@ -304,7 +304,7 @@ class EditorFragment(val context: Context,val scope:CoroutineScope) : CoreFragme
                 }
             }?.let{
                 if (it is SecurityException){
-                    toast(strings.read_only_file)
+                    XEDtoast(strings.read_only_file)
                     return@safeLaunch
                 }else{
                     it.printStackTrace()

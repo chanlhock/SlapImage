@@ -4,7 +4,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
 import com.example.slapimage.xededitor.libcommons.LoadingPopup
 import com.example.slapimage.xededitor.libcommons.errorDialog
-import com.example.slapimage.xededitor.libcommons.toast
+import com.example.slapimage.xededitor.libcommons.XEDtoast
 import com.example.slapimage.xededitor.mutator_engine.Engine
 import com.example.slapimage.xededitor.mutator_engine.EngineAPI
 import com.example.slapimage.xededitor.xededitor.MainActivity.Kee
@@ -33,7 +33,7 @@ class ImplAPI(val engine: Engine) : EngineAPI {
      * @param text The message to display in the toast.
      */
     override fun showToast(text: String?) {
-        toast(text)
+        XEDtoast(text)
     }
 
     /**

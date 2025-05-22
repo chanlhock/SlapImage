@@ -26,7 +26,7 @@ import com.example.slapimage.xededitor.libcommons.LoadingPopup
 import com.example.slapimage.xededitor.libcommons.PathUtils.toPath
 import com.example.slapimage.xededitor.libcommons.askInput
 import com.example.slapimage.xededitor.libcommons.errorDialog
-import com.example.slapimage.xededitor.libcommons.toast
+import com.example.slapimage.xededitor.libcommons.XEDtoast
 import com.example.slapimage.xededitor.resources.drawables
 import com.example.slapimage.xededitor.resources.getDrawable
 import com.example.slapimage.xededitor.resources.getString
@@ -203,7 +203,7 @@ class FileAction(
                                 withContext(Dispatchers.Main) {
                                     loading.hide()
                                     if (success.not()) {
-                                        toast("Failed to delete file")
+                                        XEDtoast("Failed to delete file")
                                     }
                                 }
                             }
@@ -236,7 +236,7 @@ class FileAction(
                     drawables.content_paste_24px.getDrawable(mainActivity),
                 ) {
                     if (FileClipboard.isEmpty()) {
-                        toast(getString(strings.clipboardempty))
+                        XEDtoast(getString(strings.clipboardempty))
                     } else {
                         val loading = LoadingPopup(mainActivity, null).show()
 
@@ -318,7 +318,7 @@ class FileAction(
 
         fun create(createFile: Boolean,name: String){
             if (name.isEmpty()) {
-                toast(mainActivity.getString(strings.ask_enter_name))
+                XEDtoast(mainActivity.getString(strings.ask_enter_name))
                 return
             }
 
@@ -330,7 +330,7 @@ class FileAction(
                 runCatching {
                     if (file.hasChild(name)) {
                         withContext(Dispatchers.Main) {
-                            toast(mainActivity.getString(strings.already_exists))
+                            XEDtoast(mainActivity.getString(strings.already_exists))
                             loading.hide()
                         }
                     }
@@ -376,7 +376,7 @@ class FileAction(
             hint = strings.file_name.getString(),
             onResult = { input ->
                 if (input.isEmpty()) {
-                    toast(mainActivity.getString(strings.ask_enter_name))
+                    XEDtoast(mainActivity.getString(strings.ask_enter_name))
                     return@askInput
                 }
 
@@ -388,7 +388,7 @@ class FileAction(
                     runCatching {
                         if (file.hasChild(input)) {
                             withContext(Dispatchers.Main) {
-                                toast(mainActivity.getString(strings.already_exists))
+                                XEDtoast(mainActivity.getString(strings.already_exists))
                                 loading.hide()
                             }
                             return@launch
@@ -460,7 +460,7 @@ class FileAction(
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            toast(getString(strings.file_open_denied))
+            XEDtoast(getString(strings.file_open_denied))
         }
     }
 }

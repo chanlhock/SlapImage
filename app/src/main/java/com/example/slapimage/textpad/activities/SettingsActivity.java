@@ -36,7 +36,7 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        settingsService = ServiceLocator.getInstance().getSettingsService(getApplicationContext());
+        settingsService = ServiceLocator.getInstance().getSettingsService(SettingsActivity.this);  // getApplicationContext()
         alternativeUrlsService = ServiceLocator.getInstance().getAlternativeUrlsService();
         addPreferencesFromResource(R.xml.preferences);
 
@@ -113,7 +113,7 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
         new AlertDialog.Builder(this)
                 .setTitle(R.string.AlternativeFileAccessTitle)
                 .setMessage(R.string.ResetAlternativeFileLocations)
-                .setPositiveButton(R.string.Yes, (arg0, arg1) -> alternativeUrlsService.clearAlternativeUrls(getApplicationContext()))
+                .setPositiveButton(R.string.Yes, (arg0, arg1) -> alternativeUrlsService.clearAlternativeUrls(SettingsActivity.this)) // getApplicationContext()
                 .create()
                 .show();
     }
@@ -142,7 +142,7 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 
         // Unregister the listener whenever a key changes
         PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
-        settingsService.reloadSettings(this.getApplicationContext());
+        settingsService.reloadSettings(SettingsActivity.this);  // this.getApplicationContext()
     }
 
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
@@ -163,7 +163,7 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
             Preference backgroundColorPreference = this.findPreference(SettingsService.SETTING_BG_COLOR);
             backgroundColorPreference.setEnabled(SettingsService.COLOR_THEME_CUSTOM.equals(value));
         }
-        settingsService.reloadSettings(this.getApplicationContext());
+        settingsService.reloadSettings(SettingsActivity.this);       // this.getApplicationContext()
     }
 
 

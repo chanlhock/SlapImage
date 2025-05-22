@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.slapimage.xededitor.file_wrapper.FileWrapper
 import com.example.slapimage.xededitor.libcommons.DefaultScope
-import com.example.slapimage.xededitor.libcommons.toast
+import com.example.slapimage.xededitor.libcommons.XEDtoast
 import com.example.slapimage.xededitor.resources.getString
 import com.example.slapimage.xededitor.resources.strings
 import com.example.slapimage.xededitor.xededitor.App.Companion.getTempDir
@@ -85,7 +85,7 @@ fun ManageMutators(modifier: Modifier = Modifier, navController: NavController) 
                                         file
                                     )
                                 )
-                                toast(strings.tab_opened.getString())
+                                XEDtoast(strings.tab_opened.getString())
                             }
 
                         }
@@ -131,11 +131,11 @@ fun ManageMutators(modifier: Modifier = Modifier, navController: NavController) 
 
 private fun onDone(name: String): Boolean {
     if (name.isBlank()) {
-        toast(strings.name_empty_err.getString())
+        XEDtoast(strings.name_empty_err.getString())
         return false
     } else {
         if (Mutators.getMutators().map { it.name }.contains(name)) {
-            toast(strings.name_used.getString())
+            XEDtoast(strings.name_used.getString())
             return false
         }
         Mutators.createMutator(

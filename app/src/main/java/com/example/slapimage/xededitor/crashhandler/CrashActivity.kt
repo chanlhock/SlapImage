@@ -27,7 +27,7 @@ import kotlin.system.exitProcess
 import com.example.slapimage.BuildConfig
 import com.example.slapimage.xededitor.libcommons.child
 import com.example.slapimage.xededitor.libcommons.createFileIfNot
-import com.example.slapimage.xededitor.libcommons.toast
+import com.example.slapimage.xededitor.libcommons.XEDtoast
 import com.example.slapimage.xededitor.resources.getString
 import com.example.slapimage.xededitor.resources.strings
 import com.example.slapimage.R
@@ -114,7 +114,7 @@ class CrashActivity : AppCompatActivity() {
             R.id.copy_error -> {
                 runCatching {
                     copyToClipboard(this, editor.text.toString())
-                    toast("Copied")
+                    XEDtoast("Copied")
                 }.onFailure {
                     logErrorOrExit(it)
                 }

@@ -3,7 +3,7 @@ package com.example.slapimage.xededitor.xededitor.ui.screens.settings.editor
 import androidx.compose.runtime.mutableStateListOf
 import com.google.gson.GsonBuilder
 import com.example.slapimage.xededitor.libcommons.application
-import com.example.slapimage.xededitor.libcommons.toast
+import com.example.slapimage.xededitor.libcommons.XEDtoast
 import com.example.slapimage.xededitor.settings.Settings
 
 

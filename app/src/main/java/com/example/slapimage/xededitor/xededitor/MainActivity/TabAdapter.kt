@@ -10,7 +10,7 @@ import com.google.android.material.tabs.TabLayout
 import com.example.slapimage.xededitor.file_wrapper.FileObject
 import com.example.slapimage.xededitor.file_wrapper.FileWrapper
 import com.example.slapimage.xededitor.libcommons.DefaultScope
-import com.example.slapimage.xededitor.libcommons.toast
+import com.example.slapimage.xededitor.libcommons.XEDtoast
 import com.example.slapimage.xededitor.resources.getString
 import com.example.slapimage.xededitor.resources.strings
 import com.example.slapimage.xededitor.settings.Settings
@@ -218,7 +218,7 @@ class TabAdapter(private val mainActivity: XEDMainActivity) : FragmentStateAdapt
         val type = file.getFragmentType()
         if (Settings.unrestricted_files.not()){
             if ((type == FragmentType.EDITOR) && (file.length() / (1024.0 * 1024.0)) > 10) {
-                toast(strings.file_too_large)
+                XEDtoast(strings.file_too_large)
                 return
             }
         }
@@ -241,13 +241,13 @@ class TabAdapter(private val mainActivity: XEDMainActivity) : FragmentStateAdapt
 
                     }
                 }.onFailure {
-                    toast(getString(strings.already_opened))
+                    XEDtoast(getString(strings.already_opened))
                 }
 
                 return
             }
             if (tabViewModel.fragmentFiles.size >= tabLimit) {
-                toast(
+                XEDtoast(
                     "${getString(strings.open_cant)} $tabLimit ${getString(strings.files)}"
                 )
                 return

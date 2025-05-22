@@ -31,7 +31,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.slapimage.xededitor.libcommons.toast
+import com.example.slapimage.xededitor.libcommons.XEDtoast
 import com.example.slapimage.xededitor.resources.getString
 import com.example.slapimage.xededitor.resources.strings
 import com.example.slapimage.xededitor.settings.Settings
@@ -66,7 +66,7 @@ fun SettingsAppScreen(activity: SettingsActivity,navController: NavController) {
                 default = Settings.amoled,
                 sideEffect = {
                     Settings.amoled = it
-                    toast(strings.restart_required)
+                    XEDtoast(strings.restart_required)
                 })
 
 
@@ -149,7 +149,7 @@ fun DayNightDialog(
                                 coroutineScope.launch {
                                     bottomSheetState.hide(); showBottomSheet.value = false;
                                 }
-                                toast(strings.restart_required)
+                                XEDtoast(strings.restart_required)
                             },
                             startWidget = {
                                 RadioButton(

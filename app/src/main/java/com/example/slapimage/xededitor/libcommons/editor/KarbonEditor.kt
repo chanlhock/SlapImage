@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.example.slapimage.xededitor.file_wrapper.FileObject
 import com.example.slapimage.xededitor.libcommons.isDarkMode
 import com.example.slapimage.xededitor.libcommons.isMainThread
-import com.example.slapimage.xededitor.libcommons.toast
+import com.example.slapimage.xededitor.libcommons.XEDtoast
 import com.example.slapimage.xededitor.libcommons.toastCatching
 import com.example.slapimage.xededitor.settings.Settings
 import io.github.rosemoe.sora.text.ContentIO

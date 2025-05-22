@@ -36,7 +36,7 @@ import com.example.slapimage.xededitor.extension.ExtensionManager
 import com.example.slapimage.xededitor.libcommons.DefaultScope
 import com.example.slapimage.xededitor.libcommons.LoadingPopup
 import com.example.slapimage.xededitor.libcommons.application
-import com.example.slapimage.xededitor.libcommons.toast
+import com.example.slapimage.xededitor.libcommons.XEDtoast
 import com.example.slapimage.xededitor.resources.getString
 import com.example.slapimage.xededitor.resources.strings
 import com.example.slapimage.xededitor.xededitor.App.Companion.getTempDir

@@ -155,7 +155,7 @@ public class EditorActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        settingsService = ServiceLocator.getInstance().getSettingsService(this.getApplicationContext());
+        settingsService = ServiceLocator.getInstance().getSettingsService(EditorActivity.this); // this.getApplicationContext()
         recentFilesService = ServiceLocator.getInstance().getRecentFilesService();
         alternativeUrlsService = ServiceLocator.getInstance().getAlternativeUrlsService();
 
@@ -198,8 +198,8 @@ public class EditorActivity extends AppCompatActivity {
         if (useAndroidManager()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 if (settingsService.isAlternativeFileAccess() &&
-                    alternativeUrlsService.hasAlternativeUrl(u, getApplicationContext())) {
-                    openNamedFile(alternativeUrlsService.getAlternativeUrl(u, getApplicationContext()));
+                    alternativeUrlsService.hasAlternativeUrl(u, EditorActivity.this)) {  //getApplicationContext()
+                    openNamedFile(alternativeUrlsService.getAlternativeUrl(u, EditorActivity.this)); // getApplicationContext()
                 } else {
                     openNamedFile(u);
                 }
@@ -291,7 +291,7 @@ public class EditorActivity extends AppCompatActivity {
         }
 
         if (settingsService.useWakeLock()) {
-            ServiceLocator.getInstance().getWakeLockService().acquireLock(this.getApplicationContext());
+            ServiceLocator.getInstance().getWakeLockService().acquireLock(EditorActivity.this);  // this.getApplicationContext()
         }
     }
 
@@ -355,6 +355,7 @@ public class EditorActivity extends AppCompatActivity {
             exitDialogShown = true;
         } else {
             super.onBackPressed();
+            java.lang.System.exit(0);
         }
     }
 
@@ -398,7 +399,7 @@ public class EditorActivity extends AppCompatActivity {
             title = TPStrings.NEW_FILE_TXT;
         } else {
             Uri uri = Uri.parse(getFilename());
-            title = FileNameHelper.getFilenameByUri(getApplicationContext(), uri);
+            title = FileNameHelper.getFilenameByUri(EditorActivity.this, uri);      // getApplicationContext()
         }
         if (changed) {
             title = title + TPStrings.STAR;
@@ -519,7 +520,7 @@ public class EditorActivity extends AppCompatActivity {
             recentFilesMenuItem.setVisible(false);
             return;
         }
-        ArrayList<String> recentFiles = recentFilesService.getLastFiles(1, this.getApplicationContext());
+        ArrayList<String> recentFiles = recentFilesService.getLastFiles(1, EditorActivity.this); // this.ApplicationContext()
         MenuItem recentFilesMenuItem1 = menu.findItem(R.id.menu_document_open_last1);
         MenuItem recentFilesMenuItem2 = menu.findItem(R.id.menu_document_open_last2);
         MenuItem recentFilesMenuItem3 = menu.findItem(R.id.menu_document_open_last3);
@@ -539,7 +540,7 @@ public class EditorActivity extends AppCompatActivity {
             case 1:
                 recentFilesMenuItem.setVisible(true);
                 recentFilesMenuItem1.setVisible(true);
-                recentFilesMenuItem1.setTitle(FileNameHelper.getFilenameByUri(getApplicationContext(), recentFiles.get(0)));
+                recentFilesMenuItem1.setTitle(FileNameHelper.getFilenameByUri(EditorActivity.this, recentFiles.get(0))); // getApplicationContext()
                 recentFilesMenuItem2.setVisible(false);
                 recentFilesMenuItem3.setVisible(false);
                 recentFilesMenuItem4.setVisible(false);
@@ -548,9 +549,9 @@ public class EditorActivity extends AppCompatActivity {
             case 2:
                 recentFilesMenuItem.setVisible(true);
                 recentFilesMenuItem1.setVisible(true);
-                recentFilesMenuItem1.setTitle(FileNameHelper.getFilenameByUri(getApplicationContext(), recentFiles.get(0)));
+                recentFilesMenuItem1.setTitle(FileNameHelper.getFilenameByUri(EditorActivity.this, recentFiles.get(0))); // getApplicationContext()
                 recentFilesMenuItem2.setVisible(true);
-                recentFilesMenuItem2.setTitle(FileNameHelper.getFilenameByUri(getApplicationContext(), recentFiles.get(1)));
+                recentFilesMenuItem2.setTitle(FileNameHelper.getFilenameByUri(EditorActivity.this, recentFiles.get(1))); // getApplicationContext()
                 recentFilesMenuItem3.setVisible(false);
                 recentFilesMenuItem4.setVisible(false);
                 recentFilesMenuItem5.setVisible(false);
@@ -558,38 +559,38 @@ public class EditorActivity extends AppCompatActivity {
             case 3:
                 recentFilesMenuItem.setVisible(true);
                 recentFilesMenuItem1.setVisible(true);
-                recentFilesMenuItem1.setTitle(FileNameHelper.getFilenameByUri(getApplicationContext(), recentFiles.get(0)));
+                recentFilesMenuItem1.setTitle(FileNameHelper.getFilenameByUri(EditorActivity.this, recentFiles.get(0))); // getApplicationContext()
                 recentFilesMenuItem2.setVisible(true);
-                recentFilesMenuItem2.setTitle(FileNameHelper.getFilenameByUri(getApplicationContext(), recentFiles.get(1)));
+                recentFilesMenuItem2.setTitle(FileNameHelper.getFilenameByUri(EditorActivity.this, recentFiles.get(1))); // getApplicationContext()
                 recentFilesMenuItem3.setVisible(true);
-                recentFilesMenuItem3.setTitle(FileNameHelper.getFilenameByUri(getApplicationContext(), recentFiles.get(2)));
+                recentFilesMenuItem3.setTitle(FileNameHelper.getFilenameByUri(EditorActivity.this, recentFiles.get(2))); // getApplicationContext()
                 recentFilesMenuItem4.setVisible(false);
                 recentFilesMenuItem5.setVisible(false);
                 break;
             case 4:
                 recentFilesMenuItem.setVisible(true);
                 recentFilesMenuItem1.setVisible(true);
-                recentFilesMenuItem1.setTitle(FileNameHelper.getFilenameByUri(getApplicationContext(), recentFiles.get(0)));
+                recentFilesMenuItem1.setTitle(FileNameHelper.getFilenameByUri(EditorActivity.this, recentFiles.get(0))); // getApplicationContext()
                 recentFilesMenuItem2.setVisible(true);
-                recentFilesMenuItem2.setTitle(FileNameHelper.getFilenameByUri(getApplicationContext(), recentFiles.get(1)));
+                recentFilesMenuItem2.setTitle(FileNameHelper.getFilenameByUri(EditorActivity.this, recentFiles.get(1))); // getApplicationContext()
                 recentFilesMenuItem3.setVisible(true);
-                recentFilesMenuItem3.setTitle(FileNameHelper.getFilenameByUri(getApplicationContext(), recentFiles.get(2)));
+                recentFilesMenuItem3.setTitle(FileNameHelper.getFilenameByUri(EditorActivity.this, recentFiles.get(2))); // getApplicationContext()
                 recentFilesMenuItem4.setVisible(true);
-                recentFilesMenuItem4.setTitle(FileNameHelper.getFilenameByUri(getApplicationContext(), recentFiles.get(3)));
+                recentFilesMenuItem4.setTitle(FileNameHelper.getFilenameByUri(EditorActivity.this, recentFiles.get(3))); // getApplicationContext()
                 recentFilesMenuItem5.setVisible(false);
                 break;
             default:
                 recentFilesMenuItem.setVisible(true);
                 recentFilesMenuItem1.setVisible(true);
-                recentFilesMenuItem1.setTitle(FileNameHelper.getFilenameByUri(getApplicationContext(), recentFiles.get(0)));
+                recentFilesMenuItem1.setTitle(FileNameHelper.getFilenameByUri(EditorActivity.this, recentFiles.get(0)));  // getApplicationContext()
                 recentFilesMenuItem2.setVisible(true);
-                recentFilesMenuItem2.setTitle(FileNameHelper.getFilenameByUri(getApplicationContext(), recentFiles.get(1)));
+                recentFilesMenuItem2.setTitle(FileNameHelper.getFilenameByUri(EditorActivity.this, recentFiles.get(1))); // getApplicationContext()
                 recentFilesMenuItem3.setVisible(true);
-                recentFilesMenuItem3.setTitle(FileNameHelper.getFilenameByUri(getApplicationContext(), recentFiles.get(2)));
+                recentFilesMenuItem3.setTitle(FileNameHelper.getFilenameByUri(EditorActivity.this, recentFiles.get(2))); // getApplicationContext()
                 recentFilesMenuItem4.setVisible(true);
-                recentFilesMenuItem4.setTitle(FileNameHelper.getFilenameByUri(getApplicationContext(), recentFiles.get(3)));
+                recentFilesMenuItem4.setTitle(FileNameHelper.getFilenameByUri(EditorActivity.this, recentFiles.get(3))); // getApplicationContext()
                 recentFilesMenuItem5.setVisible(true);
-                recentFilesMenuItem5.setTitle(FileNameHelper.getFilenameByUri(getApplicationContext(), recentFiles.get(4)));
+                recentFilesMenuItem5.setTitle(FileNameHelper.getFilenameByUri(EditorActivity.this, recentFiles.get(4))); // getApplicationContext()
                 break;
         }
     }
@@ -740,7 +741,7 @@ public class EditorActivity extends AppCompatActivity {
     }
 
     private void openRecentFile(int i) {
-        ArrayList<String> lastFiles = recentFilesService.getLastFiles(1, getApplicationContext());
+        ArrayList<String> lastFiles = recentFilesService.getLastFiles(1, EditorActivity.this);  // getApplicationContext()
         if (i >= lastFiles.size()) {
             return;
         }
@@ -813,7 +814,7 @@ public class EditorActivity extends AppCompatActivity {
         if (!settingsService.isShowLastEditedFiles()) {
             return;
         }
-        recentFilesService.addRecentFile(value, getApplicationContext());
+        recentFilesService.addRecentFile(value, EditorActivity.this);  // getApplicationContext()
     }
 
     protected void initEditor() {
@@ -882,12 +883,15 @@ public class EditorActivity extends AppCompatActivity {
                                 Intent intent = new Intent(this, MainActivity.class);
                                 startActivity(intent);
                                 super.finish();
+                                java.lang.System.exit(0);
                     }).show();
         } else {
             //System.exitFromApp(EditorActivity.this);
+
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             super.finish();
+            java.lang.System.exit(0);
         }
     }
     
@@ -1087,7 +1091,7 @@ public class EditorActivity extends AppCompatActivity {
             initEditor();
             this.setFilename(filename);
             if (!settingsService.getLastFilename().equals(filename)) {
-                settingsService.setLastFilename(filename, this.getApplicationContext());
+                settingsService.setLastFilename(filename, EditorActivity.this);        // this.getApplicationContext()
             }
             selectionStart = 0;
             updateTitle();
@@ -1128,11 +1132,11 @@ public class EditorActivity extends AppCompatActivity {
             initEditor();
             setFilename(uri.toString());
             if (!settingsService.getLastFilename().equals(getFilename())) {
-                settingsService.setLastFilename(getFilename(), this.getApplicationContext());
+                settingsService.setLastFilename(getFilename(), EditorActivity.this);  // this.getApplicationContext()
             }
             selectionStart = 0;
             if (lastTriedSystemUri != null) {
-                alternativeUrlsService.addAlternativeUrl(lastTriedSystemUri, uri, getApplicationContext());
+                alternativeUrlsService.addAlternativeUrl(lastTriedSystemUri, uri, EditorActivity.this); // getApplicationContext()
                 lastTriedSystemUri = null;
             }
             updateTitle();
@@ -1346,17 +1350,17 @@ public class EditorActivity extends AppCompatActivity {
     }
 
     protected void showToast(int toast_str) {
-        Context context = getApplicationContext();
+        Context context = EditorActivity.this;  //getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, toast_str, duration);
-        toast.show();
+        Toast texttoast = Toast.makeText(context, toast_str, duration);
+        texttoast.show();
     }
 
     protected void showToast(String toast_str) {
-        Context context = getApplicationContext();
+        Context context = EditorActivity.this;  //getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, toast_str, duration);
-        toast.show();
+        Toast texttoast = Toast.makeText(context, toast_str, duration);
+        texttoast.show();
     }
 
     // QueryTextListener

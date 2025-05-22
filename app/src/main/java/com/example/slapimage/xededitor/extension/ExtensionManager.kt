@@ -16,7 +16,7 @@ import com.example.slapimage.xededitor.libcommons.createFileIfNot
 import com.example.slapimage.xededitor.libcommons.dialog
 import com.example.slapimage.xededitor.libcommons.errorDialog
 import com.example.slapimage.xededitor.libcommons.postIO
-import com.example.slapimage.xededitor.libcommons.toast
+import com.example.slapimage.xededitor.libcommons.XEDtoast
 import com.example.slapimage.xededitor.libcommons.toastCatching
 import com.example.slapimage.xededitor.resources.getString
 import com.example.slapimage.xededitor.resources.strings
@@ -176,7 +176,7 @@ object ExtensionManager : ExtensionAPI() {
                         extensions[ext] = null
                     }
 
-                    toast(strings.success)
+                    XEDtoast(strings.success)
 
                     if (apkFile.exists()) {
                         apkFile.delete()

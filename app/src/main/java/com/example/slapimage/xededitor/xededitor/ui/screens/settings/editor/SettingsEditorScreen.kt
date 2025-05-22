@@ -16,7 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.example.slapimage.xededitor.libcommons.DefaultScope
-import com.example.slapimage.xededitor.libcommons.toast
+import com.example.slapimage.xededitor.libcommons.XEDtoast
 import com.example.slapimage.xededitor.resources.getString
 import com.example.slapimage.xededitor.resources.strings
 import com.example.slapimage.xededitor.settings.Settings
@@ -87,7 +87,7 @@ fun SettingsEditorScreen(navController: NavController) {
                 key = PreferencesKeys.SCROLL_TO_BOTTOM,
                 sideEffect = {
                     if (it) {
-                        toast(strings.ni.getString())
+                        XEDtoast(strings.ni.getString())
                     }
                 }) */
 
@@ -284,10 +284,10 @@ fun SettingsEditorScreen(navController: NavController) {
                 },
                 onConfirm = {
                     if (lineSpacingValue.toFloatOrNull() == null){
-                        toast(strings.inavalid_v)
+                        XEDtoast(strings.inavalid_v)
                         lineSpacingValue = Settings.line_spacing.toString()
                     }else if (lineSpacingValue.toFloat() < 0) {
-                        toast(context.getString(strings.v_small))
+                        XEDtoast(context.getString(strings.v_small))
                         lineSpacingValue = Settings.line_spacing.toString()
                     } else {
                         Settings.line_spacing = lineSpacingValue.toFloat()
@@ -315,10 +315,10 @@ fun SettingsEditorScreen(navController: NavController) {
                 },
                 onConfirm = {
                     if (autoSaveTimeValue.toIntOrNull() == null){
-                        toast(strings.inavalid_v)
+                        XEDtoast(strings.inavalid_v)
                         autoSaveTimeValue = Settings.auto_save_interval.toString()
                     }else if (autoSaveTimeValue.toInt() < 3000) {
-                        toast(context.getString(strings.v_small))
+                        XEDtoast(context.getString(strings.v_small))
                         autoSaveTimeValue = Settings.auto_save_interval.toString()
                     } else {
                         Settings.auto_save_interval = autoSaveTimeValue.toInt()
@@ -340,13 +340,13 @@ fun SettingsEditorScreen(navController: NavController) {
                 },
                 onConfirm = {
                     if (textSizeValue.toIntOrNull() == null){
-                        toast(strings.inavalid_v)
+                        XEDtoast(strings.inavalid_v)
                         textSizeValue = Settings.editor_text_size.toString()
                     }else if (textSizeValue.toInt() > 32) {
-                        toast(context.getString(strings.v_large))
+                        XEDtoast(context.getString(strings.v_large))
                         textSizeValue = Settings.editor_text_size.toString()
                     } else if (textSizeValue.toInt() < 8) {
-                        toast(context.getString(strings.v_small))
+                        XEDtoast(context.getString(strings.v_small))
                         textSizeValue = Settings.editor_text_size.toString()
                     } else {
                         Settings.editor_text_size = textSizeValue.toInt()
@@ -373,13 +373,13 @@ fun SettingsEditorScreen(navController: NavController) {
                 },
                 onConfirm = {
                     if (tabSizeValue.toIntOrNull() == null){
-                        toast(strings.inavalid_v)
+                        XEDtoast(strings.inavalid_v)
                         tabSizeValue = Settings.tab_size.toString()
                     }else if (tabSizeValue.toInt() > 16) {
-                        toast(context.getString(strings.v_large))
+                        XEDtoast(context.getString(strings.v_large))
                         tabSizeValue = Settings.tab_size.toString()
                     } else if (tabSizeValue.toInt() < 1) {
-                        toast(context.getString(strings.v_small))
+                        XEDtoast(context.getString(strings.v_small))
                         tabSizeValue = Settings.tab_size.toString()
                     } else {
                         Settings.tab_size = tabSizeValue.toInt()

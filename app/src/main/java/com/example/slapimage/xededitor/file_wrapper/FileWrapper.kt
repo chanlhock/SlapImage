@@ -5,7 +5,7 @@ import android.net.Uri
 import android.os.Environment
 import android.webkit.MimeTypeMap
 import androidx.core.net.toUri
-import com.example.slapimage.xededitor.libcommons.toast
+import com.example.slapimage.xededitor.libcommons.XEDtoast
 import com.example.slapimage.xededitor.resources.strings
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -41,7 +41,7 @@ class FileWrapper(var file: File) : FileObject {
         charset: Charset
     ): Boolean {
         if (canWrite().not()){
-            toast(strings.permission_denied)
+            XEDtoast(strings.permission_denied)
             return false
         }
         withContext(Dispatchers.IO){

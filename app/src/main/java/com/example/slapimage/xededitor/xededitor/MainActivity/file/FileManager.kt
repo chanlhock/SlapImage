@@ -22,7 +22,7 @@ import com.example.slapimage.xededitor.libcommons.PathUtils.toPath
 import com.example.slapimage.xededitor.libcommons.application
 import com.example.slapimage.xededitor.libcommons.askInput
 import com.example.slapimage.xededitor.libcommons.errorDialog
-import com.example.slapimage.xededitor.libcommons.toast
+import com.example.slapimage.xededitor.libcommons.XEDtoast
 import com.example.slapimage.xededitor.libcommons.uriToFileObject
 import com.example.slapimage.xededitor.resources.getString
 import com.example.slapimage.xededitor.resources.strings
@@ -198,14 +198,14 @@ class FileManager(private val mainActivity: XEDMainActivity) {
             }
 
             if (fileObject.hasChild(fileName)){
-                toast("File with name $fileName already exists")
+                XEDtoast("File with name $fileName already exists")
             }else{
                 val newFile = fileObject.createChild(true,fileName)
                 DefaultScope.launch(Dispatchers.Main) {
                     if (newFile != null) {
                         mainActivity.adapter?.addFragment(newFile)
                     }else{
-                        toast("Unable to create file")
+                        XEDtoast("Unable to create file")
                     }
                 }
             }
@@ -289,17 +289,17 @@ class FileManager(private val mainActivity: XEDMainActivity) {
             onResult = { input ->
                 val file = File(input)
                 if (input.isEmpty()) {
-                    toast(getString(strings.enter_path))
+                    XEDtoast(getString(strings.enter_path))
                     return@askInput
                 }
 
                 if (!file.exists()) {
-                    toast(getString(strings.invalid_path))
+                    XEDtoast(getString(strings.invalid_path))
                     return@askInput
                 }
 
                 if (!file.canRead() || !file.canWrite()) {
-                    toast(getString(strings.permission_denied))
+                    XEDtoast(getString(strings.permission_denied))
                     return@askInput
                 }
 

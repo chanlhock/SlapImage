@@ -10,7 +10,7 @@ import com.example.slapimage.xededitor.libcommons.DefaultScope
 import com.example.slapimage.xededitor.libcommons.application
 import com.example.slapimage.xededitor.libcommons.dialog
 import com.example.slapimage.xededitor.libcommons.errorDialog
-import com.example.slapimage.xededitor.libcommons.toast
+import com.example.slapimage.xededitor.libcommons.XEDtoast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

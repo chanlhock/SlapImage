@@ -4,12 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.res.Configuration
-import android.os.Build
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.WindowManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.StringRes
@@ -19,15 +16,15 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.example.slapimage.BuildConfig
+import com.example.slapimage.R
+import com.example.slapimage.musicplayer.ApplicationClass
 import com.example.slapimage.xededitor.components.compose.preferences.base.DividerColumn
 import com.example.slapimage.xededitor.resources.getString
 import com.example.slapimage.xededitor.resources.strings
-import com.example.slapimage.BuildConfig
 import com.example.slapimage.xededitor.xededitor.MainActivity.XEDMainActivity
-import com.example.slapimage.R
-import com.example.slapimage.musicplayer.ApplicationClass
 import com.example.slapimage.xededitor.xededitor.ui.theme.KarbonTheme
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -82,12 +79,11 @@ inline fun runOnUiThread(runnable: Runnable) {
     GlobalScope.launch(Dispatchers.Main) { runnable.run() }
 }
 
-inline fun toast(@StringRes resId: Int) {
-    toast(resId.getString())
+inline fun XEDtoast(@StringRes resId: Int) {
+    XEDtoast(resId.getString())
 }
 
-fun toast(message: String?) {
-    val context = ApplicationClass.getAppContext()
+fun XEDtoast(message: String?) {
     if (message.isNullOrBlank()) {
         Log.w("UTILS", "Toast with null or empty message")
         return
@@ -101,7 +97,7 @@ fun toast(message: String?) {
 }
 
 inline fun String?.toastIt() {
-    toast(this)
+    XEDtoast(this)
 }
 
 inline fun toastCatching(block: () -> Unit): Exception? {
@@ -223,7 +219,7 @@ fun errorDialog(msg: String){
 
     val activity = XEDMainActivity.activityRef.get()
     if (activity == null){
-        //toast(msg)
+        XEDtoast(msg)
         return
     }
 

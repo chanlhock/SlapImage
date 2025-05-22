@@ -20,7 +20,7 @@ import com.example.slapimage.xededitor.libcommons.askInput
 import com.example.slapimage.xededitor.libcommons.composeDialog
 import com.example.slapimage.xededitor.libcommons.runOnUiThread
 import com.example.slapimage.xededitor.libcommons.safeLaunch
-import com.example.slapimage.xededitor.libcommons.toast
+import com.example.slapimage.xededitor.libcommons.XEDtoast
 import com.example.slapimage.xededitor.libcommons.toastCatching
 import com.example.slapimage.xededitor.resources.getString
 import com.example.slapimage.xededitor.resources.strings
@@ -56,7 +56,7 @@ object MenuClickHandler {
             Id.run -> {
                 val file = XEDMainActivity.activityRef.get()?.adapter?.getCurrentFragment()?.fragment?.getFile()
                 if (file == null){
-                    toast("Illegal state")
+                    XEDtoast("Illegal state")
                     return true
                 }
                 DefaultScope.safeLaunch {
@@ -67,7 +67,7 @@ object MenuClickHandler {
 
             Id.action_all -> {
                 saveAllFiles()
-                toast(strings.save_all.getString())
+                XEDtoast(strings.save_all.getString())
                 return true
             }
 
@@ -162,14 +162,14 @@ object MenuClickHandler {
 
                     val file = XEDMainActivity.activityRef.get()?.adapter?.getCurrentFragment()?.fragment?.getFile()
                     if (file == null){
-                        toast(strings.unsupported_contnt)
+                        XEDtoast(strings.unsupported_contnt)
                         return true
                     }
 
                     if (file is FileWrapper){
                         if (file.getAbsolutePath().contains(application!!.filesDir.parentFile!!.absolutePath)){
                             //files in private directory cannot be shared
-                            toast(strings.permission_denied)
+                            XEDtoast(strings.permission_denied)
                             return true
                         }
                     }

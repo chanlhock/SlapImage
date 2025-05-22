@@ -56,15 +56,12 @@ class ApplicationClass:Application() {
             }
             return tmp
         }
-        private lateinit var instance: ApplicationClass
-        fun getAppContext(): Context = instance.applicationContext
     }
 
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate() {
         super.onCreate()
 
-        instance = this
         startKoin {
             androidLogger(Level.DEBUG)
             androidContext(this@ApplicationClass)
