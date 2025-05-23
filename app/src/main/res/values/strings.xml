@@ -182,6 +182,7 @@
     // DeepSeek AI
     <string name="select_model">Select AI Model</string>
     <string name="model_not_loaded">Model not loaded. Please select an ONNX model file.</string>
+    <string name="model_loading_progress">Loading model... %d%%</string>
     <string name="model_loaded">Model loaded to cache: %s</string>
     <string name="type_your_message">Type your message…</string>
     <string name="you">You</string>

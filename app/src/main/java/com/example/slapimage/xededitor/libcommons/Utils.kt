@@ -93,7 +93,15 @@ fun XEDtoast(message: String?) {
         return
     }
 
-    runOnUiThread { Toast.makeText(XEDMainActivity.activityRef.get(), message.toString(), Toast.LENGTH_SHORT).show() }
+    //runOnUiThread { Toast.makeText(XEDMainActivity.activityRef.get(), message.toString(), Toast.LENGTH_SHORT).show() }
+    val context = XEDMainActivity.activityRef.get()
+    context?.let { safeContext ->
+        runOnUiThread {
+            Toast.makeText(safeContext, message.toString(), Toast.LENGTH_SHORT).show()
+        }
+    } ?: run {
+        Log.e("XEDtoast", "Cannot show toast - context is null")
+    }
 }
 
 inline fun String?.toastIt() {

@@ -105,7 +105,7 @@ class ChatBotFragment : Fragment() {
         binding.btnSend.setOnClickListener { sendMessage() }
         binding.btnSend.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.dark_blue))
     }
-
+/*
     private fun setupObservers() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -117,16 +117,42 @@ class ChatBotFragment : Fragment() {
                 }
             }
         }
-
+private fun setupObservers() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                // For observing changes
+                viewModel.isModelLoaded.collect { isLoaded ->
+                    binding.btnSend.isEnabled = !viewModel.isProcessing.value && isLoaded
+                }
+            }
+        }
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.isProcessing.collect { isProcessing ->
                     binding.progressBar.visibility = if (isProcessing) View.VISIBLE else View.GONE
-                    binding.btnSend.isEnabled = !isProcessing && viewModel.isModelLoaded
+                    binding.btnSend.isEnabled = !isProcessing && viewModel.isModelLoadedDirect
+                }
+            }
+        }
+    }*/
+private fun setupObservers() {
+    viewLifecycleOwner.lifecycleScope.launch {
+        viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            viewModel.isProcessing.collect { isProcessing ->
+                binding.progressBar.visibility = if (isProcessing) View.VISIBLE else View.GONE
+                binding.btnSend.isEnabled = !isProcessing && viewModel.isModelLoaded.value // Use .value instead of Direct
+            }
+            viewModel.chatMessages.collect { messages ->
+                chatAdapter.submitList(messages)
+                if(messages.isNotEmpty()) {
+                    binding.rvChatMessages.smoothScrollToPosition(messages.size - 1)
                 }
             }
         }
     }
+}
+
+
 
     private fun openFilePicker() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
@@ -137,10 +163,25 @@ class ChatBotFragment : Fragment() {
         filePickerLauncher.launch(intent)
     }
 
+
     private fun sendMessage() {
         val userInput = binding.etUserInput.text.toString().trim()
         if (userInput.isEmpty()) return
 
+        // Use the StateFlow's value directly
+        if (!viewModel.isModelLoaded.value) {
+            Toast.makeText(requireContext(), "Model not loaded", Toast.LENGTH_SHORT).show()
+            return
+        }
+    //private fun sendMessage() {
+    //    val userInput = binding.etUserInput.text.toString().trim()
+    //    if (userInput.isEmpty()) return
+
+        // Use isModelLoadedDirect for immediate checks
+    //    if (!viewModel.isModelLoadedDirect) {
+    //        Toast.makeText(requireContext(), "Model not loaded", Toast.LENGTH_SHORT).show()
+    //        return
+    //    }
         viewModel.addChatMessage(AIChatMessage(getString(R.string.you), userInput, false))
         binding.etUserInput.text.clear()
 
@@ -216,7 +257,73 @@ class ChatBotFragment : Fragment() {
         return@withContext vocabFile
     }
 
+    private fun loadModelFromUri(uri: Uri) {
+        lifecycleScope.launch {
+            try {
+                binding.tvModelStatus.text = getString(R.string.processing)
+                binding.btnSend.isEnabled = false
+                binding.progressBar.visibility = View.VISIBLE
+                binding.progressBarHorizontal.visibility = View.VISIBLE
 
+                // Get filename from URI
+                val originalFileName = getFileNameFromUri(uri)
+                val cacheFileName = originalFileName?.let { "cache_$originalFileName.onnx" } ?: "temp_model.onnx"
+
+                // Copy model file to cache
+                val modelFile = withContext(Dispatchers.IO) {
+                    File(requireContext().cacheDir, cacheFileName).also { file ->
+                        requireContext().contentResolver.openInputStream(uri)?.use { inputStream ->
+                            FileOutputStream(file).use { outputStream ->
+                                inputStream.copyTo(outputStream)
+                            }
+                        }
+                    }
+                }
+
+                // Load model with progress tracking
+                viewModel.loadModel(requireContext(), modelFile.absolutePath)
+
+                // Observe loading progress
+                viewLifecycleOwner.lifecycleScope.launch {
+                    viewModel.loadingProgress.collect { progress ->
+                        binding.progressBarHorizontal.progress = progress
+                        binding.tvModelStatus.text =
+                            getString(R.string.model_loading_progress, progress)
+                    }
+                }
+
+                // Observe completion
+                viewLifecycleOwner.lifecycleScope.launch {
+                    viewModel.isModelLoaded.collect { isLoaded ->
+                        if (isLoaded) {
+                            binding.tvModelStatus.text =
+                                getString(R.string.model_loaded, modelFile.name)
+                            binding.btnSend.isEnabled = true
+                            binding.progressBar.visibility = View.GONE
+                            binding.progressBarHorizontal.visibility = View.GONE
+                            Toast.makeText(
+                                requireContext(),
+                                "Model loaded successfully",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }
+
+            } catch (e: Exception) {
+                binding.tvModelStatus.text = getString(R.string.model_not_loaded)
+                binding.btnSend.isEnabled = false
+                binding.progressBar.visibility = View.GONE
+                binding.progressBarHorizontal.visibility = View.GONE
+                Toast.makeText(
+                    requireContext(),
+                    "Error: ${e.message}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+    }
+    /*
     private fun loadModelFromUri(uri: Uri) {
         lifecycleScope.launch {
             try {
@@ -232,9 +339,15 @@ class ChatBotFragment : Fragment() {
                 }
 
                 // Copy the model file to cache
-                val inputStream = requireContext().contentResolver.openInputStream(uri)
-                val modelFile = File(requireContext().cacheDir, cacheFileName).apply {
-                    inputStream?.use { it.copyTo(outputStream()) }
+                //val inputStream = requireContext().contentResolver.openInputStream(uri)
+                //val modelFile = File(requireContext().cacheDir, cacheFileName).apply {
+                //    inputStream?.use { it.copyTo(outputStream()) }
+               // }
+                val modelFile = File(requireContext().cacheDir, cacheFileName)
+                requireContext().contentResolver.openInputStream(uri)?.use { inputStream ->
+                    FileOutputStream(modelFile).use { outputStream ->
+                        inputStream.copyTo(outputStream)
+                    }
                 }
                 // Load model with context
                 viewModel.loadModel(requireContext(), modelFile.absolutePath)
@@ -249,7 +362,7 @@ class ChatBotFragment : Fragment() {
             }
         }
     }
-
+*/
     // Helper function to get filename from URI
     private fun getFileNameFromUri(uri: Uri): String? {
         return when (uri.scheme) {

@@ -22,20 +22,35 @@ import java.io.File
 import java.io.FileOutputStream
 import java.nio.file.Paths
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.asCoroutineDispatcher
+import java.util.concurrent.Executors
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 
-class AIChatViewModel : ViewModel() {
+
+/*class AIChatViewModel : ViewModel() {
     private val _chatMessages = MutableStateFlow<List<AIChatMessage>>(emptyList())
     val chatMessages: StateFlow<List<AIChatMessage>> = _chatMessages.asStateFlow()
 
     private val _isProcessing = MutableStateFlow(false)
     val isProcessing: StateFlow<Boolean> = _isProcessing.asStateFlow()
 
+    private val _isModelLoaded = MutableStateFlow(false)
+    val isModelLoaded: StateFlow<Boolean> = _isModelLoaded.asStateFlow()
+
+    // Add this convenience property for direct boolean access
+    val isModelLoadedDirect: Boolean
+        get() = _isModelLoaded.value
+
+    private val _errorMessage = MutableStateFlow<String?>(null)
+    val errorMessage: StateFlow<String?> = _errorMessage.asStateFlow()
+
     private var model: Model? = null
     private var predictor: Predictor<NDList, NDList>? = null
     private var vocabulary: DefaultVocabulary? = null
 
-    val isModelLoaded: Boolean
-        get() = model != null && predictor != null
+    //val isModelLoaded: Boolean
+      //  get() = model != null && predictor != null
 
     fun loadModel(context: Context, modelPath: String) {
         //fun loadModel(modelPath: String) {
@@ -59,18 +74,164 @@ class AIChatViewModel : ViewModel() {
 
                 predictor = model?.newPredictor(NoopTranslator())
                 // Add system message confirming model loaded
-                addChatMessage(AIChatMessage("System", "Model loaded successfully", true))
+                // Update state on main thread
+                withContext(Dispatchers.Main) {
+                    _isModelLoaded.value = true
+                    addChatMessage(AIChatMessage("System", "Model loaded successfully", true))
+                }
+                //addChatMessage(AIChatMessage("System", "Model loaded successfully", true))
             } catch (e: Exception) {
                 closeModel()
                 // You might want to update UI with this error
-                addChatMessage(AIChatMessage("System", "Error loading model: ${e.localizedMessage}", true))
+                withContext(Dispatchers.Main) {
+                    _errorMessage.value = "Error loading model: ${e.localizedMessage}"
+                    addChatMessage(AIChatMessage("System", "Error loading model: ${e.localizedMessage}", true))
+                }
+                //addChatMessage(AIChatMessage("System", "Error loading model: ${e.localizedMessage}", true))
                 //throw e
             } finally {
                 _isProcessing.value = false
             }
         }
     }
+*/
+class AIChatViewModel : ViewModel() {
+    // Model components
+    private var model: Model? = null
+    private var vocabulary: DefaultVocabulary? = null
+    private var predictor: Predictor<NDList, NDList>? = null
 
+    // Thread management
+    private val modelLoaderDispatcher = Executors.newSingleThreadExecutor().asCoroutineDispatcher()
+
+    // State flows
+    private val _chatMessages = MutableStateFlow<List<AIChatMessage>>(emptyList())
+    private val _isProcessing = MutableStateFlow(false)
+    private val _isModelLoaded = MutableStateFlow(false)
+    private val _errorMessage = MutableStateFlow<String?>(null)
+    private val _loadingProgress = MutableStateFlow(0)
+
+    // Public flows
+    val chatMessages: StateFlow<List<AIChatMessage>> = _chatMessages.asStateFlow()
+    val isProcessing: StateFlow<Boolean> = _isProcessing.asStateFlow()
+    val isModelLoaded: StateFlow<Boolean> = _isModelLoaded.asStateFlow()
+    val errorMessage: StateFlow<String?> = _errorMessage.asStateFlow()
+    val loadingProgress: StateFlow<Int> = _loadingProgress.asStateFlow()
+    // Add this direct access property
+    val isModelLoadedDirect: Boolean
+        get() = _isModelLoaded.value
+
+    fun loadModel(context: Context, modelPath: String) {
+        if (_isProcessing.value) return
+
+        viewModelScope.launch {
+            _isProcessing.value = true
+            _errorMessage.value = null
+            _loadingProgress.value = 0
+
+            try {
+                // Step 1: Prepare vocabulary (10% progress)
+                val vocabFile = withContext(Dispatchers.IO) {
+                    prepareVocabFile(context)
+                }
+                _loadingProgress.value = 10
+
+                // Step 2-4: Load model on dedicated thread
+                val (loadedModel, loadedVocab, loadedPredictor) = withContext(modelLoaderDispatcher) {
+                    // Step 2: Load model (can take time)
+                    val model = Model.newInstance("deepseek-r1").apply {
+                        load(Paths.get(modelPath))
+                    }
+                    _loadingProgress.value = 60
+
+                    // Step 3: Prepare vocabulary
+                    val vocabulary = DefaultVocabulary.builder()
+                        .optMinFrequency(1)
+                        .addFromTextFile(vocabFile.toPath())
+                        .optUnknownToken("[UNK]")
+                        .build()
+                    _loadingProgress.value = 80
+
+                    // Step 4: Create predictor
+                    val predictor = model.newPredictor(NoopTranslator())
+                    _loadingProgress.value = 90
+
+                    Triple(model, vocabulary, predictor)
+                }
+
+                // Update state on main thread
+                closeModel() // Close any existing model first
+                model = loadedModel
+                vocabulary = loadedVocab
+                predictor = loadedPredictor
+                _isModelLoaded.value = true
+                _loadingProgress.value = 100
+                addChatMessage(AIChatMessage("System", "Model loaded successfully", true))
+            } catch (e: Exception) {
+                closeModel()
+                _errorMessage.value = "Error loading model: ${e.localizedMessage}"
+                addChatMessage(AIChatMessage("System", "Error loading model: ${e.localizedMessage}", true))
+            } finally {
+                _isProcessing.value = false
+            }
+        }
+    }
+
+    private suspend fun prepareVocabFile(context: Context): File = withContext(Dispatchers.IO) {
+        val vocabFile = File(context.cacheDir, "vocab.txt")
+        if (!vocabFile.exists()) {
+            context.assets.open("vocab.txt").use { input ->
+                FileOutputStream(vocabFile).use { output ->
+                    input.copyTo(output)
+                }
+            }
+        }
+        vocabFile
+    }
+
+    fun getAIResponse(input: String): String {
+        if (!_isModelLoaded.value) throw IllegalStateException("Model not loaded")
+
+        return NDManager.newBaseManager().use { manager ->
+            try {
+                // Tokenization with proper unknown token handling
+                val tokens = input.split(" ").map {
+                    vocabulary?.getIndex(it)?.toLong()
+                        ?: vocabulary?.getIndex("[UNK]")?.toLong()
+                        ?: 0L
+                }
+
+                // Create input tensor
+                val inputArray = manager.create(tokens.toLongArray())
+                    .reshape(Shape(1, tokens.size.toLong()))
+
+                        // Perform inference
+                        val output = predictor?.predict(NDList(inputArray))
+                    ?: throw IllegalStateException("Predictor not initialized")
+
+                // Process output
+                when {
+                    output.singletonOrThrow().shape.dimension() == 1 -> {
+                        val probs = output.singletonOrThrow().softmax(0)
+                        "Prediction: ${probs.argMax().getLong()}"
+                    }
+                    else -> {
+                        val outputIds = output.singletonOrThrow().toLongArray()
+                        outputIds.joinToString(" ") { id ->
+                            vocabulary?.getToken(id) ?: "[UNK]"
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                "Error generating response: ${e.message}"
+            }
+        }
+    }
+
+    fun addChatMessage(message: AIChatMessage) {
+        _chatMessages.value = _chatMessages.value + message
+    }
+    /*
     private suspend fun prepareVocabFile(context: Context): File = withContext(Dispatchers.IO) {
         val vocabFile = File(context.cacheDir, "vocab.txt")
         if (!vocabFile.exists()) {
@@ -86,7 +247,7 @@ class AIChatViewModel : ViewModel() {
         }
         return@withContext vocabFile
     }
-
+*/
     /*
     fun getAIResponse(input: String): String {
         if (!isModelLoaded) throw IllegalStateException("Model not loaded")
@@ -113,57 +274,24 @@ class AIChatViewModel : ViewModel() {
         }
     }
 */
-// In AIChatViewModel.kt
-fun getAIResponse(input: String): String {
-    if (!isModelLoaded) throw IllegalStateException("Model not loaded")
-
-    return NDManager.newBaseManager().use { manager ->
-        try {
-            // 1. Tokenization with proper unknown token handling
-            val tokens = input.split(" ").map {
-                vocabulary?.getIndex(it)?.toLong()
-                    ?: vocabulary?.getIndex("[UNK]")?.toLong()
-                    ?: 0L
-            }
-
-            // 2. Create input tensor with explicit type and shape toLong
-            val inputArray = manager.create(tokens.toLongArray())
-                .reshape(Shape(1, tokens.size.toLong()))
 
 
-            // 3. Perform inference
-            val output = predictor?.predict(NDList(inputArray))
-                ?: throw IllegalStateException("Predictor not initialized")
-
-
-            // 4. Proper output processing
-            return@use when {
-                // For classification models
-                output.singletonOrThrow().shape.dimension() == 1 -> {
-                    val probs = output.singletonOrThrow().softmax(0)
-                    "Prediction: ${probs.argMax().getLong()}"
-                }
-                // For text generation
-                else -> {
-                    val outputIds = output.singletonOrThrow().toLongArray()
-                    outputIds.joinToString(" ") { id ->
-                        vocabulary?.getToken(id) ?: "[UNK]"
-                    }
-                }
-            }
-        } catch (e: Exception) {
-            "Error generating response: ${e.message}\n${e.stackTraceToString()}"
-        }
-    }
-}
-
-    fun addChatMessage(message: AIChatMessage) {
-        _chatMessages.value = _chatMessages.value + message
-    }
+ //   fun addChatMessage(message: AIChatMessage) {
+  //      _chatMessages.value = _chatMessages.value + message
+  //  }
 
     fun setProcessing(processing: Boolean) {
         _isProcessing.value = processing
     }
+
+    //private fun closeModel() {
+   //     predictor?.close()
+   //     model?.close()
+   //     predictor = null
+//model = null
+   //     vocabulary = null
+ //       _isModelLoaded.value = false
+  //  }
 
     private fun closeModel() {
         predictor?.close()
@@ -171,10 +299,16 @@ fun getAIResponse(input: String): String {
         predictor = null
         model = null
         vocabulary = null
+        _isModelLoaded.value = false
     }
 
     override fun onCleared() {
         super.onCleared()
+        modelLoaderDispatcher.close()
         closeModel()
     }
+    //override fun onCleared() {
+    //    super.onCleared()
+    //    closeModel()
+   // }
 }
