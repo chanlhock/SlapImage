@@ -128,7 +128,7 @@ object MediaStoreReceiver {
                     null
                 }
             }
-            cursor.close()
+            //cursor.close()
         }
         return null
     }

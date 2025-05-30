@@ -1,6 +1,5 @@
 package com.example.slapimage.xededitor.libcommons
 
-import android.content.Context
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
@@ -54,7 +53,7 @@ fun alpineHomeDir(): File {
 fun File.child(fileName:String):File {
     return File(this,fileName)
 }
-
+/*
 fun File.createFileIfNot():File{
     if (parentFile.exists().not()){
         parentFile.mkdirs()
@@ -63,13 +62,18 @@ fun File.createFileIfNot():File{
         createNewFile()
     }
     return this
+}*/
+fun File.createFileIfNot(): File {
+    parentFile?.takeIf { !it.exists() }?.mkdirs()
+    takeIf { !it.exists() }?.createNewFile()
+    return this
 }
 
 fun File.toFileWrapper():FileWrapper{
     return FileWrapper(this)
 }
 
-inline fun isFileManager():Boolean{
+fun isFileManager():Boolean{
     return ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) && Environment.isExternalStorageManager())
 }
 

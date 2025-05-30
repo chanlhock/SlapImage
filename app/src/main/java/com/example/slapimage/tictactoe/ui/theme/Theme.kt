@@ -99,7 +99,7 @@ fun DoozTheme(
         isDarkTheme -> darkColors
         else -> lightColors
     }
-
+    @Suppress("DEPRECATION")
     if (!isPreviewing) {
         val activity = LocalView.current.context as Activity
         SideEffect {

@@ -346,6 +346,7 @@ class GameState(
 }
 
 @Composable
+@Suppress("DEPRECATION")
 fun rememberHomeState(
     hapticFeedback: HapticFeedback = LocalHapticFeedback.current,
     context: Context = LocalContext.current,

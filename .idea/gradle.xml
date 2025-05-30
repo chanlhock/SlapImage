@@ -10,6 +10,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Builder" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/components" />
@@ -17,6 +18,8 @@
             <option value="$PROJECT_DIR$/core/editor-lsp" />
             <option value="$PROJECT_DIR$/core/language-textmate" />
             <option value="$PROJECT_DIR$/core/resources" />
+            <option value="$PROJECT_DIR$/pro" />
+            <option value="$PROJECT_DIR$/smartreflow" />
           </set>
         </option>
       </GradleProjectSettings>

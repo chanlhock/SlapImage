@@ -20,6 +20,7 @@ class CalculatorActivity : AppCompatActivity() {
     private var operation = ""
     private var isNewOperation = true
 
+    @Suppress("DEPRECATION")
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

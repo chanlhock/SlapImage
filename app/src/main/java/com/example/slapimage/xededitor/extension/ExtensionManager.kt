@@ -3,13 +3,10 @@ package com.example.slapimage.xededitor.extension
 import android.app.Activity
 import android.app.Application
 import android.content.pm.PackageManager
-import android.os.Build
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.core.content.pm.PackageInfoCompat
 import com.example.slapimage.xededitor.file_wrapper.FileObject
-import com.example.slapimage.xededitor.libcommons.PopupButton
-import com.example.slapimage.xededitor.libcommons.PopupButtonType
 import com.example.slapimage.xededitor.libcommons.application
 import com.example.slapimage.xededitor.libcommons.child
 import com.example.slapimage.xededitor.libcommons.createFileIfNot
@@ -66,11 +63,11 @@ object ExtensionManager : ExtensionAPI() {
 
                         val metadata = appInfo.metaData
 
-                        val versionCode = if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-                            info.longVersionCode
-                        } else {
-                            info.versionCode.toLong()
-                        }
+                        //val versionCode = if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+                        val versionCode=info.longVersionCode
+                        // else {
+                        //    info.versionCode.toLong()
+                       // }
 
                         val minSdkVersion = metadata.getInt("minXedVersionCode", -1)
                         val targetSdkVersion = metadata.getInt("targetXedVersionCode", -1)
@@ -150,11 +147,11 @@ object ExtensionManager : ExtensionAPI() {
                 )
 
 
-                val versionCode = if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-                    info.longVersionCode
-                } else {
-                    info.versionCode.toLong()
-                }
+             //   val versionCode = if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+                val versionCode = info.longVersionCode
+             //   } else {
+              //      info.versionCode.toLong()
+              //  }
 
                 val ext = Extension(
                     name = pm.getApplicationLabel(appInfo).toString(),

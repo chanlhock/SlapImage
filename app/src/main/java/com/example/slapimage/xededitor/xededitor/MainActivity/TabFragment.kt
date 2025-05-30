@@ -25,6 +25,7 @@ class TabFragment : Fragment() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        @Suppress("DEPRECATION")
         file = arguments?.getSerializable(ARG_FILE_PATH) as FileObject
 
         if (Hooks.Editor.tabs.isNotEmpty()){

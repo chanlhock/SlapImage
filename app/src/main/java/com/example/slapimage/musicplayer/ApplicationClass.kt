@@ -18,6 +18,7 @@ import com.example.slapimage.mp3tagger.core.di.coreFunctionalitiesModule
 import org.koin.core.logger.Level
 // XED Editor
 import android.os.StrictMode
+import androidx.multidex.MultiDexApplication
 import com.github.anrwatchdog.ANRWatchDog
 import com.example.slapimage.xededitor.crashhandler.CrashHandler
 import com.example.slapimage.xededitor.extension.Extension
@@ -41,8 +42,26 @@ import java.io.File
 import java.util.concurrent.Executors
 import com.example.slapimage.BuildConfig
 import com.example.slapimage.xededitor.xededitor.App
+// Librera
+import android.content.Intent
+import android.os.Environment
+import android.util.Log
+import androidx.annotation.NonNull
+import com.example.slapimage.ibook.foobnix.android.utils.Dips
+import com.example.slapimage.ibook.foobnix.android.utils.LOG
+import com.example.slapimage.ibook.foobnix.android.utils.TxtUtils
+import com.example.slapimage.ibook.foobnix.ext.CacheZipUtils
+import com.example.slapimage.ibook.foobnix.hypen.HypenUtils
+import com.example.slapimage.ibook.foobnix.pdf.info.ADS
+import com.example.slapimage.ibook.foobnix.pdf.info.AppsConfig
+import com.example.slapimage.ibook.foobnix.pdf.info.IMG
+import com.example.slapimage.ibook.foobnix.pdf.info.Prefs
+import com.example.slapimage.ibook.foobnix.pdf.info.TintUtil
+import com.example.slapimage.ibook.foobnix.tts.TTSNotification
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.RequestConfiguration
 
-class ApplicationClass:Application() {
+class ApplicationClass:MultiDexApplication() {
     companion object{
         const val CHANNEL_ID = "MusicNotification"
         const val PLAY = "play"
@@ -56,10 +75,25 @@ class ApplicationClass:Application() {
             }
             return tmp
         }
+        lateinit var context: Context   // Librera
     }
 
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate() {
+        if (false) {    // Librera
+            StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder()
+                .detectDiskReads()
+                .detectDiskWrites()
+                .detectNetwork()
+                .penaltyLog()
+                .build())
+            StrictMode.setVmPolicy(StrictMode.VmPolicy.Builder()
+                .detectLeakedSqlLiteObjects()
+                .detectLeakedClosableObjects()
+                .penaltyLog()
+                .penaltyDeath()
+                .build())
+        }
         super.onCreate()
 
         startKoin {
@@ -84,9 +118,9 @@ class ApplicationClass:Application() {
 
         Thread.setDefaultUncaughtExceptionHandler(CrashHandler)
 
-        if (BuildConfig.DEBUG || Settings.anr_watchdog){
-            ANRWatchDog().start()
-        }
+     //   if (BuildConfig.DEBUG || Settings.anr_watchdog){
+     //       ANRWatchDog().start()
+     //   }
 
         if (BuildConfig.DEBUG || Settings.strict_mode){
             StrictMode.setVmPolicy(
@@ -123,6 +157,39 @@ class ApplicationClass:Application() {
                 Extension.loadExtensions(this@ApplicationClass, GlobalScope)
             }
         }
+
+        // Librera
+        context = applicationContext
+        AppsConfig.init(this)
+        //Dips.init(this);
+        //Prefs.get().init(this)
+        if (AppsConfig.IS_TEST_DEVICE) {
+            val configuration = RequestConfiguration.Builder()
+                .setTestDeviceIds(AppsConfig.testDevices)
+                .build()
+            MobileAds.setRequestConfiguration(configuration)
+        }
+      //  TTSNotification.initChannels(this)
+
+      //  CacheZipUtils.init(this)
+       // IMG.init(this)
+        if (TxtUtils.isEmpty(AppsConfig.FLAVOR)) {
+            throw RuntimeException("Application not configured correctly!")
+        }
+
+       // if (AppsConfig.IS_WRITE_LOGS) {
+       //     LOG.writeCrashTofile = true
+       //     Thread.setDefaultUncaughtExceptionHandler { thread, e ->
+       //         LOG.uncaughtException(e)
+
+         //       val intent = Intent(Intent.ACTION_MAIN)
+        //        intent.addCategory(Intent.CATEGORY_HOME)
+        //        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+         //       startActivity(intent)
+
+//                System.exit(0)
+  //          }
+    //    }
     }
     override fun onTrimMemory(level: Int) {
         XEDMainActivity.withContext {
@@ -131,4 +198,16 @@ class ApplicationClass:Application() {
         ExtensionManager.onLowMemory()
         super.onTrimMemory(level)
     }
+    override fun onLowMemory() {
+        super.onLowMemory()
+        LOG.d("AppState save onLowMemory")
+        IMG.clearMemoryCache()
+        TintUtil.clean()
+        HypenUtils.cache.clear()
+    }
+
+    //override fun onTrimMemory(level: Int) {
+    //    super.onTrimMemory(level)
+    //    LOG.d("onTrimMemory", level)
+   // }
 }

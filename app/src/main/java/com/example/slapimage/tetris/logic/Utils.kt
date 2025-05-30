@@ -50,7 +50,7 @@ fun calculateScore(lines: Int) = when (lines) {
 
 
 object StatusBarUtil {
-
+    @Suppress("DEPRECATION")
     fun transparentStatusBar(activity: Activity) {
         with(activity) {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)

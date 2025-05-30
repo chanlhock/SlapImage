@@ -87,5 +87,23 @@
         <attr name="label" format="string"/>
         <attr name="labelLeftPadding" format="dimension"/>
     </declare-styleable>
+    <declare-styleable name="FastScrollRecyclerView">
+        <attr name="hideScrollbar" format="boolean" />
+        <attr name="showTrack" format="boolean" />
+        <attr name="trackColor" format="color" />
+        <attr name="handleColor" format="color" />
+        <attr name="bubbleColor" format="color" />
+        <attr name="bubbleTextColor" format="color" />
+    </declare-styleable>
 
+
+    <declare-styleable name="DragLinearLayout">
+        <attr name="scrollSensitiveHeight" format="dimension" />
+        <attr name="placeholderView" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomSeek">
+        <attr name="custom_text" format="string" />
+        <attr name="textColor" format="string" />
+    </declare-styleable>
 </resources>

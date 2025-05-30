@@ -51,7 +51,7 @@ class AndroidSensorEventListener(
                 windowManager.defaultDisplay.rotation
             }
 
-            if (rotation != null) {
+            //if (rotation != null) {
                 when (rotation) {
                     Surface.ROTATION_0 -> SensorManager.remapCoordinateSystem(
                         rotationMatrix,
@@ -86,7 +86,7 @@ class AndroidSensorEventListener(
                 val azimuth = orientationAngles[0]
                 val toDegree = ToDegree.toDegree(azimuth)
                 azimuthValueListener?.onAzimuthValueChange(toDegree)
-            }
+            //}
         }else if (event.sensor.type == Sensor.TYPE_MAGNETIC_FIELD){
             System.arraycopy(event.values, 0, magnetometerReading, 0, magnetometerReading.size)
         }

@@ -18,7 +18,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
 import com.example.slapimage.BuildConfig
 import com.example.slapimage.R
-import com.example.slapimage.musicplayer.ApplicationClass
 import com.example.slapimage.xededitor.components.compose.preferences.base.DividerColumn
 import com.example.slapimage.xededitor.resources.getString
 import com.example.slapimage.xededitor.resources.strings
@@ -75,11 +74,11 @@ inline fun CoroutineScope.safeToastLaunch(
 
 
 @OptIn(DelicateCoroutinesApi::class)
-inline fun runOnUiThread(runnable: Runnable) {
+fun runOnUiThread(runnable: Runnable) {
     GlobalScope.launch(Dispatchers.Main) { runnable.run() }
 }
 
-inline fun XEDtoast(@StringRes resId: Int) {
+fun XEDtoast(@StringRes resId: Int) {
     XEDtoast(resId.getString())
 }
 
@@ -104,7 +103,7 @@ fun XEDtoast(message: String?) {
     }
 }
 
-inline fun String?.toastIt() {
+fun String?.toastIt() {
     XEDtoast(this)
 }
 
@@ -126,12 +125,12 @@ fun isDarkMode(ctx: Context): Boolean {
     return ((ctx.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES)
 }
 
-inline fun dpToPx(dp: Float, ctx: Context): Int {
+fun dpToPx(dp: Float, ctx: Context): Int {
     val density = ctx.resources.displayMetrics.density
     return Math.round(dp * density)
 }
 
-inline fun isMainThread(): Boolean {
+fun isMainThread(): Boolean {
     return Thread.currentThread().name == "main"
 }
 

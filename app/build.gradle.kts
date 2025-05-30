@@ -46,6 +46,7 @@ android {
         }
         manifestPlaceholders["redirectHostName"] = "SlapImage"
         manifestPlaceholders["redirectSchemeName"] = "SlapImage"
+        multiDexEnabled = true
     }
 
     buildTypes {
@@ -53,6 +54,7 @@ android {
             //applicationIdSuffix = ".debug"
             //versionNameSuffix = "-DEBUG"
             //resValue("string","app_name","SlapImage-Debug")
+            isDebuggable = true
         }
         release {
             isMinifyEnabled = false
@@ -60,6 +62,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            isDebuggable = false
         }
     }
     compileOptions {
@@ -79,15 +82,76 @@ android {
     }
     packaging {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/{AL2.0,LGPL2.1,LICENSE,LICENSE.txt,NOTICE,NOTICE.txt}"
+            excludes += "/META-INF/*.kotlin_module"
+            excludes += "/META-INF/*.version"
+            excludes += "/META-INF/proguard/*"
+            excludes += "/META-INF/services/*"
+            excludes += "/META-INF/native-image/*"
         }
-        // For .so (JNI) files
-        jniLibs.pickFirsts.add("**/libonnxruntime4j_jni.so")
-        jniLibs.pickFirsts.add("**/libonnxruntime.so")
+
         jniLibs {
-            useLegacyPackaging = true
+            pickFirsts.addAll(listOf(
+                "**/libonnxruntime4j_jni.so",
+                "**/libonnxruntime.so",
+                "**/libMuPDF.so"
+            ))
+            // Only enable if you have specific needs for uncompressed native libs
+            // useLegacyPackaging = true
         }
     }
+//splits {
+  //      abi {
+  //          reset()
+  //          include("x86", "x86_64", "armeabi-v7a", "arm64-v8a")
+  //          isUniversalApk = true
+  //      }
+ //   }
+
+    flavorDimensions += listOf("version")
+
+    productFlavors {
+        create("fdroid") {
+            minSdk = 29
+            dimension = "version"
+            applicationId = "com.example.slapimage"
+            manifestPlaceholders["appGdriveKey"] = ""
+            manifestPlaceholders["admobAppId"] = ""
+            manifestPlaceholders["admobBannerId"] = ""
+            manifestPlaceholders["admobFullId"] = ""
+            manifestPlaceholders["appSafeMode"] = "true"
+            versionNameSuffix = "-fdroid"
+        }
+
+        create("pro") {
+            dimension = "version"
+            applicationId = "com.example.slapimage"
+            manifestPlaceholders["admobAppId"] = ""
+            manifestPlaceholders["admobBannerId"] = ""
+            manifestPlaceholders["admobFullId"] = ""
+            manifestPlaceholders["appSafeMode"] = "false"
+        }
+    }
+
+    sourceSets {
+        getByName("fdroid") {
+            assets.srcDirs("src/fdroid/assets", "src/fdroid/assets/")
+        }
+        named("main") {
+            jniLibs.srcDirs("src/main/jniLibs", "src/main/Libs")
+        }
+    }
+
+
+    applicationVariants.all {
+        outputs.all {
+                val flavor = productFlavors[0].name.replaceFirstChar { it.uppercase() }
+                val abi = System.getenv("TARGET_ABI") ?: "universal"
+                val fullName = "SlapImage_${flavor}_${versionCode}_${abi}.apk"
+                (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl).outputFileName = fullName
+        }
+    }
+
 }
 
 dependencies {
@@ -263,4 +327,45 @@ dependencies {
     api(project(":core:language-textmate"))
     api(project(":core:resources"))
     api(project(":core:components"))
+
+    // Librera
+        implementation(fileTree(mapOf("include" to listOf("*.jar"), "dir" to "libs")))
+        //proImplementation(project(":pro"))
+        //fdroidImplementation(project(":pro"))
+        implementation(project(":pro"))
+        implementation(project(":smartreflow"))
+
+        /** AndroidX **/
+        //implementation("androidx.cardview:cardview:1.0.0")
+        implementation("androidx.multidex:multidex:2.0.1")
+        //implementation("androidx.recyclerview:recyclerview:1.3.2")
+        //implementation("androidx.work:work-runtime:2.10.0")
+        implementation("androidx.legacy:legacy-support-v4:1.0.0")
+        //implementation("androidx.appcompat:appcompat:1.7.0")
+
+        /** Third-party **/
+        implementation("com.github.axet:lame:1.0.9")
+        implementation("org.greenrobot:eventbus:3.3.1")
+
+        implementation("org.greenrobot:greendao:3.3.0") {
+            exclude(group = "org.greenrobot.greendao.rx")
+        }
+
+        implementation("org.greenrobot:greendao-api:3.3.0")
+        implementation("org.jsoup:jsoup:1.18.1")
+        implementation("com.github.albfernandez:juniversalchardet:2.5.0")
+        implementation("com.squareup.okhttp3:okhttp:3.12.6")
+        implementation("io.github.rburgst:okhttp-digest:1.21")
+        implementation("com.squareup.okio:okio-parent:1.17.6")
+        implementation("com.github.joniles:rtfparserkit:1.16.0")
+        implementation("org.zwobble.mammoth:mammoth:1.5.0")
+        implementation("javax.xml.stream:stax-api:1.0-2")
+        implementation("net.lingala.zip4j:zip4j:2.11.5")
+        //implementation("com.github.bumptech.glide:glide:4.16.0")
+        //annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
+        implementation("commons-logging:commons-logging-api:1.1")
+        implementation("androidx.work:work-runtime:2.10.0")
+        implementation("com.google.guava:guava:33.3.1-android")
+        implementation("com.jaredrummler:colorpicker:1.1.0")
+
 }

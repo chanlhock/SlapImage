@@ -371,14 +371,31 @@ class XEDMainActivity : BaseActivity() {
         PermissionHandler.onRequestPermissionsResult(requestCode, grantResults, this)
     }
 
-    var isPaused = true
+    //var isPaused = true
+   // override fun onPause() {
+   //     isPaused = true
+   //     tabViewModel.save()
+  //      GlobalScope.launch { saveProjects() }
+
+//        if (Settings.auto_save) {
+  //          toastCatching { saveAllFiles() }
+   //     }
+
+     //   super.onPause()
+   // }
+     var isPaused = true
     override fun onPause() {
         isPaused = true
-        tabViewModel.save()
-        GlobalScope.launch { saveProjects() }
 
-        if (Settings.auto_save) {
-            toastCatching { saveAllFiles() }
+        // Use lifecycleScope instead of GlobalScope
+        lifecycleScope.launch {
+            // Run save operations sequentially
+            tabViewModel.save()
+            saveProjects()
+
+            if (Settings.auto_save) {
+                toastCatching { saveAllFiles() }
+            }
         }
 
         super.onPause()

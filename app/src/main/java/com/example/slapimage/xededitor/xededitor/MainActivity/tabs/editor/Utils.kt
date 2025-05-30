@@ -19,7 +19,7 @@ fun editorFragmentsForEach(callback: (EditorFragment) -> Unit){
     }
 }
 
-inline fun CoreFragment.isEditorFragment(): Boolean{
+fun CoreFragment.isEditorFragment(): Boolean{
     return this is EditorFragment
 }
 

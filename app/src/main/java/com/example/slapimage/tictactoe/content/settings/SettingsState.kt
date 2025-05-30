@@ -173,6 +173,7 @@ class SettingsState(
 }
 
 @Composable
+@Suppress("DEPRECATION")
 fun rememberSettingsState(
     context: Context = LocalContext.current,
     coroutineScope: LifecycleCoroutineScope = LocalLifecycleOwner.current.lifecycleScope,

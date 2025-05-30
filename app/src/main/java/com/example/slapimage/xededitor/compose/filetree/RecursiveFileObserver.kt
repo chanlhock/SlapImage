@@ -19,7 +19,7 @@ import java.util.Stack
  * @author    uestc.Mobius <mobius></mobius>@toraleap.com>
  * @version  2011.0121
  */
-
+@Suppress("DEPRECATION")
 class RecursiveFileObserver @JvmOverloads constructor(path: String?, mask: Int = ALL_EVENTS) :
     FileObserver(path, mask) {
     private var mObservers: MutableList<SingleFileObserver>? = null

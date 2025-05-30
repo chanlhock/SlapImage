@@ -488,7 +488,7 @@ class CalcMainActivity : AppCompatActivity() {
          }
 
      }
-
+    @Suppress("DEPRECATION")
     private fun vibration(){
         val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         if (vibrator.hasVibrator()) { // Vibrator availability checking
