@@ -89,21 +89,19 @@ class HomeFragment : Fragment() {
          R.drawable.banner3, R.drawable.banner4, R.drawable.banner5, R.drawable.banner6,
          R.drawable.banner7, R.drawable.banner8, R.drawable.banner37, R.drawable.banner10,
          R.drawable.banner12, R.drawable.banner13, R.drawable.banner14,
-         R.drawable.banner15, R.drawable.banner16, R.drawable.banner17, R.drawable.banner18,
+         R.drawable.banner15, R.drawable.banner18,
          R.drawable.banner19, R.drawable.banner23, R.drawable.banner24, R.drawable.banner25,
-         R.drawable.banner26, R.drawable.banner29, R.drawable.banner30, R.drawable.banner32,
+         R.drawable.banner26, R.drawable.banner30, R.drawable.banner32,
          R.drawable.banner35, R.drawable.banner36, R.drawable.banner9, R.drawable.banner38,
          R.drawable.banner39, R.drawable.banner40,
          R.drawable.banner43, R.drawable.banner44, R.drawable.banner45, R.drawable.banner46,
-         R.drawable.banner47, R.drawable.banner48, R.drawable.banner49, R.drawable.banner50,
-         R.drawable.banner51, R.drawable.banner52, R.drawable.banner53, R.drawable.banner54,
+         R.drawable.banner47, R.drawable.banner48, R.drawable.banner49,
+         R.drawable.banner51, R.drawable.banner53, R.drawable.banner54,
          R.drawable.banner55, R.drawable.banner56, R.drawable.banner57, R.drawable.banner58,
-         R.drawable.banner59, R.drawable.banner60, R.drawable.banner61, R.drawable.banner62,
-         R.drawable.banner63, R.drawable.banner64, R.drawable.banner65, R.drawable.banner66,
-         R.drawable.banner67, R.drawable.banner68, R.drawable.banner69, R.drawable.banner70,
-         R.drawable.banner71, R.drawable.banner72, R.drawable.banner73, R.drawable.banner74,
-         R.drawable.banner75, R.drawable.banner76, R.drawable.banner77, R.drawable.banner78,
-         R.drawable.banner79, R.drawable.banner80, R.drawable.banner84, R.drawable.banner85
+         R.drawable.banner60, R.drawable.banner61, R.drawable.banner62,
+         R.drawable.banner63, R.drawable.banner65, R.drawable.banner66,
+         R.drawable.banner68, R.drawable.banner70, R.drawable.banner71, R.drawable.banner72,
+         R.drawable.banner74, R.drawable.banner78
      )
  }
     private var currentBannerIndex = 3
