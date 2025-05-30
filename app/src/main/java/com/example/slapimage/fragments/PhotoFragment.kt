@@ -52,7 +52,7 @@ class PhotoFragment : Fragment() {
     }
     private var currentPosition = 0
     private var isLimitedMode = true // Start in limited mode (7 photos)
-    private val maxLimitedPosition = 6 // 0-6 = 7 photos
+    private val maxLimitedPosition = 5 // 0-5 = 6 photos
     private var lastPinchTime = 0L
     private val pinchCooldown = 1000L // 1 second cooldown between pinch actions
 

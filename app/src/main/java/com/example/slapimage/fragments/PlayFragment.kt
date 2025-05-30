@@ -76,25 +76,20 @@ class PlayFragment : Fragment() {
     // Two separate GIF lists
     private val gifList3 = listOf(
         R.drawable.gif3,
-        R.drawable.gif6,
-        R.drawable.gif7
+        R.drawable.gif6
     )
 
     private val gifList5 = when {
         BuildConfig.MINIMAL_BUILDSIZE == true -> listOf(
             R.drawable.gif3,
             R.drawable.gif6,
-            R.drawable.gif7,
             R.drawable.gif4
         )
         else -> listOf(
             R.drawable.gif3,
             R.drawable.gif6,
-            R.drawable.gif7,
             R.drawable.gif4,
-            R.drawable.gif5,
-            R.drawable.gif10,
-            R.drawable.gif15
+            R.drawable.gif5
         )
     }
     private var currentGifIndex = 0
