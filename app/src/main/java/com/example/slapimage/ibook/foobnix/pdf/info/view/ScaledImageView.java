@@ -5,10 +5,12 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
+import androidx.appcompat.widget.AppCompatImageView;
+
 import com.example.slapimage.ibook.foobnix.android.utils.Dips;
 import com.example.slapimage.ibook.foobnix.android.utils.LOG;
 
-public class ScaledImageView extends ImageView {
+public class ScaledImageView extends AppCompatImageView {        //IamgeView chanlhock
     public ScaledImageView(final Context context, final AttributeSet attrs) {
         super(context, attrs);
     }

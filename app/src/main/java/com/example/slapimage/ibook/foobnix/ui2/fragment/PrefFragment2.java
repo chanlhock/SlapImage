@@ -189,7 +189,8 @@ public class PrefFragment2 extends UIFragment {
         if (profileLetter != null && getActivity() != null) {
             final String p = AppProfile.getCurrent(getActivity());
             profileLetter.setText(TxtUtils.getFirstLetter(p));
-            profileLetter.setBackgroundDrawable(AppProfile.getProfileColorDrawable(getActivity(), TintUtil.color));
+            profileLetter.setBackground(AppProfile.getProfileColorDrawable(getActivity(), TintUtil.color));
+            //profileLetter.setBackgroundDrawable(AppProfile.getProfileColorDrawable(getActivity(), TintUtil.color));
             profileLetter.setContentDescription(p + " " + getString(R.string.profile));
         }
 
@@ -597,7 +598,7 @@ public class PrefFragment2 extends UIFragment {
 
             // ((TextView) inflate.findViewById(R.id.pVersion)).setText(String.format("%s:
             // %s (%s)", getString(R.string.version), version, AppsConfig.MUPDF_VERSION));
-            ((TextView) inflate.findViewById(R.id.pVersion)).setText(String.format("%s: %s", getString(R.string.version), version));
+            //((TextView) inflate.findViewById(R.id.pVersion)).setText(String.format("%s: %s", getString(R.string.version), version));
             ((TextView) inflate.findViewById(R.id.section6)).setText(String.format("%s: %s %s %s", Apps.getApplicationName(getActivity()), version, "SDK: " + Build.VERSION.SDK_INT, Build.MANUFACTURER));
         } catch (final NameNotFoundException e) {
         }
@@ -1146,6 +1147,7 @@ public class PrefFragment2 extends UIFragment {
 
                             }
                         });
+
 
                         builder.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
 
@@ -1721,25 +1723,7 @@ public class PrefFragment2 extends UIFragment {
             }
         });
 
-        final TextView whatIsNew = inflate.findViewById(R.id.whatIsNew);
-        whatIsNew.setText(
 
-                getActivity().
-
-                        getString(R.string.what_is_new_in) + " " + Apps.getApplicationName(
-
-                        getActivity()) + " " + Apps.getVersionName(
-
-                        getActivity()));
-        TxtUtils.underlineTextView(whatIsNew);
-        whatIsNew.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                AndroidWhatsNew.show2(getActivity());
-
-            }
-        });
 
         ///
 
@@ -2550,7 +2534,7 @@ public class PrefFragment2 extends UIFragment {
         final String p = AppProfile.getCurrent(getActivity());
 
         profileLetter.setText(TxtUtils.getFirstLetter(p));
-        profileLetter.setBackgroundDrawable(AppProfile.getProfileColorDrawable(
+        profileLetter.setBackground(AppProfile.getProfileColorDrawable(
 
                 getActivity(), p));
 
@@ -2791,7 +2775,7 @@ public class PrefFragment2 extends UIFragment {
         super.onCreate(savedInstanceState);
     }
 
-    public void onEmail() {
+ /*   public void onEmail() {
         final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 
         String string = getResources().getString(R.string.my_email).replace("<u>", "").replace("</u>", "");
@@ -2807,7 +2791,7 @@ public class PrefFragment2 extends UIFragment {
             Toast.makeText(getContext(), R.string.there_are_no_email_applications_installed_, Toast.LENGTH_SHORT).show();
         }
     }
-
+*/
     public String getFullDeviceInfo() {
         return "(" + Build.BRAND + ", " + Build.MODEL + ", " + android.os.Build.VERSION.RELEASE + ", " + Dips.screenWidthDP() + "dp" + ")";
     }

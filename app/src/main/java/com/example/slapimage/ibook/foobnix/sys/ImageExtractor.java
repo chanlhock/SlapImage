@@ -37,6 +37,7 @@ import com.example.slapimage.ibook.foobnix.ext.Fb2Extractor;
 import com.example.slapimage.ibook.foobnix.ext.MobiExtract;
 import com.example.slapimage.ibook.foobnix.ext.OdtExtractor;
 import com.example.slapimage.ibook.foobnix.ext.RtfExtract;
+import com.example.slapimage.ibook.foobnix.ext.PdfExtract;
 import com.example.slapimage.ibook.foobnix.model.AppSP;
 import com.example.slapimage.ibook.foobnix.model.AppState;
 import com.example.slapimage.ibook.foobnix.opds.OPDS;
@@ -237,7 +238,7 @@ public class ImageExtractor {
         return BaseExtractor.getBookCoverWithTitle(msg, name, true);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+   /* @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public Bitmap coverPDFNative(PageUrl pageUrl) {
         try {
             LOG.d("Cover-PDF-navite");
@@ -259,10 +260,58 @@ public class ImageExtractor {
             return null;
         }
 
-    }
+    }*/
+   @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+   public Bitmap coverPDFNative(PageUrl pageUrl) {
+       ParcelFileDescriptor fd = null;
+       PdfRenderer renderer = null;
+       try {
+           File file = new File(pageUrl.getPath());
+           if (!file.exists()) {
+               LOG.d("PDF file not found: " + pageUrl.getPath());
+               return null;
+           }
+
+           fd = ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY);
+           renderer = new PdfRenderer(fd);
+
+           if (renderer.getPageCount() == 0) {
+               LOG.d("PDF has no pages");
+               return null;
+           }
+
+           PdfRenderer.Page page = renderer.openPage(0);
+           try {
+               final float ratio = (float) page.getHeight() / page.getWidth();
+               int width = pageUrl.getWidth();
+               int height = (int) (width * ratio);
+
+               // Use ARGB_8888 for better quality
+               Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+               page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
+               return bitmap;
+           } finally {
+               page.close();
+           }
+       } catch (SecurityException e) {
+           LOG.d("PDF security error", e);
+           return null;
+       } catch (IOException e) {
+           LOG.d("PDF IO error", e);
+           return null;
+       } finally {
+           if (renderer != null) {
+               renderer.close();
+           }
+           if (fd != null) {
+               try { fd.close(); } catch (IOException e) { /* ignore */ }
+           }
+       }
+   }
 
 
     public Bitmap proccessCoverPage(PageUrl pageUrl) {
+        LOG.d("ImageExtractor_Entry", "proccessCoverPage ENTERED for PageUrl: " + pageUrl); // ADD THIS LINE
         String path = pageUrl.getPath();
 
         if (pageUrl.getHeight() == 0) {
@@ -335,7 +384,9 @@ public class ImageExtractor {
             cover = BaseExtractor.arrayToBitmap(ebookMeta.coverImage, pageUrl.getWidth());
             LOG.d("Calibre-image", pageUrl);
         } else if (BookType.EPUB.is(unZipPath)) {
+            LOG.d("ImageExtractor_Trace", "Attempting EPUB cover. Path: " + unZipPath); // Use LOG.d
             cover = BaseExtractor.arrayToBitmap(EpubExtractor.get().getBookCover(unZipPath), pageUrl.getWidth());
+            LOG.d("ImageExtractor_Trace", "Returned from EPUB. Bytes null: " + (cover == null)); // Use LOG.d
         } else if (ExtUtils.isLibreFile(unZipPath) || BookType.ODT.is(unZipPath) || (unZipPath != null && unZipPath.endsWith(".docx"))) {
             cover = BaseExtractor.arrayToBitmap(OdtExtractor.get().getBookCover(unZipPath), pageUrl.getWidth());
         } else if (BookType.FB2.is(unZipPath)) {
@@ -345,14 +396,23 @@ public class ImageExtractor {
         } else if (BookType.RTF.is(unZipPath)) {
             cover = BaseExtractor.arrayToBitmap(RtfExtract.getImageCover(unZipPath), pageUrl.getWidth());
         } else if (BookType.PDF.is(unZipPath)) {
-            if (Build.VERSION.SDK_INT >= 29 && Arrays.asList(COVER_PAGE, COVER_PAGE_NO_EFFECT, COVER_PAGE_WITH_EFFECT).contains(pageUrl.getPage())) {
+            if (Arrays.asList(COVER_PAGE, COVER_PAGE_NO_EFFECT, COVER_PAGE_WITH_EFFECT).contains(pageUrl.getPage())) {
                 LOG.d("Native-PDF-cover", pageUrl);
+                LOG.d("ImageExtractor_Trace", "Attempting PDF cover. Path: " + unZipPath); // Use LOG.d
+                pageUrl.setPath(unZipPath); // Ensure pageUrl has the correct path for coverPDFNative
                 cover = coverPDFNative(pageUrl);
                 if (cover == null) {
-                    LOG.d("Native-PDF-cover", "error", pageUrl);
+                    LOG.d("ImageExtractor_PDF", "Native PDF cover failed for: " + unZipPath + ". Falling back to MuPDF.");
+                    // Ensure pageUrl has the correct path (unZipPath) before calling proccessOtherPage
+                    pageUrl.setPath(unZipPath);
                     cover = proccessOtherPage(pageUrl);
+                }else {
+                    LOG.d("ImageExtractor_PDF", "Native PDF cover successful for: " + unZipPath);
                 }
             } else {
+                LOG.d("ImageExtractor_PDF", "Falling back to MuPDF for PDF: " + unZipPath + " (SDK < 21 or not a cover page request)");
+                // Ensure pageUrl has the correct path (unZipPath) before calling proccessOtherPage
+                pageUrl.setPath(unZipPath);
                 cover = proccessOtherPage(pageUrl);
             }
         } else if (BookType.DJVU.is(unZipPath) || BookType.TIFF.is(unZipPath)) {
@@ -377,12 +437,13 @@ public class ImageExtractor {
         }
 
         if (cover == null) {
+            LOG.d("ImageExtractor_NullCover", "Cover is NULL before final return for: " + (fileMeta != null ? fileMeta.getPath() : "Unknown Path") + ", PageUrl: " + pageUrl); // ADD THIS LINE (or similar)
             cover = BaseExtractor.getBookCoverWithTitle(fileMeta.getAuthor(), fileMeta.getTitle(), true);
             pageUrl.tempWithWatermakr = true;
         }
 
         LOG.d("udpateFullMeta ImageExtractor", fileMeta.getAuthor());
-
+        LOG.d("ImageExtractor_Exit", "proccessCoverPage EXITING for PageUrl: " + pageUrl + ", Cover null: " + (cover == null)); // ADD THIS LINE
         return cover;
     }
 
@@ -631,6 +692,7 @@ public class ImageExtractor {
 
         final PageUrl pageUrl = PageUrl.fromString(imageUri);
         String path = pageUrl.getPath();
+        LOG.d("ImageExtractor_PageDebug", "Processing URI: " + imageUri + ", Parsed Page: " + pageUrl.getPage()); // ADD THIS LINE
 
         try {
 
@@ -677,6 +739,8 @@ public class ImageExtractor {
             // }
 
             int page = pageUrl.getPage();
+            // Add log before the cover page checks
+            LOG.d("ImageExtractor_PageCheck", "Path: " + path + ", Page value for cover check: " + page);
 
             if (pageUrl.getHeight() == 0) {
                 pageUrl.setHeight((int) (pageUrl.getWidth() * 1.5));
@@ -684,16 +748,20 @@ public class ImageExtractor {
 
             if (page == COVER_PAGE || page == COVER_PAGE_WITH_EFFECT) {
                 try {
+                    LOG.d("ImageExtractor_Caller", "Calling proccessCoverPage (EFFECT) with PageUrl: " + pageUrl);
                     MagicHelper.isNeedBC = false;
+                    LOG.d("ImageExtractor_Caller", "Calling proccessCoverPage with PageUrl: " + pageUrl);
                     Bitmap proccessCoverPage = proccessCoverPage(pageUrl);
                     return bitmapToStreamRAW(generalCoverWithEffect(pageUrl, proccessCoverPage));
                 } finally {
                     MagicHelper.isNeedBC = true;
                 }
             } else if (page == COVER_PAGE_NO_EFFECT) {
+                LOG.d("ImageExtractor_Caller", "Calling proccessCoverPage (NO_EFFECT) with PageUrl: " + pageUrl);
                 //ByteArrayInputStream bitmapToStream = bitmapToStream(proccessCoverPage(pageUrl));
                 return bitmapToStreamRAW(proccessCoverPage(pageUrl));
             } else {
+                LOG.d("ImageExtractor_PageDebug", "Not a cover page. Page: " + page);
                 if (pageUrl.isDouble()) {
                     LOG.d("isDouble", pageUrl.getHeight(), pageUrl.getWidth());
                     if (AppSP.get().isDoubleCoverAlone) {

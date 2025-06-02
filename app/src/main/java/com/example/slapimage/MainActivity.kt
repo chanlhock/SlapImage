@@ -19,24 +19,34 @@
 **/
 package com.example.slapimage
 import android.annotation.SuppressLint
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.fragment.app.Fragment
 import com.example.slapimage.fragments.ChatBotFragment
 import com.example.slapimage.fragments.HomeFragment
 import com.example.slapimage.fragments.PhotoFragment
 import com.example.slapimage.fragments.PlayFragment
 import com.example.slapimage.fragments.ProfileFragment
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import com.example.slapimage.ibook.foobnix.android.utils.Dips
+import com.example.slapimage.ibook.foobnix.android.utils.TxtUtils
+import com.example.slapimage.ibook.foobnix.ext.CacheZipUtils
+import com.example.slapimage.ibook.foobnix.pdf.info.AppsConfig
+import com.example.slapimage.ibook.foobnix.pdf.info.IMG
+import com.example.slapimage.ibook.foobnix.pdf.info.Prefs
+import com.example.slapimage.ibook.foobnix.tts.TTSNotification
+import com.example.slapimage.musicplayer.ApplicationClass
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.RequestConfiguration
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
@@ -120,6 +130,24 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             replaceFragment(HomeFragment())
         }
+
+        // Librera
+       /* val context = ApplicationClass.context
+        AppsConfig.init(context)*/
+        Dips.init(this)
+  /*      Prefs.get().init(context)
+        if (AppsConfig.IS_TEST_DEVICE) {
+            val configuration = RequestConfiguration.Builder()
+                .setTestDeviceIds(AppsConfig.testDevices)
+                .build()
+            MobileAds.setRequestConfiguration(configuration)
+        }
+        TTSNotification.initChannels(context)
+        CacheZipUtils.init(context)
+       // IMG.init(context)
+        if (TxtUtils.isEmpty(AppsConfig.FLAVOR)) {
+            throw RuntimeException("Application not configured correctly!")
+        }*/
 
     }
 

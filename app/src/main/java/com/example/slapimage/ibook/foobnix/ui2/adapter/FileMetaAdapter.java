@@ -218,7 +218,12 @@ public class FileMetaAdapter extends AppRecycleAdapter<FileMeta, RecyclerView.Vi
                 adapterType = ADAPTER_GRID;
             }
 
-            LOG.d("bindFileMetaView-1", items.get(position).getTitle());
+            //LOG.d("bindFileMetaView-1", items.get(position).getTitle());
+            // Librera debug chanlhock
+
+            // Log the title of the book being bound
+            LOG.d("bindFileMetaView-1", fileMeta.getTitle()); // Using fileMeta.getTitle() is safer than items.get(position) if items list can change
+
             bindFileMetaView(holder, position);
 
             boolean needRefresh = TxtUtils.isEmpty(fileMeta.getPathTxt());
@@ -228,13 +233,14 @@ public class FileMetaAdapter extends AppRecycleAdapter<FileMeta, RecyclerView.Vi
             // TempHolder.listHash++;
             //AppDB.get().getDao().detach(fileMeta);
             //}
-
+            // ADD YOUR LOG HERE:
+            LOG.d("FileMetaAdapter_IMG_Call", "Requesting cover for: " + fileMeta.getTitle() + ", Path: " + fileMeta.getPath());
             IMG.getCoverPageWithEffect(holder.image, fileMeta.getPath(), IMG.getImageSize(), new IMG.ResourceReady() {
 
 
                 @Override
                 public void onResourceReady(Bitmap bitmap) {
-
+                    LOG.d("FileMetaAdapter_IMG_Ready", "onResourceReady for: " + fileMeta.getTitle() + ", Bitmap is null: " + (bitmap == null));
                     try {
                         if (position < items.size() && needRefresh) {
                             FileMeta it = AppDB.get().load(fileMeta.getPath());

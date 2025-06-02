@@ -14,6 +14,8 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.core.graphics.ColorUtils;
@@ -40,7 +42,7 @@ public class MagicHelper {
     private static final int LIGHT_VALUE = 450;
     public static volatile boolean isNeedBC = true;
 
-    public static int hash() {
+    /*public static int hash() {
         StringBuilder builder = new StringBuilder();
 
         builder.append(Objects.hashCode(AppState.get()));
@@ -48,8 +50,10 @@ public class MagicHelper {
 
         return builder.toString().hashCode();
 
+    }*/
+    public static int hash() {
+        return (Objects.hashCode(AppState.get()) + "" + Objects.hashCode(BookCSS.get())).hashCode();
     }
-
     public static int darkerColor(int color) {
         float[] hsv = new float[3];
         Color.colorToHSV(color, hsv);
@@ -115,7 +119,8 @@ public class MagicHelper {
         // our
         // new,
         // scaled bitmap onto it.
-        Bitmap dest = Bitmap.createBitmap(newWidth, newHeight, Config.ARGB_4444);
+       // Bitmap dest = Bitmap.createBitmap(newWidth, newHeight, Config.ARGB_4444);
+        Bitmap dest = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(dest);
 
         Paint paint = new Paint();
@@ -162,11 +167,16 @@ public class MagicHelper {
         return isDay || isNigth;
     }
 
+    //public static boolean isNeedMagicSimple() {
+    //    boolean isDay = AppState.get().isDayNotInvert && //
+    //            (AppState.get().colorDayBg != AppState.COLOR_WHITE || //
+    //                    AppState.get().colorDayText != AppState.COLOR_BLACK); //
+    //    return isDay;
+   // }
     public static boolean isNeedMagicSimple() {
-        boolean isDay = AppState.get().isDayNotInvert && //
-                (AppState.get().colorDayBg != AppState.COLOR_WHITE || //
-                        AppState.get().colorDayText != AppState.COLOR_BLACK); //
-        return isDay;
+        return AppState.get().isDayNotInvert &&
+                (AppState.get().colorDayBg != AppState.COLOR_WHITE ||
+                        AppState.get().colorDayText != AppState.COLOR_BLACK);
     }
 
     public static boolean isNeedBookBackgroundImage() {
@@ -189,7 +199,7 @@ public class MagicHelper {
     public static final String IMAGE_BG_2 = "bg/bg2.jpg";
     public static final String IMAGE_BG_3 = "bg/bg3.jpg";
 
-    public static Bitmap updateTextViewBG(TextView textView, int transparency, String path) {
+  /*  public static Bitmap updateTextViewBG(TextView textView, int transparency, String path) {
         textView.setDrawingCacheEnabled(true);
         textView.buildDrawingCache(true);
 
@@ -208,8 +218,38 @@ public class MagicHelper {
         textView.setDrawingCacheEnabled(false);
         return updates;
 
-    }
+    }*/
 
+    public static Bitmap updateTextViewBG(TextView textView, int transparency, String path) {
+        // Measure and layout the TextView to ensure correct dimensions
+        textView.measure(
+                View.MeasureSpec.makeMeasureSpec(textView.getWidth(), View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(textView.getHeight(), View.MeasureSpec.EXACTLY)
+        );
+        textView.layout(0, 0, textView.getMeasuredWidth(), textView.getMeasuredHeight());
+
+        // Create a Bitmap with the same dimensions as the TextView
+        Bitmap bitmap = Bitmap.createBitmap(
+                textView.getWidth(),
+                textView.getHeight(),
+                Bitmap.Config.ARGB_8888
+        );
+
+        // Draw the TextView into the Bitmap
+        Canvas canvas = new Canvas(bitmap);
+        textView.draw(canvas);
+
+        // Apply the background update
+        Bitmap updates = null;
+        try {
+            Bitmap bgBitmap = loadBitmap(path); // Load the background image
+            updates = updateWithBackground(bitmap, transparency, bgBitmap);
+        } catch (Exception e) {
+            Log.e("TAG", "Error updating TextView background", e);
+        }
+
+        return updates;
+    }
     public static Drawable getBgImageDrawable(String name) {
         final BitmapDrawable background = new BitmapDrawable(Resources.getSystem(), loadBitmap(name));
         background.setAlpha(AppState.get().bgImageDayTransparency);
@@ -288,7 +328,7 @@ public class MagicHelper {
         return updateWithBackground(bitmap, getTransparencyInt(), getBackgroundImage());
     }
 
-    public static Bitmap updateWithBackground(Bitmap bitmap, int alpha, Bitmap bgBitmap) {
+   /* public static Bitmap updateWithBackground(Bitmap bitmap, int alpha, Bitmap bgBitmap) {
         Paint p = new Paint();
         p.setAlpha(alpha);
 
@@ -305,6 +345,34 @@ public class MagicHelper {
 
         bitmap.recycle();
         bitmap = null;
+        return result;
+    }
+*/
+    public static Bitmap updateWithBackground(Bitmap bitmap, int alpha, Bitmap bgBitmap) {
+        if (bitmap == null || bgBitmap == null) {
+            return null; // Handle null inputs
+        }
+
+        Paint p = new Paint();
+        p.setAlpha(alpha);
+
+        // Safely handle null config
+        Bitmap.Config config = bitmap.getConfig() != null ? bitmap.getConfig() : Bitmap.Config.ARGB_8888;
+        Bitmap result = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), config);
+        Canvas canvas = new Canvas(result);
+
+        // Scale background to match the target bitmap
+        Matrix m = new Matrix();
+        float sx = (float) bitmap.getWidth() / bgBitmap.getWidth();
+        float sy = (float) bitmap.getHeight() / bgBitmap.getHeight();
+        m.setScale(sx, sy);
+
+        // Draw background (scaled) and then the original bitmap with alpha
+        canvas.drawBitmap(bgBitmap, m, new Paint());
+        canvas.drawBitmap(bitmap, 0, 0, p);
+
+        // Cleanup (optional)
+        bitmap.recycle();
         return result;
     }
 
@@ -343,7 +411,7 @@ public class MagicHelper {
         return result;
     }
 
-    public static Bitmap updateWithBackground(Bitmap bitmap, int alpha, int color) {
+    /*public static Bitmap updateWithBackground(Bitmap bitmap, int alpha, int color) {
         if (bitmap == null) {
             return null;
         }
@@ -356,6 +424,23 @@ public class MagicHelper {
 
         canvas.drawColor(color);
         canvas.drawBitmap(bitmap, 0, 0, p);
+        return result;
+    }*/
+    public static Bitmap updateWithBackground(Bitmap bitmap, int alpha, int color) {
+        if (bitmap == null) {
+            return null;
+        }
+
+        Paint p = new Paint();
+        p.setAlpha(alpha);
+
+        // Safely handle null config by defaulting to ARGB_8888
+        Bitmap.Config config = bitmap.getConfig() != null ? bitmap.getConfig() : Bitmap.Config.ARGB_8888;
+        Bitmap result = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), config);
+        Canvas canvas = new Canvas(result);
+
+        canvas.drawColor(color); // Fill with the background color
+        canvas.drawBitmap(bitmap, 0, 0, p); // Draw the original bitmap with alpha
         return result;
     }
 

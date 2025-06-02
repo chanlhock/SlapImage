@@ -26,6 +26,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.util.Pair;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -567,7 +568,8 @@ public class OpdsFragment2 extends UIFragment<Entry> {
 
                     new AsyncTask() {
 
-                        @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                        //@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+                       // @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                         @Override
                         protected Object doInBackground(Object... params) {
 

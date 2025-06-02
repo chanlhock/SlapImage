@@ -157,7 +157,22 @@ public class EntryAdapter extends AppRecycleAdapter<Entry, RecyclerView.ViewHold
             if (link.TYPE_LOGO.equals(link.type) || link.isThumbnail()) {
                 holder.image.setVisibility(View.VISIBLE);
                 //ImageLoader.getInstance().displayImage(link.href, holder.image, IMG.displayOPDSOptions);
-                Glide.with(context).load(link.href).into(holder.image);
+
+                // Fixed Librera image loading bug chanlhock 30th May 2025
+                String imagePath = link.href;
+                if (imagePath != null && imagePath.startsWith("assets://")) {
+                    // Convert "assets://opds/opds.png" to "file:///android_asset/opds/opds.png"
+                    imagePath = "file:///android_asset/" + imagePath.substring("assets://".length());
+                }
+
+                Glide.with(context)
+                        .load(imagePath) // Use the potentially modified imagePath
+                        // It's good practice to add a placeholder and error drawable
+                        .placeholder(R.drawable.ic_placeholder_image) // Replace with your placeholder
+                        .error(R.drawable.ic_error_image)           // Replace with your error image
+                        .into(holder.image);
+
+               // Glide.with(context).load(link.href).into(holder.image);
 
             } else if (link.isSearchLink()) {
                 LinearLayout l = new LinearLayout(context);
@@ -217,7 +232,20 @@ public class EntryAdapter extends AppRecycleAdapter<Entry, RecyclerView.ViewHold
                     ScaledImageView img = new ScaledImageView(holder.parent.getContext());
                     img.setPadding(PD, PD, PD, PD);
                     //ImageLoader.getInstance().displayImage(link.href, img, IMG.displayCacheMemoryDisc);
-                    Glide.with(context).load(link.href).into(img);
+
+                    // Fixed Librera image loading bug chanlhock 30th May 2025
+                    String imagePathForLargeCover = link.href;
+                    if (imagePathForLargeCover != null && imagePathForLargeCover.startsWith("assets://")) {
+                        imagePathForLargeCover = "file:///android_asset/" + imagePathForLargeCover.substring("assets://".length());
+                    }
+
+                    Glide.with(context)
+                            .load(imagePathForLargeCover)
+                            .placeholder(R.drawable.ic_placeholder_image) // Replace with your placeholder
+                            .error(R.drawable.ic_error_image)           // Replace with your error image
+                            .into(img);
+
+                    //Glide.with(context).load(link.href).into(img);
 
                     holder.links.addView(img, new LinearLayout.LayoutParams(Dips.screenWidth() / 2, LayoutParams.WRAP_CONTENT));
                     imgLink = link.href;

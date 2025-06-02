@@ -56,6 +56,7 @@ public class IMG {
     public static Context context;
     private static String pattern = Pattern.quote("||");
 
+
     public static void init(Context context) {
 
         IMG.context = context;
@@ -139,8 +140,8 @@ public class IMG {
     }
 
     public static void clearMemoryCache() {
-        if (ApplicationClass.context != null) {
-            Glide.get(ApplicationClass.context).clearMemory();
+        if (ApplicationClass.context != null) {     //ApplicationClass
+            Glide.get(ApplicationClass.context).clearMemory(); //ApplicationClass
         }
     }
 
@@ -152,7 +153,7 @@ public class IMG {
         } else if (a instanceof MainTabs2) {
             return Glide.with((MainTabs2) a);
         } else {
-            return Glide.with(ApplicationClass.context);
+            return Glide.with(ApplicationClass.context);    //ApplicationClass
         }
     }
 
@@ -194,8 +195,8 @@ public class IMG {
             @Override
             public void run() {
                 try {
-                    if (ApplicationClass.context != null) {
-                        Glide.get(ApplicationClass.context).clearDiskCache();
+                    if (ApplicationClass.context != null) {     //ApplicationClass
+                        Glide.get(ApplicationClass.context).clearDiskCache();  //ApplicationClass
                     }
                 } catch (Exception e) {
                     LOG.e(e);
@@ -233,7 +234,7 @@ public class IMG {
     public static void getCoverPage(ImageView img, String path, int width) {
         try {
             final String url = IMG.toUrl(path, ImageExtractor.COVER_PAGE, width);
-            Glide.with(ApplicationClass.context).asBitmap().load(url).into(img);
+            Glide.with(ApplicationClass.context).asBitmap().load(url).into(img);    //ApplicationClass
         } catch (Exception e) {
             LOG.e(e);
         }
@@ -255,7 +256,12 @@ public class IMG {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
                         LOG.d("Bitmap-test-2", "failed");
-
+                        LOG.d("IMG_GLIDE_FAIL", "Model: " + model, e); // Log the full exception
+                        if (e != null) {
+                            for (Throwable t : e.getRootCauses()) {
+                                LOG.d("IMG_GLIDE_FAIL_CAUSE", "Cause: " + t.getMessage(), t);
+                            }
+                        }
                         return false;
                     }
 
@@ -277,7 +283,7 @@ public class IMG {
     public static void getCoverPageWithEffectPos(ImageView img, String path, int width, int pos) {
         final String url = IMG.toUrlPos(path, ImageExtractor.COVER_PAGE, width, pos);
         try {
-            Glide.with(ApplicationClass.context).asBitmap().load(url).into(img);
+            Glide.with(ApplicationClass.context).asBitmap().load(url).into(img);        //ApplicationClass
         } catch (Exception e) {
             LOG.e(e);
         }

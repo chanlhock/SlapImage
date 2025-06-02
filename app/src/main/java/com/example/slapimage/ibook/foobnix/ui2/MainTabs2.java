@@ -13,7 +13,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -44,7 +43,6 @@ import com.example.slapimage.ibook.foobnix.model.AppProfile;
 import com.example.slapimage.ibook.foobnix.model.AppSP;
 import com.example.slapimage.ibook.foobnix.model.AppState;
 import com.example.slapimage.ibook.foobnix.pdf.SlidingTabLayout;
-import com.example.slapimage.ibook.foobnix.pdf.info.ADS;
 import com.example.slapimage.ibook.foobnix.pdf.info.Android6;
 import com.example.slapimage.ibook.foobnix.pdf.info.AppsConfig;
 import com.example.slapimage.ibook.foobnix.pdf.info.Clouds;
@@ -76,12 +74,6 @@ import com.example.slapimage.ibook.foobnix.ui2.fragment.SearchFragment2;
 import com.example.slapimage.ibook.foobnix.ui2.fragment.UIFragment;
 import com.example.slapimage.musicplayer.ApplicationClass;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.ump.ConsentDebugSettings;
-import com.google.android.ump.ConsentForm;
-import com.google.android.ump.ConsentInformation;
-import com.google.android.ump.ConsentRequestParameters;
-import com.google.android.ump.FormError;
-import com.google.android.ump.UserMessagingPlatform;
 import com.example.slapimage.ibook.foobnix.tts.TTSNotification;
 import org.ebookdroid.common.settings.books.SharedBooks;
 import org.ebookdroid.ui.viewer.VerticalViewActivity;
@@ -192,6 +184,7 @@ public class MainTabs2 extends AdsFragmentActivity {
 
     @Override
     protected void onNewIntent(final Intent intent) {
+        super.onNewIntent(intent); // Add this line
         LOG.d(TAG, "onNewIntent");
         // testIntentHandler();
         if (intent.getBooleanExtra(EXTRA_EXIT, false)) {
@@ -289,6 +282,8 @@ public class MainTabs2 extends AdsFragmentActivity {
         super.attachBaseContext(MyContextWrapper.wrap(context));
     }
 
+   // private Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -302,11 +297,13 @@ public class MainTabs2 extends AdsFragmentActivity {
 //            setTheme(R.style.StyledIndicatorsBlack);
 //        }
         super.onCreate(savedInstanceState);
+      //  context = getApplicationContext();
 
         if (!Android6.canWrite(this)) {
             Android6.checkPermissions(this, true);
             return;
         }
+
 
         Clouds.get().init(this);
 
@@ -323,13 +320,7 @@ public class MainTabs2 extends AdsFragmentActivity {
             finish();
             return;
         }
-        Dips.init(this);        // move from LibreraApp to here
-        Prefs.get().init(this);
 
-        TTSNotification.initChannels(this);
-
-        CacheZipUtils.init(this);
-        IMG.init(this);         // move from LibreraApp to here
         handler = new Handler();
         isEink = Dips.isEInk();
 
@@ -850,11 +841,15 @@ public class MainTabs2 extends AdsFragmentActivity {
 
     }
 
+    //@Override
+    //public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    //    Android6.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+   // }
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults); // Add this line
         Android6.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
     }
-
     @Override
     public boolean onKeyLongPress(final int keyCode, final KeyEvent event) {
         if (CloseAppDialog.checkLongPress(this, event)) {

@@ -1,25 +1,33 @@
 package com.example.slapimage.musicplayer
 
+// XED Editor
+//import androidx.multidex.MultiDexApplication
+// Librera
 import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.startKoin
-import com.example.slapimage.mp3tagger.tageditor.di.tagEditorViewModelsModule
-import com.example.slapimage.mp3tagger.features.spotify.di.spotifyMainModule
-import com.example.slapimage.mp3tagger.features.spotify.di.spotifyServicesModule
-import com.example.slapimage.mp3tagger.mediastore.di.mediaStoreViewModelsModule
+import android.os.StrictMode
+import com.example.slapimage.BuildConfig
+import com.example.slapimage.ibook.foobnix.android.utils.Dips
+import com.example.slapimage.ibook.foobnix.android.utils.LOG
+import com.example.slapimage.ibook.foobnix.android.utils.TxtUtils
+import com.example.slapimage.ibook.foobnix.ext.CacheZipUtils
+import com.example.slapimage.ibook.foobnix.hypen.HypenUtils
+import com.example.slapimage.ibook.foobnix.model.AppState
+import com.example.slapimage.ibook.foobnix.pdf.info.AppsConfig
+import com.example.slapimage.ibook.foobnix.pdf.info.IMG
+import com.example.slapimage.ibook.foobnix.pdf.info.Prefs
+import com.example.slapimage.ibook.foobnix.pdf.info.TintUtil
+import com.example.slapimage.ibook.foobnix.tts.TTSNotification
 import com.example.slapimage.mp3tagger.core.di.appCoroutinesScope
 import com.example.slapimage.mp3tagger.core.di.appSystemManagers
 import com.example.slapimage.mp3tagger.core.di.coreFunctionalitiesModule
-import org.koin.core.logger.Level
-// XED Editor
-import android.os.StrictMode
-import androidx.multidex.MultiDexApplication
-import com.github.anrwatchdog.ANRWatchDog
+import com.example.slapimage.mp3tagger.features.spotify.di.spotifyMainModule
+import com.example.slapimage.mp3tagger.features.spotify.di.spotifyServicesModule
+import com.example.slapimage.mp3tagger.mediastore.di.mediaStoreViewModelsModule
+import com.example.slapimage.mp3tagger.tageditor.di.tagEditorViewModelsModule
 import com.example.slapimage.xededitor.crashhandler.CrashHandler
 import com.example.slapimage.xededitor.extension.Extension
 import com.example.slapimage.xededitor.extension.ExtensionManager
@@ -27,41 +35,27 @@ import com.example.slapimage.xededitor.libcommons.application
 import com.example.slapimage.xededitor.libcommons.editor.SetupEditor
 import com.example.slapimage.xededitor.resources.Res
 import com.example.slapimage.xededitor.settings.Settings
+import com.example.slapimage.xededitor.xededitor.App
 import com.example.slapimage.xededitor.xededitor.MainActivity.XEDMainActivity
 import com.example.slapimage.xededitor.xededitor.MainActivity.tabs.editor.AutoSaver
-import com.example.slapimage.xededitor.xededitor.ui.screens.settings.extensions.Extensions
 import com.example.slapimage.xededitor.xededitor.ui.screens.settings.feature_toggles.InbuiltFeatures
 import com.example.slapimage.xededitor.xededitor.ui.screens.settings.mutators.Mutators
 import com.example.slapimage.xededitor.xededitor.update.UpdateChecker
 import com.example.slapimage.xededitor.xededitor.update.UpdateManager
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.RequestConfiguration
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 import java.io.File
 import java.util.concurrent.Executors
-import com.example.slapimage.BuildConfig
-import com.example.slapimage.xededitor.xededitor.App
-// Librera
-import android.content.Intent
-import android.os.Environment
-import android.util.Log
-import androidx.annotation.NonNull
-import com.example.slapimage.ibook.foobnix.android.utils.Dips
-import com.example.slapimage.ibook.foobnix.android.utils.LOG
-import com.example.slapimage.ibook.foobnix.android.utils.TxtUtils
-import com.example.slapimage.ibook.foobnix.ext.CacheZipUtils
-import com.example.slapimage.ibook.foobnix.hypen.HypenUtils
-import com.example.slapimage.ibook.foobnix.pdf.info.ADS
-import com.example.slapimage.ibook.foobnix.pdf.info.AppsConfig
-import com.example.slapimage.ibook.foobnix.pdf.info.IMG
-import com.example.slapimage.ibook.foobnix.pdf.info.Prefs
-import com.example.slapimage.ibook.foobnix.pdf.info.TintUtil
-import com.example.slapimage.ibook.foobnix.tts.TTSNotification
-import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.RequestConfiguration
 
-class ApplicationClass:MultiDexApplication() {
+class ApplicationClass:Application() {
     companion object{
         const val CHANNEL_ID = "MusicNotification"
         const val PLAY = "play"
@@ -76,11 +70,12 @@ class ApplicationClass:MultiDexApplication() {
             return tmp
         }
         lateinit var context: Context   // Librera
+      //  lateinit var appContext: Context
     }
 
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate() {
-        if (false) {    // Librera
+        /*if (false) {    // Librera
             StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder()
                 .detectDiskReads()
                 .detectDiskWrites()
@@ -93,7 +88,7 @@ class ApplicationClass:MultiDexApplication() {
                 .penaltyLog()
                 .penaltyDeath()
                 .build())
-        }
+        }*/
         super.onCreate()
 
         startKoin {
@@ -159,20 +154,20 @@ class ApplicationClass:MultiDexApplication() {
         }
 
         // Librera
-        context = applicationContext
-        AppsConfig.init(this)
-        //Dips.init(this);
-        //Prefs.get().init(this)
+       context = applicationContext
+        AppsConfig.init(applicationContext)
+        Dips.init(null);
+        Prefs.get().init(applicationContext)
         if (AppsConfig.IS_TEST_DEVICE) {
             val configuration = RequestConfiguration.Builder()
                 .setTestDeviceIds(AppsConfig.testDevices)
                 .build()
             MobileAds.setRequestConfiguration(configuration)
         }
-      //  TTSNotification.initChannels(this)
+        TTSNotification.initChannels(applicationContext)
 
-      //  CacheZipUtils.init(this)
-       // IMG.init(this)
+        CacheZipUtils.init(applicationContext)
+        IMG.init(applicationContext)
         if (TxtUtils.isEmpty(AppsConfig.FLAVOR)) {
             throw RuntimeException("Application not configured correctly!")
         }

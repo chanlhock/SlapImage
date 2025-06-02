@@ -1,5 +1,6 @@
 package com.example.slapimage.ibook.foobnix;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -8,7 +9,7 @@ import android.os.StrictMode;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.multidex.MultiDexApplication;
+//import androidx.multidex.MultiDexApplication;
 
 import com.example.slapimage.ibook.foobnix.android.utils.Dips;
 import com.example.slapimage.ibook.foobnix.android.utils.LOG;
@@ -27,7 +28,7 @@ import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 
-public class LibreraApp2 extends MultiDexApplication {
+public class LibreraApp2 extends Application {
 
 
     public static Context context;

@@ -464,7 +464,7 @@ public class FileInformationDialog {
             }
         });
 
-        // IMG.updateImageSizeBig(coverImage);
+        //IMG.updateImageSizeBig(coverImage);
 
         final ImageView starIcon = ((ImageView) dialog.findViewById(R.id.starIcon));
 
