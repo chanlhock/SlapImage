@@ -46,7 +46,6 @@ android {
         }
         manifestPlaceholders["redirectHostName"] = "SlapImage"
         manifestPlaceholders["redirectSchemeName"] = "SlapImage"
-        multiDexEnabled = true
     }
 
     buildTypes {
@@ -337,7 +336,7 @@ dependencies {
 
         /** AndroidX **/
         //implementation("androidx.cardview:cardview:1.0.0")
-        implementation("androidx.multidex:multidex:2.0.1")
+      //  implementation("androidx.multidex:multidex:2.0.1")
         //implementation("androidx.recyclerview:recyclerview:1.3.2")
         //implementation("androidx.work:work-runtime:2.10.0")
         implementation("androidx.legacy:legacy-support-v4:1.0.0")
@@ -361,8 +360,9 @@ dependencies {
         implementation("org.zwobble.mammoth:mammoth:1.5.0")
         implementation("javax.xml.stream:stax-api:1.0-2")
         implementation("net.lingala.zip4j:zip4j:2.11.5")
-        //implementation("com.github.bumptech.glide:glide:4.16.0")
-        //annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
+        implementation("com.github.bumptech.glide:glide:4.16.0")
+    //annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
+        //kapt("com.github.bumptech.glide:compiler:4.16.0")
         implementation("commons-logging:commons-logging-api:1.1")
         implementation("androidx.work:work-runtime:2.10.0")
         implementation("com.google.guava:guava:33.3.1-android")
