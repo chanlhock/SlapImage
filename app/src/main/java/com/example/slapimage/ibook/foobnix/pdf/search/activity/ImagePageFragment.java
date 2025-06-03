@@ -189,12 +189,23 @@ public class ImagePageFragment extends Fragment {
             }
 
         };
-        LOG.cc("Chanlhock: Glide-load-into", getActivity());
-        IMG.with(getActivity())
+        LOG.cc("CHANLHOCK: ", getActivity(), getPath(), target);
+      /*  IMG.with(getActivity())
                 .asBitmap()
                 .load(getPath())
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(target);
+*/
+        // Fixed the image not display Glide bug by bypassing Glide and using ImageExtractor directly. chanlhock 3th June 2025
+        executorService.submit(() -> {
+            Bitmap bitmap = ImageExtractor.getInstance(getContext()).proccessOtherPage(getPath());
+            getActivity().runOnUiThread(() -> {
+                text.setVisibility(View.GONE);
+                if (bitmap != null && image != null) {
+                    image.addBitmap(bitmap);
+                }
+            });
+        });
     }
 
     @Override
