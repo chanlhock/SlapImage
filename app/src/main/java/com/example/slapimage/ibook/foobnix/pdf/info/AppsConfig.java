@@ -36,9 +36,9 @@ public class AppsConfig {
     public static final String FLAVOR = LibreraBuildConfig.FLAVOR;
     public static final boolean IS_ENABLE_1_PAGE_SEARCH = true;
     public final static ExecutorService executorService = Executors.newFixedThreadPool(2);
-    public static boolean IS_LOG =  Build.MODEL.startsWith("Android SDK")
-            || Build.DEVICE.contains("emulator")
-    || Build.MODEL.contains("sdk_gphone64_x86_64");
+    public static boolean IS_LOG =  true;   //Build.MODEL.startsWith("Android SDK")
+         //   || Build.DEVICE.contains("emulator")
+  //  || Build.MODEL.contains("sdk_gphone64_x86_64");
     public static boolean IS_TEST_DEVICE = false;
     public static String MUPDF_FZ_VERSION = "";
     public static String MUPDF_1_11 = "1.11";

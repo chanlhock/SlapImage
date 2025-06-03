@@ -241,6 +241,7 @@ public class FileMetaAdapter extends AppRecycleAdapter<FileMeta, RecyclerView.Vi
                 @Override
                 public void onResourceReady(Bitmap bitmap) {
                     LOG.d("FileMetaAdapter_IMG_Ready", "onResourceReady for: " + fileMeta.getTitle() + ", Bitmap is null: " + (bitmap == null));
+                    
                     try {
                         if (position < items.size() && needRefresh) {
                             FileMeta it = AppDB.get().load(fileMeta.getPath());

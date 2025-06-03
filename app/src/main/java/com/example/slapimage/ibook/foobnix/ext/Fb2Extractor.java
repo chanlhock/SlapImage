@@ -4,10 +4,12 @@ import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.util.Base64;
 
+import com.example.slapimage.MainActivity;
 import com.example.slapimage.ibook.BaseExtractor;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 //import com.example.slapimage.ibook.foobnix.LibreraApp;
+import com.example.slapimage.ibook.foobnix.android.utils.Dips;
 import com.example.slapimage.ibook.foobnix.android.utils.LOG;
 import com.example.slapimage.ibook.foobnix.android.utils.StreamUtils;
 import com.example.slapimage.ibook.foobnix.android.utils.TxtUtils;
@@ -331,8 +333,8 @@ public class Fb2Extractor extends BaseExtractor {
                 String uri = line.substring(i1 + imgScr.length(), i2);
                 LOG.d("remote-image-url", uri);
 
-                Glide.with(ApplicationClass.context).asFile().load(uri).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).submit().get();
-                Bitmap submit = Glide.with(ApplicationClass.context).asBitmap().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).load(uri).submit().get();
+                Glide.with(ApplicationClass.context).asFile().load(uri).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).submit().get();      // ApplicationClass
+                Bitmap submit = Glide.with(ApplicationClass.context).asBitmap().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).load(uri).submit().get();    // ApplicationClass
 
 
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
