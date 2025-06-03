@@ -1160,7 +1160,7 @@ public class ExtUtils {
         }
         // Bitmap imageBitmap = ImageLoader.getInstance().loadImageSync(pageUrl, IMG.ExportOptions);
 
-        Glide.with(ApplicationClass.context).asBitmap().load(pageUrl).into(new CustomTarget<Bitmap>() {
+        Glide.with(a).asBitmap().load(pageUrl).into(new CustomTarget<Bitmap>() {     //ApplicationClass.context
             @Override
             public void onResourceReady(@NonNull Bitmap imageBitmap, @Nullable Transition<? super Bitmap> transition) {
                 try {
