@@ -321,6 +321,21 @@ class HomeFragment : Fragment() {
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon10, "About")
+            ),
+            // Third page (example additional icons)
+            listOf(
+                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon10, "About")
             )
         )
 
