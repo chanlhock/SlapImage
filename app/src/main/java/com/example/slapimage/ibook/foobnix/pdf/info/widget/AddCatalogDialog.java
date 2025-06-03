@@ -144,7 +144,7 @@ public class AddCatalogDialog {
             name.setText(line[1]);
             description.setText(line[2]);
             //ImageLoader.getInstance().displayImage(line[3], image, IMG.displayCacheMemoryDisc);
-            Glide.with(ApplicationClass.context).load(line[3]).into(image);
+            Glide.with(image.getContext()).load(line[3]).into(image);     // ApplicationClass.context
 
             if (e.logo != null) {
                 image.setTag(e.logo);

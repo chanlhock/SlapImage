@@ -147,13 +147,16 @@ public class IMG {
 
     public static RequestManager with(Context a) {
         if (a instanceof HorizontalViewActivity) {
+            LOG.cc("IMG_DEBUG", "HorizontalViewActivity CALLED.");
             return Glide.with((HorizontalViewActivity) a);
         } else if (a instanceof VerticalViewActivity) {
+            LOG.cc("IMG_DEBUG", "VerticalViewActivity CALLED.");
             return Glide.with((VerticalViewActivity) a);
         } else if (a instanceof MainTabs2) {
+            LOG.cc("IMG_DEBUG", "MainTabs2 CALLED.");
             return Glide.with((MainTabs2) a);
         } else {
-            return Glide.with(ApplicationClass.context);    //ApplicationClass
+            return Glide.with(a);    //ApplicationClass.context
         }
     }
 
@@ -234,7 +237,8 @@ public class IMG {
     public static void getCoverPage(ImageView img, String path, int width) {
         try {
             final String url = IMG.toUrl(path, ImageExtractor.COVER_PAGE, width);
-            Glide.with(ApplicationClass.context).asBitmap().load(url).into(img);    //ApplicationClass
+            Glide.with(img.getContext()).asBitmap().load(url).into(img);    //ApplicationClass
+            LOG.cc("getCoverPage", "bitmap:"+ path + width);
         } catch (Exception e) {
             LOG.e(e);
         }
@@ -244,22 +248,34 @@ public class IMG {
         void onResourceReady(Bitmap bitmap);
     }
 
+    public static boolean isImageFile2(String path) {
+        String lower = path.toLowerCase();
+        return lower.endsWith(".jpg") || lower.endsWith(".jpeg") || lower.endsWith(".png") || lower.endsWith(".gif") || lower.endsWith(".webp");
+    }
     public static void getCoverPageWithEffect(ImageView img, String path, int width, ResourceReady run) {
+
+        // Librera debug chanlhock
+        /*if (isImageFile2(path)) {
+            // Not an image: set placeholder and callback with null
+            img.setImageResource(R.drawable.glyphicons_49_star);
+            if (run != null) run.onResourceReady(null);
+            return;
+        }*/
         String url = IMG.toUrl(path, ImageExtractor.COVER_PAGE, width);
-        LOG.d("Bitmap-test-load", path);
+        LOG.cc("IMG_DEBUG", "getCoverPageWithEffect CALLED. Path: " + path + ", Width: " + width);
         IMG.with(img.getContext())
                 .asBitmap()
                 .load(url)
-                .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+               // .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                 .listener(new RequestListener<Bitmap>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
-                        LOG.d("Bitmap-test-2", "failed");
-                        LOG.d("IMG_GLIDE_FAIL", "Model: " + model, e); // Log the full exception
+                       // LOG.cc("Bitmap-test-2", "failed");
+                        LOG.cc("IMG_GLIDE_FAIL", "Model: " + model, e); // Log the full exception
                         if (e != null) {
                             for (Throwable t : e.getRootCauses()) {
-                                LOG.d("IMG_GLIDE_FAIL_CAUSE", "Cause: " + t.getMessage(), t);
+                                LOG.cc("IMG_GLIDE_FAIL_CAUSE", "Cause: " + t.getMessage(), t);
                             }
                         }
                         return false;
@@ -268,7 +284,7 @@ public class IMG {
                     @Override
                     public boolean onResourceReady(Bitmap bitmap, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
                         target.onResourceReady(bitmap, null);
-                        LOG.d("Bitmap-test-2", bitmap, bitmap.getWidth(), bitmap.getHeight(), bitmap.getConfig());
+                        LOG.cc("Bitmap-test-2", bitmap, bitmap.getWidth(), bitmap.getHeight(), bitmap.getConfig());
 
                         if (run != null) {
                             run.onResourceReady(null);
@@ -283,7 +299,7 @@ public class IMG {
     public static void getCoverPageWithEffectPos(ImageView img, String path, int width, int pos) {
         final String url = IMG.toUrlPos(path, ImageExtractor.COVER_PAGE, width, pos);
         try {
-            Glide.with(ApplicationClass.context).asBitmap().load(url).into(img);        //ApplicationClass
+            Glide.with(img.getContext()).asBitmap().load(url).into(img);        //ApplicationClass
         } catch (Exception e) {
             LOG.e(e);
         }

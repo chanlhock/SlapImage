@@ -5,7 +5,9 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.slapimage.ibook.foobnix.android.utils.Dips;
@@ -50,6 +52,26 @@ public abstract class AdsFragmentActivity extends FragmentActivity {
         myAds.intetrstialTimeout = intetrstialTimeoutSec;
         myAds.createHandler();
         handler = new Handler();
+
+        // New back press handling system
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (doubleBackToExitPressedOnce) {
+                    handler.removeCallbacksAndMessages(null);
+                    onBackPressedFinishImpl();
+                    finish();
+                    return;
+                }
+
+                doubleBackToExitPressedOnce = true;
+                handler.postDelayed(() -> {
+                    doubleBackToExitPressedOnce = false;
+                    LOG.d("BackPress", "Timer expired");
+                    onBackPressedImpl();
+                }, 500);
+            }
+        });
     }
 
     @Override
@@ -122,7 +144,7 @@ public abstract class AdsFragmentActivity extends FragmentActivity {
 
         if (savedInstanceState != null) {
             savedInstanceState.clear();
-        }
+    }
         LOG.d("AdsFragmentActivity onRestoreInstanceState after", savedInstanceState);
 
         super.onRestoreInstanceState(savedInstanceState);
@@ -145,7 +167,7 @@ public abstract class AdsFragmentActivity extends FragmentActivity {
         return false;
     }
 
-    @Override
+  /*  @Override
     public void onBackPressed() {
         LOG.d("onBackPressed", doubleBackToExitPressedOnce);
         if (doubleBackToExitPressedOnce) {
@@ -163,9 +185,20 @@ public abstract class AdsFragmentActivity extends FragmentActivity {
             }, 500);
 
         }
-    }
+    }*/
+
+
 
     public abstract void onBackPressedImpl();
 
     public abstract void onBackPressedFinishImpl();
+  //  private void onBackPressedImpl() {
+        // Your existing implementation when back is pressed once
+  //      Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+ //   }
+
+  //  private void onBackPressedFinishImpl() {
+        // Your existing cleanup before exit
+  //      LOG.d("BackPress", "Exiting app");
+  //  }
 }

@@ -189,7 +189,7 @@ public class ImagePageFragment extends Fragment {
             }
 
         };
-        LOG.d("Glide-load-into", getActivity());
+        LOG.cc("Chanlhock: Glide-load-into", getActivity());
         IMG.with(getActivity())
                 .asBitmap()
                 .load(getPath())
