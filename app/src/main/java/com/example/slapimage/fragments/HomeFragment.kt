@@ -296,16 +296,16 @@ class HomeFragment : Fragment() {
             listOf(
                 Icon(R.drawable.icon1, "Open Photo"),
                 Icon(R.drawable.icon2, "Play Video"),
-                Icon(R.drawable.icon13, "Play Music"),
+                Icon(R.drawable.icon20, "XED-Editor"),
                 Icon(R.drawable.icon4, "TextPad"),
                 Icon(R.drawable.icon5, "Calendar"),
                 Icon(R.drawable.icon6, "Calculator"),
-                Icon(R.drawable.icon19, "Compass"),
+                Icon(R.drawable.icon17, "MP3 TagEdit"),
                 Icon(R.drawable.icon8, "Stock"),
                 Icon(R.drawable.icon3, "DeepSeek Bot"),
                 Icon(R.drawable.icon9, "Gemini AI"),
-                Icon(R.drawable.icon17, "MP3 TagEdit"),
-                Icon(R.drawable.icon20, "XED-Editor")
+                Icon(R.drawable.icon22, "Librera"),
+                Icon(R.drawable.icon19, "Compass")
             ),
             // Second page (example additional icons)
             listOf(
@@ -315,7 +315,7 @@ class HomeFragment : Fragment() {
                 Icon(R.drawable.icon7, "Game of Life"),
                 Icon(R.drawable.icon15, "AI Calc"),
                 Icon(R.drawable.icon21, "Wallpaper"),
-                Icon(R.drawable.icon22, "Librera"),
+                Icon(R.drawable.icon13, "Play Music"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
