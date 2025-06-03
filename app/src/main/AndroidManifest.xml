@@ -107,7 +107,7 @@
         tools:targetApi="35"
         android:usesCleartextTraffic="true"
         android:vmSafeMode="${appSafeMode}"
-        android:hardwareAccelerated="false">
+        android:hardwareAccelerated="true">
 
         <meta-data android:name="android.webkit.WebView.MetricsOptOut" android:value="true" />
 
