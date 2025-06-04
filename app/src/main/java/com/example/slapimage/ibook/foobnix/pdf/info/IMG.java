@@ -39,11 +39,12 @@ import com.example.slapimage.musicplayer.ApplicationClass;
 import java.util.concurrent.ExecutorService;
 
 //import com.example.slapimage.ibook.foobnix.LibreraApp;
-
+import java.util.concurrent.ExecutorService;
 import org.ebookdroid.ui.viewer.VerticalViewActivity;
 import java.util.concurrent.Future;
 import java.util.concurrent.Executors;
 import java.util.regex.Pattern;
+import com.example.slapimage.ibook.foobnix.ui2.adapter.BookmarksAdapter2;
 
 public class IMG {
 
@@ -294,70 +295,7 @@ public class IMG {
 
 
     }*/
-/*
-    public static void getCoverPageWithEffect(ImageView img, String path, int width, ResourceReady run) {
-        LOG.cc("IMG_DEBUG", "getCoverPageWithEffect CALLED. Path: " + path + ", Width: " + width);
 
-        Executors.newSingleThreadExecutor().execute(() -> {
-            try {
-                // Use the available method from ImageExtractor
-                Bitmap bitmap = ImageExtractor.getInstance(img.getContext())
-                        .proccessOtherPage(path); // Or use appropriate method
-
-                // Calculate scaled dimensions while maintaining aspect ratio
-                if (bitmap != null) {
-                    int originalWidth = bitmap.getWidth();
-                    int originalHeight = bitmap.getHeight();
-                    float aspectRatio = (float) originalWidth / originalHeight;
-                    int height = (int) (width / aspectRatio);
-
-                    // Create scaled bitmap
-                    Bitmap scaledBitmap = Bitmap.createScaledBitmap(
-                            bitmap,
-                            width,
-                            height,
-                            true
-                    );
-
-                    // Recycle original bitmap if we created a scaled version
-                    if (scaledBitmap != bitmap) {
-                        bitmap.recycle();
-                    }
-
-                    bitmap = scaledBitmap;
-                }
-
-                final Bitmap finalBitmap = bitmap;
-                img.post(() -> {
-                    if (finalBitmap != null && !finalBitmap.isRecycled()) {
-                        LOG.cc("Bitmap-test-2", finalBitmap,
-                                finalBitmap.getWidth(),
-                                finalBitmap.getHeight(),
-                                finalBitmap.getConfig());
-
-                        img.setImageBitmap(finalBitmap);
-
-                        if (run != null) {
-                            run.onResourceReady(finalBitmap);
-                        }
-                    } else {
-                        LOG.cc("IMG_EXTRACTOR_FAIL", "Null or recycled bitmap");
-                        if (run != null) {
-                            run.onResourceReady(null);
-                        }
-                    }
-                });
-            } catch (Exception e) {
-                img.post(() -> {
-                    LOG.cc("IMG_EXTRACTOR_FAIL", "Error extracting cover page", e);
-                    if (run != null) {
-                        run.onResourceReady(null);
-                    }
-                });
-            }
-        });
-    }
-*/
 public static void getCoverPageWithEffect(ImageView img, String path, int width, ResourceReady run) {
    // PageUrl pageUrl = new PageUrl(path, ImageExtractor.COVER_PAGE, width);
     String url = IMG.toUrl(path, ImageExtractor.COVER_PAGE, width);
@@ -384,10 +322,36 @@ public static void getCoverPageWithEffect(ImageView img, String path, int width,
         }
     });
 }
+
     public static void getCoverPageWithEffectPos(ImageView img, String path, int width, int pos) {
         final String url = IMG.toUrlPos(path, ImageExtractor.COVER_PAGE, width, pos);
         try {
-            Glide.with(img.getContext()).asBitmap().load(url).into(img);        //ApplicationClass
+            //Glide.with(img.getContext()).asBitmap().load(url).into(img);        //ApplicationClass
+            // Create a PageUrl object with the required parameters
+            PageUrl pageUrl = PageUrl.fromString(url);
+            pageUrl.setWidth(width);
+            pageUrl.setPage(pos); // Use the position parameter
+
+            // Get the ImageExtractor instance
+            ImageExtractor extractor = ImageExtractor.getInstance(img.getContext());
+
+            // Process the cover page
+            Bitmap cover = extractor.proccessCoverPage(pageUrl);
+
+            // Apply effects if needed
+            if (pos == ImageExtractor.COVER_PAGE_WITH_EFFECT) {
+                cover = extractor.generalCoverWithEffect(pageUrl, cover);
+            }
+
+            // Set the bitmap directly to the ImageView
+            if (cover != null) {
+                LOG.cc("CHANLHOCK: Cover applied to BookMark");     // Librera debug chanlhock 4th June 2025
+                img.setImageBitmap(cover);
+            } else {
+                // Handle case when bitmap is null (load error/placeholder)
+              //  img.setImageResource(R.drawable.default_cover); // Set a default image
+            }
+
         } catch (Exception e) {
             LOG.e(e);
         }
