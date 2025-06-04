@@ -36,11 +36,13 @@ import com.example.slapimage.ibook.foobnix.sys.ImageExtractor;
 import com.example.slapimage.ibook.foobnix.ui2.MainTabs2;
 import com.example.slapimage.R;
 import com.example.slapimage.musicplayer.ApplicationClass;
+import java.util.concurrent.ExecutorService;
 
 //import com.example.slapimage.ibook.foobnix.LibreraApp;
 
 import org.ebookdroid.ui.viewer.VerticalViewActivity;
-
+import java.util.concurrent.Future;
+import java.util.concurrent.Executors;
 import java.util.regex.Pattern;
 
 public class IMG {
@@ -55,7 +57,6 @@ public class IMG {
     public static Drawable bookBGNoMark;
     public static Context context;
     private static String pattern = Pattern.quote("||");
-
 
     public static void init(Context context) {
 
@@ -252,15 +253,12 @@ public class IMG {
         String lower = path.toLowerCase();
         return lower.endsWith(".jpg") || lower.endsWith(".jpeg") || lower.endsWith(".png") || lower.endsWith(".gif") || lower.endsWith(".webp");
     }
+
+/*
     public static void getCoverPageWithEffect(ImageView img, String path, int width, ResourceReady run) {
 
         // Librera debug chanlhock
-        /*if (isImageFile2(path)) {
-            // Not an image: set placeholder and callback with null
-            img.setImageResource(R.drawable.glyphicons_49_star);
-            if (run != null) run.onResourceReady(null);
-            return;
-        }*/
+
         String url = IMG.toUrl(path, ImageExtractor.COVER_PAGE, width);
         LOG.cc("IMG_DEBUG", "getCoverPageWithEffect CALLED. Path: " + path + ", Width: " + width);
         IMG.with(img.getContext())
@@ -293,9 +291,99 @@ public class IMG {
                     }
                 })
                 .into(img);
+
+
+    }*/
+/*
+    public static void getCoverPageWithEffect(ImageView img, String path, int width, ResourceReady run) {
+        LOG.cc("IMG_DEBUG", "getCoverPageWithEffect CALLED. Path: " + path + ", Width: " + width);
+
+        Executors.newSingleThreadExecutor().execute(() -> {
+            try {
+                // Use the available method from ImageExtractor
+                Bitmap bitmap = ImageExtractor.getInstance(img.getContext())
+                        .proccessOtherPage(path); // Or use appropriate method
+
+                // Calculate scaled dimensions while maintaining aspect ratio
+                if (bitmap != null) {
+                    int originalWidth = bitmap.getWidth();
+                    int originalHeight = bitmap.getHeight();
+                    float aspectRatio = (float) originalWidth / originalHeight;
+                    int height = (int) (width / aspectRatio);
+
+                    // Create scaled bitmap
+                    Bitmap scaledBitmap = Bitmap.createScaledBitmap(
+                            bitmap,
+                            width,
+                            height,
+                            true
+                    );
+
+                    // Recycle original bitmap if we created a scaled version
+                    if (scaledBitmap != bitmap) {
+                        bitmap.recycle();
+                    }
+
+                    bitmap = scaledBitmap;
+                }
+
+                final Bitmap finalBitmap = bitmap;
+                img.post(() -> {
+                    if (finalBitmap != null && !finalBitmap.isRecycled()) {
+                        LOG.cc("Bitmap-test-2", finalBitmap,
+                                finalBitmap.getWidth(),
+                                finalBitmap.getHeight(),
+                                finalBitmap.getConfig());
+
+                        img.setImageBitmap(finalBitmap);
+
+                        if (run != null) {
+                            run.onResourceReady(finalBitmap);
+                        }
+                    } else {
+                        LOG.cc("IMG_EXTRACTOR_FAIL", "Null or recycled bitmap");
+                        if (run != null) {
+                            run.onResourceReady(null);
+                        }
+                    }
+                });
+            } catch (Exception e) {
+                img.post(() -> {
+                    LOG.cc("IMG_EXTRACTOR_FAIL", "Error extracting cover page", e);
+                    if (run != null) {
+                        run.onResourceReady(null);
+                    }
+                });
+            }
+        });
     }
+*/
+public static void getCoverPageWithEffect(ImageView img, String path, int width, ResourceReady run) {
+   // PageUrl pageUrl = new PageUrl(path, ImageExtractor.COVER_PAGE, width);
+    String url = IMG.toUrl(path, ImageExtractor.COVER_PAGE, width);
+    PageUrl pageUrl = PageUrl.fromString(url);
+    Executors.newSingleThreadExecutor().execute(() -> {
+        try {
+            Bitmap cover = ImageExtractor.getInstance(img.getContext())
+                    .proccessCoverPage(pageUrl);
 
-
+            img.post(() -> {
+                if (cover != null && !cover.isRecycled()) {
+                    img.setImageBitmap(cover);
+                    if (run != null) run.onResourceReady(cover);
+                } else {
+                   // showErrorCover(img);
+                    if (run != null) run.onResourceReady(null);
+                }
+            });
+        } catch (Exception e) {
+            img.post(() -> {
+             //   showErrorCover(img);
+                if (run != null) run.onResourceReady(null);
+            });
+        }
+    });
+}
     public static void getCoverPageWithEffectPos(ImageView img, String path, int width, int pos) {
         final String url = IMG.toUrlPos(path, ImageExtractor.COVER_PAGE, width, pos);
         try {
