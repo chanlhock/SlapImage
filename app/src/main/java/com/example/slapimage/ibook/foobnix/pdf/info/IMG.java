@@ -300,7 +300,7 @@ public static void getCoverPageWithEffect(ImageView img, String path, int width,
    // PageUrl pageUrl = new PageUrl(path, ImageExtractor.COVER_PAGE, width);
     String url = IMG.toUrl(path, ImageExtractor.COVER_PAGE, width);
     PageUrl pageUrl = PageUrl.fromString(url);
-    Executors.newSingleThreadExecutor().execute(() -> {
+    //Executors.newSingleThreadExecutor().execute(() -> {
         try {
             Bitmap cover = ImageExtractor.getInstance(img.getContext())
                     .proccessCoverPage(pageUrl);
@@ -320,7 +320,7 @@ public static void getCoverPageWithEffect(ImageView img, String path, int width,
                 if (run != null) run.onResourceReady(null);
             });
         }
-    });
+   // });
 }
 
     public static void getCoverPageWithEffectPos(ImageView img, String path, int width, int pos) {
