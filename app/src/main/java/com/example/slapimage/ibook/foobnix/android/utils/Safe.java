@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.example.slapimage.R;
 import com.example.slapimage.musicplayer.ApplicationClass;
 //import com.example.slapimage.ibook.foobnix.LibreraApp;
 
@@ -47,7 +48,7 @@ public class Safe {
         }
 
         Glide.with(ApplicationClass.context)
-                .asBitmap().load(TXT_SAFE_RUN)
+                .asBitmap().load(R.drawable.glyphicons_239_check)      // TXT_SAFE_RUN chanlhock fix Open Library bug
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(new CustomTarget<Bitmap>() {

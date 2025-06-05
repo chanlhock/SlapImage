@@ -753,7 +753,7 @@ public class VerticalModeController extends DocumentController {
                         });
                     }
 
-                    ;
+
                 });
                 builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     @Override

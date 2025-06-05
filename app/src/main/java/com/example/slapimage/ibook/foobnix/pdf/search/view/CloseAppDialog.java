@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.slapimage.ibook.foobnix.android.utils.Apps;
+import com.example.slapimage.ibook.foobnix.android.utils.LOG;
 import com.example.slapimage.ibook.foobnix.android.utils.TxtUtils;
 import com.example.slapimage.ibook.foobnix.model.AppState;
 import com.example.slapimage.ibook.foobnix.pdf.info.IMG;
@@ -157,7 +158,8 @@ public class CloseAppDialog {
 
                         @Override
                         public void run() {
-                            MainTabs2.startActivity(a, UITab.getCurrentTabIndex(UITab.SearchFragment));
+                            LOG.cc("CHANLHOCK: return to MainTab2");     // Librera debug chanlhock 4th June 2025
+                            MainTabs2.startActivity(a, UITab.getCurrentTabIndex(UITab.SearchFragment)); // chanlhock
                         }
                     });
                 } else if (which == i++) {
