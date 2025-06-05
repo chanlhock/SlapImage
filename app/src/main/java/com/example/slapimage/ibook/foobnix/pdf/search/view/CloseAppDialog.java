@@ -139,7 +139,7 @@ public class CloseAppDialog {
         items.add(c.getString(R.string.close_book)); //
         items.add(c.getString(R.string.go_to_the_library)); //
         items.add(c.getString(R.string.hide_app)); //
-        items.add(c.getString(R.string.exit_application)); //
+        //items.add(c.getString(R.string.exit_application)); //
 
         final DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
 
@@ -163,14 +163,14 @@ public class CloseAppDialog {
                 } else if (which == i++) {
                     Apps.showDesctop(a);
 
-                } else if (which == i++) {
-                    c.onCloseActivityFinal(new Runnable() {
+             //   } else if (which == i++) {
+             //       c.onCloseActivityFinal(new Runnable() {
 
-                        @Override
-                        public void run() {
-                            MainTabs2.closeApp(a);
-                        }
-                    });
+               //         @Override
+               //         public void run() {
+               //             MainTabs2.closeApp(a);
+               //         }
+              //      });
 
                 }
             }

@@ -14,10 +14,14 @@ import com.example.slapimage.databinding.DataScreenBinding
 
 class DataScreen : AppCompatActivity() {
     private lateinit var binding: DataScreenBinding
+    private lateinit var dbHelper: CalculatorDatabaseHelper // Single instance for the activity
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataScreenBinding.inflate(layoutInflater)
         setContentView(R.layout.data_screen)
+        // Initialize database helper once
+        dbHelper = CalculatorDatabaseHelper(this)
         dataScreen()
         val next = findViewById<TextView>(R.id.textView3)
         next.setOnClickListener {
@@ -29,12 +33,14 @@ class DataScreen : AppCompatActivity() {
     }
     private fun dataScreen()
     {
-        val dbHelper = CalculatorDatabaseHelper(this)
-        val db = dbHelper.readableDatabase
+        try {
+            dbHelper.readableDatabase.use { db -> // Auto-closes the database
+        //val dbHelper = CalculatorDatabaseHelper(this)
+        //val db = dbHelper.readableDatabase
 
         val cursor = db.rawQuery("SELECT * FROM calculations", null)
         setupBackButton()
-
+                cursor.use { // Auto-closes the cursor
         val calculations = mutableListOf<String>()
         while (cursor.moveToNext()) {
             val firstNumberIndex = cursor.getColumnIndex("first_number")
@@ -105,13 +111,19 @@ if(countZeros(firstNumber.toString())!==firstNumber.toString().length-1)
               if(firstNumber!==result&&secondNumber!==result){  calculations.add(calculationString)}
             }
         }
-        cursor.close()
+        //cursor.close()
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
         val adapter = CalculationAdapter(calculations)
         recyclerView.adapter = adapter
+                }
+            }
+        } catch (e: Exception) {
+            // Handle database errors
+            e.printStackTrace()
+        }
     }
     private fun goBack() {
         finish()
@@ -131,6 +143,10 @@ if(countZeros(firstNumber.toString())!==firstNumber.toString().length-1)
 
     }
 
+    override fun onDestroy() {
+        dbHelper.close() // Properly close the database helper
+        super.onDestroy()
+    }
     private fun setupBackButton() {
         val backButton = findViewById<Button>(R.id.backButton)
         backButton.setOnClickListener {

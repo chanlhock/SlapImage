@@ -13,6 +13,7 @@ import android.os.Vibrator
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
@@ -23,6 +24,8 @@ import com.example.slapimage.newcalculator.screens.DataScreen
 import kotlin.math.*
 import com.example.slapimage.databinding.ActivityCalcmainBinding
 import androidx.core.content.edit
+import com.example.slapimage.fragments.HomeFragment
+import com.example.slapimage.newcalculator.CalculatorDatabaseHelper
 
 class CalcMainActivity : AppCompatActivity() {
     private var operation: Operation = Operation.EMPTY
@@ -35,6 +38,7 @@ class CalcMainActivity : AppCompatActivity() {
     private var darkmode = false
     private val operators = charArrayOf('/', '*', '%', '-', '+', 'l', 'o', 'g', 'n', '!', '^', 'C', '√', 's', 'i', 'n', 'c', 'o', 't', 'a', 'e','m','d')
     private lateinit var binding: ActivityCalcmainBinding
+    private lateinit var dbHelper: CalculatorDatabaseHelper
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
@@ -49,12 +53,18 @@ class CalcMainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCalcmainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        // Initialize the dbHelper here
+        dbHelper = CalculatorDatabaseHelper(this)
         loadDayNight()
-
         initListeners()
         daynight()
     }
 
+    override fun onDestroy() {
+        // Close the helper (which will close any open databases)
+        dbHelper.close()
+        super.onDestroy()
+    }
 
     // load Dark night after open the app
     private fun loadDayNight(){
@@ -163,9 +173,10 @@ class CalcMainActivity : AppCompatActivity() {
     private fun equalsButtonOnclick() {
         try {
 
-            val dbHelper = CalculatorDatabaseHelper(this)
-            val db = dbHelper.writableDatabase
-
+            //val dbHelper = CalculatorDatabaseHelper(this)
+            //val db = dbHelper.writableDatabase
+                // Get database reference
+                dbHelper.writableDatabase.use { db ->  // This will auto-close the database
 
 
             if(operation == Operation.log || operation == Operation.sqrt || operation == Operation.sin || operation == Operation.cos
@@ -300,7 +311,7 @@ class CalcMainActivity : AppCompatActivity() {
                 }
 
             }
-
+                } // Database automatically closed here
         } catch (e: NumberFormatException) {
             Log.d("ERROR", "Error is"+e)
             binding.calculatorDisplayNonMock.text = "ERROR"

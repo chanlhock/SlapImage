@@ -14,6 +14,7 @@ import java.lang.reflect.Modifier;
 
 public class LOG {
     public static String TAG = "DEBUG";
+    public static String TAGCC = "CHANLHOCK DEBUG";
     public static String DELIMITER = "|";
 
     public static boolean writeCrashTofile = false;
@@ -26,7 +27,7 @@ public class LOG {
     }
 
     public static void d(Object msg1, Object... statement) {
-        if (!AppsConfig.IS_LOG) {
+        if (AppsConfig.IS_LOG) {
             if (statement.length == 0) {
                 Log.d(TAG, msg1.toString());
                 return;
@@ -41,9 +42,9 @@ public class LOG {
         }
     }
     public static void cc(Object msg1, Object... statement) {
-        if (AppsConfig.IS_LOG) {
+        if (!AppsConfig.IS_LOG) {
             if (statement.length == 0) {
-                Log.d(TAG, msg1.toString());
+                Log.d(TAGCC, msg1.toString());
                 return;
             }
             String msg = asString(statement);

@@ -179,7 +179,8 @@ public class MainTabs2 extends AdsFragmentActivity {
         if (c == null) {
             return;
         }
-        EventBus.getDefault().post(new MsgCloseMainTabs());
+        // chanlhock - disable the Page view dialog Exit function
+        //EventBus.getDefault().post(new MsgCloseMainTabs());
     }
 
     @Override

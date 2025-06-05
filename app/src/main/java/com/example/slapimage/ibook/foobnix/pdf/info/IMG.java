@@ -149,13 +149,13 @@ public class IMG {
 
     public static RequestManager with(Context a) {
         if (a instanceof HorizontalViewActivity) {
-            LOG.cc("IMG_DEBUG", "HorizontalViewActivity CALLED.");
+            LOG.d("IMG_DEBUG", "HorizontalViewActivity CALLED.");
             return Glide.with((HorizontalViewActivity) a);
         } else if (a instanceof VerticalViewActivity) {
-            LOG.cc("IMG_DEBUG", "VerticalViewActivity CALLED.");
+            LOG.d("IMG_DEBUG", "VerticalViewActivity CALLED.");
             return Glide.with((VerticalViewActivity) a);
         } else if (a instanceof MainTabs2) {
-            LOG.cc("IMG_DEBUG", "MainTabs2 CALLED.");
+            LOG.d("IMG_DEBUG", "MainTabs2 CALLED.");
             return Glide.with((MainTabs2) a);
         } else {
             return Glide.with(a);    //ApplicationClass.context
@@ -320,7 +320,7 @@ public static void getCoverPageWithEffect(ImageView img, String path, int width,
                 if (run != null) run.onResourceReady(null);
             });
         }
-   // });
+    //});
 }
 
     public static void getCoverPageWithEffectPos(ImageView img, String path, int width, int pos) {
