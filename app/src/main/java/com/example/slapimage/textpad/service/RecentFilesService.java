@@ -94,8 +94,9 @@ public class RecentFilesService {
 
     private ArrayList<String> loadRecentFiles(Context context) {
         ArrayList<String> history = new ArrayList<>();
-        try {
-            FileInputStream fis = context.openFileInput(RECENT_FILES_FILENAME); // getApplicationContext().
+        //try {
+        //    FileInputStream fis = context.openFileInput(RECENT_FILES_FILENAME); // getApplicationContext().
+        try (FileInputStream fis = context.openFileInput(RECENT_FILES_FILENAME)) {  // chanlhock fixed file not close crash bug
             ObjectInputStream objectIn = new ObjectInputStream(fis);
             history = (ArrayList<String>) objectIn.readObject();
         } catch (FileNotFoundException e) {
