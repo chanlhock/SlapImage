@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-05-13T08:33:29.376594Z">
+        <DropdownSelection timestamp="2025-06-04T07:36:40.798994Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=/Users/ethan/.android/avd/Pixel_4.avd" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=/Users/ethan/.android/avd/Huawei_MatePad_12x.avd" />
             </handle>
           </Target>
         </DropdownSelection>
