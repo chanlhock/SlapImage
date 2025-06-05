@@ -239,7 +239,10 @@ public class IMG {
     public static void getCoverPage(ImageView img, String path, int width) {
         try {
             final String url = IMG.toUrl(path, ImageExtractor.COVER_PAGE, width);
-            Glide.with(img.getContext()).asBitmap().load(url).into(img);    //ApplicationClass
+            PageUrl pageUrl = PageUrl.fromString(url);
+            Bitmap cover = ImageExtractor.getInstance(img.getContext())
+                    .proccessCoverPage(pageUrl);
+            Glide.with(img.getContext()).asBitmap().load(cover).into(img);    //ApplicationClass  url
             LOG.cc("getCoverPage", "bitmap:"+ path + width);
         } catch (Exception e) {
             LOG.e(e);
