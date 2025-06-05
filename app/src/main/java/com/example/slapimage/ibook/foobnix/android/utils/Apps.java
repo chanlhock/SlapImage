@@ -105,7 +105,7 @@ public class Apps {
     public static void onCrashEmail(Context c, String msg, String title) {
         final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 
-        String string = c.getResources().getString(R.string.my_email).replace("<u>", "").replace("</u>", "");
+        String string = c.getResources().getString(R.string.email).replace("<u>", "").replace("</u>", "");
         final String aEmailList[] = {string};
         emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, aEmailList);
         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getApplicationName(c) + " " + Apps.getVersionName(c) + " Crash report");

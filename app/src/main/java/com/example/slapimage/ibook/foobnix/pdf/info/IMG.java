@@ -255,17 +255,22 @@ public class IMG {
         return lower.endsWith(".jpg") || lower.endsWith(".jpeg") || lower.endsWith(".png") || lower.endsWith(".gif") || lower.endsWith(".webp");
     }
 
-/*
+
     public static void getCoverPageWithEffect(ImageView img, String path, int width, ResourceReady run) {
 
         // Librera debug chanlhock
 
         String url = IMG.toUrl(path, ImageExtractor.COVER_PAGE, width);
         LOG.cc("IMG_DEBUG", "getCoverPageWithEffect CALLED. Path: " + path + ", Width: " + width);
+
+        PageUrl pageUrl = PageUrl.fromString(url);
+        Bitmap cover = ImageExtractor.getInstance(img.getContext())
+                        .proccessCoverPage(pageUrl);
+
         IMG.with(img.getContext())
                 .asBitmap()
-                .load(url)
-               // .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+                .load(cover)      // url
+                .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                 .listener(new RequestListener<Bitmap>() {
                     @Override
@@ -294,8 +299,8 @@ public class IMG {
                 .into(img);
 
 
-    }*/
-
+    }
+/*
 public static void getCoverPageWithEffect(ImageView img, String path, int width, ResourceReady run) {
    // PageUrl pageUrl = new PageUrl(path, ImageExtractor.COVER_PAGE, width);
     String url = IMG.toUrl(path, ImageExtractor.COVER_PAGE, width);
@@ -322,13 +327,21 @@ public static void getCoverPageWithEffect(ImageView img, String path, int width,
         }
     //});
 }
-
+*/
     public static void getCoverPageWithEffectPos(ImageView img, String path, int width, int pos) {
         final String url = IMG.toUrlPos(path, ImageExtractor.COVER_PAGE, width, pos);
         try {
-            //Glide.with(img.getContext()).asBitmap().load(url).into(img);        //ApplicationClass
-            // Create a PageUrl object with the required parameters
             PageUrl pageUrl = PageUrl.fromString(url);
+            pageUrl.setWidth(width);
+            pageUrl.setPage(pos); // Use the position parameter
+
+            // Get the ImageExtractor instance
+            ImageExtractor extractor = ImageExtractor.getInstance(img.getContext());
+            // Process the cover page
+            Bitmap cover = extractor.proccessCoverPage(pageUrl);
+            Glide.with(img.getContext()).asBitmap().load(cover).into(img);        //ApplicationClass  url
+            // Create a PageUrl object with the required parameters
+     /*       PageUrl pageUrl = PageUrl.fromString(url);
             pageUrl.setWidth(width);
             pageUrl.setPage(pos); // Use the position parameter
 
@@ -351,7 +364,7 @@ public static void getCoverPageWithEffect(ImageView img, String path, int width,
                 // Handle case when bitmap is null (load error/placeholder)
               //  img.setImageResource(R.drawable.default_cover); // Set a default image
             }
-
+*/
         } catch (Exception e) {
             LOG.e(e);
         }
