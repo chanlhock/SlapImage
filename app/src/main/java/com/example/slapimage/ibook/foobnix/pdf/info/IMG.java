@@ -17,7 +17,6 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
@@ -36,15 +35,8 @@ import com.example.slapimage.ibook.foobnix.sys.ImageExtractor;
 import com.example.slapimage.ibook.foobnix.ui2.MainTabs2;
 import com.example.slapimage.R;
 import com.example.slapimage.musicplayer.ApplicationClass;
-import java.util.concurrent.ExecutorService;
-
-//import com.example.slapimage.ibook.foobnix.LibreraApp;
-import java.util.concurrent.ExecutorService;
 import org.ebookdroid.ui.viewer.VerticalViewActivity;
-import java.util.concurrent.Future;
-import java.util.concurrent.Executors;
 import java.util.regex.Pattern;
-import com.example.slapimage.ibook.foobnix.ui2.adapter.BookmarksAdapter2;
 
 public class IMG {
 
@@ -241,7 +233,7 @@ public class IMG {
             final String url = IMG.toUrl(path, ImageExtractor.COVER_PAGE, width);
             PageUrl pageUrl = PageUrl.fromString(url);
             Bitmap cover = ImageExtractor.getInstance(img.getContext())
-                    .proccessCoverPage(pageUrl);
+                        .proccessCoverPage(pageUrl);
             Glide.with(img.getContext()).asBitmap().load(cover).into(img);    //ApplicationClass  url
             LOG.cc("getCoverPage", "bitmap:"+ path + width);
         } catch (Exception e) {
@@ -262,19 +254,17 @@ public class IMG {
     public static void getCoverPageWithEffect(ImageView img, String path, int width, ResourceReady run) {
 
         // Librera debug chanlhock
-
         String url = IMG.toUrl(path, ImageExtractor.COVER_PAGE, width);
-        LOG.cc("IMG_DEBUG", "getCoverPageWithEffect CALLED. Path: " + path + ", Width: " + width);
 
         PageUrl pageUrl = PageUrl.fromString(url);
         Bitmap cover = ImageExtractor.getInstance(img.getContext())
                         .proccessCoverPage(pageUrl);
-
+        LOG.cc("CHANLHOCK_DEBUG","Cover applied to SearchFragment cover thumbnails - getCoverPageWithEffect");     // Librera debug chanlhock 4th June 2025
         IMG.with(img.getContext())
                 .asBitmap()
                 .load(cover)      // url
                 .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)      // RESOURCE
                 .listener(new RequestListener<Bitmap>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
@@ -303,34 +293,7 @@ public class IMG {
 
 
     }
-/*
-public static void getCoverPageWithEffect(ImageView img, String path, int width, ResourceReady run) {
-   // PageUrl pageUrl = new PageUrl(path, ImageExtractor.COVER_PAGE, width);
-    String url = IMG.toUrl(path, ImageExtractor.COVER_PAGE, width);
-    PageUrl pageUrl = PageUrl.fromString(url);
-    //Executors.newSingleThreadExecutor().execute(() -> {
-        try {
-            Bitmap cover = ImageExtractor.getInstance(img.getContext())
-                    .proccessCoverPage(pageUrl);
 
-            img.post(() -> {
-                if (cover != null && !cover.isRecycled()) {
-                    img.setImageBitmap(cover);
-                    if (run != null) run.onResourceReady(cover);
-                } else {
-                   // showErrorCover(img);
-                    if (run != null) run.onResourceReady(null);
-                }
-            });
-        } catch (Exception e) {
-            img.post(() -> {
-             //   showErrorCover(img);
-                if (run != null) run.onResourceReady(null);
-            });
-        }
-    //});
-}
-*/
     public static void getCoverPageWithEffectPos(ImageView img, String path, int width, int pos) {
         final String url = IMG.toUrlPos(path, ImageExtractor.COVER_PAGE, width, pos);
         try {
@@ -342,32 +305,8 @@ public static void getCoverPageWithEffect(ImageView img, String path, int width,
             ImageExtractor extractor = ImageExtractor.getInstance(img.getContext());
             // Process the cover page
             Bitmap cover = extractor.proccessCoverPage(pageUrl);
+            LOG.cc("CHANLHOCK: Cover applied to BookMark");     // Librera debug chanlhock 4th June 2025
             Glide.with(img.getContext()).asBitmap().load(cover).into(img);        //ApplicationClass  url
-            // Create a PageUrl object with the required parameters
-     /*       PageUrl pageUrl = PageUrl.fromString(url);
-            pageUrl.setWidth(width);
-            pageUrl.setPage(pos); // Use the position parameter
-
-            // Get the ImageExtractor instance
-            ImageExtractor extractor = ImageExtractor.getInstance(img.getContext());
-
-            // Process the cover page
-            Bitmap cover = extractor.proccessCoverPage(pageUrl);
-
-            // Apply effects if needed
-            if (pos == ImageExtractor.COVER_PAGE_WITH_EFFECT) {
-                cover = extractor.generalCoverWithEffect(pageUrl, cover);
-            }
-
-            // Set the bitmap directly to the ImageView
-            if (cover != null) {
-                LOG.cc("CHANLHOCK: Cover applied to BookMark");     // Librera debug chanlhock 4th June 2025
-                img.setImageBitmap(cover);
-            } else {
-                // Handle case when bitmap is null (load error/placeholder)
-              //  img.setImageResource(R.drawable.default_cover); // Set a default image
-            }
-*/
         } catch (Exception e) {
             LOG.e(e);
         }

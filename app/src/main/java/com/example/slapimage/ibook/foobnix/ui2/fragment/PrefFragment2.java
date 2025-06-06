@@ -2428,14 +2428,14 @@ public class PrefFragment2 extends UIFragment {
                 });
 
         // licences link
-        underline(inflate.findViewById(R.id.libraryLicenses)).
+   /*     underline(inflate.findViewById(R.id.libraryLicenses)).
 
                 setOnClickListener(new OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
                         AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-                        alert.setTitle(R.string.licenses_for_libraries);
+                       // alert.setTitle(R.string.licenses_for_libraries);
 
                         WebView wv = new WebView(getActivity());
                         wv.loadUrl("file:///android_asset/licenses.html");
@@ -2465,7 +2465,7 @@ public class PrefFragment2 extends UIFragment {
                         create.show();
                     }
                 });
-
+*/
         TxtUtils.underlineTextView(inflate.findViewById(R.id.docSearch)).
 
                 setOnClickListener(new OnClickListener() {

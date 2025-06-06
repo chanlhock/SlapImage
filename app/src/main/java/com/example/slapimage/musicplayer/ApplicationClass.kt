@@ -6,9 +6,11 @@ package com.example.slapimage.musicplayer
 import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.ComponentCallbacks2
 import android.content.Context
 import android.os.Build
 import android.os.StrictMode
+import com.bumptech.glide.Glide
 import com.example.slapimage.BuildConfig
 import com.example.slapimage.ibook.foobnix.android.utils.Dips
 import com.example.slapimage.ibook.foobnix.android.utils.LOG
@@ -153,7 +155,7 @@ class ApplicationClass:Application() {
             }
         }
 
-        // Librera
+        // Librera Application Initialization
        context = applicationContext
         AppsConfig.init(applicationContext)
         Dips.init(null);
@@ -192,6 +194,7 @@ class ApplicationClass:Application() {
         }
         ExtensionManager.onLowMemory()
         super.onTrimMemory(level)
+        LOG.d("onTrimMemory", level)
     }
     override fun onLowMemory() {
         super.onLowMemory()
@@ -200,9 +203,4 @@ class ApplicationClass:Application() {
         TintUtil.clean()
         HypenUtils.cache.clear()
     }
-
-    //override fun onTrimMemory(level: Int) {
-    //    super.onTrimMemory(level)
-    //    LOG.d("onTrimMemory", level)
-   // }
 }

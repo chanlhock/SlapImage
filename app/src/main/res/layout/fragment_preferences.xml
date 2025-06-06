@@ -1655,13 +1655,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/licence_gnu_gpl_v3_0" />
 
-            <TextView
-                android:id="@+id/libraryLicenses"
-                style="@style/textLink"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dip"
-                android:text="@string/licenses_for_libraries" />
+
         </LinearLayout>
 
 

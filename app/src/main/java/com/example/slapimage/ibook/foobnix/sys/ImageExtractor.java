@@ -237,8 +237,8 @@ public class ImageExtractor {
     public static Bitmap messageFileBitmap(String msg, String name) {
         return BaseExtractor.getBookCoverWithTitle(msg, name, true);
     }
-
-   /* @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+/*
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public Bitmap coverPDFNative(PageUrl pageUrl) {
         try {
             LOG.d("Cover-PDF-navite");
@@ -261,6 +261,7 @@ public class ImageExtractor {
         }
 
     }*/
+
    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
    public Bitmap coverPDFNative(PageUrl pageUrl) {
        ParcelFileDescriptor fd = null;
@@ -286,7 +287,6 @@ public class ImageExtractor {
                int width = pageUrl.getWidth();
                int height = (int) (width * ratio);
 
-               // Use ARGB_8888 for better quality
                Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
                page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
                return bitmap;
@@ -308,7 +308,6 @@ public class ImageExtractor {
            }
        }
    }
-
 
     public Bitmap proccessCoverPage(PageUrl pageUrl) {
         LOG.d("ImageExtractor_Entry", "proccessCoverPage ENTERED for PageUrl: " + pageUrl); // ADD THIS LINE

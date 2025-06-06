@@ -28,9 +28,6 @@ import com.example.slapimage.ibook.foobnix.model.AppState;
 import com.example.slapimage.ibook.foobnix.pdf.info.IMG;
 import com.example.slapimage.ibook.foobnix.pdf.info.model.BookCSS;
 import com.example.slapimage.musicplayer.ApplicationClass;
-
-//import com.example.slapimage.ibook.foobnix.LibreraApp;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -120,7 +117,7 @@ public class MagicHelper {
         // new,
         // scaled bitmap onto it.
        // Bitmap dest = Bitmap.createBitmap(newWidth, newHeight, Config.ARGB_4444);
-        Bitmap dest = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
+        Bitmap dest = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);        // ARGB_4444
         Canvas canvas = new Canvas(dest);
 
         Paint paint = new Paint();
