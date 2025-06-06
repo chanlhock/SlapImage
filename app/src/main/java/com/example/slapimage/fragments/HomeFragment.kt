@@ -115,6 +115,7 @@ class HomeFragment : Fragment() {
     private var initialY1: Float = 0f
     private var initialY2: Float = 0f
     private var isTwoFingersDown = false
+    private var isFragmentResumed = false
 
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreateView(
@@ -518,17 +519,21 @@ class HomeFragment : Fragment() {
 
 
     private fun rotateBannerWithAnimation() {
+        if (!isFragmentResumed) return  // Prevent rotation of banner if the fragment is not resumed
+
         handler.postDelayed({
+            if (!isFragmentResumed)  return@postDelayed // Check if the fragment is still active before proceeding
+
             val nextIndex = (currentBannerIndex + 1) % bannerImages.size
             // Load the next banner image
             Glide.with(this).load(bannerImages[nextIndex]).into(nextBanner)
 
             // Define animations
             val slideOut = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_out_left).apply {
-                duration = 300
+                duration = 500
             }
             val slideIn = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_right).apply {
-                duration = 300
+                duration = 500
             }
 
             // Set next banner visibility and animation
@@ -577,11 +582,13 @@ class HomeFragment : Fragment() {
         //Thread {
         //    Glide.get(requireContext()).clearDiskCache()
         //}.start()
+        isFragmentResumed = true
         rotateBannerWithAnimation()
     }
 
     override fun onPause() {
         super.onPause()
+        isFragmentResumed = false
         handler.removeCallbacksAndMessages(null)
     }
 
