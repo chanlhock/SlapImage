@@ -116,6 +116,7 @@ class HomeFragment : Fragment() {
     private var initialY2: Float = 0f
     private var isTwoFingersDown = false
     private var isFragmentResumed = false
+    private var isBannerRotationPaused = false
 
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreateView(
@@ -127,6 +128,10 @@ class HomeFragment : Fragment() {
 
         gestureDetector = GestureDetector(requireContext(), object : GestureDetector.SimpleOnGestureListener() {
             override fun onDown(e: MotionEvent): Boolean = true
+            override fun onDoubleTap(e: MotionEvent): Boolean {
+                toggleBannerRotation()
+                return true
+            }
         })
 
         view.setOnTouchListener { v, event ->
@@ -517,12 +522,20 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun toggleBannerRotation() {
+        isBannerRotationPaused = !isBannerRotationPaused
+        if (isBannerRotationPaused) {
+            handler.removeCallbacksAndMessages(null)    // Stop banner rotation
+        }else{
+            rotateBannerWithAnimation() // Start banner rotation
+        }
+    }
 
     private fun rotateBannerWithAnimation() {
-        if (!isFragmentResumed) return  // Prevent rotation of banner if the fragment is not resumed
+        if (!isFragmentResumed || isBannerRotationPaused) return  // Prevent rotation of banner if paused or fragment is not resumed
 
         handler.postDelayed({
-            if (!isFragmentResumed)  return@postDelayed // Check if the fragment is still active before proceeding
+            if (!isFragmentResumed || isBannerRotationPaused)  return@postDelayed // Check if the fragment is still active before proceeding
 
             val nextIndex = (currentBannerIndex + 1) % bannerImages.size
             // Load the next banner image
@@ -582,6 +595,7 @@ class HomeFragment : Fragment() {
         //Thread {
         //    Glide.get(requireContext()).clearDiskCache()
         //}.start()
+        isBannerRotationPaused = false
         isFragmentResumed = true
         rotateBannerWithAnimation()
     }
