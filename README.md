@@ -41,13 +41,13 @@ SlapImage is developed using:
 ## :factory: Build Process
 - SlapImage build is relatively auto within the Android Studio build environment except LibMUPdf.so file generation for Librera which needs special build.
 - The following instruction are extracted from a portion of the Librerareader README.md file.
-  - Required build libs
+### Required build libs
 ~~~~
 mesa-common-dev libxcursor-dev libxrandr-dev libxinerama-dev libglu1-mesa-dev libxi-dev pkg-config libgl-dev
 ~~~~
 You also need the Android NDK in version 20+
 Please ensure to download it using android studio and add the NDK to your PATH.
-- Create a keystore
+### Create a keystore
 Even if you do not plan to upload a version yourself you need a keystore with a certificate to build.
 The keystore needs to be in PKCS12 format.
 You can create a keystore in your actual directory using the following call
@@ -64,7 +64,7 @@ RELEASE_STORE_PASSWORD=PASSWD
 RELEASE_KEY_PASSWORD=PASSWD
 RELEASE_KEY_ALIAS=ALIAS
 ~~~~
-   - Librera Build on MuPdf
+### Librera Build on MuPdf
 ~~~~
 cd Builder
 ./link_to_mupdf_x.x.x.sh (Change the paths to mupdf and jniLibs folders)
@@ -72,7 +72,7 @@ cd ..
 ./gradlew assembleLibrera
 ~~~~
 
-   - Building for F-Droid for Android
+### Building for F-Droid for Android
 If you wish to build for F-Droid (e.g. not using google services, Internet) you can run the build with
 ~~~~
 cd Builder
