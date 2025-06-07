@@ -71,6 +71,7 @@ import com.example.slapimage.xededitor.xededitor.MainActivity.XEDMainActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.view.GestureDetector
 import android.view.MotionEvent
+import com.example.slapimage.droidzebra.DroidZebra
 import com.example.slapimage.ibook.foobnix.ui2.MainTabs2
 
 class HomeFragment : Fragment() {
@@ -319,10 +320,10 @@ class HomeFragment : Fragment() {
                 Icon(R.drawable.icon16, "TicTacToe"),
                 Icon(R.drawable.icon18, "SolitaireCG"),
                 Icon(R.drawable.icon7, "Game of Life"),
-                Icon(R.drawable.icon15, "AI Calc"),
+                Icon(R.drawable.icon23, "Reversi"),
                 Icon(R.drawable.icon21, "Wallpaper"),
                 Icon(R.drawable.icon13, "Play Music"),
-                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon15, "AI Calc"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
@@ -512,6 +513,15 @@ class HomeFragment : Fragment() {
             }
             "Librera" -> {
                 val intent = Intent(activity, MainTabs2::class.java)
+                val options = ActivityOptions.makeCustomAnimation(
+                    requireContext(),
+                    R.anim.slide_up,
+                    R.anim.no_animation
+                )
+                startActivity(intent, options.toBundle())
+            }
+            "Reversi" -> {
+                val intent = Intent(activity, DroidZebra::class.java)
                 val options = ActivityOptions.makeCustomAnimation(
                     requireContext(),
                     R.anim.slide_up,
