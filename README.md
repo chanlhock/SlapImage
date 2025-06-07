@@ -39,7 +39,7 @@ SlapImage is developed using:
 - GitHub Copilot for some minor code review and debug
 
 ## :factory: Build Process
-- SlapImage build is relatively auto within the Android Studio build environment except LibMUPdf.so file generation which needs special build.
+- SlapImage build is relatively auto within the Android Studio build environment except LibMUPdf.so file generation for Librera which needs special build.
 - Required build libs
 ~~~~
 mesa-common-dev libxcursor-dev libxrandr-dev libxinerama-dev libglu1-mesa-dev libxi-dev pkg-config libgl-dev
