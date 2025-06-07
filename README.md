@@ -8,7 +8,7 @@
 - [Description](#scroll-description)
 - [APK Download](#gift-apk-download)
 - [Development Platform](#computer-development-platform)
-- [Build Process](build-process)
+- [Build Process](#factory-build-process)
 - [Platform Tested](#iphone-platform-tested)
 - [Screenshots](#film_strip-screenshots)
 - [Chronology of Development Events](#hourglass_flowing_sand-chronology-of-development-events)
@@ -38,7 +38,7 @@ SlapImage is developed using:
 - DeepSeek AI for code and activity generation, debug and review
 - GitHub Copilot for some minor code review and debug
 
-## Build Process
+## :factory: Build Process
 SlapImage build is relatively auto within the Android Studio build environment except LibMUPdf.so file generation which needs special build.
 - 
 
