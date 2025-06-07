@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- the theme applied to the application or activity Theme.Holo-->
+    <style name="CustomActionBarTheme"
+           parent="android:style/Theme.Holo">
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <item name="android:textColor">@color/statustextcolor</item>
+        </style>
+    AppThemeActivity
+
+    <style name="CustomActionBarThemeSlapImage"
+        parent="android:style/Theme.Holo">
+        <item name="android:windowTitleStyle">@style/DialogTitleStyle</item>
+        <item name="colorAccent">@color/white</item> <!-- Changes ALL dialog buttons -->
+        <item name="android:windowIsFloating">true</item> <!-- Ensures dialog floats -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:gravity">left</item>
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <item name="android:textColor">@color/statustextcolor</item>
+    </style>
+    <style name="DialogTitleStyle" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textSize">20sp</item> <!-- Custom title size -->
+        <item name="android:textColor">@color/white</item> <!-- Optional: Change color -->
+    </style>
+    <!-- ActionBar styles -->
+    <style name="MyActionBar"
+           parent="android:style/Widget.Holo.ActionBar">
+        <item name="android:background">@color/board_color</item>
+        <item name="android:titleTextStyle">@style/MyActionBarTitleText</item>
+    </style>
+    
+    <!-- ActionBar title text -->
+    <style name="MyActionBarTitleText"
+           parent="android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/statustextcolor</item>
+    </style>    
+</resources>
