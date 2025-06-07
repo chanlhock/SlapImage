@@ -22,7 +22,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.slapimage.ibook.foobnix.android.utils.LOG;
-import com.example.slapimage.ibook.foobnix.android.utils.TxtUtils;
 import com.example.slapimage.ibook.foobnix.pdf.info.IMG;
 import com.example.slapimage.R;
 import com.example.slapimage.ibook.foobnix.pdf.info.wrapper.MagicHelper;

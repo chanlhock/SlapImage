@@ -198,7 +198,7 @@ public class AppState {
 
             //
     );
-    public static final List<String> langCodes = Arrays.asList("ar"
+   /* public static final List<String> langCodes = Arrays.asList("ar"
             , "be"
             , "bg"
             , "ca"
@@ -238,6 +238,11 @@ public class AppState {
             , "tr"
             , "uk"
             , "vi"
+            , "zh-rCN"
+            , "zh-rTW");*/
+    public static final List<String> langCodes = Arrays.asList("en"
+            , "ja"
+            , "uk"
             , "zh-rCN"
             , "zh-rTW");
     public static final int BOOKMARK_SORT_PAGE_ASC = 0;

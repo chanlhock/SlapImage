@@ -3,7 +3,6 @@ package com.example.slapimage.ibook.foobnix.pdf.info.view;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
 import androidx.appcompat.widget.AppCompatImageView;
 

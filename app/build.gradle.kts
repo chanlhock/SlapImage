@@ -46,6 +46,11 @@ android {
         }
         manifestPlaceholders["redirectHostName"] = "SlapImage"
         manifestPlaceholders["redirectSchemeName"] = "SlapImage"
+        resConfigs("en") // Still works despite deprecation warning
+        ndk {
+            // Optional: If you need to specify NDK version
+            version = "29.0.13113456"
+        }
     }
 
     buildTypes {
@@ -72,10 +77,18 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+
+    externalNativeBuild {
+        ndkBuild {
+            path = file("src/main/jni/Android.mk")
+        }
+    }
+
     buildFeatures {
         compose = true // Enable Compose
         viewBinding = true
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.15"  //"1.5.4" // Use the latest version
     }
@@ -93,7 +106,8 @@ android {
             pickFirsts.addAll(listOf(
                 "**/libonnxruntime4j_jni.so",
                 "**/libonnxruntime.so",
-                "**/libMuPDF.so"
+                "**/libMuPDF.so",
+                "**/libdroidzebra.so"
             ))
             // Only enable if you have specific needs for uncompressed native libs
             // useLegacyPackaging = true
@@ -134,12 +148,13 @@ android {
 
     sourceSets {
         getByName("fdroid") {
-            assets.srcDirs("src/fdroid/assets", "src/fdroid/assets/")
+            assets.srcDirs("src/fdroid/assets", "src/fdroid/assets/", "src/main/assets")
         }
         named("main") {
             jniLibs.srcDirs("src/main/jniLibs", "src/main/Libs")
         }
     }
+    ndkVersion = "27.0.12077973"
 
 
     applicationVariants.all {

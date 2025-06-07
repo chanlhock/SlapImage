@@ -6,18 +6,15 @@ package com.example.slapimage.musicplayer
 import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.ComponentCallbacks2
 import android.content.Context
 import android.os.Build
 import android.os.StrictMode
-import com.bumptech.glide.Glide
 import com.example.slapimage.BuildConfig
 import com.example.slapimage.ibook.foobnix.android.utils.Dips
 import com.example.slapimage.ibook.foobnix.android.utils.LOG
 import com.example.slapimage.ibook.foobnix.android.utils.TxtUtils
 import com.example.slapimage.ibook.foobnix.ext.CacheZipUtils
 import com.example.slapimage.ibook.foobnix.hypen.HypenUtils
-import com.example.slapimage.ibook.foobnix.model.AppState
 import com.example.slapimage.ibook.foobnix.pdf.info.AppsConfig
 import com.example.slapimage.ibook.foobnix.pdf.info.IMG
 import com.example.slapimage.ibook.foobnix.pdf.info.Prefs
@@ -158,7 +155,7 @@ class ApplicationClass:Application() {
         // Librera Application Initialization
        context = applicationContext
         AppsConfig.init(applicationContext)
-        Dips.init(null);
+        Dips.init(null)
         Prefs.get().init(applicationContext)
         if (AppsConfig.IS_TEST_DEVICE) {
             val configuration = RequestConfiguration.Builder()

@@ -13,7 +13,6 @@ import android.os.Vibrator
 import android.util.Log
 import android.view.View
 import android.widget.*
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
@@ -24,8 +23,6 @@ import com.example.slapimage.newcalculator.screens.DataScreen
 import kotlin.math.*
 import com.example.slapimage.databinding.ActivityCalcmainBinding
 import androidx.core.content.edit
-import com.example.slapimage.fragments.HomeFragment
-import com.example.slapimage.newcalculator.CalculatorDatabaseHelper
 
 class CalcMainActivity : AppCompatActivity() {
     private var operation: Operation = Operation.EMPTY

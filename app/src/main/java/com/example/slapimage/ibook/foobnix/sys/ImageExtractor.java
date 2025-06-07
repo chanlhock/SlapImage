@@ -37,7 +37,6 @@ import com.example.slapimage.ibook.foobnix.ext.Fb2Extractor;
 import com.example.slapimage.ibook.foobnix.ext.MobiExtract;
 import com.example.slapimage.ibook.foobnix.ext.OdtExtractor;
 import com.example.slapimage.ibook.foobnix.ext.RtfExtract;
-import com.example.slapimage.ibook.foobnix.ext.PdfExtract;
 import com.example.slapimage.ibook.foobnix.model.AppSP;
 import com.example.slapimage.ibook.foobnix.model.AppState;
 import com.example.slapimage.ibook.foobnix.opds.OPDS;
@@ -54,7 +53,6 @@ import com.example.slapimage.ibook.foobnix.ui2.AppDB;
 import com.example.slapimage.ibook.foobnix.ui2.FileMetaCore;
 import com.example.slapimage.ibook.foobnix.ui2.fragment.BrowseFragment2;
 import com.example.slapimage.musicplayer.ApplicationClass;
-import com.google.common.collect.Lists;
 
 import org.ebookdroid.BookType;
 import org.ebookdroid.common.bitmaps.BitmapRef;
