@@ -56,6 +56,10 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <uses-permission android:name="com.termux.permission.RUN_COMMAND"/>
+    <uses-feature
+        android:required="false"
+        android:name="android.hardware.touchscreen">
+    </uses-feature>
     <queries>
         <package android:name="com.github.android" />
         <intent>
@@ -700,5 +704,28 @@
        //     android:exported="false"
        //     android:permission="android.permission.BIND_REMOTEVIEWS" />
 -->
+        <activity android:name=".droidzebra.DroidZebra"
+            android:allowBackup="true"
+            android:label="@string/zebra_app_name"
+            android:icon="@drawable/icon23"
+            android:theme="@style/CustomActionBarTheme"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            tools:ignore="DiscouragedApi,LockedOrientationActivity"
+            android:multiprocess="false"
+            android:launchMode="singleTask">
+        </activity>
+        <activity android:name=".droidzebra.SettingsPreferences"
+            tools:ignore="DiscouragedApi,LockedOrientationActivity"
+            android:label="@string/zebra_app_name"
+            android:icon="@drawable/icon23"
+            android:theme="@style/CustomActionBarTheme"
+            android:screenOrientation="portrait"
+            android:multiprocess="false"
+            android:launchMode="standard"
+            android:stateNotNeeded="true"
+            android:noHistory="false"
+            android:allowTaskReparenting="false">
+        </activity>
     </application>
 </manifest>
