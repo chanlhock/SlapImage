@@ -39,7 +39,7 @@ SlapImage is developed using:
 - GitHub Copilot for some minor code review and debug
 
 ## :factory: Build Process
-SlapImage build is relatively auto within the Android Studio build environment except LibMUPdf.so file generation which needs special build.
+- SlapImage build is relatively auto within the Android Studio build environment except LibMUPdf.so file generation which needs special build.
 - 
 
 ## :iphone: Platform tested:
