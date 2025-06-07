@@ -226,7 +226,7 @@ private fun setupObservers() {
     }
 
     private fun showExitConfirmationDialog() {
-        val dialog = AlertDialog.Builder(requireContext())
+        val dialog = AlertDialog.Builder(requireContext(), R.style.CustomActionBarThemeSlapImage)
             .setTitle(R.string.exit_chat_title)
             .setMessage(R.string.exit_chat_message)
             .setPositiveButton(R.string.exit) { _, _ -> parentFragmentManager.popBackStack() }
@@ -234,10 +234,10 @@ private fun setupObservers() {
             .show()
         // Access and set text color for the buttons
         dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(
-            ContextCompat.getColor(requireContext(), R.color.dark_blue)
+            ContextCompat.getColor(requireContext(), R.color.white)
         )
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(
-            ContextCompat.getColor(requireContext(), R.color.dark_blue)
+            ContextCompat.getColor(requireContext(), R.color.white)
         )
     }
 

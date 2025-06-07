@@ -306,7 +306,7 @@ class MainMusicActivity : AppCompatActivity() {
     }
 
     private fun showExitDialog() {
-        val builder = android.app.AlertDialog.Builder(this)
+        val builder = android.app.AlertDialog.Builder(this, R.style.CustomActionBarThemeSlapImage)
         builder.setTitle("Exit MusicPlayer")
         builder.setMessage("Do you want to go back to Home screen?")
 
@@ -327,10 +327,13 @@ class MainMusicActivity : AppCompatActivity() {
         dialog.show()
         // Access and set text color for the buttons
         dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)?.setTextColor(
-            ContextCompat.getColor(this, R.color.dark_blue)
+            ContextCompat.getColor(this, R.color.white)
         )
         dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE)?.setTextColor(
-            ContextCompat.getColor(this, R.color.dark_blue)
+            ContextCompat.getColor(this, R.color.white)
+        )
+        dialog.getButton(android.app.AlertDialog.BUTTON_NEUTRAL)?.setTextColor(
+            ContextCompat.getColor(this, R.color.white)
         )
     }
 }

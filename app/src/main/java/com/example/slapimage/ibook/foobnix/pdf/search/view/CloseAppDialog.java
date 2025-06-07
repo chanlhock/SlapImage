@@ -59,54 +59,54 @@ public class CloseAppDialog {
             return;
         }
 
-        AlertDialog.Builder dialog = new AlertDialog.Builder(c);
+        AlertDialog.Builder dialog = new AlertDialog.Builder(c, R.style.CustomActionBarThemeSlapImage);
+        dialog.setTitle("Exit Librera !!!");
+      //  View inflate = LayoutInflater.from(c).inflate(R.layout.dialog_exit, null, false);
 
-        View inflate = LayoutInflater.from(c).inflate(R.layout.dialog_exit, null, false);
+     //   final TextView onAsk = (TextView) inflate.findViewById(R.id.onAsk);
+     //   final TextView onRateUs = (TextView) inflate.findViewById(R.id.onRateUs);
+     //   final View topLayout = inflate.findViewById(R.id.topLayout);
+     //   final ImageView onClose = (ImageView) inflate.findViewById(R.id.onClose);
+     //   final TextView dialogTitle = (TextView) inflate.findViewById(R.id.dialogTitle);
 
-        final TextView onAsk = (TextView) inflate.findViewById(R.id.onAsk);
-        final TextView onRateUs = (TextView) inflate.findViewById(R.id.onRateUs);
-        final View topLayout = inflate.findViewById(R.id.topLayout);
-        final ImageView onClose = (ImageView) inflate.findViewById(R.id.onClose);
-        final TextView dialogTitle = (TextView) inflate.findViewById(R.id.dialogTitle);
+    //    long delta = System.currentTimeMillis() - AppState.get().installationDate;
 
-        long delta = System.currentTimeMillis() - AppState.get().installationDate;
+       // topLayout.setBackgroundColor(TintUtil.color);
 
-        topLayout.setBackgroundColor(TintUtil.color);
+      //  onRateUs.setText(onRateUs.getText());
+     //   onAsk.setText(onAsk.getText() + " ★★★★★");
 
-        onRateUs.setText(onRateUs.getText());
-        onAsk.setText(onAsk.getText() + " ★★★★★");
-
-        topLayout.setVisibility(TxtUtils.visibleIf(AppState.get().isShowRateUsOnExit && TimeUnit.MILLISECONDS.toDays(delta) > 1));
+      //  topLayout.setVisibility(TxtUtils.visibleIf(AppState.get().isShowRateUsOnExit && TimeUnit.MILLISECONDS.toDays(delta) > 1));
         // topLayout.setVisibility(View.VISIBLE);
-        onAsk.setOnClickListener(new View.OnClickListener() {
+     //   onAsk.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                Urls.rateIT(c);
-            }
-        });
+     //       @Override
+       //     public void onClick(View v) {
+        //        Urls.rateIT(c);
+        //    }
+      //  });
 
-        onRateUs.setOnClickListener(new View.OnClickListener() {
+  //      onRateUs.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                Urls.rateIT(c);
-            }
-        });
-        TxtUtils.underlineTextView(onRateUs);
+   //         @Override
+  //          public void onClick(View v) {
+   //             Urls.rateIT(c);
+   //         }
+   //     });
+    //    TxtUtils.underlineTextView(onRateUs);
 
-        onClose.setOnClickListener(new View.OnClickListener() {
+    //    onClose.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                topLayout.setVisibility(View.GONE);
-                AppState.get().isShowRateUsOnExit = false;
-            }
-        });
+    //        @Override
+   //         public void onClick(View v) {
+    //            topLayout.setVisibility(View.GONE);
+    //            AppState.get().isShowRateUsOnExit = false;
+    //        }
+    //    });
 
-        dialog.setView(inflate);
+     //   dialog.setView(inflate);
 
-        dialog.setPositiveButton(R.string.cancel, new OnClickListener() {
+        dialog.setNegativeButton(R.string.cancel, new OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -114,7 +114,7 @@ public class CloseAppDialog {
             }
         });
 
-        dialog.setNegativeButton(R.string.yes, new OnClickListener() {
+        dialog.setPositiveButton(R.string.yes, new OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
