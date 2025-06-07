@@ -8,6 +8,7 @@
 - [Description](#scroll-description)
 - [APK Download](#gift-apk-download)
 - [Development Platform](#computer-development-platform)
+- [Build Process](build-process)
 - [Platform Tested](#iphone-platform-tested)
 - [Screenshots](#film_strip-screenshots)
 - [Chronology of Development Events](#hourglass_flowing_sand-chronology-of-development-events)
@@ -36,6 +37,10 @@ SlapImage is developed using:
 - Android Studio Meerkat 2024 3.1 Patch 1
 - DeepSeek AI for code and activity generation, debug and review
 - GitHub Copilot for some minor code review and debug
+
+## Build Process
+SlapImage build is relatively auto within the Android Studio build environment except LibMUPdf.so file generation which needs special build.
+- 
 
 ## :iphone: Platform tested:
 I have tested mostly my code on:
@@ -86,6 +91,13 @@ In addition I have also tested to some extent on:
 - 16th May 2025: Added SimpleTextEditor from f-droid.org based on Version 1.27.1 2nd May 2025 source tarball. (https://f-droid.org/en/packages/com.maxistar.textpad/)
 - 17th May 2025: Added MBCompass from f-droid.org based on Version 1.1.5 22nd Apr 2025 source tarball. (https://f-droid.org/en/packages/com.mubarak.mbcompass/)
 - 20th May 2025: Added Xed-Editor from f-droid.org based on Version 3.0.6 (52) 14th May 2025 source tarball. (https://f-droid.org/en/packages/com.rk.xededitor/). Xed-Editor also has open source at GitHub. (https://github.com/Xed-Editor/Xed-Editor)
+- 21st May 2025: Released the updated version of SlapImage v1.0.0-beta.2 apk.
+- 5th June 2025: 
+  - Succesfully added Librera ebook reader after attempting for 11 days. Librera from f-droid.org based on version 8.9.182-fdroid (6202) 9th Nov 2024 source tarball. (https://f-droid.org/en/packages/com.foobnix.pro.pdf.reader/). Librera also has open source at Github. (https://github.com/foobnix/LibreraReader).
+  - The source code is very complicated and it took me quite a long time to fix the book cover thumbnail and book pages images not showing issue.
+- 7th June 2025: 
+  - Added DroidZebra (Reversi) from f-droid.org based on Version 1.5.3 (17) 18th June 2016 source tarball. (https://f-droid.org/en/packages/com.shurik.droidzebra/). DroidZebra can also be found as open source at Github. (https://github.com/alkom/droidzebra).
+  - Although this apps is written more than 10 years ago it is quite easily ported over to latest version of Android.
 
 ## :beetle: Unresolvable Bug in Todo List
 - [ ] When Xed-Editor activity is launched and user using Alphine for running C++ and Python there is an error of permission denied for proot in the Alphine terminal windows. 
