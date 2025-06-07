@@ -130,13 +130,17 @@ In addition I have also tested to some extent on:
 - 15th May 2025: Added SolitaireCG from f-droid.org based on Version 4.1 (4010) 2nd May 2025 source tarball. Quite easily ported over eventhough it is in Java instead of Kotlin. (https://f-droid.org/en/packages/net.sourceforge.solitaire_cg/)
 - 16th May 2025: Added SimpleTextEditor from f-droid.org based on Version 1.27.1 2nd May 2025 source tarball. (https://f-droid.org/en/packages/com.maxistar.textpad/)
 - 17th May 2025: Added MBCompass from f-droid.org based on Version 1.1.5 22nd Apr 2025 source tarball. (https://f-droid.org/en/packages/com.mubarak.mbcompass/)
-- 20th May 2025: Added Xed-Editor from f-droid.org based on Version 3.0.6 (52) 14th May 2025 source tarball. (https://f-droid.org/en/packages/com.rk.xededitor/). Xed-Editor also has open source at GitHub. (https://github.com/Xed-Editor/Xed-Editor)
+- 20th May 2025: 
+  - Added Xed-Editor from f-droid.org based on Version 3.0.6 (52) 14th May 2025 source tarball. (https://f-droid.org/en/packages/com.rk.xededitor/). 
+  - Xed-Editor also has open source at GitHub. (https://github.com/Xed-Editor/Xed-Editor)
 - 21st May 2025: Released the updated version of SlapImage v1.0.0-beta.2 apk.
 - 5th June 2025: 
-  - Succesfully added Librera ebook reader after attempting for 11 days. Librera from f-droid.org based on version 8.9.182-fdroid (6202) 9th Nov 2024 source tarball. (https://f-droid.org/en/packages/com.foobnix.pro.pdf.reader/). Librera also has open source at Github. (https://github.com/foobnix/LibreraReader).
+  - Succesfully added Librera ebook reader after attempting for 11 days. Librera from f-droid.org based on version 8.9.182-fdroid (6202) 9th Nov 2024 source tarball. (https://f-droid.org/en/packages/com.foobnix.pro.pdf.reader/). 
+  - Librera also has open source at Github. (https://github.com/foobnix/LibreraReader).
   - The source code is very complicated and it took me quite a long time to fix the book cover thumbnail and book pages images not showing issue.
 - 7th June 2025: 
-  - Added DroidZebra (Reversi) from f-droid.org based on Version 1.5.3 (17) 18th June 2016 source tarball. (https://f-droid.org/en/packages/com.shurik.droidzebra/). DroidZebra can also be found as open source at Github. (https://github.com/alkom/droidzebra).
+  - Added DroidZebra (Reversi) from f-droid.org based on Version 1.5.3 (17) 18th June 2016 source tarball. (https://f-droid.org/en/packages/com.shurik.droidzebra/). 
+  - DroidZebra can also be found as open source at Github. (https://github.com/alkom/droidzebra).
   - Although this apps is written more than 10 years ago it is quite easily ported over to latest version of Android.
 
 ## :beetle: Unresolvable Bug in Todo List
