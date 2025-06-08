@@ -142,6 +142,7 @@ In addition I have also tested to some extent on:
   - Added DroidZebra (Reversi) from f-droid.org based on Version 1.5.3 (17) 18th June 2016 source tarball. (https://f-droid.org/en/packages/com.shurik.droidzebra/). 
   - DroidZebra can also be found as open source at Github. (https://github.com/alkom/droidzebra).
   - Although this apps is written more than 10 years ago it is quite easily ported over to latest version of Android.
+- 8th June 2025: Released the stable updated version of SlapImage v1.0.0-fdroid-beta.3 apk.
 
 ## :beetle: Unresolvable Bug in Todo List
 - [ ] When Xed-Editor activity is launched and user using Alphine for running C++ and Python there is an error of permission denied for proot in the Alphine terminal windows. 
