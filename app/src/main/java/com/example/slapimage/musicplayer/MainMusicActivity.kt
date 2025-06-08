@@ -7,6 +7,8 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -28,6 +30,8 @@ import com.example.slapimage.R
 import com.example.slapimage.musicplayer.PlayerActivity.Companion.musicService
 import androidx.core.graphics.drawable.toDrawable
 import androidx.core.net.toUri
+import android.text.Spannable
+
 
 class MainMusicActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainmusicBinding
@@ -70,7 +74,17 @@ class MainMusicActivity : AppCompatActivity() {
             // Set background color
             val colorInt = ContextCompat.getColor(this@MainMusicActivity, R.color.cool_blue) // Resolve color resource to a color int
             setBackgroundDrawable(colorInt.toDrawable()) // Convert color int to ColorDrawable
-
+            // Set title text color (Spannable approach)
+            val whiteColor = ContextCompat.getColor(this@MainMusicActivity, android.R.color.white)
+            val spannableTitle = SpannableString(title).apply {
+                setSpan(
+                    ForegroundColorSpan(whiteColor),
+                    0,
+                    length,
+                    Spannable.SPAN_INCLUSIVE_INCLUSIVE
+                )
+            }
+            title = spannableTitle
         }
 
         //checking for dark theme

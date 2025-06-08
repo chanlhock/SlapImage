@@ -338,14 +338,14 @@ public class EditorActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (this.changed && !exitDialogShown) {
-            new AlertDialog.Builder(this)
+            new AlertDialog.Builder(this, R.style.CustomActionBarThemeSlapImage)
                     .setTitle(R.string.You_have_made_some_changes)
                     .setMessage(R.string.Are_you_sure_to_quit)
-                    .setNegativeButton(R.string.Yes, (arg0, arg1) -> {
+                    .setPositiveButton(R.string.Yes, (arg0, arg1) -> {
                         EditorActivity.super.onBackPressed();
                         exitDialogShown = false;
                     })
-                    .setPositiveButton(R.string.No, (arg0, arg1) -> {
+                    .setNegativeButton(R.string.No, (arg0, arg1) -> {
                         //do nothing
                         exitDialogShown = false;
                     })
@@ -868,7 +868,7 @@ public class EditorActivity extends AppCompatActivity {
 
     protected void exitApplication() {
         if (changed) {
-            new AlertDialog.Builder(this)
+            new AlertDialog.Builder(this, R.style.CustomActionBarThemeSlapImage)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setTitle(R.string.File_not_saved)
                     .setMessage(R.string.Save_current_file)

@@ -29,7 +29,7 @@ android {
         applicationId = "com.example.slapimage"
         minSdk = 29
         targetSdk = 34
-        versionCode = 1
+        versionCode = 3
         versionName = "1.0.0"
 
         android.buildFeatures.buildConfig = true
@@ -161,7 +161,7 @@ android {
         outputs.all {
                 val flavor = productFlavors[0].name.replaceFirstChar { it.uppercase() }
                 val abi = System.getenv("TARGET_ABI") ?: "universal"
-                val fullName = "SlapImage_${flavor}_${versionCode}_${abi}.apk"
+                val fullName = "SlapImage-v${versionName}-beta.${versionCode}.apk"
                 (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl).outputFileName = fullName
         }
     }

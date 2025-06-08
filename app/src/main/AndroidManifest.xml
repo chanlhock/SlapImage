@@ -286,6 +286,7 @@
             android:exported="true"
             android:screenOrientation="sensorPortrait"
             android:launchMode="standard"
+            android:theme="@style/MyToolbarTheme"
             tools:ignore="DiscouragedApi,LockedOrientationActivity">
         </activity>
         <activity
@@ -324,9 +325,11 @@
         <activity
             android:name=".solitaire_cg.SolitaireCG"
             android:exported="true"
+            android:theme="@style/android:Theme.Material"
             android:screenOrientation="portrait"
             tools:ignore="DiscouragedApi,LockedOrientationActivity"/>
-        <activity android:name=".solitaire_cg.Help" />
+        <activity android:name=".solitaire_cg.Help"
+            android:theme="@style/android:Theme.Material"/>
 
     <activity
         android:name=".textpad.activities.EditorActivity"

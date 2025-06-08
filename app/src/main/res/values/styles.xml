@@ -382,4 +382,13 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textAllCaps">true</item>
     </style>
+
+    <style name="MyToolbarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <!-- Back/Up arrow color -->
+        <item name="colorControlNormal">@android:color/white</item>
+        <!-- Search/menu icon color -->
+        <item name="actionMenuTextColor">@android:color/white</item> <!-- Menu icons -->
+        <item name="android:textColorSecondary">@android:color/white</item> <!-- SearchView text -->
+
+    </style>
 </resources>

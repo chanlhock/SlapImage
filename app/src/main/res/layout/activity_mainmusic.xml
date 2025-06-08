@@ -7,6 +7,7 @@
     android:fitsSystemWindows="true"
     android:textColor="@color/white"
     tools:openDrawer="start"
+    app:theme="@style/MyToolbarTheme"
     tools:context=".musicplayer.MainMusicActivity">
 
     <!-- android:fitsSystemWindows="true" -->
