@@ -6,21 +6,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.slapimage.ibook.foobnix.android.utils.Apps;
 import com.example.slapimage.ibook.foobnix.android.utils.LOG;
-import com.example.slapimage.ibook.foobnix.android.utils.TxtUtils;
 import com.example.slapimage.ibook.foobnix.model.AppState;
 import com.example.slapimage.ibook.foobnix.pdf.info.IMG;
 import com.example.slapimage.R;
-import com.example.slapimage.ibook.foobnix.pdf.info.TintUtil;
-import com.example.slapimage.ibook.foobnix.pdf.info.Urls;
 import com.example.slapimage.ibook.foobnix.pdf.info.view.MyPopupMenu;
 import com.example.slapimage.ibook.foobnix.pdf.info.wrapper.DocumentController;
 import com.example.slapimage.ibook.foobnix.pdf.info.wrapper.UITab;
@@ -30,7 +24,6 @@ import com.example.slapimage.ibook.foobnix.ui2.MainTabs2;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class CloseAppDialog {
 
@@ -60,7 +53,8 @@ public class CloseAppDialog {
         }
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(c, R.style.CustomActionBarThemeSlapImage);
-        dialog.setTitle("Exit Librera !!!");
+        dialog.setTitle("Exit Librera");
+        dialog.setMessage("Do you want to go back to Home screen?");
       //  View inflate = LayoutInflater.from(c).inflate(R.layout.dialog_exit, null, false);
 
      //   final TextView onAsk = (TextView) inflate.findViewById(R.id.onAsk);
@@ -106,7 +100,7 @@ public class CloseAppDialog {
 
      //   dialog.setView(inflate);
 
-        dialog.setNegativeButton(R.string.cancel, new OnClickListener() {
+        dialog.setNegativeButton("No", new OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
