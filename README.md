@@ -43,8 +43,6 @@ SlapImage is developed using:
 - The following instruction are extracted from a portion of the Librerareader README.md file. (Note: I was not able to build to generate the libMuPDF.so file because my old iMac doesn't support some dependency library files. Ended up i just extracted the libMuPDF.so from the Librera apk and add it in the /scr/main/Libs)
 ### Required build libs
 ~~~~
-### Required build libs
-~~~~
 mesa-common-dev libxcursor-dev libxrandr-dev libxinerama-dev libglu1-mesa-dev libxi-dev pkg-config libgl-dev
 ~~~~
 You also need the Android NDK in version 20+
