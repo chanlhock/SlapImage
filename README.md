@@ -39,8 +39,8 @@ SlapImage is developed using:
 - GitHub Copilot for some minor code review and debug
 
 ## :factory: Build Process
-- SlapImage build is relatively auto within the Android Studio build environment except LibMUPdf.so file generation for Librera which needs special build.
-- The following instruction are extracted from a portion of the Librerareader README.md file.
+- SlapImage build is relatively auto within the Android Studio build environment except libMuPDF.so file generation for Librera which needs special build.
+- The following instruction are extracted from a portion of the Librerareader README.md file. (Note: I was not able to build to generate the libMuPDF.so file because my old iMac doesn't support some dependency library files. Ended up i just extracted the libMuPDF.so from the Librera apk and add it in the /scr/main/Libs)
 ### Required build libs
 ~~~~
 mesa-common-dev libxcursor-dev libxrandr-dev libxinerama-dev libglu1-mesa-dev libxi-dev pkg-config libgl-dev
@@ -128,7 +128,9 @@ In addition I have also tested to some extent on:
 - 8th May 2025: Release the initial stable version of SlapImage v1.0.0-beta.1 apk. :tada:
 - 12th May 2025: Modified and added an MP3 Tag Editor - Metadator from Github. (https://github.com/BobbyESP/Metadator)
 - 15th May 2025: Added SolitaireCG from f-droid.org based on Version 4.1 (4010) 2nd May 2025 source tarball. Quite easily ported over eventhough it is in Java instead of Kotlin. (https://f-droid.org/en/packages/net.sourceforge.solitaire_cg/)
-- 16th May 2025: Added SimpleTextEditor from f-droid.org based on Version 1.27.1 2nd May 2025 source tarball. (https://f-droid.org/en/packages/com.maxistar.textpad/)
+- 16th May 2025: 
+  - Added SimpleTextEditor from f-droid.org based on Version 1.27.1 2nd May 2025 source tarball. (https://f-droid.org/en/packages/com.maxistar.textpad/)
+  - SimpleTextEditor also has source code released at Github. (https://github.com/maxistar/TextPad)
 - 17th May 2025: Added MBCompass from f-droid.org based on Version 1.1.5 22nd Apr 2025 source tarball. (https://f-droid.org/en/packages/com.mubarak.mbcompass/)
 - 20th May 2025: 
   - Added Xed-Editor from f-droid.org based on Version 3.0.6 (52) 14th May 2025 source tarball. (https://f-droid.org/en/packages/com.rk.xededitor/). 
@@ -142,6 +144,7 @@ In addition I have also tested to some extent on:
   - Added DroidZebra (Reversi) from f-droid.org based on Version 1.5.3 (17) 18th June 2016 source tarball. (https://f-droid.org/en/packages/com.shurik.droidzebra/). 
   - DroidZebra can also be found as open source at Github. (https://github.com/alkom/droidzebra).
   - Although this apps is written more than 10 years ago it is quite easily ported over to latest version of Android.
+- 8th June 2025: Released the stable updated version of SlapImage v1.0.0-fdroid-beta.3 apk.
 
 ## :beetle: Unresolvable Bug in Todo List
 - [ ] When Xed-Editor activity is launched and user using Alphine for running C++ and Python there is an error of permission denied for proot in the Alphine terminal windows. 
