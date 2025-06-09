@@ -130,7 +130,7 @@ In addition I have also tested to some extent on:
 - 15th May 2025: Added SolitaireCG from f-droid.org based on Version 4.1 (4010) 2nd May 2025 source tarball. Quite easily ported over eventhough it is in Java instead of Kotlin. (https://f-droid.org/en/packages/net.sourceforge.solitaire_cg/)
 - 16th May 2025: 
   - Added SimpleTextEditor from f-droid.org based on Version 1.27.1 2nd May 2025 source tarball. (https://f-droid.org/en/packages/com.maxistar.textpad/)
-  - SimoleTextEditor also has source code released at Github. (https://github.com/maxistar/TextPad)
+  - SimpleTextEditor also has source code released at Github. (https://github.com/maxistar/TextPad)
 - 17th May 2025: Added MBCompass from f-droid.org based on Version 1.1.5 22nd Apr 2025 source tarball. (https://f-droid.org/en/packages/com.mubarak.mbcompass/)
 - 20th May 2025: 
   - Added Xed-Editor from f-droid.org based on Version 3.0.6 (52) 14th May 2025 source tarball. (https://f-droid.org/en/packages/com.rk.xededitor/). 
