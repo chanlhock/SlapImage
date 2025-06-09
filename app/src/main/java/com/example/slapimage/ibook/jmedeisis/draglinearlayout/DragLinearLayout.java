@@ -22,7 +22,10 @@ import android.view.ViewTreeObserver.OnPreDrawListener;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
-
+import android.app.Activity;
+import android.os.Handler;
+import android.os.Looper;
+import java.util.function.Consumer; // API level 24+
 /**
  * copy from github:https://github.com/justasm/DragLinearLayout
  * <p/>
@@ -212,8 +215,7 @@ public class DragLinearLayout extends LinearLayout {
      * The currently dragged item, if {@link DragLinearLayout.DragItem#mDetecting}.
      */
     private final DragItem mDragItem;
-    private final int mSlop;
-
+    private int mSlop;      // chanlhock change to remove final int
     private static final int INVALID_POINTER_ID = -1;
     private int mDownY = -1;
     private int mDownX = -1;
@@ -224,15 +226,48 @@ public class DragLinearLayout extends LinearLayout {
         this(context, null);
     }
 
+ /*   public DragLinearLayout(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        mDraggableChildren = new SparseArray<DraggableChild>();
+        mDragItem = new DragItem();
+
+        ViewConfiguration vc = ViewConfiguration.get(context);
+        mSlop = vc.getScaledTouchSlop();
+
+        final Resources resources = getResources();
+        mNominalDistanceScaled = (int) (NOMINAL_DISTANCE * resources.getDisplayMetrics().density + 0.5f);
+    }*/
+
+    // chanlhock debug UI crash
+    // Modify constructor
     public DragLinearLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         mDraggableChildren = new SparseArray<DraggableChild>();
         mDragItem = new DragItem();
-        ViewConfiguration vc = ViewConfiguration.get(context);
-        mSlop = vc.getScaledTouchSlop();
+
+         //ViewConfiguration vc = ViewConfiguration.get(context);
+         //mSlop = vc.getScaledTouchSlop();
+
+        // Use this approach:
+        if (context instanceof Activity) {
+            ((Activity) context).runOnUiThread(() -> {
+                ViewConfiguration vc = ViewConfiguration.get(context);
+                // Handle configuration
+                mSlop = vc.getScaledTouchSlop();
+            });
+        } else {
+            // Fallback for non-Activity contexts
+            new Handler(Looper.getMainLooper()).post(() -> {
+                ViewConfiguration vc = ViewConfiguration.get(context);
+                // Handle configuration
+                mSlop = vc.getScaledTouchSlop();
+            });
+        }
+
         final Resources resources = getResources();
         mNominalDistanceScaled = (int) (NOMINAL_DISTANCE * resources.getDisplayMetrics().density + 0.5f);
     }
+
 
     /**
      * Calls {@link #addView(android.view.View)} followed by {@link #setViewDraggable(android.view.View, android.view.View)}.
