@@ -178,7 +178,7 @@ public class CloseAppDialog {
         }
 
         if (v == null) {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(a);
+            AlertDialog.Builder dialog = new AlertDialog.Builder(a, R.style.CustomActionBarThemeSlapImage);
             dialog.setItems(items.toArray(new String[items.size()]), listener);
 
             // dialog.setNegativeButton(R.string.don_t_show_this_dialog, new

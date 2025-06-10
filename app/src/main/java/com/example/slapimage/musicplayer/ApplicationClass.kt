@@ -157,12 +157,12 @@ class ApplicationClass:Application() {
         AppsConfig.init(applicationContext)
         Dips.init(null)
         Prefs.get().init(applicationContext)
-        if (AppsConfig.IS_TEST_DEVICE) {
-            val configuration = RequestConfiguration.Builder()
-                .setTestDeviceIds(AppsConfig.testDevices)
-                .build()
-            MobileAds.setRequestConfiguration(configuration)
-        }
+      //  if (AppsConfig.IS_TEST_DEVICE) {
+   //         val configuration = RequestConfiguration.Builder()
+    //            .setTestDeviceIds(AppsConfig.testDevices)
+    //            .build()
+    //        MobileAds.setRequestConfiguration(configuration)
+   //     }
         TTSNotification.initChannels(applicationContext)
 
         CacheZipUtils.init(applicationContext)
@@ -171,19 +171,6 @@ class ApplicationClass:Application() {
             throw RuntimeException("Application not configured correctly!")
         }
 
-       // if (AppsConfig.IS_WRITE_LOGS) {
-       //     LOG.writeCrashTofile = true
-       //     Thread.setDefaultUncaughtExceptionHandler { thread, e ->
-       //         LOG.uncaughtException(e)
-
-         //       val intent = Intent(Intent.ACTION_MAIN)
-        //        intent.addCategory(Intent.CATEGORY_HOME)
-        //        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-         //       startActivity(intent)
-
-//                System.exit(0)
-  //          }
-    //    }
     }
     override fun onTrimMemory(level: Int) {
         XEDMainActivity.withContext {

@@ -391,4 +391,8 @@
         <item name="android:textColorSecondary">@android:color/white</item> <!-- SearchView text -->
 
     </style>
+
+    <style name="Theme.OpenBible" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">#000</item>
+    </style>
 </resources>

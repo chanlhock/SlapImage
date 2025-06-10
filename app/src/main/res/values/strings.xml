@@ -1409,4 +1409,51 @@ TIP:  Long press ^ at bottom center of screen for alternate menu.
     <string name="mail_move">Move sequence:</string>
     <string name="mail_url">Game URL:</string>
     <string name="mail_viewer_url">http://droidzebra.appspot.com/viewer/?</string>
+
+    // Open Bible
+    <string name="about_us">About us</string>
+    <string name="alignment">Alignment</string>
+    <string name="alignment_start">Start</string>
+    <string name="alignment_justify">Justify</string>
+    <string name="backup">Backup</string>
+    <string name="bible_text">Bible Text</string>
+    <string name="chapter">Chapter</string>
+    <string name="check_at_startup">Update at startup</string>
+    <string name="colors">Colors</string>
+    <string name="color_scheme">Color Scheme</string>
+    <string name="color_theme">Color Theme</string>
+    <string name="continue_button">Continue</string>
+    <string name="delete_translation">Delete Translation</string>
+    <string name="documents">Documents</string>
+    <string name="download_translation">Download Translation</string>
+    <string name="downloading_index">Downloading Index, please wait…</string>
+    <string name="downloading_translation">Downloading Translation, please wait…</string>
+    <string name="openbible_error">ERROR</string>
+    <string name="index">Index</string>
+    <string name="infinite_scroll">Infinite Scroll</string>
+    <string name="openbible_information">Information</string>
+    <string name="needs_files">This application needs an index, checksums and translations to work.</string>
+    <string name="new_files">Updates for translations found. Do you want to install them?</string>
+    <string name="notifications">Notifications</string>
+    <string name="previous">Previous</string>
+    <string name="restore">Restore</string>
+    <string name="scheme_dynamic">Dynamic</string>
+    <string name="scheme_static">Static</string>
+    <string name="screen_home">Home</string>
+    <string name="screen_read">Read</string>
+    <string name="search_for_text">Search for text</string>
+    <string name="selection">Selection</string>
+    <string name="show_verse_number">Show Verse Number</string>
+    <string name="skip">Skip</string>
+    <string name="split_screen">Split Screen</string>
+    <string name="openbible_theme_system">System</string>
+    <string name="translation">Translation</string>
+    <string name="update">Update</string>
+    <string name="verse_of_the_day">Verse of the day</string>
+    <string name="openbible_app_name" translatable="false">OpenBible</string>
+    <string name="google_play" translatable="false">Google Play</string>
+    <string name="source_getbible" translatable="false">getBible</string>
+    <string name="source_repo" translatable="false">GitHub</string>
+    <string name="theme_amoled" translatable="false">Amoled</string>
+
 </resources>

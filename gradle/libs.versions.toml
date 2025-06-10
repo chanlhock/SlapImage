@@ -27,6 +27,8 @@ swiperefreshlayout = "1.1.0"
 browser = "1.8.0"
 coreAnimation = "1.0.0"
 runtimeAndroid = "1.7.8"
+kotlinxSerializationJson = "1.8.1"
+materialIconsExtended = "1.7.8"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -75,6 +77,8 @@ utilcode = { module = "com.blankj:utilcodex", version = "1.31.1" }
 browser = { module = "androidx.browser:browser", version.ref = "browser" }
 core-animation = { group = "androidx.core", name = "core-animation", version.ref = "coreAnimation" }
 runtime-android = { group = "androidx.compose.runtime", name = "runtime-android", version.ref = "runtimeAndroid" }
+android-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "materialIconsExtended" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -71,8 +71,14 @@ import com.example.slapimage.xededitor.xededitor.MainActivity.XEDMainActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.view.GestureDetector
 import android.view.MotionEvent
+import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.slapimage.droidzebra.DroidZebra
 import com.example.slapimage.ibook.foobnix.ui2.MainTabs2
+import com.example.slapimage.openbible.OpenBibleMainActivity
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
@@ -107,7 +113,7 @@ class HomeFragment : Fragment() {
  }
     private var currentBannerIndex = 3
     private val handler = Handler(Looper.getMainLooper())
-    private val bannerChangeInterval = 1500L
+    private val bannerChangeInterval = 2000L
     private lateinit var bannerContainer: ViewGroup
     private lateinit var currentBanner: ImageView
     private lateinit var nextBanner: ImageView
@@ -192,9 +198,14 @@ class HomeFragment : Fragment() {
         Thread {
             Glide.get(requireContext()).clearDiskCache()
         }.start()
-        Glide.with(this).load(bannerImages[currentBannerIndex]).into(currentBanner)
-        rotateBannerWithAnimation()
 
+        Glide.with(requireContext()).load(bannerImages[currentBannerIndex]).dontTransform().into(currentBanner)
+        //Glide.with(requireContext()).load(bannerImages[currentBannerIndex]).diskCacheStrategy(DiskCacheStrategy.ALL).into(currentBanner)
+
+     //   bannerImages.forEach { resId ->
+     //       Glide.with(requireContext()).load(resId).dontTransform().preload()
+     //   }
+        rotateBannerWithAnimation()
         pageIndicator = view.findViewById(R.id.pageIndicator)
         // Initialize icon pager
         iconRecyclerView = view.findViewById(R.id.icon_pager_recycler_view)
@@ -324,7 +335,7 @@ class HomeFragment : Fragment() {
                 Icon(R.drawable.icon21, "Wallpaper"),
                 Icon(R.drawable.icon13, "Play Music"),
                 Icon(R.drawable.icon15, "AI Calc"),
-                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon24, "OpenBible"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon10, "About")
@@ -347,6 +358,7 @@ class HomeFragment : Fragment() {
         )
 
         setupPageIndicator(iconPages.size)
+        iconRecyclerView.setHasFixedSize(true) // optimize RecycleView performance
 
         iconRecyclerView.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -372,21 +384,21 @@ class HomeFragment : Fragment() {
                 val transaction = parentFragmentManager.beginTransaction()
                 transaction.replace(R.id.fragment_container, PhotoFragment())
                 transaction.addToBackStack(null)
-                transaction.commit()
+                transaction.commitAllowingStateLoss()
                 requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation).selectedItemId = R.id.nav_search
             }
             "Play Video" -> {
                 val transaction = parentFragmentManager.beginTransaction()
                 transaction.replace(R.id.fragment_container, PlayFragment())
                 transaction.addToBackStack(null)
-                transaction.commit()
+                transaction.commitAllowingStateLoss()
                 requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation).selectedItemId = R.id.nav_play
             }
             "DeepSeek Bot" -> {
                 val transaction = parentFragmentManager.beginTransaction()
                 transaction.replace(R.id.fragment_container, ChatBotFragment())
                 transaction.addToBackStack(null)
-                transaction.commit()
+                transaction.commitAllowingStateLoss()
                 requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation).selectedItemId = R.id.nav_chatbot
             }
 
@@ -529,6 +541,15 @@ class HomeFragment : Fragment() {
                 )
                 startActivity(intent, options.toBundle())
             }
+            "OpenBible" -> {
+                val intent = Intent(activity, OpenBibleMainActivity::class.java)
+                val options = ActivityOptions.makeCustomAnimation(
+                    requireContext(),
+                    R.anim.slide_up,
+                    R.anim.no_animation
+                )
+                startActivity(intent, options.toBundle())
+            }
         }
     }
 
@@ -542,22 +563,35 @@ class HomeFragment : Fragment() {
     }
 
     private fun rotateBannerWithAnimation() {
+        //isBannerRotationPaused = true
         if (!isFragmentResumed || isBannerRotationPaused) return  // Prevent rotation of banner if paused or fragment is not resumed
 
-        handler.postDelayed({
-            if (!isFragmentResumed || isBannerRotationPaused)  return@postDelayed // Check if the fragment is still active before proceeding
+      //  handler.postDelayed({
+      //      if (!isFragmentResumed || isBannerRotationPaused)  return@postDelayed // Check if the fragment is still active before proceeding
+
+        lifecycleScope.launch {
+            delay(bannerChangeInterval)
+            if (!isFragmentResumed || isBannerRotationPaused) return@launch
 
             val nextIndex = (currentBannerIndex + 1) % bannerImages.size
             // Load the next banner image
-            Glide.with(this).load(bannerImages[nextIndex]).into(nextBanner)
+            Glide.with(requireContext()).load(bannerImages[nextIndex]).dontTransform().into(nextBanner)
+            // Since images are preloaded, we can use diskCacheStrategy(DiskCacheStrategy.ALL)
+        //    Glide.with(requireContext())
+         //       .load(bannerImages[nextIndex])
+        //        .diskCacheStrategy(DiskCacheStrategy.ALL) // Use cached version
+                //.transition(DrawableTransitionOptions.withCrossFade(300)) // Smooth transition
+         //       .into(nextBanner)
 
             // Define animations
-            val slideOut = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_out_left).apply {
-                duration = 500
-            }
-            val slideIn = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_right).apply {
-                duration = 500
-            }
+            val slideOut =
+                AnimationUtils.loadAnimation(requireContext(), R.anim.slide_out_left).apply {
+                    duration = 200
+                }
+            val slideIn =
+                AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_right).apply {
+                    duration = 200
+                }
 
             // Set next banner visibility and animation
             nextBanner.visibility = View.VISIBLE
@@ -581,7 +615,8 @@ class HomeFragment : Fragment() {
                     rotateBannerWithAnimation()
                 }
             })
-        }, bannerChangeInterval)
+        }
+        //}, bannerChangeInterval)
     }
 
     private fun updateButtonIcon(button: Button, iconResourceId: Int, newWidth: Int, newHeight: Int) {
@@ -594,6 +629,8 @@ class HomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        Glide.with(requireContext()).clear(currentBanner)
+        Glide.with(requireContext()).clear(nextBanner)
         handler.removeCallbacksAndMessages(null)
     }
 
