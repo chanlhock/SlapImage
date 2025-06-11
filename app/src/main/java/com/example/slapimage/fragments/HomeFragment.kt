@@ -71,6 +71,7 @@ import com.example.slapimage.xededitor.xededitor.MainActivity.XEDMainActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.view.GestureDetector
 import android.view.MotionEvent
+import android.view.WindowManager
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -89,25 +90,21 @@ class HomeFragment : Fragment() {
          R.drawable.banner1, R.drawable.banner2,
          R.drawable.banner3, R.drawable.banner4, R.drawable.banner5, R.drawable.banner6,
          R.drawable.banner7, R.drawable.banner8, R.drawable.banner37, R.drawable.banner10,
-         R.drawable.banner12, R.drawable.banner13, R.drawable.banner14
+         R.drawable.banner13, R.drawable.banner14
      )
      else -> listOf(
          R.drawable.banner1, R.drawable.banner2,
          R.drawable.banner3, R.drawable.banner4, R.drawable.banner5, R.drawable.banner6,
          R.drawable.banner7, R.drawable.banner8, R.drawable.banner37, R.drawable.banner10,
-         R.drawable.banner12, R.drawable.banner13, R.drawable.banner14,
-         R.drawable.banner15, R.drawable.banner18,
-         R.drawable.banner19, R.drawable.banner23, R.drawable.banner24, R.drawable.banner25,
-         R.drawable.banner26, R.drawable.banner30, R.drawable.banner32,
-         R.drawable.banner35, R.drawable.banner36, R.drawable.banner9, R.drawable.banner38,
-         R.drawable.banner39, R.drawable.banner40,
-         R.drawable.banner43, R.drawable.banner44, R.drawable.banner45, R.drawable.banner46,
-         R.drawable.banner47, R.drawable.banner48, R.drawable.banner49,
+         R.drawable.banner13, R.drawable.banner14, R.drawable.banner15, R.drawable.banner18,
+         R.drawable.banner19, R.drawable.banner23, R.drawable.banner24, R.drawable.banner26,
+         R.drawable.banner32, R.drawable.banner35, R.drawable.banner36, R.drawable.banner38,
+         R.drawable.banner39, R.drawable.banner40, R.drawable.banner43, R.drawable.banner44,
+         R.drawable.banner45, R.drawable.banner46, R.drawable.banner47, R.drawable.banner49,
          R.drawable.banner51, R.drawable.banner53, R.drawable.banner54,
          R.drawable.banner55, R.drawable.banner56, R.drawable.banner57, R.drawable.banner58,
          R.drawable.banner60, R.drawable.banner61, R.drawable.banner62,
-         R.drawable.banner63, R.drawable.banner65, R.drawable.banner66,
-         R.drawable.banner68, R.drawable.banner70, R.drawable.banner71, R.drawable.banner72,
+         R.drawable.banner63, R.drawable.banner71, R.drawable.banner72,
          R.drawable.banner74, R.drawable.banner78
      )
  }
@@ -132,6 +129,9 @@ class HomeFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
+        // Keep screen on while this fragment is visible
+        activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         gestureDetector = GestureDetector(requireContext(), object : GestureDetector.SimpleOnGestureListener() {
             override fun onDown(e: MotionEvent): Boolean = true
@@ -631,12 +631,14 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         Glide.with(requireContext()).clear(currentBanner)
         Glide.with(requireContext()).clear(nextBanner)
+        // Clear the flag when fragment is destroyed
+        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         handler.removeCallbacksAndMessages(null)
     }
 
     override fun onResume() {
         super.onResume()
-
+        activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         // Clear Glide memory cache when the fragment resumes
         //Glide.get(requireContext()).clearMemory()
         //Thread {
@@ -648,6 +650,7 @@ class HomeFragment : Fragment() {
     }
 
     override fun onPause() {
+        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         super.onPause()
         isFragmentResumed = false
         handler.removeCallbacksAndMessages(null)

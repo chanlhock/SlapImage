@@ -31,6 +31,7 @@ import com.example.slapimage.musicplayer.PlayerActivity.Companion.musicService
 import androidx.core.graphics.drawable.toDrawable
 import androidx.core.net.toUri
 import android.text.Spannable
+import android.view.WindowManager
 
 
 class MainMusicActivity : AppCompatActivity() {
@@ -266,6 +267,7 @@ class MainMusicActivity : AppCompatActivity() {
 
 
     override fun onDestroy() {
+        window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         super.onDestroy()
         if(!PlayerActivity.isPlaying && musicService != null){
             exitApplication()
@@ -274,6 +276,7 @@ class MainMusicActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         // Keep the screen on for this activity
         window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         //for storing favourites data using shared preferences
