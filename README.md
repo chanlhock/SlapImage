@@ -145,8 +145,12 @@ In addition I have also tested to some extent on:
   - DroidZebra can also be found as open source at Github. (https://github.com/alkom/droidzebra).
   - Although this apps is written more than 10 years ago it is quite easily ported over to latest version of Android.
 - 8th June 2025: Released the stable updated version of SlapImage v1.0.0-fdroid-beta.3 apk.
+- 10th June 2025: 
+  - Added OpenBible from f-droid.org based on Version 1.8.0 (29) 14th May 2025 source tarball. (https://f-droid.org/en/packages/com.schwegelbin.openbible/)
+  - OpenBible can also be found as open source at Github. (https://github.com/SchweGELBin/OpenBible2)
 
 ## :beetle: Unresolvable Bug in Todo List
+- [ ] When OpenBible activity is launched it took a long time before the OpenBible main page is displayed. Based on Logcat there are 808 frames skipped and that main activity is very busy. This long delay also happen when closing the Settings screen. It seems that there is quite a lot of work that the apps needs to do and its code needs to change to run these in the backgrond instead of main.
 - [ ] When Xed-Editor activity is launched and user using Alphine for running C++ and Python there is an error of permission denied for proot in the Alphine terminal windows. 
 - [X] (Issue fixed 19th Apr 2025) When user pressed the back arrow button at the topbar of StockActivity.kt view, returning back to HomeFragment.kt view there is a large white rectangle covering lower two rows of the grid icon container. This only happens when user enters a Stock Ticker and check the stock price. However, if user uses the phone back button to return to HomeFragment.kt view, the bug doesn't happen. One other observation is that the bug doesn't happen on Android 15 phone. :eyes:
    - Resolution: Added these lines of code to navigate back to MainActivity (which hosts HomeFragment) solved the issue.
