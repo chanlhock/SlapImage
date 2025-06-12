@@ -113,6 +113,7 @@
         android:usesCleartextTraffic="true"
         android:vmSafeMode="${appSafeMode}"
         tools:ignore="HardwareIds"
+        android:largeHeap="true"
         android:hardwareAccelerated="true">
 
         <meta-data android:name="android.webkit.WebView.MetricsOptOut" android:value="true" />

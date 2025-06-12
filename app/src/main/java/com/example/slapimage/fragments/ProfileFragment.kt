@@ -80,7 +80,7 @@ class ProfileFragment : Fragment() {
 
 
     private fun showExitDialog() {
-        val icon = ContextCompat.getDrawable(requireContext(), R.drawable.icon_reversi)
+        val icon = ContextCompat.getDrawable(requireContext(), R.drawable.icon_slapimage)
         val scaledIcon = icon?.apply {
             // Set size in pixels (convert dp to px)
             val sizeInPx = (24 * resources.displayMetrics.density).toInt()

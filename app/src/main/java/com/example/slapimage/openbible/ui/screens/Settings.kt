@@ -200,7 +200,7 @@ fun SettingsScreen(
                     BackupButton(isUser = true, text = stringResource(R.string.documents))
                     BackupButton(isData = true, text = stringResource(R.string.preferences))
                 }
-                HorizontalDivider(Modifier.padding(12.dp))
+        /*        HorizontalDivider(Modifier.padding(12.dp))
                 Text(stringResource(R.string.about_us), style = styleLarge, modifier = modLarge)
                 Row(
                     Modifier
@@ -220,7 +220,7 @@ fun SettingsScreen(
                         text = stringResource(R.string.source_getbible),
                         url = "https://getbible.net/docs"
                     )
-                }
+                }*/
             }
         }
 }

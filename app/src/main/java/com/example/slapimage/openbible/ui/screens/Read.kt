@@ -65,7 +65,7 @@ import kotlinx.coroutines.runBlocking
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReadScreen(
-    onNavigateToBookmarks: () -> Unit,
+   // onNavigateToBookmarks: () -> Unit,
     onNavigateToRead: () -> Unit,
     onNavigateToSearch: () -> Unit,
     onNavigateToSelection: (Boolean) -> Unit,
@@ -73,11 +73,12 @@ fun ReadScreen(
     onNavigateToStart: () -> Unit,
 ) {
     val appTitle = getAppName(
-        stringResource(R.string.openbible_app_name),
-        MaterialTheme.colorScheme.primary,
-        MaterialTheme.colorScheme.secondary,
-        MaterialTheme.colorScheme.tertiary
-    )
+            stringResource(R.string.openbible_app_name),
+            MaterialTheme.colorScheme.primary,
+            MaterialTheme.colorScheme.secondary,
+            MaterialTheme.colorScheme.tertiary
+        )
+
     val split = getSplitScreen(LocalContext.current)
 
     Scaffold(topBar = {
@@ -85,7 +86,7 @@ fun ReadScreen(
             title = { Text(appTitle) },
             actions = {
                 HamburgerMenu(
-                    onNavigateToBookmarks,
+                   // onNavigateToBookmarks,
                     onNavigateToSearch,
                     onNavigateToSettings
                 )
@@ -130,9 +131,13 @@ fun ReadCard(
         mutableStateOf(getSelection(context, isSplitScreen))
     }
     val (abbrev, book, chapter) = selection.value
-    val translation = checkTranslation(context, abbrev, onNavigateToStart, isSplitScreen)
+    //val translation = checkTranslation(context, abbrev, onNavigateToStart, isSplitScreen)
+
+    val translation = remember(abbrev) {
+        checkTranslation(context, abbrev, onNavigateToStart, isSplitScreen)
+    }
     val showVerseNumbers = remember { mutableStateOf(getShowVerseNumbers(context)) }
-    val textAlignment = getTextAlignment(context)
+    val textAlignment = remember { getTextAlignment(context)}
    /* val (title, text) = getChapter(
         context,
         translation,
@@ -253,7 +258,7 @@ fun TurnButton(next: Boolean, isSplitScreen: Boolean, onNavigateToRead: () -> Un
 
 @Composable
 fun HamburgerMenu(
-    onNavigateToBookmarks: () -> Unit,
+   // onNavigateToBookmarks: () -> Unit,
     onNavigateToSearch: () -> Unit,
     onNavigateToSettings: () -> Unit
 ) {

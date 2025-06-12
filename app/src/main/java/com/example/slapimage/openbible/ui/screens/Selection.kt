@@ -25,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -42,12 +43,23 @@ import com.example.slapimage.openbible.logic.getTranslationList
 import com.example.slapimage.openbible.logic.saveSelection
 import com.example.slapimage.openbible.logic.shorten
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SelectionScreen(onNavigateToRead: () -> Unit, isSplitScreen: Boolean = false) {
+    val isLoading = remember{ mutableStateOf(false) }
     Scaffold(topBar = {
         TopAppBar(title = { Text(stringResource(R.string.selection)) }, navigationIcon = {
-            IconButton(onClick = { onNavigateToRead() }) {
+            IconButton(onClick = {
+                if (!isLoading.value) {
+                    isLoading.value = true
+                    try {
+                        onNavigateToRead()
+                    } finally {
+                        isLoading.value = false
+                    }
+                }
+            }) {
                 Icon(
                     imageVector = Icons.Filled.Close,
                     contentDescription = stringResource(R.string.close)
@@ -69,7 +81,7 @@ fun SelectionScreen(onNavigateToRead: () -> Unit, isSplitScreen: Boolean = false
 @Composable
 fun Selection(onNavigateToRead: () -> Unit, isSplitScreen: Boolean) {
     val context = LocalContext.current
-    val selection = getSelection(context, isSplitScreen)
+    val selection = remember { getSelection(context, isSplitScreen) }
     val translation = remember { mutableStateOf(selection.first) }
     val book = remember { mutableIntStateOf(selection.second) }
     val chapter = remember { mutableIntStateOf(selection.third) }
@@ -103,17 +115,18 @@ fun Selection(onNavigateToRead: () -> Unit, isSplitScreen: Boolean) {
                     .fillMaxHeight(0.65f)
             ) {
                 Column(Modifier.verticalScroll(rememberScrollState())) {
-                    val translationList =
+                    val translationList = remember {
                         getTranslationList(context).map { it.nameWithoutExtension }
-
+                    }
                     listTranslations(buttonFunction = { abbrev ->
                         translation.value = abbrev
 
                         val (bookCount, chapterCount) = getCount(
-                            context,
-                            translation.value,
-                            book.intValue
-                        )
+                                context,
+                                translation.value,
+                                book.intValue
+                            )
+
                         if (book.intValue > bookCount) {
                             book.intValue = 0
                             chapter.intValue = 0
@@ -153,7 +166,7 @@ fun Selection(onNavigateToRead: () -> Unit, isSplitScreen: Boolean) {
                     .fillMaxWidth()
                     .verticalScroll(rememberScrollState())
             ) {
-                val names = getBookNames(context, translation.value)
+                val names = remember { getBookNames(context, translation.value) }
                 val num = names.size - 1
                 val buttonsPerRow = 3
                 val length = 10
@@ -172,10 +185,11 @@ fun Selection(onNavigateToRead: () -> Unit, isSplitScreen: Boolean) {
                                     book.intValue = i + j
 
                                     val (_, chapterCount) = getCount(
-                                        context,
-                                        translation.value,
-                                        book.intValue
-                                    )
+                                            context,
+                                            translation.value,
+                                            book.intValue
+                                        )
+
                                     if (chapter.intValue > chapterCount) chapter.intValue = 0
                                     selectMode.value = SelectMode.Chapter
                                     selectedIndex.intValue = 2

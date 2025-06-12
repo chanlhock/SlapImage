@@ -1,6 +1,8 @@
 package com.example.slapimage.openbible.ui.screens
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -11,7 +13,10 @@ import com.example.slapimage.openbible.logic.fixLegacy
 import com.example.slapimage.openbible.logic.getCheckAtStartup
 import com.example.slapimage.openbible.logic.getIndex
 import com.example.slapimage.openbible.logic.getTranslationList
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
+import kotlinx.coroutines.coroutineScope
 
 @Serializable
 object Bookmarks
@@ -43,19 +48,37 @@ fun App(onThemeChange: (Boolean?, Boolean?, Boolean?) -> Unit) {
 
     val navController = rememberNavController()
     NavHost(navController, startDestination = startDestination) {
-        composable<Bookmarks> {
+      /*  composable<Bookmarks> {
             BookmarksScreen(onNavigateToRead = {
                 navController.navigate(Read) {
                     popUpTo(0) { inclusive = true }
                 }
             })
-        }
+        }*/
         composable<Read> {
+            val context = LocalContext.current
+            val coroutineScope = rememberCoroutineScope()
             ReadScreen(
-                onNavigateToBookmarks = { navController.navigate(Bookmarks) },
+                //onNavigateToBookmarks = { navController.navigate(Bookmarks) },
+                //onNavigateToRead = {
+               //     navController.navigate(Read) {
+                //        popUpTo(0) { inclusive = true }
+               //     }
+               // },
                 onNavigateToRead = {
-                    navController.navigate(Read) {
-                        popUpTo(0) { inclusive = true }
+                    coroutineScope.launch(Dispatchers.Main.immediate) {
+                        // Optional pre-navigation work
+                        withFrameNanos { } // Yield to next frame
+
+                        navController.navigate(Read) {      //navigate
+                            anim {
+                                enter = android.R.anim.fade_in
+                                exit = android.R.anim.fade_out
+                                popEnter = android.R.anim.fade_in
+                                popExit = android.R.anim.fade_out
+                            }
+                            popUpTo(0) { inclusive = true }
+                        }
                     }
                 },
                 onNavigateToSearch = { navController.navigate(Search) },
@@ -87,10 +110,13 @@ fun App(onThemeChange: (Boolean?, Boolean?, Boolean?) -> Unit) {
             )
         }
         composable<Settings> {
+            val coroutineScope = rememberCoroutineScope()
             SettingsScreen(
                 onNavigateToRead = {
-                    navController.navigate(Read) {
-                        popUpTo(0) { inclusive = true }
+                    coroutineScope.launch {
+                        navController.navigate(Read) {
+                            popUpTo(0) { inclusive = true }
+                        }
                     }
                 }, onThemeChange = onThemeChange
             )
