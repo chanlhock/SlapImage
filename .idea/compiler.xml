@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="Slap_Image.BackupAPI" target="17" />
+      <module name="Slap_Image.libs.privacy-friendly-backup-api.BackupAPI" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
