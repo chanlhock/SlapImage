@@ -915,7 +915,7 @@ public class QQWing {
 					for (int j = 0; j < GRID_SIZE_ROW; j++) {
 						int secVal = secStart + i + (ROW_COL_SEC_SIZE * j);
 						int valPos = getPossibilityIndex(valIndex, secVal);
-						if (possibilities[valPos] == 0) {
+						if (possibilities[valPos] >= 0 && possibilities[valPos] < 729) {		// chanlhock bug
 							if (boxCol == -1 || boxCol == i) {
 								boxCol = i;
 							} else {
