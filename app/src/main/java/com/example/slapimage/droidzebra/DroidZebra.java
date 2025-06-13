@@ -884,7 +884,7 @@ public boolean onOptionsItemSelected(MenuItem item) {
 	    	return new AlertDialog.Builder(getActivity(), R.style.CustomActionBarThemeSlapImage)
 			.setTitle(R.string.dialog_donate_title)
 			.setMessage(R.string.dialog_donate_message)
-			.setIcon(R.drawable.icon_reversi)
+			.setIcon(R.drawable.icon_slapimage)
 			.setPositiveButton( R.string.dialog_donate_doit, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int id) {
 					String url = getResources().getString(R.string.donate_url);

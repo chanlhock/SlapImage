@@ -9,6 +9,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import android.os.StrictMode
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.slapimage.BuildConfig
 import com.example.slapimage.ibook.foobnix.android.utils.Dips
 import com.example.slapimage.ibook.foobnix.android.utils.LOG
@@ -27,6 +28,7 @@ import com.example.slapimage.mp3tagger.features.spotify.di.spotifyMainModule
 import com.example.slapimage.mp3tagger.features.spotify.di.spotifyServicesModule
 import com.example.slapimage.mp3tagger.mediastore.di.mediaStoreViewModelsModule
 import com.example.slapimage.mp3tagger.tageditor.di.tagEditorViewModelsModule
+import com.example.slapimage.privacyfriendlysudoku.PFSudoku
 import com.example.slapimage.xededitor.crashhandler.CrashHandler
 import com.example.slapimage.xededitor.extension.Extension
 import com.example.slapimage.xededitor.extension.ExtensionManager
@@ -69,7 +71,7 @@ class ApplicationClass:Application() {
             return tmp
         }
         lateinit var context: Context   // Librera
-      //  lateinit var appContext: Context
+        const val CHANNEL_ID_SUDOKU = "sudoku.0" // Sudoku
     }
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -170,7 +172,14 @@ class ApplicationClass:Application() {
         if (TxtUtils.isEmpty(AppsConfig.FLAVOR)) {
             throw RuntimeException("Application not configured correctly!")
         }
-
+        // Sudoku
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // channels
+            val channel = NotificationChannel(ApplicationClass.Companion.CHANNEL_ID_SUDOKU, "Default", NotificationManager.IMPORTANCE_LOW)
+            val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager?.createNotificationChannel(channel)
+        }
     }
     override fun onTrimMemory(level: Int) {
         XEDMainActivity.withContext {
@@ -186,5 +195,9 @@ class ApplicationClass:Application() {
         IMG.clearMemoryCache()
         TintUtil.clean()
         HypenUtils.cache.clear()
+    }
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(base)
+        //MultiDex.install(this)
     }
 }

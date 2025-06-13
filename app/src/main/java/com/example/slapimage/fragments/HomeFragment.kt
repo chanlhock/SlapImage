@@ -78,6 +78,8 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.slapimage.droidzebra.DroidZebra
 import com.example.slapimage.ibook.foobnix.ui2.MainTabs2
 import com.example.slapimage.openbible.OpenBibleMainActivity
+import com.example.slapimage.privacyfriendlysudoku.ui.SudokuMainActivity
+import com.example.slapimage.privacyfriendlysudoku.ui.SplashActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -336,7 +338,7 @@ class HomeFragment : Fragment() {
                 Icon(R.drawable.icon13, "Play Music"),
                 Icon(R.drawable.icon15, "AI Calc"),
                 Icon(R.drawable.icon24, "OpenBible"),
-                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon25, "Sudoku"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon10, "About")
             ),
@@ -543,6 +545,15 @@ class HomeFragment : Fragment() {
             }
             "OpenBible" -> {
                 val intent = Intent(activity, OpenBibleMainActivity::class.java)
+                val options = ActivityOptions.makeCustomAnimation(
+                    requireContext(),
+                    R.anim.slide_up,
+                    R.anim.no_animation
+                )
+                startActivity(intent, options.toBundle())
+            }
+            "Sudoku" -> {
+                val intent = Intent(activity, SplashActivity::class.java)
                 val options = ActivityOptions.makeCustomAnimation(
                     requireContext(),
                     R.anim.slide_up,
