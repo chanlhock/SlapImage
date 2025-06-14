@@ -2,13 +2,16 @@ package com.example.slapimage.fragments
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.drawable.AnimatedVectorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -25,6 +28,7 @@ class ProfileFragment : Fragment() {
     private lateinit var btnQuitProgram: Button
     private lateinit var constraintLayout: ConstraintLayout
     private lateinit var ivLogo: ImageView
+    private lateinit var ivGPL3Logo: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +46,7 @@ class ProfileFragment : Fragment() {
 
         // Initialize views
         btnQuitProgram = view.findViewById(R.id.btnQuitProgram) // Initialize the Quit Program button
+        ivGPL3Logo = view.findViewById(R.id.ivGPL3Logo)
 
         // Load GIF from a local resource (e.g., raw or drawable folder)
         val gifResource = R.drawable.animated_logo
@@ -75,6 +80,40 @@ class ProfileFragment : Fragment() {
             //requireActivity().finishAffinity() // Close all activities in the app's task
         }
 
+        ivGPL3Logo.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                val sizeInDp = 256
+                val sizeInPixels = (sizeInDp * resources.displayMetrics.density + 0.5f).toInt()
+
+                val imageView = ImageView(requireContext()).apply {
+                    setImageResource(R.drawable.anim_hearts)
+                    layoutParams = ConstraintLayout.LayoutParams(sizeInPixels, sizeInPixels)
+                }
+
+                val animatedVectorDrawable = imageView.drawable as? AnimatedVectorDrawable
+                animatedVectorDrawable?.start()
+
+                val layoutParams = ConstraintLayout.LayoutParams(sizeInPixels, sizeInPixels).apply {
+                    leftToLeft = ConstraintLayout.LayoutParams.PARENT_ID
+                    topToTop = ConstraintLayout.LayoutParams.PARENT_ID
+                    marginStart = event.rawX.toInt() - sizeInPixels / 2
+                    topMargin = event.rawY.toInt() - sizeInPixels / 2
+                }
+
+                imageView.layoutParams = layoutParams
+                constraintLayout.addView(imageView)
+
+                val animationDuration = 1600L
+                imageView.postDelayed({
+                    constraintLayout.removeView(imageView)
+                }, animationDuration)
+                // Call performClick for accessibility - now using 'view' parameter
+                view.performClick()
+                return@setOnTouchListener true
+            }
+            false
+        }
+        ivGPL3Logo.isClickable = true
         return view
     }
 

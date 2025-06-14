@@ -89,6 +89,7 @@
         app:layout_constraintBottom_toTopOf="@+id/ivGPL3Logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
     <ImageView
         android:id="@+id/ivGPL3Logo"
         android:layout_width="150dp"
