@@ -37,6 +37,7 @@ SlapImage is developed using:
 - Android Studio Meerkat 2024 3.1 Patch 1
 - DeepSeek AI for code and activity generation, debug and review
 - GitHub Copilot for some minor code review and debug
+- Google Gemini built in Android Studios for occasional consultation 
 
 ## :factory: Build Process
 - SlapImage build is relatively auto within the Android Studio build environment except libMuPDF.so file generation for Librera which needs special build.
