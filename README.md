@@ -29,7 +29,7 @@
 
 ## :gift: APK Download
 Try it yourself and I would love to hear your feedback :smiley: :mouse: <br>
-- Download [SlapImage-v1.0.0-fdroid-beta.3.apk](https://github.com/chanlhock/SlapImage/releases/tag/v1.0.0-beta.3)
+- Download [SlapImage-v1.0.0-fdroid-beta.3.apk](https://github.com/chanlhock/SlapImage/releases/tag/v1.0.0-fdroid-beta.3)
 
 ## :computer: Development Platform
 SlapImage is developed using:
