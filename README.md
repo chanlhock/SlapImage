@@ -151,6 +151,9 @@ In addition I have also tested to some extent on:
 - 13th June 2025: 
   - Added Sudoku from f-droid.org based on Version 3.2.4 (19) 25th Apr 2025 source tarball. (https://f-droid.org/en/packages/org.secuso.privacyfriendlysudoku/)
   - Sudoku can be found as well as open source at Github. (https://github.com/SecUSo/privacy-friendly-sudoku)
+- 14th June 2025:
+  - Added another Calculator from f-droid.org based on Version 3.1.2 (33) 22nd Jan 2025 source tarball. (https://f-droid.org/packages/com.marktka.calculatorYou/)
+  - Forz Calculator can also be found as open source at Github. (https://github.com/forzzzzz/Calculator-You?tab=readme-ov-file)
 
 ## :beetle: Unresolvable Bug in Todo List
 - [ ] When OpenBible activity is launched it took a long time before the OpenBible main page is displayed. Based on Logcat there are 808 frames skipped and that main activity is very busy. This long delay also happen when closing the Settings screen. It seems that there is quite a lot of work that the apps needs to do and its code needs to change to run these in the backgrond instead of main.
