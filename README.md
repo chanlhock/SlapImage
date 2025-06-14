@@ -40,7 +40,7 @@ SlapImage is developed using:
 
 ## :factory: Build Process
 - SlapImage build is relatively auto within the Android Studio build environment except libMuPDF.so file generation for Librera which needs special build.
-- The following instruction are extracted from a portion of the Librerareader README.md file. (:bulb: Note: I was not able to build to generate the libMuPDF.so file because my old iMac doesn't support some dependency library files. Ended up i just extracted the libMuPDF.so from the Librera apk and add it in the /scr/main/Libs)
+- The following instruction are extracted from a portion of the Librerareader README.md file. ( :bulb: Note: I was not able to build to generate the libMuPDF.so file because my old iMac doesn't support some dependency library files. Ended up i just extracted the libMuPDF.so from the Librera apk and add it in the /scr/main/Libs)
 ### Required build libs
 ~~~~
 mesa-common-dev libxcursor-dev libxrandr-dev libxinerama-dev libglu1-mesa-dev libxi-dev pkg-config libgl-dev
