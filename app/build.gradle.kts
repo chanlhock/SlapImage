@@ -387,4 +387,9 @@ dependencies {
     //implementation(libs.androidx.material.icons.extended)
     api(libs.kotlinx.serialization.json)
 
+    // Calcx
+    implementation("com.intuit.sdp:sdp-android:1.1.1")
+    implementation ("com.mikhaellopez:circleview:1.4.1")
+    implementation("androidx.viewpager2:viewpager2:1.1.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.5")
 }

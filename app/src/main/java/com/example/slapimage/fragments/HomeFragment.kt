@@ -82,6 +82,7 @@ import com.example.slapimage.privacyfriendlysudoku.ui.SudokuMainActivity
 import com.example.slapimage.privacyfriendlysudoku.ui.SplashActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import com.example.slapimage.forz.calculator.CalcxMainActivity
 
 class HomeFragment : Fragment() {
 
@@ -335,11 +336,11 @@ class HomeFragment : Fragment() {
                 Icon(R.drawable.icon7, "Game of Life"),
                 Icon(R.drawable.icon23, "Reversi"),
                 Icon(R.drawable.icon21, "Wallpaper"),
-                Icon(R.drawable.icon13, "Play Music"),
+                Icon(R.drawable.icon25, "Sudoku"),
                 Icon(R.drawable.icon15, "AI Calc"),
                 Icon(R.drawable.icon24, "OpenBible"),
-                Icon(R.drawable.icon25, "Sudoku"),
-                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon26, "XCalc"),
+                Icon(R.drawable.icon13, "Play Music"),
                 Icon(R.drawable.icon10, "About")
             ),
             // Third page (example additional icons)
@@ -554,6 +555,15 @@ class HomeFragment : Fragment() {
             }
             "Sudoku" -> {
                 val intent = Intent(activity, SplashActivity::class.java)
+                val options = ActivityOptions.makeCustomAnimation(
+                    requireContext(),
+                    R.anim.slide_up,
+                    R.anim.no_animation
+                )
+                startActivity(intent, options.toBundle())
+            }
+            "XCalc" -> {
+                val intent = Intent(activity, CalcxMainActivity::class.java)
                 val options = ActivityOptions.makeCustomAnimation(
                     requireContext(),
                     R.anim.slide_up,

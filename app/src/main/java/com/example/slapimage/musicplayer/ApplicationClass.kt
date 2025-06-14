@@ -28,7 +28,6 @@ import com.example.slapimage.mp3tagger.features.spotify.di.spotifyMainModule
 import com.example.slapimage.mp3tagger.features.spotify.di.spotifyServicesModule
 import com.example.slapimage.mp3tagger.mediastore.di.mediaStoreViewModelsModule
 import com.example.slapimage.mp3tagger.tageditor.di.tagEditorViewModelsModule
-import com.example.slapimage.privacyfriendlysudoku.PFSudoku
 import com.example.slapimage.xededitor.crashhandler.CrashHandler
 import com.example.slapimage.xededitor.extension.Extension
 import com.example.slapimage.xededitor.extension.ExtensionManager
@@ -43,8 +42,6 @@ import com.example.slapimage.xededitor.xededitor.ui.screens.settings.feature_tog
 import com.example.slapimage.xededitor.xededitor.ui.screens.settings.mutators.Mutators
 import com.example.slapimage.xededitor.xededitor.update.UpdateChecker
 import com.example.slapimage.xededitor.xededitor.update.UpdateManager
-import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.RequestConfiguration
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -55,6 +52,7 @@ import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 import java.io.File
 import java.util.concurrent.Executors
+import com.example.slapimage.forz.calculator.history.HistoryService
 
 class ApplicationClass:Application() {
     companion object{
@@ -72,6 +70,12 @@ class ApplicationClass:Application() {
         }
         lateinit var context: Context   // Librera
         const val CHANNEL_ID_SUDOKU = "sudoku.0" // Sudoku
+
+    }
+
+    // Forz Calculator
+    val historyService: HistoryService by lazy {
+        HistoryService(this)
     }
 
     @OptIn(DelicateCoroutinesApi::class)

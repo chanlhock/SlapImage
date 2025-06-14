@@ -792,7 +792,8 @@
                     android:scheme="https" />
             </intent-filter>
         </activity>
-        <activity android:name=".privacyfriendlysudoku.ui.LoadGameActivity" />
+        <activity android:name=".privacyfriendlysudoku.ui.LoadGameActivity"
+            android:theme="@style/Sudoku_AppTheme"/>
         <activity
             android:name=".privacyfriendlysudoku.ui.StatsActivity"
             android:theme="@style/Sudoku_AppTheme.NoActionBar" />
@@ -812,5 +813,35 @@
                 />
         </service>
 
+        <!-- Forz Calculator -->
+        <service
+            android:name=".forz.calculator.MyQSTileService"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:icon="@drawable/tile_icon"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <meta-data android:name="android.service.quicksettings.ACTIVE_TILE"
+                android:value="true" />
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name=".forz.calculator.LicensesActivity"
+            android:exported="false" />
+
+        <profileable
+            android:shell="true"
+            tools:targetApi="29" />
+
+        <activity
+            android:name=".forz.calculator.CalcxMainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="stateAlwaysHidden">
+        </activity>
+        <activity
+            android:name=".forz.calculator.settings.SettingsActivity"
+            android:exported="false" />
     </application>
 </manifest>
