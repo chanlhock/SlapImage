@@ -29,7 +29,7 @@
 
 ## :gift: APK Download
 Try it yourself and I would love to hear your feedback :smiley: :mouse: <br>
-- Download [SlapImage-v1.0.0-beta.2.apk](https://github.com/chanlhock/SlapImage/releases/tag/v1.0.0-beta.2)
+- Download [SlapImage-v1.0.0-fdroid-beta.3.apk](https://github.com/chanlhock/SlapImage/releases/tag/v1.0.0-fdroid-beta.3)
 
 ## :computer: Development Platform
 SlapImage is developed using:
@@ -37,10 +37,11 @@ SlapImage is developed using:
 - Android Studio Meerkat 2024 3.1 Patch 1
 - DeepSeek AI for code and activity generation, debug and review
 - GitHub Copilot for some minor code review and debug
+- Google Gemini built in Android Studios for occasional consultation 
 
 ## :factory: Build Process
 - SlapImage build is relatively auto within the Android Studio build environment except libMuPDF.so file generation for Librera which needs special build.
-- The following instruction are extracted from a portion of the Librerareader README.md file. (Note: I was not able to build to generate the libMuPDF.so file because my old iMac doesn't support some dependency library files. Ended up i just extracted the libMuPDF.so from the Librera apk and add it in the /scr/main/Libs)
+- The following instruction are extracted from a portion of the Librerareader README.md file. ( :bulb: Note: I was not able to build to generate the libMuPDF.so file because my old iMac doesn't support some dependency library files. Ended up i just extracted the libMuPDF.so from the Librera apk and add it in the /scr/main/Libs)
 ### Required build libs
 ~~~~
 mesa-common-dev libxcursor-dev libxrandr-dev libxinerama-dev libglu1-mesa-dev libxi-dev pkg-config libgl-dev
@@ -151,6 +152,9 @@ In addition I have also tested to some extent on:
 - 13th June 2025: 
   - Added Sudoku from f-droid.org based on Version 3.2.4 (19) 25th Apr 2025 source tarball. (https://f-droid.org/en/packages/org.secuso.privacyfriendlysudoku/)
   - Sudoku can be found as well as open source at Github. (https://github.com/SecUSo/privacy-friendly-sudoku)
+- 14th June 2025:
+  - Added another Calculator from f-droid.org based on Version 3.1.2 (33) 22nd Jan 2025 source tarball. (https://f-droid.org/packages/com.marktka.calculatorYou/)
+  - Forz Calculator can also be found as open source at Github. (https://github.com/forzzzzz/Calculator-You?tab=readme-ov-file)
 
 ## :beetle: Unresolvable Bug in Todo List
 - [ ] When OpenBible activity is launched it took a long time before the OpenBible main page is displayed. Based on Logcat there are 808 frames skipped and that main activity is very busy. This long delay also happen when closing the Settings screen. It seems that there is quite a lot of work that the apps needs to do and its code needs to change to run these in the backgrond instead of main.
