@@ -21,7 +21,7 @@
         app:navigationIconTint="@android:color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"> <!-- Force white tint -->
+        app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/btn_back"
@@ -56,40 +56,66 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/wallpaper_chooser_title"
-                android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+                android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
                 android:textAlignment="center"
-                android:layout_marginBottom="16dp"/>
-
-            <ImageView
-                android:id="@+id/wallpaper_preview_1"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scaleType="fitCenter"
-                android:contentDescription="@string/wallpaper_preview_desc"
-                android:layout_marginBottom="8dp"/>
-
-            <Button
-                android:id="@+id/btn_set_wallpaper_1"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:text="@string/set_wallpaper_1"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="16dp"/>
 
-            <ImageView
-                android:id="@+id/wallpaper_preview_2"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scaleType="fitCenter"
-                android:contentDescription="@string/wallpaper_preview_desc"
-                android:layout_marginBottom="8dp"/>
-
-            <Button
-                android:id="@+id/btn_set_wallpaper_2"
-                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/set_wallpaper_2" />
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:baselineAligned="false">
+
+                <!-- First Image Column -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:id="@+id/wallpaper_preview_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="350dp"
+                        android:scaleType="fitCenter"
+                        android:contentDescription="@string/wallpaper_preview_desc"
+                        android:layout_marginBottom="8dp"/>
+
+                    <Button
+                        android:id="@+id/btn_set_wallpaper_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/set_wallpaper_1"
+                        android:layout_gravity="center_horizontal"/>
+                </LinearLayout>
+
+                <!-- Second Image Column -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:id="@+id/wallpaper_preview_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="350dp"
+                        android:scaleType="fitCenter"
+                        android:contentDescription="@string/wallpaper_preview_desc"
+                        android:layout_marginBottom="8dp"/>
+
+                    <Button
+                        android:id="@+id/btn_set_wallpaper_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/set_wallpaper_2"/>
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 

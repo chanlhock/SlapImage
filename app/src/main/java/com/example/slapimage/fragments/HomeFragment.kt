@@ -73,12 +73,9 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.WindowManager
 import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.slapimage.droidzebra.DroidZebra
 import com.example.slapimage.ibook.foobnix.ui2.MainTabs2
 import com.example.slapimage.openbible.OpenBibleMainActivity
-import com.example.slapimage.privacyfriendlysudoku.ui.SudokuMainActivity
 import com.example.slapimage.privacyfriendlysudoku.ui.SplashActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -315,13 +312,13 @@ class HomeFragment : Fragment() {
         val iconPages = listOf(
             // First page (original icons)
             listOf(
-                Icon(R.drawable.icon1, "Open Photo"),
-                Icon(R.drawable.icon2, "Play Video"),
+                Icon(R.drawable.icon21, "Wallpaper"),
+                Icon(R.drawable.icon17, "MP3 TagEdit"),
                 Icon(R.drawable.icon20, "XED-Editor"),
                 Icon(R.drawable.icon4, "TextPad"),
                 Icon(R.drawable.icon5, "Calendar"),
                 Icon(R.drawable.icon6, "Calculator"),
-                Icon(R.drawable.icon17, "MP3 TagEdit"),
+                Icon(R.drawable.icon26, "XCalc"),
                 Icon(R.drawable.icon8, "Stock"),
                 Icon(R.drawable.icon3, "DeepSeek Bot"),
                 Icon(R.drawable.icon9, "Gemini AI"),
@@ -335,20 +332,20 @@ class HomeFragment : Fragment() {
                 Icon(R.drawable.icon18, "SolitaireCG"),
                 Icon(R.drawable.icon7, "Game of Life"),
                 Icon(R.drawable.icon23, "Reversi"),
-                Icon(R.drawable.icon21, "Wallpaper"),
                 Icon(R.drawable.icon25, "Sudoku"),
-                Icon(R.drawable.icon15, "AI Calc"),
+                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon24, "OpenBible"),
-                Icon(R.drawable.icon26, "XCalc"),
-                Icon(R.drawable.icon13, "Play Music"),
+                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon10, "About")
             ),
             // Third page (example additional icons)
             listOf(
-                Icon(R.drawable.icon14, "Coming Soon"),
-                Icon(R.drawable.icon14, "Coming Soon"),
-                Icon(R.drawable.icon14, "Coming Soon"),
-                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon1, "Open Photo"),
+                Icon(R.drawable.icon2, "Play Video"),
+                Icon(R.drawable.icon13, "Play Music"),
+                Icon(R.drawable.icon15, "AI Calc"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
