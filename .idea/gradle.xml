@@ -18,6 +18,7 @@
             <option value="$PROJECT_DIR$/core/editor-lsp" />
             <option value="$PROJECT_DIR$/core/language-textmate" />
             <option value="$PROJECT_DIR$/core/resources" />
+            <option value="$PROJECT_DIR$/droidzebra" />
             <option value="$PROJECT_DIR$/pro" />
             <option value="$PROJECT_DIR$/smartreflow" />
           </set>

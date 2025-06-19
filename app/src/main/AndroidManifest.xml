@@ -58,6 +58,18 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <uses-permission android:name="com.termux.permission.RUN_COMMAND"/>
+    <!-- BlueGo -->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN"/>
+
+    <!-- For location permission needed on some Android versions -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"
+        android:maxSdkVersion="30"/>
+
     <uses-feature
         android:required="false"
         android:name="android.hardware.touchscreen">
@@ -115,6 +127,7 @@
         android:vmSafeMode="${appSafeMode}"
         tools:ignore="HardwareIds"
         android:largeHeap="true"
+        android:extractNativeLibs="true"
         android:hardwareAccelerated="true">
 
         <meta-data android:name="android.webkit.WebView.MetricsOptOut" android:value="true" />
@@ -843,5 +856,7 @@
         <activity
             android:name=".forz.calculator.settings.SettingsActivity"
             android:exported="false" />
+
+
     </application>
 </manifest>

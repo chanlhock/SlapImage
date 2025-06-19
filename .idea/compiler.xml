@@ -3,7 +3,10 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
       <module name="Slap_Image.BackupAPI" target="17" />
+      <module name="Slap_Image.cmakeModule" target="17" />
+      <module name="Slap_Image.leelanative" target="17" />
       <module name="Slap_Image.libs.privacy-friendly-backup-api.BackupAPI" target="17" />
+      <module name="Slap_Image.nativeLib" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>

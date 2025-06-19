@@ -28,7 +28,7 @@ android {
     defaultConfig {
         applicationId = "com.example.slapimage"
         minSdk = 29
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 4
         versionName = "1.0.0"
 
@@ -50,7 +50,14 @@ android {
         ndk {
             // Optional: If you need to specify NDK version
             version = "29.0.13113456"
+            // ARM-only architectures
+            abiFilters.addAll(listOf("armeabi-v7a", "arm64-v8a"))
         }
+        //externalNativeBuild {
+        //    cmake {
+        //        targets.addAll(listOf("native-lib", "droidzebra"))
+        //    }
+       // }
     }
 
     buildTypes {
@@ -78,11 +85,14 @@ android {
         jvmTarget = "17"
     }
 
-    externalNativeBuild {
-        ndkBuild {
-            path = file("src/main/jni/Android.mk")
-        }
-    }
+   // externalNativeBuild {
+        //ndkBuild {
+        //    path = file("src/main/jni/Android.mk")
+       // }
+   ///     cmake {
+   //         path = file("src/main/cpp/CMakeLists.txt")
+  //      }
+  //  }
 
     buildFeatures {
         compose = true // Enable Compose
@@ -107,19 +117,25 @@ android {
                 "**/libonnxruntime4j_jni.so",
                 "**/libonnxruntime.so",
                 "**/libMuPDF.so",
-                "**/libdroidzebra.so"
+                "**/libdroidzebra.so",
+                "**/libboost_filesystem.so",
+                "**/libboost_program_options.so",
+                "**/libboost_system.so",
+                "**/libleelaz.so",
+                "**/libQML-1.0.0.so",
+                "**/libc++_shared.so"
             ))
             // Only enable if you have specific needs for uncompressed native libs
-            // useLegacyPackaging = true
+            useLegacyPackaging = true
         }
     }
-//splits {
-  //      abi {
-  //          reset()
-  //          include("x86", "x86_64", "armeabi-v7a", "arm64-v8a")
-  //          isUniversalApk = true
-  //      }
- //   }
+    //splits {
+    //    abi {
+    //        reset()
+    //        include("armeabi-v7a", "arm64-v8a")
+    //        isUniversalApk = true
+    //    }
+   // }
 
     flavorDimensions += listOf("version")
 
@@ -159,8 +175,8 @@ android {
 
     applicationVariants.all {
         outputs.all {
-                val flavor = productFlavors[0].name.replaceFirstChar { it.uppercase() }
-                val abi = System.getenv("TARGET_ABI") ?: "universal"
+                //val flavor = productFlavors[0].name.replaceFirstChar { it.uppercase() }
+                //val abi = System.getenv("TARGET_ABI") ?: "universal"
                 val fullName = "SlapImage-v${versionName}-beta.${versionCode}.apk"
                 (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl).outputFileName = fullName
         }
@@ -392,4 +408,6 @@ dependencies {
     implementation ("com.mikhaellopez:circleview:1.4.1")
     implementation("androidx.viewpager2:viewpager2:1.1.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.5")
+
+    implementation(project(":droidzebra"))
 }

@@ -131,7 +131,7 @@ class HomeFragment : Fragment() {
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         // Keep screen on while this fragment is visible
-        activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+       // activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         gestureDetector = GestureDetector(requireContext(), object : GestureDetector.SimpleOnGestureListener() {
             override fun onDown(e: MotionEvent): Boolean = true
@@ -316,7 +316,7 @@ class HomeFragment : Fragment() {
                 Icon(R.drawable.icon17, "MP3 TagEdit"),
                 Icon(R.drawable.icon20, "XED-Editor"),
                 Icon(R.drawable.icon4, "TextPad"),
-                Icon(R.drawable.icon5, "Calendar"),
+                Icon(R.drawable.icon24, "OpenBible"),
                 Icon(R.drawable.icon6, "Calculator"),
                 Icon(R.drawable.icon26, "XCalc"),
                 Icon(R.drawable.icon8, "Stock"),
@@ -333,9 +333,9 @@ class HomeFragment : Fragment() {
                 Icon(R.drawable.icon7, "Game of Life"),
                 Icon(R.drawable.icon23, "Reversi"),
                 Icon(R.drawable.icon25, "Sudoku"),
+                Icon(R.drawable.icon27, "BlueGo_AI"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
-                Icon(R.drawable.icon24, "OpenBible"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon10, "About")
@@ -346,7 +346,7 @@ class HomeFragment : Fragment() {
                 Icon(R.drawable.icon2, "Play Video"),
                 Icon(R.drawable.icon13, "Play Music"),
                 Icon(R.drawable.icon15, "AI Calc"),
-                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon5, "Calendar"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
@@ -568,6 +568,15 @@ class HomeFragment : Fragment() {
                 )
                 startActivity(intent, options.toBundle())
             }
+            "BlueGo_AI" -> {
+                val intent = Intent(activity, CalcxMainActivity::class.java)
+                val options = ActivityOptions.makeCustomAnimation(
+                    requireContext(),
+                    R.anim.slide_up,
+                    R.anim.no_animation
+                )
+                startActivity(intent, options.toBundle())
+            }
         }
     }
 
@@ -647,16 +656,16 @@ class HomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        Glide.with(requireContext()).clear(currentBanner)
-        Glide.with(requireContext()).clear(nextBanner)
+       // Glide.with(requireContext()).clear(currentBanner)
+//Glide.with(requireContext()).clear(nextBanner)
         // Clear the flag when fragment is destroyed
-        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+      //  activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         handler.removeCallbacksAndMessages(null)
     }
 
     override fun onResume() {
         super.onResume()
-        activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        //activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         // Clear Glide memory cache when the fragment resumes
         //Glide.get(requireContext()).clearMemory()
         //Thread {
@@ -668,7 +677,7 @@ class HomeFragment : Fragment() {
     }
 
     override fun onPause() {
-        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        //activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         super.onPause()
         isFragmentResumed = false
         handler.removeCallbacksAndMessages(null)
