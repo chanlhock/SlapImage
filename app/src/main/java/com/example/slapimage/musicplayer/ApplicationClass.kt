@@ -53,6 +53,7 @@ import org.koin.core.logger.Level
 import java.io.File
 import java.util.concurrent.Executors
 import com.example.slapimage.forz.calculator.history.HistoryService
+import com.example.slapimage.pocket_plan.j7_003.App5
 
 class ApplicationClass:Application() {
     companion object{
@@ -70,7 +71,8 @@ class ApplicationClass:Application() {
         }
         lateinit var context: Context   // Librera
         const val CHANNEL_ID_SUDOKU = "sudoku.0" // Sudoku
-
+        // PocketPlan
+        lateinit var instance: ApplicationClass private set
     }
 
     // Forz Calculator
@@ -184,7 +186,8 @@ class ApplicationClass:Application() {
             val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             notificationManager?.createNotificationChannel(channel)
         }
-
+        // PokcetPlan
+        instance = this
 
     }
     override fun onTrimMemory(level: Int) {

@@ -82,7 +82,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.IntentFilter
 import android.view.WindowManager
-
+import com.example.slapimage.pocket_plan.j7_003.PocketPlanMainActivity
 
 class HomeFragment : Fragment() {
 
@@ -334,7 +334,7 @@ class HomeFragment : Fragment() {
                 Icon(R.drawable.icon17, "MP3 TagEdit"),
                 Icon(R.drawable.icon20, "XED-Editor"),
                 Icon(R.drawable.icon4, "TextPad"),
-                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon27, "PocketPlan"),
                 Icon(R.drawable.icon6, "Calculator"),
                 Icon(R.drawable.icon26, "XCalc"),
                 Icon(R.drawable.icon8, "Stock"),
@@ -555,7 +555,7 @@ class HomeFragment : Fragment() {
                 val options = ActivityOptions.makeCustomAnimation(
                     requireContext(),
                     R.anim.slide_up,
-                    R.anim.no_animation
+                    R.anim.fade_out
                 )
                 startActivity(intent, options.toBundle())
             }
@@ -578,11 +578,11 @@ class HomeFragment : Fragment() {
                 )
                 startActivity(intent, options.toBundle())
             }
-            "BlueGo_AI" -> {
-                val intent = Intent(activity, CalcxMainActivity::class.java)
+            "PocketPlan" -> {
+                val intent = Intent(activity, PocketPlanMainActivity::class.java)
                 val options = ActivityOptions.makeCustomAnimation(
                     requireContext(),
-                    R.anim.slide_up,
+                    R.anim.fade_in,
                     R.anim.no_animation
                 )
                 startActivity(intent, options.toBundle())
