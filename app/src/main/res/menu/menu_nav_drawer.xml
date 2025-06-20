@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="@string/menuTitleSleep"
+        android:icon="@drawable/ic_action_sleepreminder"
+        android:id="@+id/menuSleepReminder"/>
+    <item
+        android:title="@string/settingsHowToTitle"
+        android:icon="@drawable/ic_action_help"
+        android:id="@+id/menuHelp"/>
+    <item
+        android:title="@string/menuTitleSettings"
+        android:icon="@drawable/ic_action_settings"
+        android:id="@+id/menuItemSettings"/>
+
+</menu>

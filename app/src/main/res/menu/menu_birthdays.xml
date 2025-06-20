@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/item_birthdays_disable_reminders"
+        android:title="@string/birthdaysDisableReminders"
+        app:showAsAction="never">
+    </item>
+    <item
+        android:id="@+id/item_birthdays_enable_reminders"
+        android:title="@string/birthdaysEnableReminders"
+        app:showAsAction="never">
+    </item>
+    <item
+        android:id="@+id/item_birthdays_undo"
+        android:icon="@drawable/ic_action_undo"
+        android:title=""
+        android:tint="?attr/colorIconTint"
+        app:showAsAction="ifRoom">
+    </item>
+    <item
+        android:id="@+id/item_birthdays_search"
+        android:icon="@drawable/ic_action_search"
+        android:title=""
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.SearchView">
+    </item>
+</menu>

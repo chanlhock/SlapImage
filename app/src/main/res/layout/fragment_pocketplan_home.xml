@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorBackground"
+    android:paddingHorizontal="10dp"
+    android:paddingBottom="10dp"
+    tools:context=".data.home.HomeFr">
+
+    <ImageView
+        android:id="@+id/icSleepHome"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:src="@drawable/ic_action_bedtime"
+        app:layout_constraintBottom_toBottomOf="@+id/tvRemainingWakeTime"
+        app:layout_constraintEnd_toStartOf="@+id/tvRemainingWakeTime"
+        app:layout_constraintTop_toTopOf="@+id/tvRemainingWakeTime" />
+
+    <TextView
+        android:id="@+id/tvRemainingWakeTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:textColor="?attr/colorOnBackGround"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="80dp" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/panelTasks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="3dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="?attr/colorBackgroundElevated"
+        app:cardElevation="@dimen/elevation"
+        app:layout_constraintTop_toBottomOf="@id/tvRemainingWakeTime">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/tvTasks"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:textColor="?attr/colorOnBackGround"
+                android:textSize="@dimen/font_size_small"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/ivTasksHome"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivTasksHome"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginEnd="17dp"
+                android:src="@drawable/ic_action_checkmark"
+                app:layout_constraintBottom_toBottomOf="@+id/tvTasks"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvTasks"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/panelBirthdays"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="3dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        app:cardBackgroundColor="?attr/colorBackgroundElevated"
+        app:cardElevation="@dimen/elevation"
+        app:layout_constraintTop_toBottomOf="@id/panelTasks">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/tvBirthday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:textColor="?attr/colorOnBackGround"
+                android:textSize="@dimen/font_size_small"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/icBirthdaysHome"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/icBirthdaysHome"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="17dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/ic_action_birthday"
+                app:layout_constraintBottom_toBottomOf="@+id/tvBirthday"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvBirthday"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <!--    buttons-->
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/clAddNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="?attr/colorBackgroundElevated"
+        android:clickable="true"
+        android:tint="?attr/colorIconTint"
+        android:focusable="true"
+        android:src="@drawable/ic_action_add_note"
+        app:borderWidth="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/clAddTask"
+        app:layout_constraintEnd_toStartOf="@+id/clAddTask"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/clAddTask"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/clAddTask"
+        android:tint="?attr/colorIconTint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="?attr/colorBackgroundElevated"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_action_add_task_circle"
+        app:borderWidth="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/clAddItem"
+        app:layout_constraintEnd_toStartOf="@+id/clAddItem"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/clAddNote"
+        app:layout_constraintTop_toTopOf="@+id/clAddItem"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/clAddItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:tint="?attr/colorIconTint"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="?attr/colorBackgroundElevated"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_action_add_shopping"
+        app:borderWidth="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/clAddTask"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
