@@ -401,7 +401,7 @@ dependencies {
 
     // OpenBible
     //implementation(libs.androidx.material.icons.extended)
-    api(libs.kotlinx.serialization.json)
+    //api(libs.kotlinx.serialization.json)
 
     // Calcx
     implementation("com.intuit.sdp:sdp-android:1.1.1")

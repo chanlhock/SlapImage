@@ -1449,12 +1449,7 @@ TIP:  Long press ^ at bottom center of screen for alternate menu.
     <string name="openbible_theme_system">System</string>
     <string name="translation">Translation</string>
     <string name="update">Update</string>
-    <string name="verse_of_the_day">Verse of the day</string>
-    <string name="openbible_app_name" translatable="false">OpenBible</string>
-    <string name="google_play" translatable="false">Google Play</string>
-    <string name="source_getbible" translatable="false">getBible</string>
-    <string name="source_repo" translatable="false">GitHub</string>
-    <string name="theme_amoled" translatable="false">Amoled</string>
+
 
     <!-- Sudoku -->
     <string name="sudoku_app_name" translatable="false">Sudoku</string>

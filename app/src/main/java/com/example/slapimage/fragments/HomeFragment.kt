@@ -71,18 +71,36 @@ import com.example.slapimage.xededitor.xededitor.MainActivity.XEDMainActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.view.GestureDetector
 import android.view.MotionEvent
-import android.view.WindowManager
 import androidx.lifecycle.lifecycleScope
 import com.example.slapimage.droidzebra.DroidZebra
 import com.example.slapimage.ibook.foobnix.ui2.MainTabs2
-import com.example.slapimage.openbible.OpenBibleMainActivity
 import com.example.slapimage.privacyfriendlysudoku.ui.SplashActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import com.example.slapimage.forz.calculator.CalcxMainActivity
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.IntentFilter
+import android.view.WindowManager
+
 
 class HomeFragment : Fragment() {
 
+    private val powerConnectionReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            when (intent?.action) {
+                Intent.ACTION_POWER_CONNECTED -> {
+                    // Phone is plugged in, keep the screen on
+                    requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+                }
+
+                Intent.ACTION_POWER_DISCONNECTED -> {
+                    // Phone is unplugged, allow the screen to turn off
+                    requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+                }
+            }
+        }
+    }
     private lateinit var iconRecyclerView: RecyclerView
 
  private val bannerImages: List<Int> = when {
@@ -316,7 +334,7 @@ class HomeFragment : Fragment() {
                 Icon(R.drawable.icon17, "MP3 TagEdit"),
                 Icon(R.drawable.icon20, "XED-Editor"),
                 Icon(R.drawable.icon4, "TextPad"),
-                Icon(R.drawable.icon24, "OpenBible"),
+                Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon6, "Calculator"),
                 Icon(R.drawable.icon26, "XCalc"),
                 Icon(R.drawable.icon8, "Stock"),
@@ -333,7 +351,7 @@ class HomeFragment : Fragment() {
                 Icon(R.drawable.icon7, "Game of Life"),
                 Icon(R.drawable.icon23, "Reversi"),
                 Icon(R.drawable.icon25, "Sudoku"),
-                Icon(R.drawable.icon27, "BlueGo_AI"),
+                Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
@@ -541,15 +559,7 @@ class HomeFragment : Fragment() {
                 )
                 startActivity(intent, options.toBundle())
             }
-            "OpenBible" -> {
-                val intent = Intent(activity, OpenBibleMainActivity::class.java)
-                val options = ActivityOptions.makeCustomAnimation(
-                    requireContext(),
-                    R.anim.slide_up,
-                    R.anim.no_animation
-                )
-                startActivity(intent, options.toBundle())
-            }
+
             "Sudoku" -> {
                 val intent = Intent(activity, SplashActivity::class.java)
                 val options = ActivityOptions.makeCustomAnimation(
@@ -682,6 +692,26 @@ class HomeFragment : Fragment() {
         isFragmentResumed = false
         handler.removeCallbacksAndMessages(null)
     }
+    override fun onStop() {
+        super.onStop()
+        // Unregister the receiver when fragment becomes invisible
+        try {
+            requireActivity().unregisterReceiver(powerConnectionReceiver)
+        } catch (e: IllegalArgumentException) {
+            // Receiver was not registered
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        // Register the receiver when fragment becomes visible
+        val filter = IntentFilter().apply {
+            addAction(Intent.ACTION_POWER_CONNECTED)
+            addAction(Intent.ACTION_POWER_DISCONNECTED)
+        }
+        requireActivity().registerReceiver(powerConnectionReceiver, filter)
+    }
+
 
     private inner class IconPagerAdapter(
         private val pages: List<List<Icon>>,

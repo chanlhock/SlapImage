@@ -748,11 +748,6 @@
             android:allowTaskReparenting="false">
         </activity>
 
-        <activity
-            android:name=".openbible.OpenBibleMainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.OpenBible">
-        </activity>
 
         <!-- Sudoku  -->
         <activity
