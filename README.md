@@ -146,16 +146,16 @@ In addition I have also tested to some extent on:
   - DroidZebra can also be found as open source at Github. (https://github.com/alkom/droidzebra).
   - Although this apps is written more than 10 years ago it is quite easily ported over to latest version of Android.
 - 8th June 2025: Released the stable updated version of SlapImage v1.0.0-fdroid-beta.3 apk.
-- 10th June 2025: 
-  - Added OpenBible from f-droid.org based on Version 1.8.0 (29) 14th May 2025 source tarball. (https://f-droid.org/en/packages/com.schwegelbin.openbible/)
-  - OpenBible can also be found as open source at Github. (https://github.com/SchweGELBin/OpenBible2)
 - 13th June 2025: 
   - Added Sudoku from f-droid.org based on Version 3.2.4 (19) 25th Apr 2025 source tarball. (https://f-droid.org/en/packages/org.secuso.privacyfriendlysudoku/)
   - Sudoku can be found as well as open source at Github. (https://github.com/SecUSo/privacy-friendly-sudoku)
 - 14th June 2025:
   - Added another Calculator from f-droid.org based on Version 3.1.2 (33) 22nd Jan 2025 source tarball. (https://f-droid.org/packages/com.marktka.calculatorYou/)
   - Forz Calculator can also be found as open source at Github. (https://github.com/forzzzzz/Calculator-You?tab=readme-ov-file)
-
+- 20th June 2025: 
+  - Added PocketPlan from f-droid.org based on Version 1.4.3 (43) 19th Nov 2024 source tarball. (https://f-droid.org/en/packages/com.pocket_plan.j7_003/)
+  - PocketPlan can also be found as open source at Github. (https://github.com/RayLeaf-Studios/PocketPlan)
+    
 ## :beetle: Unresolvable Bug in Todo List
 - [ ] When Xed-Editor activity is launched and user using Alphine for running C++ and Python there is an error of permission denied for proot in the Alphine terminal windows. 
 - [X] (Issue fixed 19th Apr 2025) When user pressed the back arrow button at the topbar of StockActivity.kt view, returning back to HomeFragment.kt view there is a large white rectangle covering lower two rows of the grid icon container. This only happens when user enters a Stock Ticker and check the stock price. However, if user uses the phone back button to return to HomeFragment.kt view, the bug doesn't happen. One other observation is that the bug doesn't happen on Android 15 phone. :eyes:
