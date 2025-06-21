@@ -29,6 +29,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
+import com.example.slapimage.fragments.HomeFragment;
 import com.example.slapimage.ibook.cloudrail.si.CloudRail;
 import com.example.slapimage.ibook.foobnix.android.utils.Apps;
 import com.example.slapimage.ibook.foobnix.android.utils.Dips;

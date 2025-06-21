@@ -5,16 +5,19 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 
+import com.example.slapimage.fragments.HomeFragment;
 import com.example.slapimage.ibook.foobnix.android.utils.Apps;
 import com.example.slapimage.ibook.foobnix.android.utils.LOG;
 import com.example.slapimage.ibook.foobnix.model.AppState;
 import com.example.slapimage.ibook.foobnix.pdf.info.IMG;
 import com.example.slapimage.R;
+import com.example.slapimage.ibook.foobnix.pdf.info.PasswordDialog;
 import com.example.slapimage.ibook.foobnix.pdf.info.view.MyPopupMenu;
 import com.example.slapimage.ibook.foobnix.pdf.info.wrapper.DocumentController;
 import com.example.slapimage.ibook.foobnix.pdf.info.wrapper.UITab;
@@ -24,6 +27,8 @@ import com.example.slapimage.ibook.foobnix.ui2.MainTabs2;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class CloseAppDialog {
 
@@ -144,9 +149,7 @@ public class CloseAppDialog {
                 TTSEngine.get().shutdown();
                 int i = 0;
                 if (which == i++) {
-
                     c.onCloseActivityAdnShowInterstial();
-
                 } else if (which == i++) {
                     c.onCloseActivityFinal(new Runnable() {
 

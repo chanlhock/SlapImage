@@ -13,4 +13,9 @@
         android:icon="@drawable/ic_action_settings"
         android:id="@+id/menuItemSettings"/>
 
+    <item
+        android:title="Exit Pocket Plan"
+        android:icon="@drawable/ic_action_home"
+        android:id="@+id/menuExitApp"/>
+
 </menu>

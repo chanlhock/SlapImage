@@ -62,6 +62,7 @@ import com.example.slapimage.pocket_plan.j7_003.system_interaction.handler.stora
 import java.util.Locale
 import java.util.Stack
 import com.example.slapimage.R
+import kotlin.system.exitProcess
 
 class PocketPlanMainActivity : AppCompatActivity() {
 
@@ -297,6 +298,13 @@ class PocketPlanMainActivity : AppCompatActivity() {
                 R.id.menuItemSettings -> changeToFragment(FT.SETTINGS)
                 R.id.menuSleepReminder -> changeToFragment(FT.SLEEP)
                 R.id.menuHelp -> changeToFragment(FT.SETTINGS_HOWTO)
+                R.id.menuExitApp -> {       // chanlhock - added this so Pocket Plan closes on exit and return to HomeFragment
+                    // Clear fragment stack
+                    previousFragmentStack.clear()
+                    previousFragmentStack.push(FT.EMPTY)
+                    finish()
+                    exitProcess(0)
+                }
             }
             drawerLayoutBinding.drawerLayout.closeDrawer(GravityCompat.START)
             true

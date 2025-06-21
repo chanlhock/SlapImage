@@ -16,3 +16,4 @@ local.properties
 /secrets.properties
 /.kotlin/errors/
 /keystore.pkcs12
+/droidzebra/build
