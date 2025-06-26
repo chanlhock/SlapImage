@@ -2355,4 +2355,9 @@
     <color name="colorSurfaceInverse_60">#352F31</color>
     <color name="colorPrimaryInverse_60">#FED7E5</color>
 
+    <!-- Word of the Day -->
+    <color name="wod_primary">#1976D2</color>
+    <color name="wod_secondary">#039BE5</color>
+    <color name="background">#DDDDDD</color>
+
 </resources>

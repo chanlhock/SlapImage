@@ -83,6 +83,7 @@ import android.content.Context
 import android.content.IntentFilter
 import android.view.WindowManager
 import com.example.slapimage.pocket_plan.j7_003.PocketPlanMainActivity
+import com.example.slapimage.wordoftheday_en.WodMainActivity
 
 class HomeFragment : Fragment() {
 
@@ -149,7 +150,7 @@ class HomeFragment : Fragment() {
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         // Keep screen on while this fragment is visible
-       // activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         gestureDetector = GestureDetector(requireContext(), object : GestureDetector.SimpleOnGestureListener() {
             override fun onDown(e: MotionEvent): Boolean = true
@@ -351,7 +352,7 @@ class HomeFragment : Fragment() {
                 Icon(R.drawable.icon7, "Game of Life"),
                 Icon(R.drawable.icon23, "Reversi"),
                 Icon(R.drawable.icon25, "Sudoku"),
-                Icon(R.drawable.icon14, "Coming Soon"),
+                Icon(R.drawable.icon28, "Word of Day"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
                 Icon(R.drawable.icon14, "Coming Soon"),
@@ -587,6 +588,15 @@ class HomeFragment : Fragment() {
                 )
                 startActivity(intent, options.toBundle())
             }
+            "Word of Day" -> {
+                val intent = Intent(activity, WodMainActivity::class.java)
+                val options = ActivityOptions.makeCustomAnimation(
+                    requireContext(),
+                    R.anim.fade_in,
+                    R.anim.no_animation
+                )
+                startActivity(intent, options.toBundle())
+            }
         }
     }
 
@@ -669,7 +679,7 @@ class HomeFragment : Fragment() {
        // Glide.with(requireContext()).clear(currentBanner)
 //Glide.with(requireContext()).clear(nextBanner)
         // Clear the flag when fragment is destroyed
-      //  activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         handler.removeCallbacksAndMessages(null)
     }
 
@@ -687,7 +697,7 @@ class HomeFragment : Fragment() {
     }
 
     override fun onPause() {
-        //activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         super.onPause()
         isFragmentResumed = false
         handler.removeCallbacksAndMessages(null)

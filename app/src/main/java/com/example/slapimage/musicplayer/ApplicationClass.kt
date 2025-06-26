@@ -124,7 +124,7 @@ class ApplicationClass:Application() {
      //       ANRWatchDog().start()
      //   }
 
-        if (BuildConfig.DEBUG || Settings.strict_mode){
+  /*      if (BuildConfig.DEBUG || Settings.strict_mode){
             StrictMode.setVmPolicy(
                 StrictMode.VmPolicy.Builder().apply {
                     detectAll()
@@ -139,10 +139,10 @@ class ApplicationClass:Application() {
                     }
                 }.build()
             )
-        }
+        }*/
 
         //wait until UpdateManager is done, it should only take few milliseconds
-        UpdateManager.inspect()
+        //UpdateManager.inspect()
 
         GlobalScope.launch(Dispatchers.IO) {
             App.Companion.getTempDir().apply {

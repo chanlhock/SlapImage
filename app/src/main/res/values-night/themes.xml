@@ -99,4 +99,23 @@
         <item name="colorSurface">@android:color/black</item>
     </style>
 
+    <!-- Word of the Day -->
+    <style name="Theme.WordOfTheDay" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/wod_primary</item> <!--  -->
+        <item name="colorPrimaryVariant">@color/wod_primary</item> <!--notification bar -->
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
+        <item name="colorAccent">@color/wod_primary</item>
+
+        <!-- Color of text and icons -->
+        <item name="android:textColor">@color/white</item>
+        <item name="android:tint">@color/white</item>
+    </style>
 </resources>

@@ -76,6 +76,7 @@
     <!--
     <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
     -->
+
     <uses-feature
         android:required="false"
         android:name="android.hardware.touchscreen">
@@ -115,6 +116,7 @@
         </intent>
     </queries>
 
+    <!-- android:networkSecurityConfig="@xml/network_security_config" android:vmSafeMode="${appSafeMode}" -->
     <application
         android:name=".musicplayer.ApplicationClass"
         android:requestLegacyExternalStorage="true"
@@ -125,12 +127,10 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="false"
         android:theme="@style/AppTheme"
         tools:targetApi="35"
         android:usesCleartextTraffic="true"
-        android:vmSafeMode="${appSafeMode}"
         tools:ignore="HardwareIds"
         android:largeHeap="true"
         android:extractNativeLibs="true"
@@ -890,5 +890,23 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <!-- Word of the Day -->
+        <activity android:name=".wordoftheday_en.WordHistoryActivity"
+            android:theme="@style/Theme.WordOfTheDay"/>
+        <activity android:name=".wordoftheday_en.Settings"
+            android:theme="@style/Theme.WordOfTheDay"/>
+        <activity
+            android:name=".wordoftheday_en.SplashScreen"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"/>
+        <activity
+            android:name=".wordoftheday_en.WodMainActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="true"
+            android:usesCleartextTraffic="true"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.WordOfTheDay"/>
+
     </application>
 </manifest>

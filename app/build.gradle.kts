@@ -279,14 +279,6 @@ dependencies {
     // Play Core library for in-app updates
     implementation("com.google.android.play:app-update:2.1.0")
 
-    // Play Core KTX for coroutines support (optional)
-   // implementation("com.google.android.play:app-update-ktx:2.1.0")
-    // Play Core Review Library (for in-app reviews)
-    //implementation("com.google.android.play:review:2.0.1")
-
-    // Optional: Kotlin extensions for coroutines support
-   // implementation("com.google.android.play:review-ktx:2.0.1")
- //   implementation("com.google.android.gms:play-services-tasks:18.1.0")
 
     //Tic Tac Toe
 
@@ -366,12 +358,7 @@ dependencies {
         implementation(project(":smartreflow"))
 
         /** AndroidX **/
-        //implementation("androidx.cardview:cardview:1.0.0")
-      //  implementation("androidx.multidex:multidex:2.0.1")
-        //implementation("androidx.recyclerview:recyclerview:1.3.2")
-        //implementation("androidx.work:work-runtime:2.10.0")
         implementation("androidx.legacy:legacy-support-v4:1.0.0")
-        //implementation("androidx.appcompat:appcompat:1.7.0")
 
         /** Third-party **/
         implementation("com.github.axet:lame:1.0.9")
@@ -413,4 +400,15 @@ dependencies {
 
     // PocketPlan
     implementation("com.jakewharton.threetenabp:threetenabp:1.4.6")
+
+    // Word of the Day
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    // Room dependencies
+    val roomVersion = "2.6.1"
+    //implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.0")
+    implementation("androidx.room:room-runtime:$roomVersion")
+    //annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    //kapt("androidx.room:room-compiler:$roomVersion")
 }
