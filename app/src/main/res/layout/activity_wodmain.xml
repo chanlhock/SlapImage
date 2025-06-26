@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nestedScrollListen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".WodMainActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/dialogOfflineMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/radius_square"
+            android:padding="10sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:context=".WodMainActivity"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/dialogOfflineModeText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:text="@string/offline_mode"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:flow_horizontalAlign="center"
+                app:flow_verticalAlign="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/dialogMessageTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:elevation="10dp"
+            android:background="@drawable/radius_square"
+            android:padding="10sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topBarMain"
+            tools:context=".WodMainActivity"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/dialogMessageTopText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:flow_horizontalAlign="center"
+                app:flow_verticalAlign="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/sourceElement"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:padding="10sp"
+            android:textSize="14sp"
+            android:textStyle="italic"
+            android:visibility="gone"
+            app:flow_horizontalAlign="start"
+            app:flow_verticalAlign="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etymologyElement"
+            tools:text="source"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/topBarMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_top_bar"
+            android:paddingLeft="10sp"
+            android:paddingRight="10sp"
+            android:paddingBottom="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:context=".WodMainActivity">
+
+            <TextView
+                android:id="@+id/dateElement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:paddingTop="10sp"
+                android:paddingBottom="10sp"
+                android:text="···"
+                android:textColor="@color/white"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:flow_horizontalAlign="center"
+                app:flow_verticalAlign="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="DD/MM/YYYY" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/messageMainContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/radius_square"
+            android:padding="10sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topBarMain"
+            tools:context=".WodMainActivity">
+
+            <TextView
+                android:id="@+id/messageMainText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:flow_horizontalAlign="center"
+                app:flow_verticalAlign="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Message" />
+
+            <Button
+                android:id="@+id/checkAgainButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/radius_square"
+                android:fontFamily="sans-serif-medium"
+                android:paddingLeft="15sp"
+                android:paddingTop="0sp"
+                android:paddingRight="15sp"
+                android:paddingBottom="0sp"
+                android:text="@string/button_try_again"
+                android:textAllCaps="false"
+                android:textColor="@color/primary"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:backgroundTint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/messageMainText"
+                tools:visibility="visible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/separator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10sp"
+            android:paddingRight="10sp"
+            android:text="@string/separator"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            android:visibility="gone"
+            app:flow_horizontalAlign="start"
+            app:flow_verticalAlign="center"
+            app:layout_constraintStart_toEndOf="@+id/typeElement"
+            app:layout_constraintTop_toBottomOf="@+id/wordElement"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/definitionElement"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="10sp"
+            android:textSize="20sp"
+            android:visibility="gone"
+            app:flow_horizontalAlign="start"
+            app:flow_verticalAlign="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleDefinition"
+            tools:text="definition"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/titleDefinition"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="10sp"
+            android:text="@string/definition"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:flow_horizontalAlign="start"
+            app:flow_verticalAlign="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phoneticsElement"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/etymologyElement"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="10sp"
+            android:textSize="20sp"
+            android:visibility="gone"
+            app:flow_horizontalAlign="start"
+            app:flow_verticalAlign="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleEtymology"
+            tools:text="etymology"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/titleEtymology"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="10sp"
+            android:text="@string/etymology"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:flow_horizontalAlign="start"
+            app:flow_verticalAlign="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/definitionElement"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/phoneticsElement"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:paddingLeft="10sp"
+            android:paddingRight="10sp"
+            android:textSize="20sp"
+            app:flow_horizontalAlign="start"
+            app:flow_verticalAlign="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/separator"
+            app:layout_constraintTop_toBottomOf="@+id/wordElement"
+            tools:text="/phonetics/" />
+
+        <TextView
+            android:id="@+id/typeElement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10sp"
+            android:paddingRight="10sp"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            app:flow_horizontalAlign="start"
+            app:flow_verticalAlign="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wordElement"
+            tools:text="type" />
+
+        <TextView
+            android:id="@+id/wordElement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:elevation="0dp"
+            android:paddingLeft="10sp"
+            android:paddingTop="15sp"
+            android:paddingRight="10sp"
+            android:textSize="50sp"
+            app:flow_horizontalAlign="start"
+            app:flow_verticalAlign="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topBarMain"
+            tools:text="Word" />
+
+        <ImageView
+            android:id="@+id/copyButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topBarMain"
+            app:srcCompat="?attr/actionModeCopyDrawable"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/shareButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="3dp"
+            android:visibility="visible"
+            app:layout_constraintStart_toEndOf="@+id/copyButton"
+            app:layout_constraintTop_toBottomOf="@+id/topBarMain"
+            app:srcCompat="?attr/actionModeShareDrawable"
+            tools:visibility="visible" />
+
+
+        <ImageView
+            android:id="@+id/wordHistoryButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="10dp"
+            android:scaleType="fitCenter"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@+id/settingsButton"
+            app:layout_constraintTop_toBottomOf="@+id/topBarMain"
+            app:srcCompat="@drawable/ic_history"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/settingsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topBarMain"
+            app:srcCompat="@drawable/ic_settings"
+            tools:ignore="VectorDrawableCompat"
+            tools:visibility="visible" />
+
+        <!--
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            app:adSize="SMART_BANNER"
+            app:adUnitId="@string/admob_banner_ad"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible"></com.google.android.gms.ads.AdView>
+        -->
+
+        <View
+            android:id="@+id/mainSeparator1"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/dialogOfflineMode"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sourceElement" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

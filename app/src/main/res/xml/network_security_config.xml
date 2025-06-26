@@ -3,5 +3,6 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">localhost</domain>
         <!-- You can add other domains or use <domain includeSubdomains="true">*<domain> to allow all -->
+        <domain includeSubdomains="true">*</domain>
     </domain-config>
 </network-security-config>
