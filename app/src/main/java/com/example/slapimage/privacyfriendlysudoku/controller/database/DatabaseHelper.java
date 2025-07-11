@@ -16,7 +16,6 @@
  */
 package com.example.slapimage.privacyfriendlysudoku.controller.database;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -30,8 +29,6 @@ import com.example.slapimage.privacyfriendlysudoku.controller.database.model.Lev
 import com.example.slapimage.privacyfriendlysudoku.game.GameDifficulty;
 import com.example.slapimage.privacyfriendlysudoku.game.GameType;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 

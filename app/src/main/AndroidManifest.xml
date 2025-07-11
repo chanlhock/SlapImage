@@ -894,12 +894,6 @@
         <!-- Word of the Day -->
         <activity android:name=".wordoftheday_en.WordHistoryActivity"
             android:theme="@style/Theme.WordOfTheDay"/>
-        <activity android:name=".wordoftheday_en.Settings"
-            android:theme="@style/Theme.WordOfTheDay"/>
-        <activity
-            android:name=".wordoftheday_en.SplashScreen"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:exported="true"/>
         <activity
             android:name=".wordoftheday_en.WodMainActivity"
             android:configChanges="orientation|screenSize"

@@ -20,13 +20,9 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
-import android.os.Build
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
-//import androidx.multidex.MultiDex
 import androidx.work.Configuration
-
-//import com.example.slapimage.privacyfriendlybackup.api.pfa.BackupManager
 
 class PFSudoku : Application(), Configuration.Provider {
     override fun onCreate() {
@@ -34,12 +30,12 @@ class PFSudoku : Application(), Configuration.Provider {
         //BackupManager.backupRestorer = BackupRestorer()
         super.onCreate()
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      //  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // channels
             val channel = NotificationChannel(CHANNEL_ID, "Default", NotificationManager.IMPORTANCE_LOW)
             val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             notificationManager?.createNotificationChannel(channel)
-        }
+     //   }
     }
 
     override val workManagerConfiguration by lazy {

@@ -1,27 +1,17 @@
 package com.example.slapimage.mp3tagger
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.rememberNavController
 import coil.ImageLoader
-//import com.bobbyesp.mediaplayer.service.ConnectionHandler
-//import com.bobbyesp.mediaplayer.service.MediaplayerService
 import com.example.slapimage.mp3tagger.core.data.local.preferences.AppPreferences
 import com.example.slapimage.mp3tagger.core.data.local.preferences.PreferencesKey.COMPLETED_ONBOARDING
 import com.example.slapimage.mp3tagger.core.data.local.preferences.UserPreferences.Companion.emptyUserPreferences
@@ -29,17 +19,14 @@ import com.example.slapimage.mp3tagger.core.presentation.common.AppLocalSettings
 import com.example.slapimage.mp3tagger.core.presentation.common.LocalNavController
 import com.example.slapimage.mp3tagger.core.presentation.common.Route
 import com.example.slapimage.mp3tagger.core.presentation.theme.MetadatorTheme
-//import com.example.slapimage.mp3tagger.mediaplayer.data.local.MediaplayerServiceConnection
 import com.dokar.sonner.Toaster
 import com.dokar.sonner.rememberToasterState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
 import org.koin.compose.KoinContext
 import org.koin.core.component.KoinComponent
-//import setCrashlyticsCollection
 import com.example.slapimage.R
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)

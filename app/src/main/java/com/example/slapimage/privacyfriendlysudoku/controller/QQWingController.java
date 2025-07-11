@@ -16,7 +16,6 @@
  */
 package com.example.slapimage.privacyfriendlysudoku.controller;
 
-import android.os.Parcelable;
 import android.util.Log;
 
 import java.util.LinkedList;

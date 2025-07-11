@@ -3,7 +3,6 @@ package com.example.slapimage.fragments
 import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.drawable.AnimatedVectorDrawable
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -11,18 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.slapimage.R
-import com.example.slapimage.droidzebra.DroidZebra.DialogDonate
-import com.example.slapimage.xededitor.xededitor.MainActivity.tabs.editor.getCurrentFragment
 
 class ProfileFragment : Fragment() {
     private lateinit var btnQuitProgram: Button

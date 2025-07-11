@@ -31,7 +31,6 @@ import android.util.Log;
 import android.util.Pair;
 
 import com.example.slapimage.musicplayer.ApplicationClass;
-import com.example.slapimage.privacyfriendlysudoku.PFSudoku;
 import com.example.slapimage.privacyfriendlysudoku.controller.database.DatabaseHelper;
 import com.example.slapimage.privacyfriendlysudoku.controller.database.model.Level;
 import com.example.slapimage.privacyfriendlysudoku.controller.qqwing.Action;

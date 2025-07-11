@@ -10,7 +10,6 @@ import android.content.Context
 import android.os.Build
 import android.os.StrictMode
 import androidx.appcompat.app.AppCompatDelegate
-import com.example.slapimage.BuildConfig
 import com.example.slapimage.ibook.foobnix.android.utils.Dips
 import com.example.slapimage.ibook.foobnix.android.utils.LOG
 import com.example.slapimage.ibook.foobnix.android.utils.TxtUtils
@@ -34,7 +33,6 @@ import com.example.slapimage.xededitor.extension.ExtensionManager
 import com.example.slapimage.xededitor.libcommons.application
 import com.example.slapimage.xededitor.libcommons.editor.SetupEditor
 import com.example.slapimage.xededitor.resources.Res
-import com.example.slapimage.xededitor.settings.Settings
 import com.example.slapimage.xededitor.xededitor.App
 import com.example.slapimage.xededitor.xededitor.MainActivity.XEDMainActivity
 import com.example.slapimage.xededitor.xededitor.MainActivity.tabs.editor.AutoSaver
@@ -51,9 +49,7 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 import java.io.File
-import java.util.concurrent.Executors
 import com.example.slapimage.forz.calculator.history.HistoryService
-import com.example.slapimage.pocket_plan.j7_003.App5
 
 class ApplicationClass:Application() {
     companion object{

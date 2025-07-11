@@ -610,11 +610,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun rotateBannerWithAnimation() {
-        //isBannerRotationPaused = true
         if (!isFragmentResumed || isBannerRotationPaused) return  // Prevent rotation of banner if paused or fragment is not resumed
-
-      //  handler.postDelayed({
-      //      if (!isFragmentResumed || isBannerRotationPaused)  return@postDelayed // Check if the fragment is still active before proceeding
 
         lifecycleScope.launch {
             delay(bannerChangeInterval)
@@ -623,12 +619,6 @@ class HomeFragment : Fragment() {
             val nextIndex = (currentBannerIndex + 1) % bannerImages.size
             // Load the next banner image
             Glide.with(requireContext()).load(bannerImages[nextIndex]).dontTransform().into(nextBanner)
-            // Since images are preloaded, we can use diskCacheStrategy(DiskCacheStrategy.ALL)
-        //    Glide.with(requireContext())
-         //       .load(bannerImages[nextIndex])
-        //        .diskCacheStrategy(DiskCacheStrategy.ALL) // Use cached version
-                //.transition(DrawableTransitionOptions.withCrossFade(300)) // Smooth transition
-         //       .into(nextBanner)
 
             // Define animations
             val slideOut =
@@ -663,7 +653,6 @@ class HomeFragment : Fragment() {
                 }
             })
         }
-        //}, bannerChangeInterval)
     }
 
     private fun updateButtonIcon(button: Button, iconResourceId: Int, newWidth: Int, newHeight: Int) {
@@ -676,8 +665,6 @@ class HomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-       // Glide.with(requireContext()).clear(currentBanner)
-//Glide.with(requireContext()).clear(nextBanner)
         // Clear the flag when fragment is destroyed
         activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         handler.removeCallbacksAndMessages(null)

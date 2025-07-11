@@ -4,12 +4,9 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.content.res.Resources
-import android.os.Build
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.MenuItem
@@ -194,7 +191,7 @@ class PocketPlanMainActivity : AppCompatActivity() {
         //Initialize header and icon in side drawer, show current version name
         val headerView = drawerLayoutBinding.navDrawer.getHeaderView(0)
         val headerBinding = HeaderNavigationDrawerBinding.bind(headerView)
-        val versionString = "v " + packageManager.getPackageInfoCompat(packageName, 0).versionName
+        //val versionString = "v " + packageManager.getPackageInfoCompat(packageName, 0).versionName
 
         //Initialize adapters and necessary list instances
         todoFr = TodoFr()
@@ -288,7 +285,7 @@ class PocketPlanMainActivity : AppCompatActivity() {
     try {
             //1000 things can go wrong here
             manageNoteRestore()
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             /* no-op */
         }
 
@@ -394,18 +391,18 @@ class PocketPlanMainActivity : AppCompatActivity() {
                 Toast.makeText(this, getString(R.string.notesNotificationNoteAdded), Toast.LENGTH_SHORT).show()
                 return true
             }
-        }catch (e: Exception){
+        }catch (_: Exception){
             Toast.makeText(this, getString(R.string.settingsBackupImportFailed), Toast.LENGTH_SHORT).show()
         }
         return false
     }
-    private fun PackageManager.getPackageInfoCompat(packageName: String, flags: Int = 0): PackageInfo =
+ /*   private fun PackageManager.getPackageInfoCompat(packageName: String, flags: Int = 0): PackageInfo =
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(flags.toLong()))
     } else {
         @Suppress("DEPRECATION") getPackageInfo(packageName, flags)
     }
-
+*/
 
     private fun manageNoteRestore() {
 

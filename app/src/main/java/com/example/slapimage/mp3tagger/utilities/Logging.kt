@@ -1,11 +1,11 @@
 package com.example.slapimage.mp3tagger.utilities
 
-import android.content.Context
-import android.content.pm.PackageInfo
-import android.os.Build
+//import android.content.Context
+//import android.content.pm.PackageInfo
+//import android.os.Build
 import android.util.Log
 import com.example.slapimage.BuildConfig
-import java.io.File
+//import java.io.File
 
 object Logging {
     private val callingClass = Throwable().stackTrace[1].className
@@ -39,10 +39,10 @@ object Logging {
         Log.v(callingClass, message)
     }
 
-    fun wtf(message: String) {
-        Log.wtf(callingClass, message)
-    }
-
+//    fun wtf(message: String) {
+ //       Log.wtf(callingClass, message)
+  //  }
+/*
     fun getVersionReport(packageInfo: PackageInfo): String {
         val versionName = packageInfo.versionName
 
@@ -77,4 +77,6 @@ object Logging {
         logFile.appendText(errorReport)
         return logFile.absolutePath
     }
+    */
+
 }
