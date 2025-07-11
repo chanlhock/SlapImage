@@ -29,8 +29,8 @@
 
 ## :gift: APK Download
 Try it yourself and I would love to hear your feedback :smiley: :mouse: <br>
-- Download [SlapImage-v1.0.0-fdroid-beta.3.apk](https://github.com/chanlhock/SlapImage/releases/tag/v1.0.0-fdroid-beta.3)
-
+- Download [SlapImage-v1.0.0-fdroid-beta.4.apk](https://github.com/chanlhock/SlapImage/releases/tag/v1.0.0-fdroid-beta.4)
+  
 ## :computer: Development Platform
 SlapImage is developed using:
 - old MacBook Air 2017 with Intel Processor.
@@ -155,7 +155,11 @@ In addition I have also tested to some extent on:
 - 20th June 2025: 
   - Added PocketPlan from f-droid.org based on Version 1.4.3 (43) 19th Nov 2024 source tarball. (https://f-droid.org/en/packages/com.pocket_plan.j7_003/)
   - PocketPlan can also be found as open source at Github. (https://github.com/RayLeaf-Studios/PocketPlan)
-    
+- 25th June 2025: 
+  - Added Word of the Day from f-droid.org based on Version 2.0 (17) 20th Oct 2024 source tarball. (https://f-droid.org/en/packages/com.saverio.wordoftheday_en/)
+  - Word of the Day can also be found as open source at Github. (https://github.com/Sav22999/word-of-the-day)
+- 11th July 2025: Released the stable updated version of SlapImage v1.0.0-fdroid-beta.4 apk.  
+
 ## :beetle: Unresolvable Bug in Todo List
 - [ ] When Xed-Editor activity is launched and user using Alphine for running C++ and Python there is an error of permission denied for proot in the Alphine terminal windows. 
 - [X] (Issue fixed 19th Apr 2025) When user pressed the back arrow button at the topbar of StockActivity.kt view, returning back to HomeFragment.kt view there is a large white rectangle covering lower two rows of the grid icon container. This only happens when user enters a Stock Ticker and check the stock price. However, if user uses the phone back button to return to HomeFragment.kt view, the bug doesn't happen. One other observation is that the bug doesn't happen on Android 15 phone. :eyes:
