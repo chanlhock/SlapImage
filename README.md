@@ -1,6 +1,6 @@
 # :mouse: Welcome to SlapImage
 
-<p float="left">
+<p float="center">
  <img src="app/src/main/res/drawable/animated_logo.gif" width="400">
 </p>
 
