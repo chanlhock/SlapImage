@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-<i><b>Coming together is a beginning; keeping together is progress; working together is success.</b></i><br><br>
+<i><b>Coming together is a beginning; keeping together is progress; <br>working together is success.</b></i><br><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
