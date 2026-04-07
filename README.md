@@ -4,6 +4,14 @@
  <img src="app/src/main/res/drawable/animated_logo.gif" width="400">
 </p>
 
+<p align="center">
+<i><b>Coming together is a beginning; keeping together is progress; working together is success.</b></i><br><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ― HENRY FORD
+</p> 
+
 ## Table of Contents
 - [Description](#scroll-description)
 - [APK Download](#gift-apk-download)
