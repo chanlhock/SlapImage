@@ -167,7 +167,8 @@ In addition I have also tested to some extent on:
 - 25th June 2025: 
   - Added Word of the Day from f-droid.org based on Version 2.0 (17) 20th Oct 2024 source tarball. (https://f-droid.org/en/packages/com.saverio.wordoftheday_en/)
   - Word of the Day can also be found as open source at Github. (https://github.com/Sav22999/word-of-the-day)
-- 11th July 2025: Released the stable updated version of SlapImage v1.0.0-fdroid-beta.4 apk.  
+- 11th July 2025: Released the stable updated version of SlapImage v1.0.0-fdroid-beta.4 apk.
+- 8th June 2026: Decided to stop further code development and achive this project in order to free up disk space by removing Android Studio on my MacBook Air. Planning to use the freed up disk space to explore and learn Unity Game Engine. 
 
 ## :beetle: Unresolvable Bug in Todo List
 - [ ] When Xed-Editor activity is launched and user using Alphine for running C++ and Python there is an error of permission denied for proot in the Alphine terminal windows. 
